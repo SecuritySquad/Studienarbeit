@@ -2,8 +2,7 @@ before_install:
 - "sudo apt-get update && sudo apt-get install --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended dvipng"
 
 script:
-- mkdir _build
-- pdflatex -output-directory _build Studienarbeit.tex
+- pdflatex -output-directory Studienarbeit.tex
 
 deploy:
   provider: releases
