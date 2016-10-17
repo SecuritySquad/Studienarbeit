@@ -5,7 +5,6 @@ script:
 - mkdir _build
 - pdflatex -output-directory _build Studienarbeit.tex
 
-
 deploy:
   provider: releases
   user: $GITHUB_USERNAME
