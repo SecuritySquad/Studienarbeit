@@ -15,3 +15,6 @@ deploy:
   on:
     tags: true
   overwrite: true
+
+notifications:
+  slack: securitysquadteam:pQQo1tevUKPZOeURc6ANrTOH
