@@ -8,7 +8,7 @@ script:
 
 deploy:
   provider: releases
-  user: $GITHUB_USERNAMEk
+  user: $GITHUB_USERNAME
   password: $GITHUB_PASSWORD
   file: "Studienarbeit.pdf"
   skip_cleanup: true
