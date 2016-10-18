@@ -10,5 +10,6 @@ deploy:
   file: Studienarbeit.pdf
   on:
     repo: SecuritySquad/Studienarbeit
+    tags: true
 notifications:
   slack: securitysquadteam:$SLACK_TOKEN
