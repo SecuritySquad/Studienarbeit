@@ -15,4 +15,4 @@ deploy:
   overwrite: true
 
 notifications:
-  slack: securitysquadteam:pQQo1tevUKPZOeURc6ANrTOH
+  slack: securitysquadteam:$SLACK_TOKEN
