@@ -10,5 +10,6 @@ deploy:
   on:
     repo: SecuritySquad/Studienarbeit
     tags: true
+  skip_cleanup: true
 notifications:
   slack: securitysquadteam:$SLACK_TOKEN
