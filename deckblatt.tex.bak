@@ -1,0 +1,40 @@
+% Deckblatt
+%
+
+\begin{titlepage}
+
+	\begin{center}
+		% Logos der Firma und DHBW
+		\vspace*{0cm}
+		\includegraphics[width=9cm]{images/firma}
+		\hfill
+		\includegraphics[width=6cm]{images/dhbw-logo}\\ [2.3cm]
+		%Titel, Typ der Arbeit, Studiengang
+		{\Huge \textbf{Aufbau und Implementierung}} 	\\
+		{\Huge \textbf{automatisierter Testverfahren unter}} 	\\
+		{\Huge \textbf{Einsatz des Testframeworks FitNesse}} 	\\ [1.3cm]
+		{\Large  \scshape \textbf{Projektarbeit IIA}}	\\ [1.3cm]
+		{\large des Studiengangs Angewandte Informatik}	\\ [0.5cm]
+		{\large an der Dualen Hochschule Baden-Württemberg Karlsruhe}	\\[0.5cm]
+		
+		{\large von} 	\\ [0.5cm]
+		%Autor und Abgabedatum
+		{\large \bfseries \textbf{Samuel Philipp}}	\\ [1cm]
+		{\large Abgabedatum \today}
+		\vfill
+	\end{center}
+
+	\begin{tabular}{l@{\hspace{2cm}}l}
+	\textbf{Bearbeitungszeitraum}			&	10 Wochen		\\%TODO am ende überprüfen...
+	\textbf{Matrikelanzeige}				&	9207236		\\
+	\textbf{Kurs}							&	TINF14B2			\\
+	\textbf{Ausbildungsfirma}				&	Fiducia \& GAD IT AG 	\\
+	\textbf{Betreuer der Ausbildungsfirma}	&	Werner Müller	\\
+	\textbf{Gutachter der Studienakademie}	&	Prof. Dr. Heinrich Braun	\\
+	\end{tabular}
+
+\end{titlepage}
+
+%
+% EOF
+%

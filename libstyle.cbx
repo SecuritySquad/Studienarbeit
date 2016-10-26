@@ -1,0 +1,34 @@
+\ProvidesFile{libstyle.cbx}
+
+\RequireCitationStyle{authoryear-ibid}
+
+\DeclareNameFormat{labelname}{\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
+  \usebibmacro{name:andothers}
+}
+
+\DeclareFieldFormat{citehyperref}{%
+  \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
+  \bibhyperref{#1}}
+
+\renewbibmacro*{cite}{\printtext[citehyperref]{%
+  \ignorespaces
+  \global\boolfalse{cbx:loccit}%
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+       {\usebibmacro{cite:ibid}}
+       {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+          {\usebibmacro{cite:label}%
+           \setunit{\addspace}}
+          {\printnames{labelname}%
+           \setunit{\nameyeardelim}}%
+        \usebibmacro{cite:paren:labelyear+extrayear}}}
+    {\usebibmacro{cite:shorthand}}}}
+
+\renewbibmacro*{cite:paren:labelyear+extrayear}{%
+  \iffieldundef{labelyear}
+    {}
+    {\printtext[parens]{%
+       \printfield{labelyear}%
+       \printfield{extrayear}}}}
+
+\endinput

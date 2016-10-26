@@ -1,0 +1,11 @@
+%\chapter*{Abkürzungsverzeichnis}
+\addchap{Abkürzungsverzeichnis}
+\begin{acronym}[VPBBKH]
+	\acro{VPBBKH}{Verbundprodukte Karlsruhe und agree Bankorganisation}
+	\acro{BAP}{agree Bankarbeitsplatz}
+	\acro{IBM}{International Business Machines Corporation}
+	\acro{SUT}{System under test}
+	\acro{FIT}{Framework for Integrated Testing}
+	\acro{SLIM}{Simple List Invocation Method}
+	\acro{HTML}{Hypertext Markup Language}
+\end{acronym}

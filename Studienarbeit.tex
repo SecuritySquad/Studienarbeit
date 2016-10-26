@@ -1,8 +1,85 @@
-\documentclass{article}
- \title{Cartesian closed categories and the price of eggs}
- \author{Jane Doe}
- \date{September 1994}
- \begin{document}
-    \maketitle
-    Hello world !
- \end{document}
+\author{Samuel Philipp}
+
+\input{header}
+\addbibresource{lib.bib}
+\begin{document}
+
+\selectlanguage{ngerman}
+
+\renewcommand{\bibname}{Literaturverzeichnis}
+
+%Glossar
+
+\setlength{\parindent}{0mm}
+
+%mindestens 3 Zeilen auf der Seite
+\widowpenalties 3 10000 10000 100
+\clubpenalties 3 10000 10000 100
+
+%Stil der Quellangaben
+%\bibliographystyle{plain}
+
+%Deckblatt
+\include{deckblatt}
+
+\renewcommand{\thepage}{\Roman{page}}
+\setcounter{page}{1}
+% Formale Erklärungen
+\include{erklaerung}
+%Abstract
+
+% Inhaltsverzeichnis
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Inhaltsverzeichnis}
+\tableofcontents
+
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\include{abkuerzungsverzeichnis}
+\newpage
+%\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\listoffigures
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\listoftables
+\newpage
+%\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Listings}
+\lstlistoflistings
+\newpage
+
+%--> Speichern der Zahl fürs umsetzten zurück auf römische
+\newcounter{SeitenzahlSpeicher}
+\setcounter{SeitenzahlSpeicher}{\value{page}}
+
+%\newpage
+\newpage
+
+%Arabische Nummerierung
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+
+%Kapitel
+\include{Einleitung}
+\include{Grundlagen}
+\include{Konzept}
+\include{Umsetzung}
+\include{Fazit}
+
+%Römische Nummerierung --> SeitenzahlSpeicher
+\stepcounter{SeitenzahlSpeicher}
+\renewcommand{\thepage}{\Roman{page}}
+\setcounter{page}{\theSeitenzahlSpeicher}
+
+%Anhang
+\setlength\bibitemsep{12pt}
+\printbibliography
+
+%Anhang
+\include{anhang}
+
+\end{document}

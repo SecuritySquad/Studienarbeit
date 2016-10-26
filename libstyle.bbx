@@ -1,0 +1,17 @@
+\ProvidesFile{libstyle.bbx}
+
+\RequireBibliographyStyle{authoryear}
+
+\DeclareNameFormat{sortname}{
+	\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
+	\usebibmacro{name:andothers}
+}
+
+\DeclareFieldFormat{title}{#1}
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{urldate}{\addcomma\space\bibstring{urlseen}\space#1}
+
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
+
+\endinput

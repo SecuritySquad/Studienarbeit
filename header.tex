@@ -1,0 +1,254 @@
+%
+% Header die benutzt werden sollen
+%
+\documentclass[
+  pdftex,
+  fontsize=12pt,          % Schriftgroesse
+  DIV10,                  % Angabe bzgl Bestimmung der Seitenabstaende
+  ngerman,                % fuer Umlaute, Silbentrennung etc.
+  paper=a4,               % Papierformat
+  twoside=false,          % einseitiges Dokument
+  titlepage,              % es wird eine Titelseite verwendet
+  parskip=half,           % Abstand zwischen Absaetzen (halbe Zeile)
+  headings=normal,        % Groesse der Ueberschriften verkleinern
+  %liststotoc, % deprecated lt. LOG !!!
+  listof=nochaptergap,  % Verzeichnisse im Inhaltsverzeichnis auffuehren.
+  % bibtotoc,   % deprecated lt. LOG !!!
+  bibliography=totoc, % Literaturverzeichnis im Inhaltsverzeichnis auffuehren
+  index=totoc,            % Index im Inhaltsverzeichnis auffuehren
+  captions=tableheading,  % Beschriftung von Tabellen oberhalb ausgeben
+%  bookmarksopen,
+%  bookmarksnumbered,
+  final                 % Status des Dokuments (final/draft)
+]{scrreprt}
+
+% Zeilenabstand
+\usepackage[onehalfspacing]{setspace}
+%\usepackage{setspace}
+%\setstretch{1,5}
+
+% Code
+\usepackage{listings}
+
+%Tabellen
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{supertabular}
+\usepackage{longtable}
+\usepackage{hhline}
+\usepackage{multirow}
+
+%Grafiken
+\usepackage[pdftex]{graphicx}
+\usepackage{wrapfig}
+\usepackage[svgnames, table]{xcolor}
+\usepackage{floatflt}
+\usepackage{float}
+
+%Sprache und Anführungszeichen
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{hyphenat}
+\usepackage{courier}
+\usepackage{palatino}
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{eurosym}
+
+%Abstände
+\usepackage[
+	margin=25mm,
+ 	includefoot,
+%	showframe=true
+]{geometry}
+
+% Pakete um Textteile drehen zu können, oder eine Seite Querformat anzeigen kann.
+\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{enumerate}
+
+%Literaturverweise
+\usepackage[
+ 	style=libstyle,
+	backend=biber
+]{biblatex}
+\renewcommand*{\multinamedelim}{\slash\space}
+\renewcommand*{\finalnamedelim}{\multinamedelim}
+\renewcommand*{\labelnamepunct}{\addcolon\newline}
+\renewcommand*{\newunitpunct}{\addcomma\space}
+\renewcommand*{\postnotedelim}{\addcomma\space S.\space}
+\renewcommand*{\bibfootnotewrapper}{}
+\renewcommand*{\finentrypunct}{}
+\DefineBibliographyStrings{ngerman}{
+	ibidem = {ebenda},
+	urlseen = {Einsichtnahme:},
+	edition = {Auflage}
+}
+%\usepackage[round]{natbib}
+%\usepackage{cite}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+% Hurenkinder und Schusterjungen verhindern
+% http://projekte.dante.de/DanteFAQ/Silbentrennung
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+%Abkürzungsverzeichnis
+\usepackage[printonlyused]{acronym}
+
+% Fussnoten
+\usepackage[hang, multiple, stable]{footmisc}
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{equation}{chapter}
+\counterwithout{footnote}{chapter}
+\counterwithout{table}{chapter}
+\AtBeginDocument{\counterwithout{lstlisting}{chapter}}
+
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+
+%\usepackage[nottoc]{tocbibind}
+
+\usepackage{tocloft}
+\tocloftpagestyle{scrheadings}
+
+\makeatletter
+\begingroup\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \globaldefs\@ne \let\c@loldepth\@ne
+  \newlistof{listings}{lol}{\lstlistlistingname}
+\endgroup
+\let\l@lstlisting\l@section
+\makeatother
+
+\usepackage[
+  automark,     % Kapitelangaben in Kopfzeile automatisch erstellen
+  headsepline,  % Trennlinie unter Kopfzeile
+  ilines        % Trennlinie linksbndig ausrichten
+]{scrpage2}
+
+% Kopf- und Fusszeilen ------------------------------------------------------
+\pagestyle{scrheadings}
+
+% Kopf- und Fusszeile auch auf Kapitelanfangsseiten -------------------------
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+% Schriftform der Kopfzeile -------------------------------------------------
+\renewcommand{\headfont}{\normalfont}
+
+% Kopfzeile -----------------------------------------------------------------
+\ihead{\headmark} %\small{\untertitel}
+\chead{\hspace{1mm}}
+\ohead{Seite \thepage}
+\setlength{\headheight}{21mm} % Höhe der Kopfzeile
+\setheadsepline[text]{0.4pt} % Trennlinie unter Kopfzeile
+
+% Fusszeile -----------------------------------------------------------------
+%\ifoot{\copyright\ Samuel Philipp}
+\cfoot{\hspace{1mm}}
+%\ofoot{Seite \thepage}
+% \setlength{\footheight}{21mm} % Höhe der Fußzeile
+%\setfootsepline[text]{0.4pt} % Trennlinie über Fußzeile
+
+%\automark[section]{chapter} 
+\usepackage{soul}
+\newcommand{\hlc}[2][yellow]{{\sethlcolor{#1}\hl{#2}}}
+
+% \usepackage{ifthen}
+% \renewcommand{\footcite}[2][]{\footnote{Vgl. \citetitle{#2}\ifthenelse{\equal{#1}{}}{}{ #1} \cite{#2}}}
+
+\newcommand{\appref}[1]{Anhang \hyperref[app:#1]{\MakeUppercase{#1}}}
+
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\definecolor{eclipsejavakeywords}{HTML}{7F0055}
+\definecolor{eclipsejavacomments}{HTML}{3F7F5F}
+\definecolor{eclipsejavastrings}{HTML}{0000FF}
+\definecolor{eclipsejavaannotations}{HTML}{646464}
+\definecolor{eclipsejavaidentifiers}{HTML}{0000C0}
+
+\definecolor{eclipsexmlbasic}{HTML}{000000}
+\definecolor{eclipsexmlcomments}{HTML}{800000}
+\definecolor{eclipsexmlstrings}{HTML}{008000}
+
+\definecolor{eclipsehtmlkeywords}{HTML}{7F0055}
+\definecolor{eclipsehtmlcomments}{HTML}{3F7F5F}
+\definecolor{eclipsehtmlstrings}{HTML}{0000FF}
+\definecolor{eclipsehtmlbasic}{HTML}{000000}
+
+\lstdefinestyle{eclipse}{
+	float,
+	frame=single,
+	basicstyle=\ttfamily,  
+	showstringspaces=false, 
+	showspaces=false, 
+	numbers=left, 
+	captionpos=b, 
+	belowcaptionskip=4pt,
+	breaklines=true
+} 
+
+\lstdefinestyle{eclipsejava}{
+	language=Java,
+	style=eclipse,
+	keywordstyle=\bfseries\color{eclipsejavakeywords},
+	commentstyle=\color{eclipsejavacomments},
+	stringstyle=\color{eclipsejavastrings},
+	moredelim=[is][\textcolor{eclipsejavaannotations}]{\$\$}{\$\$},% für annotations
+	moredelim=[is][\textcolor{eclipsejavaidentifiers}]{\#}{\#},% für variablennamen
+	moredelim=[is][\itshape\textcolor{eclipsejavaidentifiers}]{\#\#}{\#\#},% für konstanten
+	morekeywords={enum}
+} 
+
+\lstdefinestyle{eclipsejavascript}{
+	language=JavaScript,
+	style=eclipse,
+	keywordstyle=\bfseries\color{eclipsejavakeywords},
+	commentstyle=\color{eclipsejavacomments},
+	stringstyle=\color{eclipsejavastrings}
+} 
+
+\lstdefinestyle{eclipsexml}{
+	language=XML,
+	style=eclipse,
+	commentstyle=\color{eclipsexmlcomments},
+	keywordstyle=\color{eclipsexmlbasic},
+	identifierstyle=\color{eclipsexmlbasic},
+	stringstyle=\color{eclipsexmlstrings},
+	moredelim=[s][\textcolor{eclipsexmlcomments}]{<!--}{-->}
+} 
+
+\lstdefinestyle{eclipsehtml}{
+	language=HTML,
+	style=eclipse,
+	commentstyle=\color{eclipsehtmlcomments},
+	keywordstyle=\color{eclipsehtmlkeywords},
+	identifierstyle=\color{eclipsehtmlbasic},
+	stringstyle=\color{eclipsehtmlstrings}
+} 
+
+\lstdefinestyle{eclipseproperties}{
+	style=eclipse,
+	commentstyle=\color{eclipsejavacomments},
+	keywordstyle=\color{eclipsejavakeywords},
+	morecomment=[l]{\#},
+	moredelim=[il][\textcolor{eclipsejavastrings}]{\%}{}
+} 
+
+\newcommand{\todo}[0]{\textbf{\textit{\textcolor{red}{TODO }}}}
+\newcommand{\progress}[0]{\textbf{\textit{\textcolor{orange}{In Progress }}}}
+
+% besserer Blocksatz
+\sloppy
+%
+% EOF
+%

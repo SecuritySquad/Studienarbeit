@@ -1,0 +1,14 @@
+# Fdb version 3
+["pdflatex"] 1477380874 "erklaerung.tex" "erklaerung.pdf" "erklaerung" 1477380874
+  "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
+  "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd" 1428932888 2256 09a793cb810c26c97ed035dcd724a0d0 ""
+  "/usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf" 1428852030 31983 18aeec08f48baa3cf3508d538dd5f459 ""
+  "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
+  "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1464164062 3849859 189f1b3b28fd69cddbe91985df422437 ""
+  "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
+  "erklaerung.aux" 1477380801 3869 28eaa068f703eb7ec6052d3726d3ad7c ""
+  "erklaerung.tex" 1477380869 1910 c756ec16e02e7176c569037932da5103 ""
+  (generated)
+  "erklaerung.pdf"
+  "erklaerung.log"

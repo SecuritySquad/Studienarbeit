@@ -1,0 +1,50 @@
+
+\chapter*{Anhang}
+
+\section*{TEIL A}
+\label{app:a}
+\begin{table}[H]
+\centering
+\caption[Vollständige Liste der Anweisungen des SLIM-Protokolls]{Vollständige Liste der Anweisungen des SLIM-Protokolls\protect\footnotemark}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\textbf{Name} & \textbf{Anweisung} \\\hline
+Import & [<id>, import, <path>] \\\hline
+Make & [<id>, make, <instance>, <class>, <arg>...] \\\hline
+Call & [<id>, call,<instance>,<function>,<arg>...] \\\hline
+CallAndAssign & [<id>, callAndAssign, <symbol>, <instance>, <function>, <arg>...] \\\hline
+Assign & [<id>, assign, <symbol>, <value>] \\\hline
+\end{tabularx}
+\end{table}
+\footnotetext{Siehe FitNesse Slim Protokoll Abs. 3 (The Instroctions) \cite{fitNesseUserGuideSlimProtocol}}
+
+%TODO einzelne Anweisungen beschreiben
+
+\newpage
+
+\section*{TEIL B}
+\label{app:b}
+\begin{table}[H]
+\centering
+\caption[Slim Testtabellen]{Slim Testtabellen\protect\footnotemark}
+\begin{tabularx}{\textwidth}{lX}
+\hline
+\textbf{Name} & \textbf{Beschreibung} \\\hline
+Decision Table & Supplies the inputs and outputs for decisions. This is similar to the Fit Column Fixture  \\\hline
+Dynamic Decision Table & Has the same syntax as a >Decision Table, but passes the column headers as parameters to the fixture.  \\\hline
+Query Table & Supplies the expected results of a query. This is similar to the Fit Row Fixture  \\\hline
+Subset Query Table & Supplies a subset of the expected results of a query.  \\\hline
+Ordered query Table &  	Supplies the expected results of a query. The rows are expected to be in order. This is similar to the Fit Row Fixture  \\\hline
+Script Table & A series of actions and checks. Similar to Do Fixture.  \\\hline
+Table Table & Whatever you want it to be!  \\\hline
+Import & Add a path to the fixture search path.  \\\hline
+Comment &  	A table that does nothing.  \\\hline
+Scenario Table & A table that can be called from other tables.  \\\hline
+Library Table & A table that installs fixtures available for all test pages  \\\hline
+Define Table Type & A helper table that defines the default table type for named fixtures.  \\\hline
+Define Alias & A helper table that defines alias names for fixtures.  \\\hline
+\end{tabularx}
+\end{table}
+\footnotetext{Siehe FitNesse Slim Test System Tab. 1 \cite{fitNesseUserGuideTestSystemSlim}}
+
+%TODO einzelne Tabellen beschreiben
