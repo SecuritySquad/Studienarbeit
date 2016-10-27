@@ -153,7 +153,7 @@
 % \setlength{\footheight}{21mm} % Höhe der Fußzeile
 %\setfootsepline[text]{0.4pt} % Trennlinie über Fußzeile
 
-%\automark[section]{chapter} 
+%\automark[section]{chapter}
 \usepackage{soul}
 \newcommand{\hlc}[2][yellow]{{\sethlcolor{#1}\hl{#2}}}
 
@@ -188,14 +188,14 @@
 \lstdefinestyle{eclipse}{
 	float,
 	frame=single,
-	basicstyle=\ttfamily,  
-	showstringspaces=false, 
-	showspaces=false, 
-	numbers=left, 
-	captionpos=b, 
+	basicstyle=\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	captionpos=b,
 	belowcaptionskip=4pt,
 	breaklines=true
-} 
+}
 
 \lstdefinestyle{eclipsejava}{
 	language=Java,
@@ -207,7 +207,7 @@
 	moredelim=[is][\textcolor{eclipsejavaidentifiers}]{\#}{\#},% für variablennamen
 	moredelim=[is][\itshape\textcolor{eclipsejavaidentifiers}]{\#\#}{\#\#},% für konstanten
 	morekeywords={enum}
-} 
+}
 
 \lstdefinestyle{eclipsejavascript}{
 	language=JavaScript,
@@ -215,7 +215,7 @@
 	keywordstyle=\bfseries\color{eclipsejavakeywords},
 	commentstyle=\color{eclipsejavacomments},
 	stringstyle=\color{eclipsejavastrings}
-} 
+}
 
 \lstdefinestyle{eclipsexml}{
 	language=XML,
@@ -225,7 +225,7 @@
 	identifierstyle=\color{eclipsexmlbasic},
 	stringstyle=\color{eclipsexmlstrings},
 	moredelim=[s][\textcolor{eclipsexmlcomments}]{<!--}{-->}
-} 
+}
 
 \lstdefinestyle{eclipsehtml}{
 	language=HTML,
@@ -234,7 +234,7 @@
 	keywordstyle=\color{eclipsehtmlkeywords},
 	identifierstyle=\color{eclipsehtmlbasic},
 	stringstyle=\color{eclipsehtmlstrings}
-} 
+}
 
 \lstdefinestyle{eclipseproperties}{
 	style=eclipse,
@@ -242,7 +242,7 @@
 	keywordstyle=\color{eclipsejavakeywords},
 	morecomment=[l]{\#},
 	moredelim=[il][\textcolor{eclipsejavastrings}]{\%}{}
-} 
+}
 
 \newcommand{\todo}[0]{\textbf{\textit{\textcolor{red}{TODO }}}}
 \newcommand{\progress}[0]{\textbf{\textit{\textcolor{orange}{In Progress }}}}

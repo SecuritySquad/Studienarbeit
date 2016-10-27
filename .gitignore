@@ -27,3 +27,7 @@
 *.tps
 *blx.bib
 *.run.xml
+*.lof
+*.lol
+*.lot
+*.pdf

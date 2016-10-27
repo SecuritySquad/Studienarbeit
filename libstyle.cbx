@@ -2,9 +2,10 @@
 
 \RequireCitationStyle{authoryear-ibid}
 
-\DeclareNameFormat{labelname}{\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
-  \usebibmacro{name:andothers}
-}
+% TODO fix beacuse of newer latex version
+%\DeclareNameFormat{labelname}{\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
+%  \usebibmacro{name:andothers}
+%}
 
 \DeclareFieldFormat{citehyperref}{%
   \DeclareFieldAlias{bibhyperref}{noformat}% Avoid nested links
