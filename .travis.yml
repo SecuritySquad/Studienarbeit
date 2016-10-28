@@ -3,12 +3,23 @@ before_install:
 - sudo apt-get install texlive-full
 - sudo apt-get install biblatex
 - sudo mkdir -p /usr/share/texmf-texlive/tex/latex/floatflt
+
+# update floatflt package
 - cd /usr/share/texmf-texlive/tex/latex/floatflt
 - sudo rm -f floatflt.* float*.tex
 - sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.ins
 - sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.dtx
 - sudo latex floatflt.ins
 - sudo texhash /usr/share/texmf-texlive
+
+# update geometry package
+- cd /usr/share/texmf-texlive/tex/latex/geometry
+- sudo rm -f geometry.* geometry*.tex
+- sudo wget http://mirror.ctan.org/macros/latex/contrib/geometry/geometry.ins
+- sudo wget http://mirror.ctan.org/macros/latex/contrib/geometry/geometry.dtx
+- sudo latex geometry.ins
+- sudo texhash /usr/share/texmf-texlive
+
 - cd $TRAVIS_BUILD_DIR
 
 script:
