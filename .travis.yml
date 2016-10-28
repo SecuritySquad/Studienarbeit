@@ -1,6 +1,7 @@
 before_install:
 - "sudo apt-get update && sudo apt-get install --no-install-recommends texlive texlive-full latex-xcolor texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-bibtex-extra texlive-lang-german texlive-science dvipng"
-- tlmgr update --self --all
+- "tex --version"
+- "tlmgr update --self --all"
 
 script:
 - pdflatex Studienarbeit.tex
