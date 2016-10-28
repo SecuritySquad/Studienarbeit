@@ -1,13 +1,14 @@
-before_install: "sudo apt-get update && sudo apt-get install --no-install-recommends texlive texlive-full latex-xcolor texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-bibtex-extra texlive-lang-german texlive-science dvipng tlmgr && tlmgr update --self --all"
+before_install:
+- sudo apt-get update
+- sudo apt-get install --no-install-recommends texlive texlive-full latex-xcolor texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-bibtex-extra texlive-lang-german texlive-science dvipng
 
-script:
-- pdflatex Studienarbeit.tex
+script: pdflatex Studienarbeit.tex
 deploy:
   provider: releases
   api_key:
     secure: U/GOyFdFQ+DgOhNZoNUSu2zey12h/VPy1j8/CYo+yejl/8MM4MPrc6Dk59+TAFhmIovRCBfwHBn8soYFnGkLplysGog6MupqxLFI4+4ZbpGbzwfHRuzbm327Eyryhvj50I8sll/pQddTsxPHuCzdn7K1N7im+iWVFGEXVeLGbf9VuQNqzLhOQgkaFb2N8dolxrw+AJ3JS26jFhRYFGxtQdXNPHYEHpSVxMBKFFhhsLsBTDcH2mVcUt+aoyvMIqFfEYh4MugViqPAk8vfn368j77s/RlS8rAA2YV/MbOy//25ij+lXHOZWxFV2LNNny4Cxtlj3NB9APQGomzPBWTou65ruKgyIqa5Zk+zq3bVkfmYNQjTClkm7w+ShacV4UCp4SLHIapr/2tokRJzfN/hS8povEsqi2/VkZAxNLAJiOxVWYwyWaJ031KFQlbxq8LtgzIsLbU1zKMQVN5pCB4u6Zos+QectBUyp+UhtwlfeWxp7nvSZ/NVPzjCPgha4oEslElhaThhbL3Bzu7yzaffN/+PTpVs8L+kaotJkSU7XF9dQlWysqnQ08p/qPd0CAmy2JR42sDJeZ/f8x6nrq/T6BVK1yWiSWStIN38gvYB6IdjVbliI3OXCy6c1n9tkcabFLJjb49phZV1ngvRtBVj7Pm1OEbmfiVkkuINPkev3po=
   file:
-    - "Studienarbeit.pdf"
+    - Studienarbeit.pdf
   on:
     repo: SecuritySquad/Studienarbeit
     tags: true
