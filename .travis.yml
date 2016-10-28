@@ -1,7 +1,7 @@
 before_install:
-- ls
 - sudo apt-get update
 - sudo apt-get install texlive-full
+- sudo apt-get install texlive-bibtex-extra biber
 - sudo mkdir -p /usr/share/texmf-texlive/tex/latex/floatflt
 - cd /usr/share/texmf-texlive/tex/latex/floatflt
 - sudo rm -f floatflt.* float*.tex
@@ -12,7 +12,9 @@ before_install:
 - cd $TRAVIS_BUILD_DIR
 
 script:
-- ls
+- pdflatex Studienarbeit.tex
+- biber Studienarbeit.tex
+- pdflatex Studienarbeit.tex
 - pdflatex Studienarbeit.tex
 deploy:
   provider: releases
