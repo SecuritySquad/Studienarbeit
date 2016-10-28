@@ -1,6 +1,14 @@
 before_install:
 - sudo apt-get update
 - sudo apt-get install texlive-full
+- sudo mkdir -p /usr/share/texmf-texlive/tex/latex/floatflt
+- cd /usr/share/texmf-texlive/tex/latex/floatflt
+- sudo rm -f floatflt.* float*.tex
+- sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.ins
+- sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.dtx
+- sudo latex floatflt.ins
+- sudo texhash /usr/share/texmf-texlive
+
 script: pdflatex Studienarbeit.tex
 deploy:
   provider: releases
