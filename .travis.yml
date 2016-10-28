@@ -1,6 +1,15 @@
 before_install:
 - sudo apt-get update
-- sudo apt-get install --no-install-recommends texlive texlive-full latex-xcolor texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-bibtex-extra texlive-lang-german texlive-science dvipng
+- sudo apt-get install --no-install-recommends texlive
+- sudo apt-get install --no-install-recommends texlive-full
+- sudo apt-get install --no-install-recommends latex-xcolor
+- sudo apt-get install --no-install-recommends texlive-fonts-recommended
+- sudo apt-get install --no-install-recommends texlive-latex-extra
+- sudo apt-get install --no-install-recommends texlive-fonts-extra
+- sudo apt-get install --no-install-recommends texlive-latex-recommended
+- sudo apt-get install --no-install-recommends texlive-bibtex-extra
+- sudo apt-get install --no-install-recommends texlive-lang-german
+- sudo apt-get install --no-install-recommends texlive-science dvipng
 
 script: pdflatex Studienarbeit.tex
 deploy:
