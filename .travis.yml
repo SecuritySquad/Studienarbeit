@@ -1,4 +1,5 @@
 before_install:
+- ls
 - sudo apt-get update
 - sudo apt-get install texlive-full
 - sudo mkdir -p /usr/share/texmf-texlive/tex/latex/floatflt
@@ -9,7 +10,9 @@ before_install:
 - sudo latex floatflt.ins
 - sudo texhash /usr/share/texmf-texlive
 
-script: pdflatex Studienarbeit.tex
+script:
+- ls
+- pdflatex Studienarbeit.tex
 deploy:
   provider: releases
   api_key:
