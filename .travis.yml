@@ -9,6 +9,7 @@ before_install:
 - sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.dtx
 - sudo latex floatflt.ins
 - sudo texhash /usr/share/texmf-texlive
+- cd $TRAVIS_BUILD_DIR
 
 script:
 - ls
