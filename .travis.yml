@@ -11,7 +11,6 @@ before_install:
 - sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.dtx
 - sudo latex floatflt.ins
 - sudo texhash /usr/share/texmf-texlive
-
 # update geometry package
 - cd /usr/share/texmf-texlive/tex/latex/geometry
 - sudo rm -f geometry.* geometry*.tex
@@ -19,7 +18,7 @@ before_install:
 - sudo wget http://mirror.ctan.org/macros/latex/contrib/geometry/geometry.dtx
 - sudo latex geometry.ins
 - sudo texhash /usr/share/texmf-texlive
-
+# go to build directory
 - cd $TRAVIS_BUILD_DIR
 
 script:
