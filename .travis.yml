@@ -3,6 +3,7 @@ before_install:
 - tar -xvzf install-tl-unx.tar.gz
 - cd install-tl-*
 - pwd
+- ls
 - install-tl
 - PATH=/usr/local/texlive/2016/bin/i386-linux:$PATH
 script:
