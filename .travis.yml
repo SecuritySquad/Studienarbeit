@@ -24,6 +24,7 @@ before_install:
 - sudo dpkg -i biber_0.9.9+release-1_all.deb || sudo apt-get -f install
 
 script:
+- command -v biber
 - pdflatex Studienarbeit.tex
 - biber Studienarbeit
 - pdflatex Studienarbeit.tex
