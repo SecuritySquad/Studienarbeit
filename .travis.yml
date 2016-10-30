@@ -21,8 +21,7 @@ before_install:
 # go to build directory
 - cd $TRAVIS_BUILD_DIR
 - sudo wget http://old-releases.ubuntu.com/ubuntu/pool/universe/b/biber/biber_0.9.9+release-1_all.deb
-- sudo dpkg -i biber_0.9.9+release-1_all.deb
-- sudo apt-get -f install
+- sudo dpkg -i biber_0.9.9+release-1_all.deb || sudo apt-get -f install
 
 script:
 - pdflatex Studienarbeit.tex
