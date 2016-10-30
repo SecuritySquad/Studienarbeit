@@ -4,7 +4,7 @@ before_install:
 - cd install-tl-*
 - pwd
 - ls
-- install-tl
+- ./install-tl
 - PATH=/usr/local/texlive/2016/bin/i386-linux:$PATH
 script:
 - command -v biber
