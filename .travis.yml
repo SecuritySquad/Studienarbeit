@@ -21,7 +21,7 @@ before_install:
 # go to build directory
 - cd $TRAVIS_BUILD_DIR
 
-script: latexmk -pdf Studienarbeit.tex
+script: latexmk -pdf -f Studienarbeit.tex
 deploy:
   provider: releases
   api_key:
