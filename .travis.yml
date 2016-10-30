@@ -2,9 +2,9 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install texlive-full
 - sudo apt-get install biblatex
-- sudo mkdir -p /usr/share/texmf-texlive/tex/latex/floatflt
 
 # update floatflt package
+- sudo mkdir -p /usr/share/texmf-texlive/tex/latex/floatflt
 - cd /usr/share/texmf-texlive/tex/latex/floatflt
 - sudo rm -f floatflt.* float*.tex
 - sudo wget http://mirror.ctan.org/macros/latex/contrib/floatflt/floatflt.ins
@@ -20,6 +20,9 @@ before_install:
 - sudo texhash /usr/share/texmf-texlive
 # go to build directory
 - cd $TRAVIS_BUILD_DIR
+- sudo wget http://old-releases.ubuntu.com/ubuntu/pool/universe/b/biber/biber_0.9.9+release-1_all.deb
+- sudo dpkg -i biber_0.9.9+release-1_all.deb
+- sudo apt-get -f install
 
 script:
 - pdflatex Studienarbeit.tex
