@@ -2,6 +2,7 @@ before_install:
 - sudo wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 - tar -xvzf install-tl-unx.tar.gz
 - cd install-tl-*
+- pwd
 - install-tl
 - PATH=/usr/local/texlive/2016/bin/i386-linux:$PATH
 script:
