@@ -1,12 +1,11 @@
 before_install:
 - sudo wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 - tar -xvzf install-tl-unx.tar.gz
-- pwd
-- ls
-
+- cd install-tl-*
+- install-tl
+- PATH=/usr/local/texlive/2016/bin/i386-linux:$PATH
 script:
 - command -v biber
-- apt-cache search biber
 - pdflatex Studienarbeit
 - biber Studienarbeit
 - pdflatex Studienarbeit
