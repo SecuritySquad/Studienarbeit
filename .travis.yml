@@ -25,10 +25,11 @@ before_install:
 
 script:
 - command -v biber
-- pdflatex Studienarbeit.tex
+- apt-cache search biber
+- pdflatex Studienarbeit
 - biber Studienarbeit
-- pdflatex Studienarbeit.tex
-- pdflatex Studienarbeit.tex
+- pdflatex Studienarbeit
+- pdflatex Studienarbeit
 deploy:
   provider: releases
   api_key:
