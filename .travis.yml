@@ -1,11 +1,9 @@
 sudo: required
 dist: trusty
 before_install:
-#- sudo add-apt-repository ppa:texlive-backports/ppa -y
 - sudo apt-get update
-- sudo apt-get install texlive-base
-- sudo apt-get install texlive-extra
-- sudo apt-get install biber
+- sudo apt-get install texlive-full
+#- sudo apt-get install biber
 script:
 - pdflatex Studienarbeit
 - biber Studienarbeit
