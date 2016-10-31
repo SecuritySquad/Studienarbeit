@@ -3,12 +3,7 @@ dist: trusty
 before_install:
 - sudo apt-get update
 - sudo apt-get install texlive-full
-#- sudo apt-get install biber
-script:
-- pdflatex Studienarbeit
-- biber Studienarbeit
-- pdflatex Studienarbeit
-- pdflatex Studienarbeit
+script: latexmk Studienarbeit.tex
 deploy:
   provider: releases
   api_key:
