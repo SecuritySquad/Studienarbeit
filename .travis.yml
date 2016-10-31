@@ -4,7 +4,7 @@ before_install:
 - cd install-tl-*
 - pwd
 - ls
-- sudo ./install-tl < ../config/install-input.txt
+- sudo ./install-tl -scheme basic < ../config/install-input.txt
 - PATH=/usr/local/texlive/2016/bin/i386-linux:$PATH
 script:
 - command -v biber
