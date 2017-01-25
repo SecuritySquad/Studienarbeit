@@ -23,7 +23,6 @@
 *.pdx
 *.pnd
 *.out
-*.pdf
 *.tcp
 *.tmp
 *.toc
@@ -31,6 +30,9 @@
 *.run.xml
 *.xmpi
 *.xref
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 
 # JetBrains IntelliJ IDEA #
 ###########################
