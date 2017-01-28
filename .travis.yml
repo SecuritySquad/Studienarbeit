@@ -3,7 +3,7 @@ dist: trusty
 before_install:
 - sudo apt-get update
 - sudo apt-get install texlive-full
-script: pdflatex Studienarbeit.tex
+script: pdflatex Studienarbeit.tex && bibtex Studienarbeit.aux && pdflatex Studienarbeit.tex
 deploy:
   provider: releases
   api_key:

@@ -33,6 +33,7 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.pdf
 
 # JetBrains IntelliJ IDEA #
 ###########################
