@@ -1,20 +1,20 @@
-sudo: required
-dist: trusty
-before_install:
-- sudo apt-get update
-- sudo apt-get install texlive-full
-script: pdflatex Studienarbeit.tex # && bibtex Studienarbeit.aux && pdflatex Studienarbeit.tex
-deploy:
-  provider: releases
-  api_key:
-    secure: U/GOyFdFQ+DgOhNZoNUSu2zey12h/VPy1j8/CYo+yejl/8MM4MPrc6Dk59+TAFhmIovRCBfwHBn8soYFnGkLplysGog6MupqxLFI4+4ZbpGbzwfHRuzbm327Eyryhvj50I8sll/pQddTsxPHuCzdn7K1N7im+iWVFGEXVeLGbf9VuQNqzLhOQgkaFb2N8dolxrw+AJ3JS26jFhRYFGxtQdXNPHYEHpSVxMBKFFhhsLsBTDcH2mVcUt+aoyvMIqFfEYh4MugViqPAk8vfn368j77s/RlS8rAA2YV/MbOy//25ij+lXHOZWxFV2LNNny4Cxtlj3NB9APQGomzPBWTou65ruKgyIqa5Zk+zq3bVkfmYNQjTClkm7w+ShacV4UCp4SLHIapr/2tokRJzfN/hS8povEsqi2/VkZAxNLAJiOxVWYwyWaJ031KFQlbxq8LtgzIsLbU1zKMQVN5pCB4u6Zos+QectBUyp+UhtwlfeWxp7nvSZ/NVPzjCPgha4oEslElhaThhbL3Bzu7yzaffN/+PTpVs8L+kaotJkSU7XF9dQlWysqnQ08p/qPd0CAmy2JR42sDJeZ/f8x6nrq/T6BVK1yWiSWStIN38gvYB6IdjVbliI3OXCy6c1n9tkcabFLJjb49phZV1ngvRtBVj7Pm1OEbmfiVkkuINPkev3po=
-  file:
-  - Studienarbeit.pdf
-  on:
-    repo: SecuritySquad/Studienarbeit
-    tags: true
-  skip_cleanup: true
-notifications:
-  email: false
-  slack:
-    secure: I4lZBpzmxeLVmTuxtFbhrdeOdr95MfPDRdu+RKiAm2Ek0ayhr/HXAB5vgRARHfdWcQt5Lub7SA+NBiTaKWIbUaBagReTkGHMVvyeH/H7P204klMam/sTRXWek2MJ1KZbwRoR8RqN8kZ0LhkjgdVI6t/76NGaJmvXgBYrPL3r/KO2MnwXIwdxM/994uouxaArZVFAu8OcJxMdLQ9PU0+b4Dm0SBkTRZKH04c850oet5rjTsoewsSAXJKn8KM3ORZkkXPz25lqQxUWGfs4n/Dk2nJ/Y9uNKIC6KgQT2EtUKUgkfiRyyiqkxsDPhHBmHCSYyzrqa+5Ai833LrAh0fYiSh/CPC2d7zxWGZ03GWTudU4FbdyVoxQWS1dnvudECM3wGvchXt3iWACYvXQ5p1g7G2PehMAdFLXOSuMZkmW2q/r1JP2x/i0iWQi5jVizV19r+e6END2MTigVGIzYV1g55RzftV292vEUeUHXLM2bub/x8Us1tFLN0uc247vGzN1X81YjzLnFZRX1pLMsa4kgdsQO94zA5F/2kDqu4Vu+xE70JLD1PR8sGmGau3W+zcNfdhnxJRwUB6WMMuu7jb5LofuEMQwvkPz3S3iqxW03CToqkWquw7fA8QnBhGBsLKB3NJAAc4mRSsykA14k47u0ERsF7/C3pcVzx6MA92iDb28=
+# sudo: required
+# dist: trusty
+#before_install:
+#- sudo apt-get update
+#- sudo apt-get install texlive-full
+#script: pdflatex Studienarbeit.tex && bibtex Studienarbeit.aux && pdflatex Studienarbeit.tex
+# deploy:
+#   provider: releases
+#   api_key:
+#     secure: U/GOyFdFQ+DgOhNZoNUSu2zey12h/VPy1j8/CYo+yejl/8MM4MPrc6Dk59+TAFhmIovRCBfwHBn8soYFnGkLplysGog6MupqxLFI4+4ZbpGbzwfHRuzbm327Eyryhvj50I8sll/pQddTsxPHuCzdn7K1N7im+iWVFGEXVeLGbf9VuQNqzLhOQgkaFb2N8dolxrw+AJ3JS26jFhRYFGxtQdXNPHYEHpSVxMBKFFhhsLsBTDcH2mVcUt+aoyvMIqFfEYh4MugViqPAk8vfn368j77s/RlS8rAA2YV/MbOy//25ij+lXHOZWxFV2LNNny4Cxtlj3NB9APQGomzPBWTou65ruKgyIqa5Zk+zq3bVkfmYNQjTClkm7w+ShacV4UCp4SLHIapr/2tokRJzfN/hS8povEsqi2/VkZAxNLAJiOxVWYwyWaJ031KFQlbxq8LtgzIsLbU1zKMQVN5pCB4u6Zos+QectBUyp+UhtwlfeWxp7nvSZ/NVPzjCPgha4oEslElhaThhbL3Bzu7yzaffN/+PTpVs8L+kaotJkSU7XF9dQlWysqnQ08p/qPd0CAmy2JR42sDJeZ/f8x6nrq/T6BVK1yWiSWStIN38gvYB6IdjVbliI3OXCy6c1n9tkcabFLJjb49phZV1ngvRtBVj7Pm1OEbmfiVkkuINPkev3po=
+#   file:
+#   - Studienarbeit.pdf
+#   on:
+#     repo: SecuritySquad/Studienarbeit
+#     tags: true
+#   skip_cleanup: true
+# notifications:
+#   email: false
+#   slack:
+#     secure: I4lZBpzmxeLVmTuxtFbhrdeOdr95MfPDRdu+RKiAm2Ek0ayhr/HXAB5vgRARHfdWcQt5Lub7SA+NBiTaKWIbUaBagReTkGHMVvyeH/H7P204klMam/sTRXWek2MJ1KZbwRoR8RqN8kZ0LhkjgdVI6t/76NGaJmvXgBYrPL3r/KO2MnwXIwdxM/994uouxaArZVFAu8OcJxMdLQ9PU0+b4Dm0SBkTRZKH04c850oet5rjTsoewsSAXJKn8KM3ORZkkXPz25lqQxUWGfs4n/Dk2nJ/Y9uNKIC6KgQT2EtUKUgkfiRyyiqkxsDPhHBmHCSYyzrqa+5Ai833LrAh0fYiSh/CPC2d7zxWGZ03GWTudU4FbdyVoxQWS1dnvudECM3wGvchXt3iWACYvXQ5p1g7G2PehMAdFLXOSuMZkmW2q/r1JP2x/i0iWQi5jVizV19r+e6END2MTigVGIzYV1g55RzftV292vEUeUHXLM2bub/x8Us1tFLN0uc247vGzN1X81YjzLnFZRX1pLMsa4kgdsQO94zA5F/2kDqu4Vu+xE70JLD1PR8sGmGau3W+zcNfdhnxJRwUB6WMMuu7jb5LofuEMQwvkPz3S3iqxW03CToqkWquw7fA8QnBhGBsLKB3NJAAc4mRSsykA14k47u0ERsF7/C3pcVzx6MA92iDb28=
