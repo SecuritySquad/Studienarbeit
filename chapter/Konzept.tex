@@ -4,10 +4,61 @@
 
 \subsection{webifier platform}
 
-\subsection{webifier scheduler}
-
 \subsection{webifier tester}
 
 \subsection{webifier tests}
 
+\subsection{webifier data}
+
+\subsection{webifier statistics}
+
 \section{Sicherheitstests}
+
+\subsection{Virus Scan}
+\begin{itemize}
+  \item Httrack (Umsetzung)
+  \item Download aller Dateien der Webseite
+  \item Scannen der Heruntergeladenen Dateien
+  \begin{itemize}
+    \item Clamav (Umsetzung)
+    \item AVG (Umsetzung)
+    \item CAV (Umsetzung)
+  \end{itemize}
+\end{itemize}
+
+\subsection{Port Scan}
+
+\subsection{Header Inspection}
+
+\subsection{Link Checker}
+\begin{itemize}
+  \item herausfiltern aller Links und nachgeladenen Ressourcen
+\end{itemize}
+
+\subsection{Certificate Checker}
+\begin{itemize}
+  \item Auslesen der relevanten Informationen des Zertifikates der WEbseite
+  \item Validierung des Zertifikates
+\end{itemize}
+
+\subsection{Phishing Detector}
+\begin{itemize}
+  \item Herausfiltern der Schlagwörter
+  \item Finden möglicher Duplikate der Webseite
+  \begin{itemize}
+    \item Erstes Schlagwort zu Top Level Domains
+    \begin{itemize}
+      \item com
+      \item ru
+      \item net
+      \item org
+      \item de
+    \end{itemize}
+    \item Websuche nach den Schlagwörtern mittels Suchmaschinen
+    \begin{itemize}
+      \item DuckDuckGo
+      \item Ixquick
+      \item Bing
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
