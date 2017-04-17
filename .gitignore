@@ -34,7 +34,10 @@
 *.fdb_latexmk
 *.synctex.gz
 
-# JetBrains IntelliJ IDEA #
+# Other files and directories #
 ###########################
+config
+.DS_Store
+.latex.json
 .idea
 *.iml
