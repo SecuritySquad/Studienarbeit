@@ -36,8 +36,8 @@
 
 # Other files and directories #
 ###########################
-config
 .DS_Store
 .latex.json
 .idea
 *.iml
+
