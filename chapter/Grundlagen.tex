@@ -36,9 +36,12 @@ Aufbauend auf dem \textit{Spring} Basis-Modul werden noch weitere Module, wie be
 Ein wichtiger Bestandteil jedes großen Software-Projektes ist ein gutes Build-Management-Tool. Für webifier wurde \textit{Gradle} als solches gewählt. Ein Build-Prozess besteht grundsätzlich aus zwei Teilschritten. Zum Einen aus dem kompilieren des Codes und zum anderen aus dem verlinkten der benutzen Bibliotheken. \cite{buildprozess}
 Da das manuelle Einbinden von Bibliotheken und compilieren des Codes bei großen Projekten sehr aufwändig und mühsam sein kann wird hier auf Build-Management-Tools wie \textit{Gradle} zurückgegriffen. Um den Build für den Nutzer möglichst einfach zu gestalten verfolgt Gradle zwei Prinzipien. Das erste Prinzip ist \textit{Convention over Configuration}, was bedeutet, dass soweit es geht ein Standardbuildprozess definiert ist und der Anwender nur die Parameter ändern muss die Projektspezifisch abweichen. Das zweite Prinzip nennt sich \acl{DRY}. Hierbei geht es darum Redundanzen in der Konfiguration des Buildes zu vermeiden. Diese beiden Prinzipien helfen Gradle, dass meist kurze Build-Skripte ausreichen um komplexe Prozesse abzubilden. \footcite[Vgl.][6f]{gradle}
 
+Die Kommunikation zwischen Server und Client erfolgt über \acl{REST}. Jedes Objekt wird in \ac{REST} als Ressource definiert, welche über einen eindeutigen \acl{URI} adressiert werden können. Über die HTTP-Methoden GET,PUT,POST und DELETE können diese Ressourcen geladen, erstellt, geändert oder auch gelöscht werden. \cite{rest}
+
+
+
 \begin{itemize}
   \item MongoDB\newline \todo Samuel
-  \item REST  \newline \todo Jani
   \item Docker  \newline \todo Jani
   \item R \newline \todo Jani
 \end{itemize}
