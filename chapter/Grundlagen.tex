@@ -1,6 +1,6 @@
 \chapter{Grundlagen}
 
-In diesem Kapitel werden die Grundlagen, welche für das weitere Verständnis der Arbeit und der gesamten Anwendung notwendig sind, näher beschrieben. Zunächst werden die verschiedenen Technologien und Frameworks, sowohl des Frontends, als auch des Backends dargestellt. Anschließend werden einige gängige Angriffstypen im \ac{WWW} erläutert, welche webifier überprüft.
+In diesem Kapitel werden die Grundlagen, welche für das weitere Verständnis der Arbeit und der gesamten Anwendung notwendig sind, näher beschrieben. Zunächst werden die verschiedenen Technologien und Frameworks, sowohl des Frontends, als auch des Backends dargestellt. Anschließend werden einige gängige Angriffstypen im \ac{WWW} erläutert.
 
 \section{Frontend Technologien und Frameworks}
 
@@ -29,20 +29,20 @@ Aufbauend auf dem \textit{Spring} Basis-Modul werden noch weitere Module, wie be
   \item[Spring MVC] \hfill \\
     Spring MVC ist sehr gut geeignet um Webanwendungen zu implementieren.\footcite[Vgl.][3]{spring3} Hierfür können die diese in mehrere Abstraktionsschichten gegliedert werden. Beispielsweise in das \ac{UI}, die Geschäftslogik und die Persistenzschicht.\footcite[Vgl.][21]{springMvc}
   \item[Spring Data] \hfill \\
-    Spring Data ist\ldots
+    Spring Data vereinfacht Datenbankzugriffe ungemein. Das Modul stelt \ac{API}s für fast alle gängigen Datenbankzugriffsschichten, wie JDBC (Java Database Connectivity), Hibernate, JDO (Java Data Objects) zur Verfügung. Aber nicht nur relationale Datenbanken werden unterstützt, sondern beispielsweise auch NoSQL-Datenbanken und Key/Value-Stores können Problemlos eingesetzt werden.\footcite[Vgl.][3f]{springData}
 \end{description}
 
+In Verbindung mit Spring Data wurde eine \textit{MongoDB} zur Speicherung der Ergebnisse eingesetzt. \textit{MongoDB} ist eine Dokument orientierte anpassungsfähige, skalierbare Datenbank. Dennoch vereint sie viele nützliche Eigenschaften von Relationalen Datenbanken, wie Sekundärindizes, Auswahlabfragen und Sortierung mit Skalierbarkeit, MapReduce-Aggregationen und raumbezogenen Indizes. Außerdem gibt es bei MongoDB keine festen Schemata, weshalb großen Datenmigrationen normal nicht notwendig sind.\footcite[Vgl.][1f]{mongodb}
 
-Ein wichtiger Bestandteil jedes großen Software-Projektes ist ein gutes Build-Management-Tool. Für webifier wurde \textit{Gradle} als solches gewählt. Ein Build-Prozess besteht grundsätzlich aus zwei Teilschritten. Zum Einen aus dem kompilieren des Codes und zum anderen aus dem verlinkten der benutzen Bibliotheken. \cite{buildprozess}
+Ein wichtiger Bestandteil jedes großen Software-Projektes ist ein gutes Build-Management-Tool. Für webifier wurde \textit{Gradle} als solches gewählt. Ein Build-Prozess besteht grundsätzlich aus zwei Teilschritten. Zum Einen aus dem kompilieren des Codes und zum anderen aus dem verlinkten der benutzen Bibliotheken. \footcite[Vgl.][]{buildprozess}
 Da das manuelle Einbinden von Bibliotheken und compilieren des Codes bei großen Projekten sehr aufwändig und mühsam sein kann wird hier auf Build-Management-Tools wie \textit{Gradle} zurückgegriffen. Um den Build für den Nutzer möglichst einfach zu gestalten verfolgt Gradle zwei Prinzipien. Das erste Prinzip ist \textit{Convention over Configuration}, was bedeutet, dass soweit es geht ein Standardbuildprozess definiert ist und der Anwender nur die Parameter ändern muss die Projektspezifisch abweichen. Das zweite Prinzip nennt sich \acl{DRY}. Hierbei geht es darum Redundanzen in der Konfiguration des Buildes zu vermeiden. Diese beiden Prinzipien helfen Gradle, dass meist kurze Build-Skripte ausreichen um komplexe Prozesse abzubilden. \footcite[Vgl.][6f]{gradle}
 
-Die Kommunikation zwischen Server und Client erfolgt über \acl{REST}. Hierbei wird jedes Objekt in \ac{REST} als Ressource definiert, welche über einen eindeutigen \acl{URI} adressiert werden können. Über die HTTP-Methoden GET,PUT,POST und DELETE können diese Ressourcen geladen, erstellt, geändert oder auch gelöscht werden. \cite{rest}
+Die Kommunikation zwischen Server und Client erfolgt über \acl{REST}. Hierbei wird jedes Objekt in \ac{REST} als Ressource definiert, welche über einen eindeutigen \acl{URI} adressiert werden können. Über die HTTP-Methoden GET, PUT, POST und DELETE können diese Ressourcen geladen, erstellt, geändert oder auch gelöscht werden. \footcite[Vgl.][]{rest}
 
-Das Testen von potenziell gefährlichen Webseiten soll natürlich nicht direkt auf dem Server geschehen, da es sonst diesen potenziell gefährden könnte. Deshalb wird hierfür eine Virtualisierung benötigt um die Tests abgekapselt vom Gesamtsystem auszuführen. Dafür wurde Docker als Tool eingesetzt. Docker ist eine Open-Source-Software zur Virtualisierung von Anwendungen. Hierbei wird auf die Container-Technologie gesetzt. Container sind vom Betriebssystem bereitgestellte virtuelle Umgebung zur isolierten Ausführung von Prozessen. Ein Vorteil der Container gegenüber der herkömmlicher virtuelle Maschinen ist der vielfach geringere Ressourcenbedarf.\cite{docker}
+Das Testen von potenziell gefährlichen Webseiten soll natürlich nicht direkt auf dem Server geschehen, da es sonst diesen potenziell gefährden könnte. Deshalb wird hierfür eine Virtualisierung benötigt um die Tests abgekapselt vom Gesamtsystem auszuführen. Dafür wurde Docker als Tool eingesetzt. Docker ist eine Open-Source-Software zur Virtualisierung von Anwendungen. Hierbei wird auf die Container-Technologie gesetzt. Container sind vom Betriebssystem bereitgestellte virtuelle Umgebung zur isolierten Ausführung von Prozessen. Ein Vorteil der Container gegenüber der herkömmlicher virtuelle Maschinen ist der vielfach geringere Ressourcenbedarf.\footcite[Vgl.][]{docker}
 
 
 \begin{itemize}
-  \item MongoDB \newline \todo Samuel
   \item R \newline \todo Jani
 \end{itemize}
 
