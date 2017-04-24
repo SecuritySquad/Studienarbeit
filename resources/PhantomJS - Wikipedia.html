@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html class="client-js ve-not-available" dir="ltr" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>PhantomJS - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"PhantomJS","wgTitle":"PhantomJS","wgCurRevisionId":776505913,"wgRevisionId":776505913,"wgArticleId":45375253,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Pages using deprecated image syntax","C++ software","Web browsers","Cross-platform web browsers","Portable software","Software based on WebKit","Software using the BSD license","2011 software"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"PhantomJS","wgRelevantArticleId":45375253,"wgRequestId":"WPwX1wrAAEIAAe5FnZoAAAAN","wgIsProbablyEditable":true,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgPopupsShouldSendModuleToUser":false,"wgPopupsConflictsWithNavPopupGadget":false,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":false},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgWikibaseItemId":"Q20712371","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","ext.cite.styles":"ready","ext.pygments":"ready","wikibase.client.init":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["ext.cite.a11y","mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.quicksurveys.init","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="PhantomJS%20-%20Wikipedia_files/load_002.css">
+<script async="" src="PhantomJS%20-%20Wikipedia_files/load_002.php"></script>
+<style>
+.cite-accessibility-label{ top:-99999px;clip:rect( 1px 1px 1px 1px ); clip:rect( 1px,1px,1px,1px ); position:absolute !important;padding:0 !important;border:0 !important;height:1px !important;width:1px !important; overflow:hidden}
+.referencetooltip{position:absolute;list-style:none;list-style-image:none;opacity:0;font-size:10px;margin:0;z-index:5;padding:0}.referencetooltip li{border:#080086 2px solid;max-width:260px;padding:10px 8px 13px 8px;margin:0px;background-color:#F7F7F7;-webkit-box-shadow:2px 4px 2px rgba(0,0,0,0.3);-moz-box-shadow:2px 4px 2px rgba(0,0,0,0.3);box-shadow:2px 4px 2px rgba(0,0,0,0.3)}.referencetooltip li+li{margin-left:7px;margin-top:-2px;border:0;padding:0;height:3px;width:0px;background-color:transparent;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;border-top:12px #080086 solid;border-right:7px transparent solid;border-left:7px transparent solid}.referencetooltip>li+li::after{content:'';border-top:8px #F7F7F7 solid;border-right:5px transparent solid;border-left:5px transparent solid;margin-top:-12px;margin-left:-5px;z-index:1;height:0px;width:0px;display:block}.client-js body .referencetooltip li li{border:none;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;height:auto;width:auto;margin:auto;padding:0;position:static}.RTflipped{padding-top:13px}.referencetooltip.RTflipped li+li{position:absolute;top:2px;border-top:0;border-bottom:12px #080086 solid}.referencetooltip.RTflipped li+li::after{border-top:0;border-bottom:8px #F7F7F7 solid;position:absolute;margin-top:7px}.RTsettings{float:right;height:24px;width:24px;cursor:pointer;background-image:url(//upload.wikimedia.org/wikipedia/commons/thumb/0/05/OOjs_UI_icon_advanced.svg/24px-OOjs_UI_icon_advanced.svg.png);background-image:linear-gradient(transparent,transparent),url(//upload.wikimedia.org/wikipedia/commons/0/05/OOjs_UI_icon_advanced.svg);margin-top:-9px;margin-right:-7px;-webkit-transition:opacity 0.15s;-moz-transition:opacity 0.15s;-ms-transition:opacity 0.15s;-o-transition:opacity 0.15s;transition:opacity 0.15s;opacity:0.6;filter:alpha(opacity=60)}.RTsettings:hover{opacity:1;filter:alpha(opacity=100)}.RTTarget{border:#080086 2px solid}
+.skin-vector li.GA,.skin-monobook li.GA,.skin-modern li.GA{list-style-image:url(//upload.wikimedia.org/wikipedia/commons/4/42/Monobook-bullet-ga.png)} .skin-vector li.FA,.skin-monobook li.FA{list-style-image:url(//upload.wikimedia.org/wikipedia/commons/d/d4/Monobook-bullet-star.png)}.skin-modern li.FA{list-style-image:url(//upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Modern-bullet-star.svg/9px-Modern-bullet-star.svg.png)}
+.wp-teahouse-question-form{position:absolute;margin-left:auto;margin-right:auto;background-color:#f4f3f0;border:1px solid #a7d7f9;padding:1em}#wp-th-question-ask{float:right}.wp-teahouse-ask a.external{background-image:none !important}.wp-teahouse-respond-form{position:absolute;margin-left:auto;margin-right:auto;background-color:#f4f3f0;border:1px solid #a7d7f9;padding:1em}.wp-th-respond{float:right}.wp-teahouse-respond a.external{background-image:none !important}
+.mw-ui-button{font-family:inherit;font-size:1em;display:inline-block;min-width:4em;max-width:28.75em;padding:0.546875em 1em;line-height:1.286;margin:0;border-radius:2px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-appearance:none;*display:inline; zoom:1;vertical-align:middle;background-color:#f8f9fa;color:#222222;border:1px solid #a2a9b1;text-align:center;font-weight:bold;cursor:pointer}.mw-ui-button:visited{color:#222222}.mw-ui-button:hover{background-color:#ffffff;color:#444444;border-color:#a2a9b1}.mw-ui-button:focus{background-color:#ffffff;color:#222222;border-color:#3366cc;box-shadow:inset 0 0 0 1px #3366cc,inset 0 0 0 2px #ffffff}.mw-ui-button:active,.mw-ui-button.is-on,.mw-ui-button.mw-ui-checked{background-color:#d9d9d9;color:#000000;border-color:#72777d;box-shadow:none}.mw-ui-button:disabled{background-color:#c8ccd1;color:#fff;border-color:#c8ccd1}.mw-ui-button:disabled:hover,.mw-ui-button:disabled:active{background-color:#c8ccd1;color:#fff;box-shadow:none;border-color:#c8ccd1}.mw-ui-button:focus{outline-width:0}.mw-ui-button:focus::-moz-focus-inner{border-color:transparent;padding:0}.mw-ui-button:not( :disabled ){-webkit-transition:background-color 100ms,color 100ms,border-color 100ms,box-shadow 100ms;-moz-transition:background-color 100ms,color 100ms,border-color 100ms,box-shadow 100ms;transition:background-color 100ms,color 100ms,border-color 100ms,box-shadow 100ms}.mw-ui-button:disabled{text-shadow:none;cursor:default}.mw-ui-button.mw-ui-big{font-size:1.3em}.mw-ui-button.mw-ui-block{display:block;width:100%;margin-left:auto;margin-right:auto}.mw-ui-button.mw-ui-progressive,.mw-ui-button.mw-ui-constructive{background-color:#3366cc;color:#fff;border:1px solid #3366cc;text-shadow:0 1px rgba(0,0,0,0.1)}.mw-ui-button.mw-ui-progressive:hover,.mw-ui-button.mw-ui-constructive:hover{background-color:#447ff5;border-color:#447ff5}.mw-ui-button.mw-ui-progressive:focus,.mw-ui-button.mw-ui-constructive:focus{box-shadow:inset 0 0 0 1px #3366cc,inset 0 0 0 2px #ffffff}.mw-ui-button.mw-ui-progressive:active,.mw-ui-button.mw-ui-constructive:active,.mw-ui-button.mw-ui-progressive.is-on,.mw-ui-button.mw-ui-constructive.is-on,.mw-ui-button.mw-ui-progressive.mw-ui-checked,.mw-ui-button.mw-ui-constructive.mw-ui-checked{background-color:#2a4b8d;border-color:#2a4b8d;box-shadow:none}.mw-ui-button.mw-ui-progressive:disabled,.mw-ui-button.mw-ui-constructive:disabled{background-color:#c8ccd1;color:#fff;border-color:#c8ccd1}.mw-ui-button.mw-ui-progressive:disabled:hover,.mw-ui-button.mw-ui-constructive:disabled:hover,.mw-ui-button.mw-ui-progressive:disabled:active,.mw-ui-button.mw-ui-constructive:disabled:active,.mw-ui-button.mw-ui-progressive:disabled.mw-ui-checked,.mw-ui-button.mw-ui-constructive:disabled.mw-ui-checked{background-color:#c8ccd1;color:#fff;border-color:#c8ccd1;box-shadow:none}.mw-ui-button.mw-ui-progressive.mw-ui-quiet,.mw-ui-button.mw-ui-constructive.mw-ui-quiet{color:#222222}.mw-ui-button.mw-ui-progressive.mw-ui-quiet:hover,.mw-ui-button.mw-ui-constructive.mw-ui-quiet:hover{background-color:transparent;color:#447ff5}.mw-ui-button.mw-ui-progressive.mw-ui-quiet:active,.mw-ui-button.mw-ui-constructive.mw-ui-quiet:active,.mw-ui-button.mw-ui-progressive.mw-ui-quiet.mw-ui-checked,.mw-ui-button.mw-ui-constructive.mw-ui-quiet.mw-ui-checked{color:#2a4b8d}.mw-ui-button.mw-ui-progressive.mw-ui-quiet:focus,.mw-ui-button.mw-ui-constructive.mw-ui-quiet:focus{background-color:transparent;color:#3366cc}.mw-ui-button.mw-ui-progressive.mw-ui-quiet:disabled,.mw-ui-button.mw-ui-constructive.mw-ui-quiet:disabled{color:#c8ccd1}.mw-ui-button.mw-ui-destructive{background-color:#dd3333;color:#fff;border:1px solid #dd3333;text-shadow:0 1px rgba(0,0,0,0.1)}.mw-ui-button.mw-ui-destructive:hover{background-color:#ff4242;border-color:#ff4242}.mw-ui-button.mw-ui-destructive:focus{box-shadow:inset 0 0 0 1px #dd3333,inset 0 0 0 2px #ffffff}.mw-ui-button.mw-ui-destructive:active,.mw-ui-button.mw-ui-destructive.is-on,.mw-ui-button.mw-ui-destructive.mw-ui-checked{background-color:#b32424;border-color:#b32424;box-shadow:none}.mw-ui-button.mw-ui-destructive:disabled{background-color:#c8ccd1;color:#fff;border-color:#c8ccd1}.mw-ui-button.mw-ui-destructive:disabled:hover,.mw-ui-button.mw-ui-destructive:disabled:active,.mw-ui-button.mw-ui-destructive:disabled.mw-ui-checked{background-color:#c8ccd1;color:#fff;border-color:#c8ccd1;box-shadow:none}.mw-ui-button.mw-ui-destructive.mw-ui-quiet{color:#222222}.mw-ui-button.mw-ui-destructive.mw-ui-quiet:hover{background-color:transparent;color:#ff4242}.mw-ui-button.mw-ui-destructive.mw-ui-quiet:active,.mw-ui-button.mw-ui-destructive.mw-ui-quiet.mw-ui-checked{color:#b32424}.mw-ui-button.mw-ui-destructive.mw-ui-quiet:focus{background-color:transparent;color:#dd3333}.mw-ui-button.mw-ui-destructive.mw-ui-quiet:disabled{color:#c8ccd1}.mw-ui-button.mw-ui-quiet{background:transparent;border:0;text-shadow:none;color:#222222}.mw-ui-button.mw-ui-quiet:hover{background-color:transparent;color:#444444}.mw-ui-button.mw-ui-quiet:active,.mw-ui-button.mw-ui-quiet.mw-ui-checked{color:#000000}.mw-ui-button.mw-ui-quiet:focus{background-color:transparent;color:#222222}.mw-ui-button.mw-ui-quiet:disabled{color:#c8ccd1}.mw-ui-button.mw-ui-quiet:hover,.mw-ui-button.mw-ui-quiet:focus{box-shadow:none}.mw-ui-button.mw-ui-quiet:active,.mw-ui-button.mw-ui-quiet:disabled{background:transparent}input.mw-ui-button::-moz-focus-inner,button.mw-ui-button::-moz-focus-inner{margin-top:-1px;margin-bottom:-1px}a.mw-ui-button{text-decoration:none}a.mw-ui-button:hover,a.mw-ui-button:focus{text-decoration:none}.mw-ui-button-group > *{min-width:48px;border-radius:0;float:left}.mw-ui-button-group > *:first-child{border-top-left-radius:2px;border-bottom-left-radius:2px}.mw-ui-button-group > *:not( :first-child ){border-left:0}.mw-ui-button-group > *:last-child{border-top-right-radius:2px;border-bottom-right-radius:2px}.mw-ui-button-group .is-on .button{cursor:default}
+.mw-ui-icon{position:relative;line-height:1.5em;min-height:1.5em;min-width:1.5em}.mw-ui-icon.mw-ui-icon-element{text-indent:-999px;overflow:hidden;width:3.5em;min-width:3.5em;max-width:3.5em}.mw-ui-icon.mw-ui-icon-element:before{left:0;right:0;position:absolute;margin:0 1em}.mw-ui-icon.mw-ui-icon-before:before,.mw-ui-icon.mw-ui-icon-element:before{background-position:50% 50%;background-repeat:no-repeat;background-size:100% auto;float:left;display:block;min-height:1.5em;content:''}.mw-ui-icon.mw-ui-icon-before:before{position:relative;width:1.5em;margin-right:1em}.mw-ui-icon.mw-ui-icon-small:before{background-size:66.67% auto}
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:0;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:#fff;cursor:pointer;border:solid 1px #aaa;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:#fff;cursor:pointer;border:solid 1px #aaa;padding:0;margin:0}.suggestions-result{color:#000;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4c59a6;color:#fff}.suggestions-special .special-label{color:#808080;text-align:left}.suggestions-special .special-query{color:#000;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:#c0c0c0}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:#fff}.highlight{font-weight:bold}
+@media screen {
+	.tochidden,.toctoggle{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}.toctoggle{font-size:94%}}
+@media print {
+	#toc.tochidden,.toctoggle{display:none}}
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:0.6em 3.6em 0.6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba( 255,255,255,0.5 );border-radius:5px;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important; }.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB9ElEQVR4AZWRA3AYURQArxrVHtW2bdu2bdu2zdi2bdu2bWxs7zeehZaw4f70kbs+zI3e/nWK+RWx3aOFlrL56Sy5SxrruG69hlv6OyK+mz+8KDSXdXembj0ispT7tjs4ZTIbpYBvxGSGKzZTeFrb7W/meN002swFs0U8ttpHTkF2BvCqWQrW35929bTsKm5Zb+SEwWwcY8wAngB9m7Z+d+rIPZ/npdy12M5p47n8dXsCYAf0qPy06eGMdktuDu9Qf+JmKl3SWM91qzVcN9tAbEYkwMaq0tyb1m/To5kP170el/BK8/qa6sJr70ydf+T/Uu5ab+Oo/lS0AkUBpIFWlZ9WPhxpse/PHO7YbOOczjL0vZV2lNxPPtG73dYXM+xvm2znrOl83tidoqCwMBgYXsPFB0on5S6pr+eK5TKuW67lgvaKvF8mL1dtfTL32FHxRdyx3cQpg7m4x9sCXKkTIzA4LDH44zWdzaUf71hv5rTG4uyzcusybxSX7aThbMQ8XgCYAp3rzTTQOiIh9PNlzY3FSuZxrzjme1Y7uGS6kjsWO4jPjM4FVjRZsvD4kO9XtTZzQn82NyzWc0B7AmZh6gA/hOYSGhfw9YbOVnarj+S7800AL2BIsxUAbWNToj7bhBuQmZcOsFdoKUC74rGheCwXmqAIQTc9jQcrADIAAAAASUVORK5CYII=);background-image:url(/w/resources/src/mediawiki.action/images/green-checkmark.png?d94f1)!ie;background-position:left}.postedit-close{position:absolute;padding:0 0.8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:#000;text-shadow:0 0.0625em 0 #fff;text-decoration:none;opacity:0.2;filter:alpha( opacity=20 )}.postedit-close:hover{color:#000;text-decoration:none;opacity:0.4;filter:alpha( opacity=40 )}
+@-webkit-keyframes centralAuthPPersonalAnimation{0%{opacity:0;-webkit-transform:translateY(-20px)}100%{opacity:1;-webkit-transform:translateY(0)}}@-moz-keyframes centralAuthPPersonalAnimation{0%{opacity:0;-moz-transform:translateY(-20px)}100%{opacity:1;-moz-transform:translateY(0)}}@-o-keyframes centralAuthPPersonalAnimation{0%{opacity:0;-o-transform:translateY(-20px)}100%{opacity:1;-o-transform:translateY(0)}}@keyframes centralAuthPPersonalAnimation{0%{opacity:0;transform:translateY(-20px)}100%{opacity:1;transform:translateY(0)}}.centralAuthPPersonalAnimation{-webkit-animation-duration:1s;-moz-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-name:centralAuthPPersonalAnimation;-moz-animation-name:centralAuthPPersonalAnimation;-o-animation-name:centralAuthPPersonalAnimation;animation-name:centralAuthPPersonalAnimation}
+@media print{#centralNotice{display:none}}.cn-closeButton{display:inline-block;zoom:1;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAACeklEQVR4Aa1UM3jkcRBN6qS//tTFttPHqmI359VZ5dm2L1zFtr02YlRx5sX2ft/7ed7O/w1M5ufnt8NZQjCBQXhG+IYZe5zjfju7xcHc3NzEzMwM6xOEqNnZ2ZeVlZW827dv1ycmJnbGx8d3Yr5582Z9eXk5D/d4h/empqYm+K0nw3yKcF4sFmdzOJzGgIAAhb29vc7Ozk6/Atrr/fz8lCwWq6m3tzcb72G3nmzFo/NNTU354eHhIltbW72Tk5M2IyND9P79+8ZPnz7VvXnzpoHBYPS4uLhobGxsDMHBwaLa2tp82MF+PVmUUqnMioiI6LOysjLQLCcPS2ZmZn7Ozc39oPtFYG80GgWpqakSS0tLY1hYmEgikWTBfoXsLD16BT3gUWhoqEKtVheREZ+Qu0IEjI+PZ2k0GqFer+cnJSWJra2tDWw2u2FqauoVeEAW3NzcnBcYGCh3dHTUtba2ltNjLvRJSEiQEQEPRENDQzkMBqPXwsKiXyqVFsFDNzc3LWmoqKmp4YIHZIyHDx9WOzg46GJiYmTk5e/h4eHstLQ0CX2ykXST4JPJ8y7sSVM5/QGMf9y4caMHf3r//v1a8IDsGRm04/D58+dtpNFPPNRqtflXrlzpI8G15IEGc2xsrFSlUglwD+Tk5NRBmuTk5A7wgOxbXFxcF8iysrIa1mskEolKvL29Ne7u7mpXV1dNaWlp9fr7X79+VYMMeQieY/dsv5p1r2g2Nja2vWZ7RXNiYuIA0dwlzwYGBjbkGXmURXeLeUa1ul2ebV8BEH+7CiAiASTYvgJ2qc3MzMzF2vz8+XPd27dvG5hMZg+CsV1tHmfXOP5+dqyddgHOI7v1srTdcwAAAABJRU5ErkJggg==);background:url(/w/extensions/CentralNotice/resources/subscribing/CloseWindow19x19.png?7596b)!ie;width:19px;height:19px;text-indent:19px;white-space:nowrap;overflow:hidden}
+.uls-menu{border-radius:4px; font-size:medium}.uls-search,.uls-language-settings-close-block{border-top-right-radius:4px;border-top-left-radius:4px}.uls-language-list{border-bottom-right-radius:4px;border-bottom-left-radius:4px}.uls-menu.callout .caret-before,.uls-menu.callout .caret-after{border-top:10px solid transparent;border-right:10px solid #c9c9c9;border-bottom:10px solid transparent;display:inline-block;left:-11px; top:17px;position:absolute}.uls-menu.callout .caret-after{border-right:10px solid #fcfcfc;display:inline-block;left:-10px}.uls-menu.callout--languageselection .caret-after{border-right:10px solid #fff}.uls-ui-languages button{margin:5px 15px 5px 0;white-space:nowrap;overflow:hidden}.uls-search-wrapper-wrapper{position:relative;padding-left:40px;margin-top:5px;margin-bottom:5px}.uls-icon-back{background:transparent url(/w/extensions/UniversalLanguageSelector/resources/images/back-grey-ltr.png?90e9b) no-repeat scroll center center;background-image:-webkit-linear-gradient( transparent,transparent ),url(/w/extensions/UniversalLanguageSelector/resources/images/back-grey-ltr.svg?ae714);background-image:linear-gradient( transparent,transparent ),url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20id%3D%22Layer_1%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M7%2013.1l8.9%208.9c.8-.8.8-2%200-2.8l-6.1-6.1%206-6.1c.8-.8.8-2%200-2.8L7%2013.1z%22%20id%3D%22path3%22%20fill%3D%22%23555%22%2F%3E%0A%3C%2Fsvg%3E%0A);background-size:28px;background-position:center center;height:32px;width:40px;display:block;position:absolute;left:0;border-right:1px solid #c9c9c9;opacity:0.8}.uls-icon-back:hover{opacity:1;cursor:pointer}
+.ext-quick-survey-panel,.ext-qs-loader-bar{width:auto;background-color:#eaecf0} .ext-qs-loader-bar{display:block;height:100px;margin-left:1.4em;clear:right;float:right;background-color:#eaecf0}.ext-qs-loader-bar.mw-ajax-loader{top:0}@media all and (min-width:720px){.ext-qs-loader-bar,.ext-quick-survey-panel{margin-left:1.4em;width:300px;clear:right;float:right}}</style><style>
+.mw-mmv-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background-color:#000}body.mw-mmv-lightbox-open{overflow-y:auto;  }body.mw-mmv-lightbox-open #mw-page-base,body.mw-mmv-lightbox-open #mw-head-base,body.mw-mmv-lightbox-open #mw-navigation,body.mw-mmv-lightbox-open #content,body.mw-mmv-lightbox-open #footer,body.mw-mmv-lightbox-open #globalWrapper{ display:none}body.mw-mmv-lightbox-open > *{ display:none}body.mw-mmv-lightbox-open > .mw-mmv-overlay,body.mw-mmv-lightbox-open > .mw-mmv-wrapper{display:block}.mw-mmv-filepage-buttons{margin-top:5px}.mw-mmv-filepage-buttons .mw-mmv-view-expanded,.mw-mmv-filepage-buttons .mw-mmv-view-config{display:block;line-height:inherit}.mw-mmv-filepage-buttons .mw-mmv-view-expanded.mw-ui-icon:before{background-image:url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201024%20768%22%3E%0A%20%20%20%20%3Cg%20fill%3D%22%2372777d%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M851.2%2071.6L690.7%20232.1l-40.1-40.3-9.6%20164.8%20164.8-9.3-40.3-40.4L926%20146.4l58.5%2058.5L997.6%200%20792.7%2013.1%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M769.6%2089.3H611.9l70.9%2070.8%207.9%207.5m-47.1%20234.6l-51.2%203%203-51.2%209.4-164.4%205.8-100.3H26.4V768h883.1V387l-100.9%205.8-165%209.4zM813.9%20678H113.6l207.2-270.2%2031.5-12.9L548%20599.8l105.9-63.2%20159.8%20140.8.2.6zm95.6-291.9V228l-79.1%2078.9%207.8%207.9%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A)}.mw-mmv-filepage-buttons .mw-mmv-view-config.mw-ui-icon:before{background-image:url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201024%20768%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M897%20454.6V313.4L810.4%20299c-6.4-23.3-16-45.7-27.3-65.8l50.5-71.4-99.4-100.2-71.4%2050.5c-20.9-11.2-42.5-20.9-65.8-27.3L582.6-1H441.4L427%2085.6c-23.3%206.4-45.7%2016-65.8%2027.3l-71.4-50.5-100.3%2099.5%2050.5%2071.4c-11.2%2020.9-20.9%2042.5-27.3%2066.6L127%20313.4v141.2l85.8%2014.4c6.4%2023.3%2016%2045.7%2027.3%2066.6L189.6%20607l99.5%2099.5%2071.4-50.5c20.9%2011.2%2042.5%2020.9%2066.6%2027.3l14.4%2085.8h141.2l14.4-86.6c23.3-6.4%2045.7-16%2065.8-27.3l71.4%2050.5%2099.5-99.5-50.5-71.4c11.2-20.9%2020.9-42.5%2027.3-66.6l86.4-13.6zm-385%2077c-81.8%200-147.6-66.6-147.6-147.6%200-81.8%2066.6-147.6%20147.6-147.6S659.6%20302.2%20659.6%20384%20593.8%20531.6%20512%20531.6z%22%20fill%3D%22%2372777d%22%2F%3E%0A%3C%2Fsvg%3E%0A);opacity:0.75}.mw-mmv-filepage-buttons .mw-mmv-view-config.mw-ui-icon:before:hover{opacity:1}
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:#000;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:#fff}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}
+.ve-activated #toc,.ve-activated #siteNotice,.ve-activated .mw-indicators,.ve-activated #t-print,.ve-activated #t-permalink,.ve-activated #p-coll-print_export,.ve-activated #t-cite,.ve-deactivating .ve-ui-surface,.ve-active .ve-init-mw-desktopArticleTarget-editableContent{display:none} .ve-activating .ve-ui-surface{height:0;padding:0 !important; overflow:hidden} .ve-loading #content > :not( .ve-init-mw-desktopArticleTarget-loading-overlay ), .ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent{pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;opacity:0.5}.ve-activated #catlinks{cursor:pointer}.ve-activated #catlinks a{opacity:1} .ve-activated #content{position:relative} .ve-init-mw-desktopArticleTarget-loading-overlay{position:absolute;left:0;right:0;z-index:1;margin-top:-0.5em}.ve-init-mw-desktopArticleTarget-progress{height:1em;overflow:hidden;margin:0 25%}.ve-init-mw-desktopArticleTarget-progress-bar{height:1em;width:0} .mw-editsection{white-space:nowrap; unicode-bidi:-moz-isolate;unicode-bidi:-webkit-isolate;unicode-bidi:isolate}.mw-editsection-divider{color:#555} .ve-init-mw-desktopArticleTarget-progress{height:0.75em;border:1px solid #36c;background:#fff;border-radius:2px;box-shadow:0 0.1em 0 0 rgba( 0,0,0,0.15 )}.ve-init-mw-desktopArticleTarget-progress-bar{height:0.75em;background:#36c}
+#uls-settings-block{border-top:1px solid #c9c9c9;background:#f8f8f8;background:-webkit-gradient( linear,left top,left bottom,from( #fbfbfb ),to( #f0f0f0 ) );background:-webkit-linear-gradient( top,#fbfbfb,#f0f0f0 );background:-moz-linear-gradient( top,#fbfbfb,#f0f0f0 );background:-o-linear-gradient( top,#fbfbfb,#f0f0f0 );background:linear-gradient( #fbfbfb,#f0f0f0 );padding-left:10px;line-height:1.2em;border-radius:0 0 5px 5px}#uls-settings-block div.display-settings-block,#uls-settings-block div.input-settings-block{display:inline-block;margin:8px 15px;color:#565656}#uls-settings-block div.display-settings-block:hover,#uls-settings-block div.input-settings-block:hover{color:#252525}</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="PhantomJS%20-%20Wikipedia_files/load.css">
+<meta name="generator" content="MediaWiki 1.29.0-wmf.20">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/4/41/Phantomjs-logo.png">
+<link rel="alternate" href="android-app://org.wikipedia/http/en.m.wikipedia.org/wiki/PhantomJS">
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit">
+<link rel="edit" title="Edit this page" href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit">
+<link rel="apple-touch-icon" href="https://en.wikipedia.org/static/apple-touch/wikipedia.png">
+<link rel="shortcut icon" href="https://en.wikipedia.org/static/favicon/wikipedia.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://en.wikipedia.org/w/opensearch_desc.php" title="Wikipedia (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://en.wikipedia.org/w/api.php?action=rsd">
+<link rel="copyright" href="https://creativecommons.org/licenses/by-sa/3.0/">
+<link rel="canonical" href="https://en.wikipedia.org/wiki/PhantomJS">
+<link rel="dns-prefetch" href="https://login.wikimedia.org/">
+<link rel="dns-prefetch" href="https://meta.wikimedia.org/">
+<script src="PhantomJS%20-%20Wikipedia_files/load.php"></script></head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-PhantomJS rootpage-PhantomJS skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+							<div id="siteNotice" class="mw-body-content"><div id="centralNotice"></div><!-- CentralNotice --></div>
+						<div class="mw-indicators mw-body-content">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">PhantomJS</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" dir="ltr" class="mw-content-ltr" lang="en"><table class="infobox vevent" style="width:22em">
+<caption class="summary">PhantomJS</caption>
+<tbody><tr>
+<td colspan="2" style="text-align:center"><a href="https://en.wikipedia.org/wiki/File:Phantomjs-logo.png" class="image"><img alt="Phantomjs-logo.png" src="PhantomJS%20-%20Wikipedia_files/Phantomjs-logo.png" data-file-width="240" data-file-height="80" width="240" height="80"></a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="https://en.wikipedia.org/wiki/Software_developer" title="Software developer">Original author(s)</a></th>
+<td><a href="https://en.wikipedia.org/wiki/Ariya_Hidayat" class="mw-redirect" title="Ariya Hidayat">Ariya Hidayat</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="https://en.wikipedia.org/wiki/Software_developer" title="Software developer">Developer(s)</a></th>
+<td><a href="https://en.wikipedia.org/wiki/Ariya_Hidayat" class="mw-redirect" title="Ariya Hidayat">Ariya Hidayat</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Initial release</th>
+<td>January&nbsp;17, 2011<span class="noprint">; 6 years ago</span><span style="display:none">&nbsp;(<span class="bday dtstart published updated">2011-01-17</span>)</span></td>
+</tr>
+<tr>
+<td colspan="2" style="text-align:center"></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="https://en.wikipedia.org/wiki/Software_release_life_cycle" title="Software release life cycle">Stable release</a></th>
+<td>
+<div style="margin:0px;">2.1.1<sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[1]</a></sup> / January&nbsp;24, 2016<span class="noprint">; 14 months ago</span><span style="display:none">&nbsp;(<span class="bday dtstart published updated">2016-01-24</span>)</span></div>
+</td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="https://en.wikipedia.org/wiki/Repository_%28version_control%29" title="Repository (version control)">Repository</a></th>
+<td><span class="url"><a rel="nofollow" class="external text" href="https://github.com/ariya/phantomjs">github<wbr>.com<wbr>/ariya<wbr>/phantomjs</a></span></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Development status</th>
+<td>Abandoned<sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[2]</a></sup></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Written in</th>
+<td><a href="https://en.wikipedia.org/wiki/C%2B%2B" title="C++">C++</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="https://en.wikipedia.org/wiki/Software_categories#Broad_categories" title="Software categories">Type</a></th>
+<td><a href="https://en.wikipedia.org/wiki/Headless_browser" title="Headless browser">Headless browser</a></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;"><a href="https://en.wikipedia.org/wiki/Software_license" title="Software license">License</a></th>
+<td><a href="https://en.wikipedia.org/wiki/BSD_License" class="mw-redirect" title="BSD License">BSD</a><sup id="cite_ref-license_3-0" class="reference"><a href="#cite_note-license-3">[3]</a></sup></td>
+</tr>
+<tr>
+<th scope="row" style="white-space: nowrap;">Website</th>
+<td><span class="url"><a rel="nofollow" class="external text" href="http://phantomjs.org/">phantomjs<wbr>.org</a></span></td>
+</tr>
+</tbody></table>
+<p><b>PhantomJS</b> is a scripted, <a href="https://en.wikipedia.org/wiki/Headless_browser" title="Headless browser">headless browser</a> used for automating web page interaction. PhantomJS provides a <a href="https://en.wikipedia.org/wiki/JavaScript" title="JavaScript">JavaScript</a>
+ API enabling automated navigation, screenshots, user behavior and 
+assertions making it a common tool used to run browser-based unit tests 
+in a <a href="https://en.wikipedia.org/wiki/Headless_system" class="mw-redirect" title="Headless system">headless system</a> like a <a href="https://en.wikipedia.org/wiki/Continuous_integration" title="Continuous integration">continuous integration</a> environment. PhantomJS is based on <a href="https://en.wikipedia.org/wiki/WebKit" title="WebKit">WebKit</a> making it a similar browsing environment to <a href="https://en.wikipedia.org/wiki/Safari_%28web_browser%29" title="Safari (web browser)">Safari</a> and <a href="https://en.wikipedia.org/wiki/Google_Chrome" title="Google Chrome">Google Chrome</a> (before Chrome's fork of WebKit evolved into <a href="https://en.wikipedia.org/wiki/Blink_%28layout_engine%29" class="mw-redirect" title="Blink (layout engine)">Blink</a>). It is <a href="https://en.wikipedia.org/wiki/Open-source_software" title="Open-source software">open-source software</a> released under the <a href="https://en.wikipedia.org/wiki/BSD_License" class="mw-redirect" title="BSD License">BSD License</a><sup id="cite_ref-license_3-1" class="reference"><a href="#cite_note-license-3">[3]</a></sup>.</p>
+<p></p>
+<div id="toc" class="toc">
+<div id="toctitle" class="toctitle">
+<h2>Contents</h2>
+<span class="toctoggle">&nbsp;[<a role="button" tabindex="0" class="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#History"><span class="tocnumber">1</span> <span class="toctext">History</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#PhantomJS_usage"><span class="tocnumber">2</span> <span class="toctext">PhantomJS usage</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Tools_using_PhantomJS"><span class="tocnumber">3</span> <span class="toctext">Tools using PhantomJS</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="#CasperJS"><span class="tocnumber">3.1</span> <span class="toctext">CasperJS</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="#YSlow"><span class="tocnumber">3.2</span> <span class="toctext">YSlow</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-6"><a href="#Companies_using_PhantomJS"><span class="tocnumber">4</span> <span class="toctext">Companies using PhantomJS</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Other_uses_for_PhantomJS"><span class="tocnumber">5</span> <span class="toctext">Other uses for PhantomJS</span></a>
+<ul>
+<li class="toclevel-2 tocsection-8"><a href="#Server_rendering_of_client-side_JavaScript"><span class="tocnumber">5.1</span> <span class="toctext">Server rendering of client-side JavaScript</span></a></li>
+<li class="toclevel-2 tocsection-9"><a href="#Malicious_use_of_PhantomJS"><span class="tocnumber">5.2</span> <span class="toctext">Malicious use of PhantomJS</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-10"><a href="#See_also"><span class="tocnumber">6</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#References"><span class="tocnumber">7</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#External_links"><span class="tocnumber">8</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="History">History</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=1" title="Edit section: History">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>PhantomJS was released January 23, 2011 by Ariya Hidayat after several years in development.<sup id="cite_ref-4" class="reference"><a href="#cite_note-4">[4]</a></sup></p>
+<p>The first commit to the public project was in 2011.<sup id="cite_ref-5" class="reference"><a href="#cite_note-5">[5]</a></sup> The project has maintained a steady level of weekly contributions from December 26, 2010 to present.<sup id="cite_ref-6" class="reference"><a href="#cite_note-6">[6]</a></sup>
+ As of February 5, 2015, the project’s open source code repository is 
+watched by 770 people and contributed to by 107 contributors. Also as of
+ February 5, 2015, the project has 1376 open issues and 1252 closed 
+issues.</p>
+<p>The logo commonly used to pictorially refer to PhantomJS is a green 
+ghost atop a black background. This refers to the lack of graphical user
+ interface, or main body of the browser, making PhantomJS users seem 
+like ghosts.</p>
+<h2><span class="mw-headline" id="PhantomJS_usage">PhantomJS usage</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=2" title="Edit section: PhantomJS usage">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>The PhantomJS JavaScript API can be used to open web pages, take 
+screenshots, execute user actions, and run injected JavaScript in the 
+page context. For example, the following code will open Wikipedia and, 
+upon loading, will save a screenshot to a file and exit.</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Loading a web page'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpage'</span><span class="p">).</span><span class="nx">create</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'http://en.wikipedia.org/'</span><span class="p">;</span>
+<span class="nx">page</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Page loaded'</span><span class="p">);</span>
+  <span class="nx">page</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'wikipedia.org.png'</span><span class="p">);</span>
+  <span class="nx">phantom</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+<h2><span class="mw-headline" id="Tools_using_PhantomJS">Tools using PhantomJS</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=3" title="Edit section: Tools using PhantomJS">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<h3><span class="mw-headline" id="CasperJS">CasperJS</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=4" title="Edit section: CasperJS">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Shortly after the release of PhantomJS, <a href="https://en.wikipedia.org/w/index.php?title=Nicolas_Perriault&amp;action=edit&amp;redlink=1" class="new" title="Nicolas Perriault (page does not exist)">Nicolas Perriault</a>
+ wrote CasperJS, a suite of libraries on top of PhantomJS that extend 
+its capabilities as a client for automated web page testing. CasperJS 
+and PhantomJS have become valuable enough that similar projects have 
+started to adopt the API as a standard way of interacting with headless 
+browsers.<sup id="cite_ref-7" class="reference"><a href="#cite_note-7">[7]</a></sup><sup id="cite_ref-8" class="reference"><a href="#cite_note-8">[8]</a></sup></p>
+<h3><span class="mw-headline" id="YSlow">YSlow</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=5" title="Edit section: YSlow">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p><a href="https://en.wikipedia.org/wiki/Yahoo%21" title="Yahoo!">Yahoo!</a> developed a version of <a href="https://en.wikipedia.org/w/index.php?title=YSlow&amp;action=edit&amp;redlink=1" class="new" title="YSlow (page does not exist)">YSlow</a> that leverages PhantomJS to gather performance metrics for websites.<sup id="cite_ref-9" class="reference"><a href="#cite_note-9">[9]</a></sup></p>
+<h2><span class="mw-headline" id="Companies_using_PhantomJS">Companies using PhantomJS</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=6" title="Edit section: Companies using PhantomJS">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Twitter" title="Twitter">Twitter</a> is using <a href="https://en.wikipedia.org/wiki/QUnit" title="QUnit">QUnit</a> and PhantomJS for unit testing.<sup id="cite_ref-10" class="reference"><a href="#cite_note-10">[10]</a></sup></li>
+<li><a href="https://en.wikipedia.org/wiki/LinkedIn" title="LinkedIn">LinkedIn</a> is using PhantomJS based tools for performance testing.<sup id="cite_ref-11" class="reference"><a href="#cite_note-11">[11]</a></sup></li>
+<li><a href="https://en.wikipedia.org/wiki/Netflix" title="Netflix">Netflix</a> is using Sketchy, a headless browser built with PhantomJS, to understand what it’s doing without having to visit the site.<sup id="cite_ref-12" class="reference"><a href="#cite_note-12">[12]</a></sup></li>
+<li><a href="https://en.wikipedia.org/wiki/Time_Warner_Cable" title="Time Warner Cable">Time Warner Cable</a> is using PhantomJS with <a href="https://en.wikipedia.org/wiki/CoffeeScript" title="CoffeeScript">CoffeeScript</a>, <a href="https://en.wikipedia.org/wiki/Jasmine_%28JavaScript_testing_framework%29" title="Jasmine (JavaScript testing framework)">Jasmine</a>, and <a href="https://en.wikipedia.org/wiki/JUnit" title="JUnit">JUnit</a> XML for <a href="https://en.wikipedia.org/wiki/Jenkins_%28software%29" title="Jenkins (software)">Jenkins</a> continuous integration.<sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[13]</a></sup></li>
+</ul>
+<h2><span class="mw-headline" id="Other_uses_for_PhantomJS">Other uses for PhantomJS</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=7" title="Edit section: Other uses for PhantomJS">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<p>PhantomJS was made for programmatic control of web sites and has been
+ used for many purposes from visual differencing of websites<sup id="cite_ref-14" class="reference"><a href="#cite_note-14">[14]</a></sup> to automated testing of JavaScript frameworks.<sup id="cite_ref-15" class="reference"><a href="#cite_note-15">[15]</a></sup></p>
+<h3><span class="mw-headline" id="Server_rendering_of_client-side_JavaScript">Server rendering of client-side JavaScript</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=8" title="Edit section: Server rendering of client-side JavaScript">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>With the rise of client-side JavaScript and the <a href="https://en.wikipedia.org/wiki/Search_engine_optimization" title="Search engine optimization">SEO</a> problems that practice presents, developers turned to PhantomJS as a way to pre-render static HTML for initial requests,.<sup id="cite_ref-16" class="reference"><a href="#cite_note-16">[16]</a></sup><sup id="cite_ref-17" class="reference"><a href="#cite_note-17">[17]</a></sup>
+ Despite the performance impact of such an approach, it remained one of 
+the simplest ways to improve SEO without rewriting a web application, 
+spawning services trying to automate the process.<sup id="cite_ref-18" class="reference"><a href="#cite_note-18">[18]</a></sup></p>
+<h3><span class="mw-headline" id="Malicious_use_of_PhantomJS">Malicious use of PhantomJS</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=9" title="Edit section: Malicious use of PhantomJS">edit</a><span class="mw-editsection-bracket">]</span></span></h3>
+<p>Because PhantomJS is runnable without a UI, scriptable via 
+JavaScript, and is relatively adherent to modern browser specifications,
+ it is commonly used as a way to automate attacks against web sites.<sup id="cite_ref-19" class="reference"><a href="#cite_note-19">[19]</a></sup>
+ PhantomJS mimics legitimate user traffic and can complicate attack 
+mitigation technologies. PhantomJS can also be used to automatically 
+verify logins across disparate web sites<sup id="cite_ref-20" class="reference"><a href="#cite_note-20">[20]</a></sup> (<a href="https://en.wikipedia.org/wiki/Credential_Stuffing" class="mw-redirect" title="Credential Stuffing">Credential Stuffing</a>), compounding the problems that arise after a site is breached and usernames and passwords are leaked.</p>
+<h2><span class="mw-headline" id="See_also">See also</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=10" title="Edit section: See also">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div role="navigation" aria-label="Portals" class="noprint portal plainlist tright" style="margin:0.5em 0 0.5em 1em;border:solid #aaa 1px">
+<ul style="display:table;box-sizing:border-box;padding:0.1em;max-width:175px;background:#f9f9f9;font-size:85%;line-height:110%;font-style:italic;font-weight:bold">
+<li style="display:table-row"><span style="display:table-cell;padding:0.2em;vertical-align:middle;text-align:center"><a href="https://en.wikipedia.org/wiki/File:Green_bug_and_broom.svg" class="image"><img alt="icon" src="PhantomJS%20-%20Wikipedia_files/32px-Green_bug_and_broom.png" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/8/83/Green_bug_and_broom.svg/48px-Green_bug_and_broom.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/8/83/Green_bug_and_broom.svg/64px-Green_bug_and_broom.svg.png 2x" data-file-width="447" data-file-height="385" width="32" height="28"></a></span><span style="display:table-cell;padding:0.2em 0.2em 0.2em 0.3em;vertical-align:middle"><a href="https://en.wikipedia.org/wiki/Portal:Software_Testing" class="mw-redirect" title="Portal:Software Testing">Software Testing portal</a></span></li>
+<li style="display:table-row"><span style="display:table-cell;padding:0.2em;vertical-align:middle;text-align:center"><img alt="" src="PhantomJS%20-%20Wikipedia_files/28px-Free_and_open-source_software_logo_2009.png" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/31/Free_and_open-source_software_logo_%282009%29.svg/42px-Free_and_open-source_software_logo_%282009%29.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/31/Free_and_open-source_software_logo_%282009%29.svg/56px-Free_and_open-source_software_logo_%282009%29.svg.png 2x" data-file-width="512" data-file-height="512" width="28" height="28"></span><span style="display:table-cell;padding:0.2em 0.2em 0.2em 0.3em;vertical-align:middle"><a href="https://en.wikipedia.org/wiki/Portal:Free_software" class="mw-redirect" title="Portal:Free software">Free software portal</a></span></li>
+</ul>
+</div>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/CasperJS" class="mw-redirect" title="CasperJS">CasperJS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Firefox" title="Firefox">Firefox</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Google_chrome" class="mw-redirect" title="Google chrome">Google chrome</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Selenium_%28software%29" title="Selenium (software)">Selenium (software)</a></li>
+<li><a href="https://en.wikipedia.org/w/index.php?title=SlimerJS&amp;action=edit&amp;redlink=1" class="new" title="SlimerJS (page does not exist)">SlimerJS</a></li>
+<li><a href="https://en.wikipedia.org/w/index.php?title=TrifleJS&amp;action=edit&amp;redlink=1" class="new" title="TrifleJS (page does not exist)">TrifleJS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Webkit" class="mw-redirect" title="Webkit">Webkit</a></li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=11" title="Edit section: References">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<div class="reflist" style="list-style-type: decimal;">
+<ol class="references">
+<li id="cite_note-1"><span class="mw-cite-backlink"><b><a href="#cite_ref-1"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/ariya/phantomjs/releases">"Releases · ariya/phantomjs"</a>. <i>GitHub</i><span class="reference-accessdate">. Retrieved <span class="nowrap">21 April</span> 2017</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Releases+%B7+ariya%2Fphantomjs&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fariya%2Fphantomjs%2Freleases&amp;rft.jtitle=GitHub&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://groups.google.com/d/msg/phantomjs/9aI5d-LDuNE/5Z3SMZrqAQAJ">"[Announcement] Stepping down as maintainer"</a>. <i>groups.google.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">19 April</span> 2017</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=%5BAnnouncement%5D+Stepping+down+as+maintainer&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgroups.google.com%2Fd%2Fmsg%2Fphantomjs%2F9aI5d-LDuNE%2F5Z3SMZrqAQAJ&amp;rft.jtitle=groups.google.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-license-3"><span class="mw-cite-backlink">^ <a href="#cite_ref-license_3-0"><span class="cite-accessibility-label">Jump up to: </span><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-license_3-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/ariya/phantomjs/blob/master/LICENSE.BSD">"phantomjs/LICENSE.BSD at master · ariya/phantomjs"</a>. <i>GitHub</i>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=phantomjs%2FLICENSE.BSD+at+master+%B7+ariya%2Fphantomjs&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fariya%2Fphantomjs%2Fblob%2Fmaster%2FLICENSE.BSD&amp;rft.jtitle=GitHub&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-4"><span class="mw-cite-backlink"><b><a href="#cite_ref-4"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://ariya.blogspot.com/2011/01/phantomjs-minimalistic-headless-webkit.html">"don't code today what you can't debug tomorrow"</a>. <i>ariya.blogspot.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=don%27t+code+today+what+you+can%27t+debug+tomorrow&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fariya.blogspot.com%2F2011%2F01%2Fphantomjs-minimalistic-headless-webkit.html&amp;rft.jtitle=ariya.blogspot.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-5"><span class="mw-cite-backlink"><b><a href="#cite_ref-5"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/ariya/phantomjs">"ariya/phantomjs"</a>. <i>GitHub</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=ariya%2Fphantomjs&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fariya%2Fphantomjs&amp;rft.jtitle=GitHub&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-6"><span class="mw-cite-backlink"><b><a href="#cite_ref-6"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/ariya/phantomjs/graphs/contributors">"Contributors to ariya/phantomjs · GitHub"</a>. <i><a href="https://en.wikipedia.org/wiki/GitHub" title="GitHub">GitHub</a></i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Contributors+to+ariya%2Fphantomjs+%B7+GitHub&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2Fariya%2Fphantomjs%2Fgraphs%2Fcontributors&amp;rft.jtitle=GitHub&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-7"><span class="mw-cite-backlink"><b><a href="#cite_ref-7"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web">Laurent Jouanneau. <a rel="nofollow" class="external text" href="http://slimerjs.org/faq.html">"FaQ - SlimerJS"</a>. <i>slimerjs.org</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=FaQ+-+SlimerJS&amp;rft.au=Laurent+Jouanneau&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fslimerjs.org%2Ffaq.html&amp;rft.jtitle=slimerjs.org&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-8"><span class="mw-cite-backlink"><b><a href="#cite_ref-8"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://triflejs.org/">"trifleJS"</a>. <i>trifleJS</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=trifleJS&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Ftriflejs.org%2F&amp;rft.jtitle=trifleJS&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-9"><span class="mw-cite-backlink"><b><a href="#cite_ref-9"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web">Marcel Duran. <a rel="nofollow" class="external text" href="http://yslow.org/phantomjs/">"YSlow - Official Open Source Project Website"</a>. <i>yslow.org</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=YSlow+-+Official+Open+Source+Project+Website&amp;rft.au=Marcel+Duran&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fyslow.org%2Fphantomjs%2F&amp;rft.jtitle=yslow.org&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-10"><span class="mw-cite-backlink"><b><a href="#cite_ref-10"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://twitter.com/leolaneseltd/status/197766152745787392">"Leo Lanese on Twitter"</a>. <i><a href="https://en.wikipedia.org/wiki/Twitter" title="Twitter">Twitter</a></i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Leo+Lanese+on+Twitter&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Ftwitter.com%2Fleolaneseltd%2Fstatus%2F197766152745787392&amp;rft.jtitle=Twitter&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-11"><span class="mw-cite-backlink"><b><a href="#cite_ref-11"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web">phegaro. <a rel="nofollow" class="external text" href="http://www.slideshare.net/phegaro/linkedin-mobile-how-do-we-do-it">"LinkedIn Mobile: How do we do it?"</a>. <i><a href="https://en.wikipedia.org/wiki/SlideShare" title="SlideShare">SlideShare</a></i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=LinkedIn+Mobile%3A+How+do+we+do+it%3F&amp;rft.au=phegaro&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.slideshare.net%2Fphegaro%2Flinkedin-mobile-how-do-we-do-it&amp;rft.jtitle=SlideShare&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-12"><span class="mw-cite-backlink"><b><a href="#cite_ref-12"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web">Michael Mimoso. <a rel="nofollow" class="external text" href="http://threatpost.com/netflix-open-source-security-tools-solve-range-of-challenges/107931#sthash.pcyW3Ksf.dpuf">"Netflix Open Source Security Tools Solve Range of Challenges"</a>. <i>threatpost.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Netflix+Open+Source+Security+Tools+Solve+Range+of+Challenges&amp;rft.au=Michael+Mimoso&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fthreatpost.com%2Fnetflix-open-source-security-tools-solve-range-of-challenges%2F107931%23sthash.pcyW3Ksf.dpuf&amp;rft.jtitle=threatpost.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-13"><span class="mw-cite-backlink"><b><a href="#cite_ref-13"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://ariya.ofilabs.com/2012/01/one-year-of-wandering-headlessly.html">"one year of wandering headlessly"</a>. <i>ofilabs.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=one+year+of+wandering+headlessly&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fariya.ofilabs.com%2F2012%2F01%2Fone-year-of-wandering-headlessly.html&amp;rft.jtitle=ofilabs.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-14"><span class="mw-cite-backlink"><b><a href="#cite_ref-14"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://github.com/Huddle/PhantomCSS">"Huddle/PhantomCSS"</a>. <i>GitHub</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Huddle%2FPhantomCSS&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgithub.com%2FHuddle%2FPhantomCSS&amp;rft.jtitle=GitHub&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-15"><span class="mw-cite-backlink"><b><a href="#cite_ref-15"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web">EisenbergEffect. <a rel="nofollow" class="external text" href="http://durandaljs.com/documentation/Testing-With-PhantomJS-And-Jasmine.html">"Docs - Testing with PhantomJS and Jasmine - Durandal"</a>. <i>durandaljs.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Docs+-+Testing+with+PhantomJS+and+Jasmine+-+Durandal&amp;rft.au=EisenbergEffect&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fdurandaljs.com%2Fdocumentation%2FTesting-With-PhantomJS-And-Jasmine.html&amp;rft.jtitle=durandaljs.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-16"><span class="mw-cite-backlink"><b><a href="#cite_ref-16"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://eshlox.net/2014/05/04/short-story-about-rendering-html-client-side-vs-server-side/">"Short story about rendering HTML, client side vs server side"</a>. <i>eshlox</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Short+story+about+rendering+HTML%2C+client+side+vs+server+side&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Feshlox.net%2F2014%2F05%2F04%2Fshort-story-about-rendering-html-client-side-vs-server-side%2F&amp;rft.jtitle=eshlox&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-17"><span class="mw-cite-backlink"><b><a href="#cite_ref-17"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web">Aaron O'Connell (22 April 2014). <a rel="nofollow" class="external text" href="http://blog.42floors.com/sever-side-rendering-single-page-apps-using-phantomjs-node-js/">"Sever-Side Rendering of Single Page Apps using PhantomJS and Node.js"</a>. <i>42floors.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Sever-Side+Rendering+of+Single+Page+Apps+using+PhantomJS+and+Node.js&amp;rft.au=Aaron+O%27Connell&amp;rft.date=2014-04-22&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fblog.42floors.com%2Fsever-side-rendering-single-page-apps-using-phantomjs-node-js%2F&amp;rft.jtitle=42floors.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-18"><span class="mw-cite-backlink"><b><a href="#cite_ref-18"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://www.brombone.com/">"BromBone - SEO for your AngularJS, EmberJS, or BackboneJS website."</a>. <i>Brombone.com</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=BromBone+-+SEO+for+your+AngularJS%2C+EmberJS%2C+or+BackboneJS+website.&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.brombone.com%2F&amp;rft.jtitle=Brombone.com&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-19"><span class="mw-cite-backlink"><b><a href="#cite_ref-19"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="http://www.darkreading.com/attacks-breaches/ddos-attack-used-headless-browsers-in-150-hour-siege/d/d-id/1140696?">"DDoS Attack Used 'Headless' Browsers In 150-Hour Siege"</a>. <i>Dark Reading</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=DDoS+Attack+Used+%27Headless%27+Browsers+In+150-Hour+Siege&amp;rft.genre=unknown&amp;rft_id=http%3A%2F%2Fwww.darkreading.com%2Fattacks-breaches%2Fddos-attack-used-headless-browsers-in-150-hour-siege%2Fd%2Fd-id%2F1140696%3F&amp;rft.jtitle=Dark+Reading&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+<li id="cite_note-20"><span class="mw-cite-backlink"><b><a href="#cite_ref-20"><span class="cite-accessibility-label">Jump up </span>^</a></b></span> <span class="reference-text"><cite class="citation web"><a rel="nofollow" class="external text" href="https://gist.github.com/dariusk/4072489">"Logging in to Amazon using PhantomJS"</a>. <i>GitHub Gists</i><span class="reference-accessdate">. Retrieved <span class="nowrap">20 July</span> 2015</span>.</cite><span title="ctx_ver=Z39.88-2004&amp;rfr_id=info%3Asid%2Fen.wikipedia.org%3APhantomJS&amp;rft.atitle=Logging+in+to+Amazon+using+PhantomJS&amp;rft.genre=unknown&amp;rft_id=https%3A%2F%2Fgist.github.com%2Fdariusk%2F4072489&amp;rft.jtitle=GitHub+Gists&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal" class="Z3988"><span style="display:none;">&nbsp;</span></span></span></li>
+</ol>
+</div>
+<h2><span class="mw-headline" id="External_links">External links</span><span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit&amp;section=12" title="Edit section: External links">edit</a><span class="mw-editsection-bracket">]</span></span></h2>
+<ul>
+<li><span class="official-website"><span class="url"><a rel="nofollow" class="external text" href="http://phantomjs.org/">Official website</a></span></span></li>
+</ul>
+<div role="navigation" class="navbox" aria-labelledby="Web_browsers" style="padding:3px">
+<table class="nowraplinks hlist collapsible autocollapse navbox-inner" style="border-spacing:0;background:transparent;color:inherit" id="collapsibleTable0">
+<tbody><tr>
+<th scope="col" class="navbox-title" colspan="2"><span class="collapseButton">[<a id="collapseButton0" href="#">show</a>]</span>
+<div class="plainlinks hlist navbar mini">
+<ul>
+<li class="nv-view"><a href="https://en.wikipedia.org/wiki/Template:Web_browsers" title="Template:Web browsers"><abbr title="View this template" style=";;background:none transparent;border:none;">v</abbr></a></li>
+<li class="nv-talk"><a href="https://en.wikipedia.org/wiki/Template_talk:Web_browsers" title="Template talk:Web browsers"><abbr title="Discuss this template" style=";;background:none transparent;border:none;">t</abbr></a></li>
+<li class="nv-edit"><a class="external text" href="https://en.wikipedia.org/w/index.php?title=Template:Web_browsers&amp;action=edit"><abbr title="Edit this template" style=";;background:none transparent;border:none;">e</abbr></a></li>
+</ul>
+</div>
+<div id="Web_browsers" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Web_browser" title="Web browser">Web browsers</a></div>
+</th>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td class="navbox-abovebelow" colspan="2">
+<div>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_web_browsers" title="Comparison of web browsers">Comparison</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_lightweight_web_browsers" title="Comparison of lightweight web browsers">lightweight</a></li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/History_of_the_web_browser" title="History of the web browser">History</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_web_browsers" title="List of web browsers">List</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_web_browsers_for_Unix_and_Unix-like_operating_systems" title="List of web browsers for Unix and Unix-like operating systems">for Unix</a></li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Timeline_of_web_browsers" title="Timeline of web browsers">Timeline</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Usage_share_of_web_browsers" title="Usage share of web browsers">Usage share</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style="width:10em">Features</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Ad_filtering" class="mw-redirect" title="Ad filtering">Ad filtering</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Augmented_browsing" title="Augmented browsing">Augmented browsing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bookmark_%28World_Wide_Web%29" title="Bookmark (World Wide Web)">Bookmarks</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Bookmarklet" title="Bookmarklet">Bookmarklet</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Features_of_Firefox#Live_bookmarks" title="Features of Firefox">Live bookmark</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Smart_Bookmarks" title="Smart Bookmarks">Smart Bookmarks</a></li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Browser_extension" title="Browser extension">Browser extension</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Browser_security" title="Browser security">Browser security</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Browser_synchronizer" title="Browser synchronizer">Browser synchronizer</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Comparison_of_browser_synchronizers" title="Comparison of browser synchronizers">comparison</a></li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/HTTP_cookie" title="HTTP cookie">Cookies</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Download_manager" title="Download manager">Download manager</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Favicon" title="Favicon">Favicon</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Incremental_search" title="Incremental search">Incremental search</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Plug-in_%28computing%29" title="Plug-in (computing)">Plug-in</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Privacy_mode" title="Privacy mode">Privacy mode</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tab_%28GUI%29" title="Tab (GUI)">Tabs</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Universal_Edit_Button" title="Universal Edit Button">Universal Edit Button</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em">Web standards</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Web_Standards_Project" title="Web Standards Project">Acid tests</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets" title="Cascading Style Sheets">Cascading Style Sheets</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HTML" title="HTML">HTML</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HTML5" title="HTML5">HTML5</a></li>
+<li><a href="https://en.wikipedia.org/wiki/JavaScript" title="JavaScript">JavaScript</a></li>
+<li><a href="https://en.wikipedia.org/wiki/MathML" title="MathML">MathML</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol" title="Online Certificate Status Protocol">OCSP</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" title="Scalable Vector Graphics">SVG</a></li>
+<li><a href="https://en.wikipedia.org/wiki/WebGL" title="WebGL">WebGL</a></li>
+<li><a href="https://en.wikipedia.org/wiki/XHTML" title="XHTML">XHTML</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em">Related topics</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/BrowserChoice.eu" title="BrowserChoice.eu">BrowserChoice.eu</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Revocation_list" class="mw-redirect" title="Revocation list">CRL</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" title="Hypertext Transfer Protocol">HTTP</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HTTPS" title="HTTPS">HTTPS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ILoo" title="ILoo">iLoo</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Internet_suite" title="Internet suite">Internet suite</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Man-in-the-browser" title="Man-in-the-browser">Man-in-the-browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mobile_Web" title="Mobile Web">Mobile Web</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Offline_reader" title="Offline reader">Offline reader</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Proxy_auto-config" title="Proxy auto-config">PAC</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pwn2Own" title="Pwn2Own">Pwn2Own</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Rich_Internet_application" title="Rich Internet application">Rich Internet application</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Site-specific_browser" title="Site-specific browser">Site-specific browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SPDY" title="SPDY">SPDY</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Transport_Layer_Security" title="Transport Layer Security">SSL/TLS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/WebSocket" title="WebSocket">WebSocket</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Graphical_control_element" class="mw-redirect" title="Graphical control element">Widget</a></li>
+<li><a href="https://en.wikipedia.org/wiki/World_Wide_Web" title="World Wide Web">World Wide Web</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Web_Proxy_Autodiscovery_Protocol" class="mw-redirect" title="Web Proxy Autodiscovery Protocol">WPAD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/XML" title="XML">XML</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing:0" id="collapsibleTable1">
+<tbody><tr>
+<th scope="col" class="navbox-title" colspan="2" style=";"><span class="collapseButton">[<a id="collapseButton1" href="#">show</a>]</span>
+<div id="Desktop" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Desktop_computer" title="Desktop computer">Desktop</a></div>
+</th>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Blink_%28layout_engine%29" class="mw-redirect" title="Blink (layout engine)">Blink</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Chromium_%28web_browser%29" title="Chromium (web browser)">Chromium</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Brave_%28web_browser%29" title="Brave (web browser)">Brave</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Google_Chrome" title="Google Chrome">Chrome</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Comodo_Dragon" title="Comodo Dragon">Dragon</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Opera_%28web_browser%29" title="Opera (web browser)">Opera</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sleipnir_%28web_browser%29" title="Sleipnir (web browser)">Sleipnir</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SlimBrowser" title="SlimBrowser">Slimjet</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SRWare_Iron" title="SRWare Iron">SRWare Iron</a></li>
+<li><a href="https://en.wikipedia.org/wiki/UC_Browser" title="UC Browser">UC Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Vivaldi_%28web_browser%29" title="Vivaldi (web browser)">Vivaldi</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Yandex_Browser" title="Yandex Browser">Yandex Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Sputnik_%28search_engine%29" title="Sputnik (search engine)">Sputnik</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SafeZone" title="SafeZone">SafeZone</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Gecko_%28software%29" title="Gecko (software)">Gecko</a>-based</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="https://en.wikipedia.org/wiki/AT%26T_Pogo" title="AT&amp;T Pogo">AT&amp;T Pogo</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Avant_Browser" title="Avant Browser">Avant</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Camino_%28web_browser%29" title="Camino (web browser)">Camino</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Firefox" title="Firefox">Firefox</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Conkeror" title="Conkeror">Conkeror</a></li>
+<li><a href="https://en.wikipedia.org/wiki/GNU_IceCat" title="GNU IceCat">GNU IceCat</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Comodo_IceDragon" title="Comodo IceDragon">IceDragon</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Swiftfox" title="Swiftfox">Swiftfox</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Swiftweasel" title="Swiftweasel">Swiftweasel</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/TenFourFox" title="TenFourFox">TenFourFox</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Timberwolf_%28web_browser%29" title="Timberwolf (web browser)">Timberwolf</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Tor_%28anonymity_network%29#Tor_Browser" title="Tor (anonymity network)">Tor Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Waterfox" title="Waterfox">Waterfox</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/XB_Browser" title="XB Browser">xB Browser</a></i></li>
+</ul>
+</li>
+<li><i><a href="https://en.wikipedia.org/wiki/Galeon" title="Galeon">Galeon</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Ghostzilla" title="Ghostzilla">Ghostzilla</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/K-Meleon" title="K-Meleon">K-Meleon</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Kazehakase" title="Kazehakase">Kazehakase</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Kirix_Strata" title="Kirix Strata">Kirix Strata</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/IBM_Lotus_Symphony" title="IBM Lotus Symphony">Lotus Symphony</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Lunascape" title="Lunascape">Lunascape</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Mozilla_Application_Suite" title="Mozilla Application Suite">Mozilla</a></i>
+<ul>
+<li><i><a href="https://en.wikipedia.org/wiki/Beonex_Communicator" title="Beonex Communicator">Beonex Communicator</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Classilla" title="Classilla">Classilla</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Netscape_%28web_browser%29" title="Netscape (web browser)">Netscape</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/SeaMonkey" title="SeaMonkey">SeaMonkey</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Trident_%28layout_engine%29" title="Trident (layout engine)">Trident</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="https://en.wikipedia.org/wiki/AOL_Explorer" title="AOL Explorer">AOL Explorer</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Avant_Browser" title="Avant Browser">Avant</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Deepnet_Explorer" title="Deepnet Explorer">Deepnet Explorer</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/GreenBrowser" title="GreenBrowser">GreenBrowser</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Internet_Explorer" title="Internet Explorer">Internet Explorer</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Lunascape" title="Lunascape">Lunascape</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Maxthon" title="Maxthon">Maxthon</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/MediaBrowser" title="MediaBrowser">MediaBrowser</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/MenuBox" title="MenuBox">MenuBox</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/NeoPlanet" title="NeoPlanet">NeoPlanet</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/NetCaptor" title="NetCaptor">NetCaptor</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/SlimBrowser" title="SlimBrowser">SlimBrowser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/SpaceTime_%28software%29#SpaceTime_Browser" title="SpaceTime (software)"><i>SpaceTime</i></a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/UltraBrowser" title="UltraBrowser">UltraBrowser</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/WebbIE" title="WebbIE">WebbIE</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ZAC_Browser" title="ZAC Browser">ZAC Browser</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/WebKit" title="WebKit">WebKit</a>-based</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="https://en.wikipedia.org/wiki/Arora_%28web_browser%29" title="Arora (web browser)">Arora</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Avant_Browser" title="Avant Browser">Avant</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dooble" title="Dooble">Dooble</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Epic_%28web_browser%29" title="Epic (web browser)">Epic</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Flock_%28web_browser%29" title="Flock (web browser)">Flock</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Fluid_%28web_browser%29" title="Fluid (web browser)">Fluid</a></li>
+<li><a href="https://en.wikipedia.org/wiki/ICab" title="ICab">iCab</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Konqueror" title="Konqueror">Konqueror</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lunascape" title="Lunascape">Lunascape</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Maxthon" title="Maxthon">Maxthon</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Midori_%28web_browser%29" title="Midori (web browser)">Midori</a></li>
+<li><a href="https://en.wikipedia.org/wiki/OmniWeb" title="OmniWeb">OmniWeb</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Origyn_Web_Browser" title="Origyn Web Browser">Origyn Web Browser</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Otter_Browser" title="Otter Browser">Otter Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/QtWeb" title="QtWeb">QtWeb</a></li>
+<li><a href="https://en.wikipedia.org/wiki/QupZilla" title="QupZilla">QupZilla</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Rekonq" title="Rekonq">rekonq</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Safari_%28web_browser%29" title="Safari (web browser)">Safari</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Shiira" title="Shiira">Shiira</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/SlimBrowser" title="SlimBrowser">SlimBoat</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Surf_%28web_browser%29" title="Surf (web browser)">surf</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Torch_%28browser%29" title="Torch (browser)">Torch</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Uzbl" title="Uzbl">Uzbl</a></li>
+<li><a href="https://en.wikipedia.org/wiki/GNOME_Web" title="GNOME Web">Web</a></li>
+<li><a href="https://en.wikipedia.org/wiki/WebPositive" title="WebPositive">WebPositive</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Xombrero" title="Xombrero">xombrero</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Text-based_web_browser" title="Text-based web browser">Text</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/ELinks" title="ELinks">ELinks</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Emacs/W3" class="mw-redirect" title="Emacs/W3">Emacs/W3</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Line_Mode_Browser" title="Line Mode Browser">Line Mode Browser</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Links_%28web_browser%29" title="Links (web browser)">Links</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lynx_%28web_browser%29" title="Lynx (web browser)">Lynx</a></li>
+<li><a href="https://en.wikipedia.org/wiki/W3m" title="W3m">w3m</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em">Other</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Abaco_%28web_browser%29" title="Abaco (web browser)">abaco</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Amaya_%28web_editor%29" title="Amaya (web editor)">Amaya</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Arachne_%28web_browser%29" title="Arachne (web browser)">Arachne</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Arena_%28web_browser%29" title="Arena (web browser)">Arena</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Charon_%28web_browser%29" title="Charon (web browser)">Charon</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dillo" title="Dillo">Dillo</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Eww_%28web_browser%29" title="Eww (web browser)">eww</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Gazelle_%28web_browser%29" title="Gazelle (web browser)">Gazelle</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/HotJava" title="HotJava">HotJava</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/IBM_Home_Page_Reader" title="IBM Home Page Reader">IBM Home Page Reader</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/IBrowse" title="IBrowse">IBrowse</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/KidZui" title="KidZui">KidZui</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microsoft_Edge" title="Microsoft Edge">Microsoft Edge</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Mosaic_%28web_browser%29" title="Mosaic (web browser)">Mosaic</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Mothra_%28web_browser%29" class="mw-redirect" title="Mothra (web browser)">Mothra</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/NetPositive" title="NetPositive">NetPositive</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/NetSurf" title="NetSurf">NetSurf</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pale_Moon_%28web_browser%29" title="Pale Moon (web browser)">Pale Moon</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing:0" id="collapsibleTable2">
+<tbody><tr>
+<th scope="col" class="navbox-title" colspan="2" style=";"><span class="collapseButton">[<a id="collapseButton2" href="#">show</a>]</span>
+<div id="Mobile" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Mobile_browser" title="Mobile browser">Mobile</a></div>
+</th>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Blink_%28layout_engine%29" class="mw-redirect" title="Blink (layout engine)">Blink</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Android_Browser" class="mw-redirect" title="Android Browser">Android Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Chromium_%28web_browser%29" title="Chromium (web browser)">Chromium</a>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Brave_%28web_browser%29" title="Brave (web browser)">Brave</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Google_Chrome" title="Google Chrome">Chrome</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Opera_Mobile" title="Opera Mobile">Opera Mobile</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Amazon_Silk" title="Amazon Silk">Silk</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Gecko_%28software%29" title="Gecko (software)">Gecko</a>-based</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Firefox_for_Android" title="Firefox for Android">Firefox for Android</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/MicroB" title="MicroB">MicroB</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Minimo" title="Minimo">Minimo</a></i></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Presto_%28layout_engine%29" title="Presto (layout engine)">Presto</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Opera_Mini" title="Opera Mini">Opera Mini</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Trident" title="Trident">Trident</a>-based</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Maxthon" title="Maxthon">Maxthon</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/WebKit" title="WebKit">WebKit</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Bolt_%28web_browser%29" title="Bolt (web browser)">BOLT</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dolphin_Browser" title="Dolphin Browser">Dolphin Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Firefox_for_iOS" title="Firefox for iOS">Firefox for iOS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Maxthon" title="Maxthon">Maxthon</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mercury_Browser" title="Mercury Browser">Mercury Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nokia_Browser_for_Symbian" title="Nokia Browser for Symbian">Nokia Browser for Symbian</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Rockmelt" title="Rockmelt">Rockmelt</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Safari_%28web_browser%29" title="Safari (web browser)">Safari</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Steel_%28web_browser%29" title="Steel (web browser)">Steel</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em">Other</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Blazer_%28web_browser%29" title="Blazer (web browser)">Blazer</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CM_Browser" class="mw-redirect" title="CM Browser">CM Browser</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Microsoft_Live_Labs_Deepfish" title="Microsoft Live Labs Deepfish">Deepfish</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/IbisBrowser" title="IbisBrowser">ibisBrowser</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Internet_Explorer_Mobile" title="Internet Explorer Mobile">Internet Explorer Mobile</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Iris_Browser" title="Iris Browser">Iris Browser</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/Konqueror#Konqueror_Embedded" title="Konqueror">Konqueror Embedded</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Microsoft_Edge" title="Microsoft Edge">Microsoft Edge</a></li>
+<li><a href="https://en.wikipedia.org/wiki/NetFront" title="NetFront">NetFront</a></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Nokia_Xpress" title="Nokia Xpress">Nokia Xpress</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Skweezer" title="Skweezer">Skweezer</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Skyfire_%28company%29" title="Skyfire (company)">Skyfire</a></i></li>
+<li><i><a href="https://en.wikipedia.org/wiki/Teashark" title="Teashark">Teashark</a></i></li>
+<li><a href="https://en.wikipedia.org/wiki/ThunderHawk" title="ThunderHawk">ThunderHawk</a></li>
+<li><a href="https://en.wikipedia.org/wiki/UC_Browser" title="UC Browser">UC Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Vision_Mobile_Browser" title="Vision Mobile Browser">Vision</a></li>
+<li><a href="https://en.wikipedia.org/wiki/WinWAP" title="WinWAP">WinWAP</a></li>
+<li>Smooz</li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks collapsible collapsed navbox-subgroup" style="border-spacing:0" id="collapsibleTable3">
+<tbody><tr>
+<th scope="col" class="navbox-title" colspan="2" style=";"><span class="collapseButton">[<a id="collapseButton3" href="#">show</a>]</span>
+<div id="Television_and_video_game_console" style="font-size:114%;margin:0 4em"><a href="https://en.wikipedia.org/wiki/Television_set" title="Television set">Television</a> and <a href="https://en.wikipedia.org/wiki/Video_game_console" title="Video game console">video game console</a></div>
+</th>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td colspan="2" class="navbox-list navbox-odd" style="width:100%;padding:0px">
+<div style="padding:0em 0.25em"></div>
+<table class="nowraplinks navbox-subgroup" style="border-spacing:0">
+<tbody><tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Gecko_%28software%29" title="Gecko (software)">Gecko</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Kylo_%28web_browser%29" title="Kylo (web browser)">Kylo</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/Presto_%28layout_engine%29" title="Presto (layout engine)">Presto</a>-based</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Internet_Channel" title="Internet Channel">Internet Channel</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em"><a href="https://en.wikipedia.org/wiki/WebKit" title="WebKit">WebKit</a>-based</th>
+<td class="navbox-list navbox-odd" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Google_TV" title="Google TV">Google TV</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Internet_Browser_%28Nintendo_3DS%29" title="Internet Browser (Nintendo 3DS)">Nintendo 3DS Internet Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nintendo_DS_%26_DSi_Browser" title="Nintendo DS &amp; DSi Browser">Nintendo DS &amp; DSi Browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/NetFront" title="NetFront">NetFront</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Steam_%28software%29#User_interface" title="Steam (software)">Steam Overlay</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Nintendo_Network#Wii_U_2" title="Nintendo Network">Wii U Internet Browser</a></li>
+</ul>
+</div>
+</td>
+</tr>
+<tr style="height:2px">
+<td colspan="2"></td>
+</tr>
+<tr>
+<th scope="row" class="navbox-group" style="width:10em">Other</th>
+<td class="navbox-list navbox-even" style="text-align:left;border-left-width:2px;border-left-style:solid;padding:0px">
+<div style="padding:0em 0.25em">
+<ul>
+<li><i><a href="https://en.wikipedia.org/wiki/MSN_TV" title="MSN TV">MSN TV</a></i></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr style="height: 2px; display: none;">
+<td colspan="2"></td>
+</tr>
+<tr style="display: none;">
+<td class="navbox-abovebelow" colspan="2">
+<div>
+<ul>
+<li>Software no longer in development shown in <i>italics</i></li>
+</ul>
+<ul>
+<li><img alt="Category" src="PhantomJS%20-%20Wikipedia_files/16px-Folder_Hexagonal_Icon.png" title="Category" srcset="//upload.wikimedia.org/wikipedia/en/thumb/4/48/Folder_Hexagonal_Icon.svg/24px-Folder_Hexagonal_Icon.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/4/48/Folder_Hexagonal_Icon.svg/32px-Folder_Hexagonal_Icon.svg.png 2x" data-file-width="36" data-file-height="31" width="16" height="14"> <a href="https://en.wikipedia.org/wiki/Category:Web_browsers" title="Category:Web browsers">Category</a></li>
+<li><img alt="Commons page" src="PhantomJS%20-%20Wikipedia_files/12px-Commons-logo.png" title="Commons page" srcset="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/18px-Commons-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/24px-Commons-logo.svg.png 2x" data-file-width="1024" data-file-height="1376" width="12" height="16"> <a href="https://commons.wikimedia.org/wiki/Category:Web_browsers" class="extiw" title="commons:Category:Web browsers">Commons</a></li>
+<li><a href="https://en.wikipedia.org/wiki/File:Crystal_Clear_app_linneighborhood.svg" class="image"><img alt="Crystal Clear app linneighborhood.svg" src="PhantomJS%20-%20Wikipedia_files/16px-Crystal_Clear_app_linneighborhood.png" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Crystal_Clear_app_linneighborhood.svg/24px-Crystal_Clear_app_linneighborhood.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Crystal_Clear_app_linneighborhood.svg/32px-Crystal_Clear_app_linneighborhood.svg.png 2x" data-file-width="407" data-file-height="407" width="16" height="16"></a> <a href="https://en.wikipedia.org/wiki/Portal:Internet" title="Portal:Internet">Internet portal</a></li>
+<li><a href="https://en.wikipedia.org/wiki/File:Crystal_Clear_device_cdrom_unmount.png" class="image"><img alt="Crystal Clear device cdrom unmount.png" src="PhantomJS%20-%20Wikipedia_files/16px-Crystal_Clear_device_cdrom_unmount.png" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/1/10/Crystal_Clear_device_cdrom_unmount.png/24px-Crystal_Clear_device_cdrom_unmount.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/1/10/Crystal_Clear_device_cdrom_unmount.png/32px-Crystal_Clear_device_cdrom_unmount.png 2x" data-file-width="128" data-file-height="128" width="16" height="16"></a> <a href="https://en.wikipedia.org/wiki/Portal:Software" title="Portal:Software">Software portal</a></li>
+</ul>
+</div>
+</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw2166
+Cached time: 20170423015639
+Cache expiry: 2592000
+Dynamic content: false
+CPU time usage: 0.272 seconds
+Real time usage: 0.347 seconds
+Preprocessor visited node count: 2213/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 127931/2097152 bytes
+Template argument size: 13796/2097152 bytes
+Highest expansion depth: 25/40
+Expensive parser function count: 2/500
+Lua time usage: 0.125/10.000 seconds
+Lua memory usage: 4.48 MB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%  282.230      1 -total
+ 41.92%  118.309      2 Template:Infobox
+ 39.02%  110.118      1 Template:Infobox_software
+ 35.09%   99.023      1 Template:Reflist
+ 28.71%   81.035     20 Template:Cite_web
+ 17.87%   50.423      1 Template:Web_browsers
+ 17.04%   48.102      1 Template:Navbox_with_collapsible_groups
+  7.55%   21.322      1 Template:Infobox_software/simple
+  5.54%   15.639      1 Template:Start_date_and_age
+  3.72%   10.504      4 Template:Navbox
+-->
+
+<!-- Saved in parser cache with key enwiki:pcache:idhash:45375253-0!*!0!!en!4!* and timestamp 20170423015638 and revision id 776505913
+ -->
+<noscript><img src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;oldid=776505913">https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;oldid=776505913</a>"					</div>
+				<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://en.wikipedia.org/wiki/Help:Category" title="Help:Category">Categories</a>: <ul><li><a href="https://en.wikipedia.org/wiki/Category:C%2B%2B_software" title="Category:C++ software">C++ software</a></li><li><a href="https://en.wikipedia.org/wiki/Category:Web_browsers" title="Category:Web browsers">Web browsers</a></li><li><a href="https://en.wikipedia.org/wiki/Category:Cross-platform_web_browsers" title="Category:Cross-platform web browsers">Cross-platform web browsers</a></li><li><a href="https://en.wikipedia.org/wiki/Category:Portable_software" title="Category:Portable software">Portable software</a></li><li><a href="https://en.wikipedia.org/wiki/Category:Software_based_on_WebKit" title="Category:Software based on WebKit">Software based on WebKit</a></li><li><a href="https://en.wikipedia.org/wiki/Category:Software_using_the_BSD_license" title="Category:Software using the BSD license">Software using the BSD license</a></li><li><a href="https://en.wikipedia.org/wiki/Category:2011_software" title="Category:2011 software">2011 software</a></li></ul></div><div id="mw-hidden-catlinks" class="mw-hidden-catlinks mw-hidden-cats-hidden">Hidden categories: <ul><li><a href="https://en.wikipedia.org/wiki/Category:Pages_using_deprecated_image_syntax" title="Category:Pages using deprecated image syntax">Pages using deprecated image syntax</a></li></ul></div></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a href="https://en.wikipedia.org/wiki/Special:MyTalk" title="Discussion about edits from this IP address [Alt+Shift+n]" accesskey="n">Talk</a></li><li id="pt-anoncontribs"><a href="https://en.wikipedia.org/wiki/Special:MyContributions" title="A list of edits made from this IP address [Alt+Shift+y]" accesskey="y">Contributions</a></li><li id="pt-createaccount"><a href="https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&amp;returnto=PhantomJS" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="https://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=PhantomJS" title="You're encouraged to log in; however, it's not mandatory. [Alt+Shift+o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li id="ca-nstab-main" class="selected"><span><a href="https://en.wikipedia.org/wiki/PhantomJS" title="View the content page [Alt+Shift+c]" accesskey="c">Article</a></span></li>
+															<li id="ca-talk"><span><a href="https://en.wikipedia.org/wiki/Talk:PhantomJS" title="Discussion about the content page [Alt+Shift+t]" accesskey="t" rel="discussion">Talk</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label" tabindex="0">
+							<span>Variants</span><a href="#" tabindex="-1"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="https://en.wikipedia.org/wiki/PhantomJS">Read</a></span></li>
+															<li id="ca-edit"><span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=edit" title="Edit this page [Alt+Shift+e]" accesskey="e">Edit</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=history" title="Past revisions of this page [Alt+Shift+h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label" style="">
+						<h3 id="p-cactions-label" tabindex="0"><span>More</span><a href="#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input name="search" placeholder="Search Wikipedia" title="Search Wikipedia [Alt+Shift+f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off" type="search"><input value="Special:Search" name="title" type="hidden"><input name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton" type="submit">							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://en.wikipedia.org/wiki/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="https://en.wikipedia.org/wiki/Main_Page" title="Visit the main page [Alt+Shift+z]" accesskey="z">Main page</a></li><li id="n-contents"><a href="https://en.wikipedia.org/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="https://en.wikipedia.org/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="https://en.wikipedia.org/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a href="https://en.wikipedia.org/wiki/Special:Random" title="Load a random article [Alt+Shift+x]" accesskey="x">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="https://shop.wikimedia.org/" title="Visit the Wikipedia store">Wikipedia store</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-interaction" aria-labelledby="p-interaction-label">
+			<h3 id="p-interaction-label">Interaction</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-help"><a href="https://en.wikipedia.org/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="https://en.wikipedia.org/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="https://en.wikipedia.org/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a href="https://en.wikipedia.org/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [Alt+Shift+r]" accesskey="r">Recent changes</a></li><li id="n-contactpage"><a href="https://en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="https://en.wikipedia.org/wiki/Special:WhatLinksHere/PhantomJS" title="List of all English Wikipedia pages containing links to this page [Alt+Shift+j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="https://en.wikipedia.org/wiki/Special:RecentChangesLinked/PhantomJS" rel="nofollow" title="Recent changes in pages linked from this page [Alt+Shift+k]" accesskey="k">Related changes</a></li><li id="t-upload"><a href="https://en.wikipedia.org/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [Alt+Shift+u]" accesskey="u">Upload file</a></li><li id="t-specialpages"><a href="https://en.wikipedia.org/wiki/Special:SpecialPages" title="A list of all special pages [Alt+Shift+q]" accesskey="q">Special pages</a></li><li id="t-permalink"><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;oldid=776505913" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;action=info" title="More information about this page">Page information</a></li><li id="t-wikibase"><a href="https://www.wikidata.org/wiki/Q20712371" title="Link to connected data repository item [Alt+Shift+g]" accesskey="g">Wikidata item</a></li><li id="t-cite"><a href="https://en.wikipedia.org/w/index.php?title=Special:CiteThisPage&amp;page=PhantomJS&amp;id=776505913" title="Information on how to cite this page">Cite this page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-coll-print_export" aria-labelledby="p-coll-print_export-label">
+			<h3 id="p-coll-print_export-label">Print/export</h3>
+
+			<div class="body">
+									<ul>
+						<li id="coll-create_a_book"><a href="https://en.wikipedia.org/w/index.php?title=Special:Book&amp;bookcmd=book_creator&amp;referer=PhantomJS">Create a book</a></li><li id="coll-download-as-rdf2latex"><a href="https://en.wikipedia.org/w/index.php?title=Special:Book&amp;bookcmd=render_article&amp;arttitle=PhantomJS&amp;returnto=PhantomJS&amp;oldid=776505913&amp;writer=rdf2latex">Download as PDF</a></li><li id="t-print"><a href="https://en.wikipedia.org/w/index.php?title=PhantomJS&amp;printable=yes" title="Printable version of this page [Alt+Shift+p]" accesskey="p">Printable version</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-lang" aria-labelledby="p-lang-label"><span class="uls-settings-trigger" title="Language settings" tabindex="0" role="button" aria-haspopup="true"></span>
+			<h3 id="p-lang-label">Languages</h3>
+
+			<div class="body">
+									<ul>
+						<li class="interlanguage-link interwiki-fr"><a href="https://fr.wikipedia.org/wiki/PhantomJS" title="PhantomJS – French" hreflang="fr" class="interlanguage-link-target" lang="fr">Français</a></li>					</ul>
+				<div class="after-portlet after-portlet-lang"><span class="wb-langlinks-edit wb-langlinks-link"><a href="https://www.wikidata.org/wiki/Q20712371#sitelinks-wikipedia" title="Edit interlanguage links" class="wbc-editpage">Edit links</a></span></div>			</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 21 April 2017, at 12:20.</li>
+											<li id="footer-info-copyright">Text is available under the <a rel="license" href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License">Creative Commons Attribution-ShareAlike License</a><a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/" style="display:none;"></a>;
+additional terms may apply.  By using this site, you agree to the <a href="https://wikimediafoundation.org/wiki/Terms_of_Use">Terms of Use</a> and <a href="https://wikimediafoundation.org/wiki/Privacy_policy">Privacy Policy</a>. Wikipedia® is a registered trademark of the <a href="https://www.wikimediafoundation.org/">Wikimedia Foundation, Inc.</a>, a non-profit organization.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wmf:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="https://en.wikipedia.org/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+											<li id="footer-places-disclaimer"><a href="https://en.wikipedia.org/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-contact"><a href="https://en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+											<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+											<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+											<li id="footer-places-mobileview"><a href="https://en.m.wikipedia.org/w/index.php?title=PhantomJS&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://wikimediafoundation.org/"><img src="PhantomJS%20-%20Wikipedia_files/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" alt="Wikimedia Foundation" width="88" height="31"></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="https://www.mediawiki.org/"><img src="PhantomJS%20-%20Wikipedia_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.272","walltime":"0.347","ppvisitednodes":{"value":2213,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1500000},"postexpandincludesize":{"value":127931,"limit":2097152},"templateargumentsize":{"value":13796,"limit":2097152},"expansiondepth":{"value":25,"limit":40},"expensivefunctioncount":{"value":2,"limit":500},"entityaccesscount":{"value":1,"limit":400},"timingprofile":["100.00%  282.230      1 -total"," 41.92%  118.309      2 Template:Infobox"," 39.02%  110.118      1 Template:Infobox_software"," 35.09%   99.023      1 Template:Reflist"," 28.71%   81.035     20 Template:Cite_web"," 17.87%   50.423      1 Template:Web_browsers"," 17.04%   48.102      1 Template:Navbox_with_collapsible_groups","  7.55%   21.322      1 Template:Infobox_software/simple","  5.54%   15.639      1 Template:Start_date_and_age","  3.72%   10.504      4 Template:Navbox"]},"scribunto":{"limitreport-timeusage":{"value":"0.125","limit":"10.000"},"limitreport-memusage":{"value":4694226,"limit":52428800}},"cachereport":{"origin":"mw2166","timestamp":"20170423015639","ttl":2592000,"transientcontent":false}}});});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":97,"wgHostname":"mw2240"});});</script>
+	
+
+<div style="display: none; font-size: 13px;" class="suggestions"><div class="suggestions-results"></div><div class="suggestions-special"></div></div><a accesskey="v" href="https://en.wikipedia.org/wiki/PhantomJS?action=edit" style="display: none;"></a></body></html>
