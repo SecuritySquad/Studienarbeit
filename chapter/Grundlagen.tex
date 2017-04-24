@@ -1,13 +1,13 @@
 \chapter{Grundlagen}
 
-In diesem Kapitel werden die Grundlagen, welche für das weitere Verständnis der Arbeit und der gesamten Anwendung notwendig sind, näher beschrieben. Zunächst werden die verschiedenen Technologien und Frameworks, sowohl des Frontends, als auch des Backends dargestellt. Anschließend werden einige gängige Angriffstypen im \ac{WWW} erläutert, welche webifier überprüft.
+In diesem Kapitel werden die Grundlagen, welche für das weitere Verständnis der Arbeit und der gesamten Anwendung notwendig sind, näher beschrieben. Zunächst werden die verschiedenen Technologien und Frameworks, sowohl des Frontends, als auch des Backends dargestellt. Anschließend werden einige gängige Angriffstypen im \ac{WWW} erläutert.
 
 \section{Frontend Technologien und Frameworks}
 
 \todo{Daniel}
 \begin{itemize}
-    \item HTML
-    \item CSS
+    \item \ac{HTML}
+    \item \ac{CSS}
     \item JavaScript
     \item jQuery
     \item Bootstrap
@@ -21,17 +21,27 @@ Wohl am häufigsten kam die Programmiersprache Java zum Einsatz. Java ist eine u
 
 In einigen Teilprojekten wurde das auf Java basierende \textit{Spring}-Framework verwendet. \textit{Spring} stellt eine vereinfachte Möglichkeit auf den Zugriff auf viele \ac{API} der Standard-Version zur Verfügung. Ein weiterer wesentlicher Bestandteil des \textit{Spring}-Frameworks ist die \textit{Dependency Injection}. Hierbei suchen sich Objekte ihre Referenzen nicht selbst, sondern bekommen diese Anhand einer Konfiguration injiziert. Dadurch sind sie eigenständig und können in verschiedenen Umgebungen eingesetzt werden. Des weiteren bringt \textit{Spring} eine Unterstützung für aspektorientierte Programmierung mit, wodurch mit verschiedenen Abstraktionsschichten einzelne Module abgekapselt werden können. \footcite[Vgl.][2]{spring3}
 
-Aufbauend auf dem \textit{Spring} Basis-Modul werden noch weitere Module, wie beispielsweise Spring Security, Sprint Boot, Spring Integration, Spring Data, Spring Session oder Sprint Web Services. \footcite[Vgl.][2]{springPivotal} \ldots
+Aufbauend auf dem \textit{Spring} Basis-Modul werden noch weitere Module, wie beispielsweise Spring Security, Sprint Boot, Spring Integration, Spring Data, Spring Session oder Spring MVC. \footcite[Vgl.][2]{springPivotal} Im folgenden werden die \textit{Spring}-Mudule naäher erläutert, die für das weitere Verständnis der Arbeit notwendig sind.
 
-\todo Samuel
+\begin{description}
+  \item[Spring Boot] \hfill \\
+    Mit Spring Boot können Anwendungen, welche das \textit{Spring}-Framework nutzen, einfacher eintwickelt und ausgeführt werden, da dadurch eigenständig lauffähige Programme erzeugt werden können, welche nicht von externen Services abhängig sind. Hierfür bringt Spring Boot einen Integrierten Server mit, auf welchem die Anwendung bereitgestellt wird.\footcite[Vgl.][1]{springBoot}
+  \item[Spring MVC] \hfill \\
+    Spring MVC ist sehr gut geeignet um Webanwendungen zu implementieren.\footcite[Vgl.][3]{spring3} Hierfür können die diese in mehrere Abstraktionsschichten gegliedert werden. Beispielsweise in das \ac{UI}, die Geschäftslogik und die Persistenzschicht.\footcite[Vgl.][21]{springMvc}
+  \item[Spring Data] \hfill \\
+    Spring Data vereinfacht Datenbankzugriffe ungemein. Das Modul stelt \ac{API}s für fast alle gängigen Datenbankzugriffsschichten, wie JDBC (Java Database Connectivity), Hibernate, JDO (Java Data Objects) zur Verfügung. Aber nicht nur relationale Datenbanken werden unterstützt, sondern beispielsweise auch NoSQL-Datenbanken und Key/Value-Stores können Problemlos eingesetzt werden.\footcite[Vgl.][3f]{springData}
+\end{description}
 
-\begin{itemize}
-  \item MongoDB\newline \todo Samuel
-  \item Gradle  \newline \todo Jani
-  \item REST  \newline \todo Jani
-  \item Docker  \newline \todo Jani
-  \item R \newline \todo Jani
-\end{itemize}
+In Verbindung mit Spring Data wurde eine \textit{MongoDB} zur Speicherung der Ergebnisse eingesetzt. \textit{MongoDB} ist eine Dokument orientierte anpassungsfähige und skalierbare Datenbank. Sie vereint viele nützliche Eigenschaften von Relationalen Datenbanken, wie Sekundärindizes, Auswahlabfragen und Sortierung mit Skalierbarkeit, MapReduce-Aggregationen und raumbezogenen Indizes. Außerdem gibt es bei MongoDB keine festen Schemata, weshalb großen Datenmigrationen normal nicht notwendig sind.\footcite[Vgl.][1f]{mongodb}
+
+Ein wichtiger Bestandteil jedes großen Software-Projektes ist ein gutes Build-Management-Tool. Für webifier wurde \textit{Gradle} als solches gewählt. Ein Build-Prozess besteht grundsätzlich aus zwei Teilschritten. Zum Einen aus dem kompilieren des Codes und zum anderen aus dem verlinkten der benutzen Bibliotheken. \footcite[Vgl.][]{buildprozess}
+Da das manuelle Einbinden von Bibliotheken und compilieren des Codes bei großen Projekten sehr aufwändig und mühsam sein kann wird hier auf Build-Management-Tools wie \textit{Gradle} zurückgegriffen. Um den Build für den Nutzer möglichst einfach zu gestalten verfolgt Gradle zwei Prinzipien. Das erste Prinzip ist \textit{Convention over Configuration}, was bedeutet, dass soweit es geht ein Standardbuildprozess definiert ist und der Anwender nur die Parameter ändern muss die Projektspezifisch abweichen. Das zweite Prinzip nennt sich \ac{DRY}. Hierbei geht es darum Redundanzen in der Konfiguration des Buildes zu vermeiden. Diese beiden Prinzipien helfen Gradle, dass meist kurze Build-Skripte ausreichen um komplexe Prozesse abzubilden. \footcite[Vgl.][6f]{gradle}
+
+Die Kommunikation zwischen Server und Client erfolgt über \ac{REST}. Hierbei wird jedes Objekt in \ac{REST} als Ressource definiert, welche über einen eindeutigen \ac{URI} adressiert werden können. Über die HTTP-Methoden GET, PUT, POST und DELETE können diese Ressourcen geladen, erstellt, geändert oder auch gelöscht werden. \footcite[Vgl.][]{rest}
+
+Das Testen von potenziell gefährlichen Webseiten soll natürlich nicht direkt auf dem Server geschehen, da es sonst diesen potenziell gefährden könnte. Deshalb wird hierfür eine Virtualisierung benötigt um die Tests abgekapselt vom Gesamtsystem auszuführen. Dafür wurde Docker als Tool eingesetzt. Docker ist eine Open-Source-Software zur Virtualisierung von Anwendungen. Hierbei wird auf die Container-Technologie gesetzt. Container sind vom Betriebssystem bereitgestellte virtuelle Umgebung zur isolierten Ausführung von Prozessen. Ein Vorteil der Container gegenüber der herkömmlicher virtuelle Maschinen ist der vielfach geringere Ressourcenbedarf.\footcite[Vgl.][]{docker}
+
+Gewonnene und gespeicherte Daten müssen danach auch noch aufbereitet und visualisiert werden. Webifier setzt dafür auf die Programmiersprache R. R ist eine freie Programmiersprache, entwickelt für statistische Auswertungen und Visualisierungen. Sie zählt zu den prozeduralen Programmiersprachen. Die quelltextoffene Programmiersprache wird ständig weiterentwickelt. Zusätzlich gibt es eine Vielzahl an Packages, welche weitere Funktionalität bereitstellen. Diese sind über ein zentrales Repository abrufbar und so leicht einbindbar in den Quelltext. \footcite[Vgl.][1ff]{R}
 
 \section{Technologien und Frameworks der Tests}
 
@@ -55,6 +65,9 @@ Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Kla
     \item Resemble JS\newline \todo Samuel
 \end{itemize}
 
+Um Webseiten mit allen ihren Ressourcen herunterzuladen wurde die freie Software \textit{HTTrack} verwendet. Mit \textit{HTTrack} können Webseiten in einem lokalen Verzeichnis gespeichert werden. Hierfür erzeugt das Programm rekursiv alle notwendigen Verzeichnisse und läd anschließend alle Ressourcen, wie \ac{HTML}-, \ac{CSS}- und JavaScript-Dateien, als auch Bilder und andere Dateien herunter. Außerdem ist es möglich automatisiert alle \ac{HTML}-Links entsprechend zu modifizieren. Abschließend bietet HTTrack umfassende Konfigurationsoptionen um es für den optimalen Gebrauch anpassen zu können.\footcite[Vgl.][]{httrack}
+
+Für die Analyse und den Vergleich von Bildern wurde auf die freie JavaScript-Bibliothek Resemble.js zurückgegriffen. Mit Resemble können jegliche Arten von Bildanalyse und Bildvergleich genutzt werden. Urspünglich wurde es für eine Bibliothek von Phanton JS entwickelt, kann aber inzwischen vielseitig eingesetzt werden. Resemble bietet einige Einstellungsmöglichkeiten um Bilder analysieren und miteinander vergleichen zu können. Als Resultat liefert es bei der Bildanalyse Helligkeits- und Farbwerte des Bildes. Beim Bildvergleich bekommt man den prozentualen Unterschied der beiden Bilder, sowie einige zusatzinformationen. Außerdem ist es möglich mit Resemble.js ein Differenzbild mit der Hervorhebung der Unterschiede zweier Bilder zu erzeugen.\footcite[Vgl.][]{resemblejs}
 
 \section{Angriffstypen}
 
