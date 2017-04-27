@@ -52,7 +52,7 @@ In diesem Kapitel werden diejenigen Technologien und Frameworks erläutert, die 
 \todo{Author: Daniel (needs completion)}
 Python ist eine Programmiersprache, die einen schnellen Projektstart ermöglicht und ist auf Integration von verschiedenen Systemen spezialisiert.
 Die Sprache wird von der Python Software Foundation nach Open Source Standards entwickelt.
-Die aktuellste Version ist Python 3.6.1, wobei bei der Implementierung der Tests keine einheitliche Version verwendet wird\too{diesen Nebensatz in Retrospektive, als Punkt zur Verbesserung?}.
+Die aktuellste Version ist Python 3.6.1, wobei bei der Implementierung der Tests keine einheitliche Version verwendet wird\todo{diesen Nebensatz in Retrospektive, als Punkt zur Verbesserung?}.
 Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, das es wie bei JavaScript\ref{sec:javascript} erst zur Laufzeit zu einer Typenprüfung kommt.
 Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Klammern in Java) gekennzeichnet, sondern definieren sich an der Einrückungstiefe.
 \footcite{pythonHomepage}
@@ -61,8 +61,6 @@ Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Kla
 \begin{itemize}
     \item Phantom JS \newline \todo{Daniel}
     \item Bro \newline \todo Jani
-    \item HTtrack\newline \todo Samuel
-    \item Resemble JS\newline \todo Samuel
 \end{itemize}
 
 Um Webseiten mit allen ihren Ressourcen herunterzuladen wurde die freie Software \textit{HTTrack} verwendet. Mit \textit{HTTrack} können Webseiten in einem lokalen Verzeichnis gespeichert werden. Hierfür erzeugt das Programm rekursiv alle notwendigen Verzeichnisse und läd anschließend alle Ressourcen, wie \ac{HTML}-, \ac{CSS}- und JavaScript-Dateien, als auch Bilder und andere Dateien herunter. Außerdem ist es möglich automatisiert alle \ac{HTML}-Links entsprechend zu modifizieren. Abschließend bietet HTTrack umfassende Konfigurationsoptionen um es für den optimalen Gebrauch anpassen zu können.\footcite[Vgl.][]{httrack}
@@ -71,7 +69,17 @@ Für die Analyse und den Vergleich von Bildern wurde auf die freie JavaScript-Bi
 
 \section{Angriffstypen}
 
+In diesem Abschnitt werden nun einige übliche Angriffstypen von Webseiten auf den Nutzer vorgestellt und eine mögliche Überprüfung in webifier dargestellt.
+
 \subsection{Malware}
+
+Spyware, Root Kits, Trojaner und viele mehr - alles das ist Malware, welche den Nutzern in unterschiedlichen Weisen kleineren, oder größeren Schaden zuführen. Kurz: Malware ist Software mit bösartiger Wirkung. In diesem Abschnitt werden nun einige Formen von Schadsoftware beschrieben und wie diese in ein System gelangen kann.\footcite[Vgl.][95]{netzwerkDatensicherheit}
+
+Malware ist so vielfältig wie gutartige Anwendungen. Dennoch lässt sie sich auf verschiedene Weisen klassifizieren. Allerdings sind die Wübergänge der einzelnen Klassen fließend. Zum Einen kann Malware im Hinblick auf ihre Verbreitungsmethode und zum Anderen in der Art des Schadens für den ungewollten Anwender unterschieden werden. Alle Klassen vereint jedoch dass Malware im allgemeinen Code enthält, welcher dem Nutzer oder dessen System Schaden zufügt.\footcite[Vgl.][95\psq]{netzwerkDatensicherheit}
+
+Bei der Verbreitungsmethode kann zwischen Viren, Trojanern und Würmern unterschieden werden. Viren sind Programme, welche sich bei der Ausführung selbst kopieren, beispielsweise indem sie ihren Code in andere Programme oder Dokumende des Nutzers einschleusen.\footcite[Vgl.][95]{netzwerkDatensicherheit} Die ersten Viren wurden Anfang der 80er Jahre in Umlauf gebracht, allerdings spielten Viren sogar schon 1970 in dem Science Fiction Film \textit{The Scarred Man} eine Rolle.\footcite[Vgl.][14]{virusesMalware} Trojaner sind Anwendungen, welche vortäuschen gutartig zu sein, aber Code beinhalten, welcher dem System oder dem User schadet. Trojaner sind seit 1972 bekannt und verbreiten sich üblicher Weise nicht eigenständig.\footcite[Vgl.][12\psq]{virusesMalware} Würmer verbreiten sich üblicherweise von alleine über Netzwerke und infizieren so andere Systeme. Hierfür nutzen sie Schwachstellen in Netzwerkdiensten und schädigt so der Maschine oder dem Anwender.\footcite[Vgl.][95]{netzwerkDatensicherheit} Die ersten Würmer sind wie die ersten Viren in der Science Fiction zu finden. Würmer kommen in dem Roman \textit{The Shockwave Rider} von John Brunner aus dem Jahr 1975 vor. Die ersten realen Würmer waren bereits 1970 im damalign Arpanet zu finden.\footcite[Vgl.][15]{virusesMalware}
+
+Anhand des kann Malware in Spyware, Adware, Dialer, Zombies, Backdoors und Root Kits unterteilt werden. \footcite[Vgl.][95\psq]{netzwerkDatensicherheit}
 
 \todo Samuel
 
