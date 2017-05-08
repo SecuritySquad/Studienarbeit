@@ -99,6 +99,13 @@
 %Abkürzungsverzeichnis
 \usepackage[printonlyused]{acronym}
 
+% Notizen und To-dos
+\usepackage[
+%	disable,		% Notizen ausblenden
+ngerman,			% Deutsche Listennamen
+colorinlistoftodos,	% Farbe in Verzeichnis einblenden
+]{todonotes}
+
 % Fussnoten
 \usepackage[hang, multiple, stable]{footmisc}
 \usepackage{chngcntr}
@@ -244,7 +251,7 @@
 	moredelim=[il][\textcolor{eclipsejavastrings}]{\%}{}
 }
 
-\newcommand{\todo}[0]{\textbf{\textit{\textcolor{red}{TODO }}}}
+%\newcommand{\todo}[0]{\textbf{\textit{\textcolor{red}{TODO }}}}
 \newcommand{\progress}[0]{\textbf{\textit{\textcolor{orange}{In Progress }}}}
 
 % besserer Blocksatz

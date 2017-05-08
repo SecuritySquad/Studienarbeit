@@ -23,6 +23,7 @@
 *.pdx
 *.pnd
 *.out
+*.tdo
 *.tcp
 *.tmp
 *.toc
