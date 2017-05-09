@@ -6,8 +6,28 @@ In diesem Kapitel werden die Grundlagen, welche für das weitere Verständnis de
 
 Dieser Abschnitt behandelt diejenigen Technologien, die die Interaktion des Benutzers visualisieren. Da es sich bei webifier um eine Webanwendung handelt, sind dies ausschließlich Webtechnologien, welche von grafischen Browsern unterstützt werden.
 
-Die grundlegende Informationssprache des \ac{WWW} heißt \ac{HTML}. Sie wurde ursprünglich entwickelt um wissenschaftliche Dokumente semantisch zu beschreiben.
+Die grundlegende Informationssprache des \ac{WWW} heißt \ac{HTML}. Sie wurde ursprünglich entwickelt um wissenschaftliche Dokumente semantisch zu beschreiben (engl. 'to mark up').
 Heute wird sie jedoch in weitaus größerem Umfang genutzt.\footcite[Vgl.][]{html5Spec}
+\ac{HTML}-Dateien bestehen aus zwei Arten von Informationen: Textdaten und Markupinformationen.
+Erstere sind verantwortlich für den textuellen Inhalt der Webseite. Dazu zählen alle abgebildeten Texte wie sie auch in Überschriften, Abschnitten, Menüs, usw. stehen. Sie sind die Informationen, die Betrachter der Webseite direkt über das grafische Browserfenster lesen kann.
+Markupinformationen hingegen definieren den Aufbau und die Semantik der Inhalte. Diese sind für den normalen Betrachter nicht unbedingt sichtbar. Hierbei handelt es sich um sogenannte \textit{Tags}, die im Quellcode in spitzen Klammern stehen und aus einer Menge von bestimmten Werten stammen. Tags treten immer in Paaren auf, wobei der zweite Tag (Endtag) zusätzlich einen Backslash zwischen aufgehender spitzer Klammer und Tagnamen hat (s. z.B. \autoref{lst:Beispiel.html} Zeile 5, 10, 11).
+Innerhalb dieser beiden Tags können wiederum neue Tags (Zeile ), aber auch einfache Textdaten stehen (s. Zeilen 4, 7, 8, 9).
+Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelementen entsteht. Zu den wichtigsten Tags zählt der \lstinline{<html>}-Tag. Er ist der äußerste Wurzeltag, der alle anderen Tags umschließt. Der \lstinline{<head>}- und \lstinline{<body>}-Tag stehen beide eine Ebene tiefer und beinhalten Metadaten für das gesamte Dokument bzw. den Seiteninhalt.\footcite[Vgl.][57]{webTechnologies}
+
+\begin{lstlisting}[language=html,caption={Beispiel.html},label=lst:Beispiel.html]
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testseite</title>
+</head>
+<body>
+	<h1>Überschrift</h1>
+	<p>Abschnitt 1</p>
+	<p>Abschnitt 2</p>
+</body>
+</html>
+\end{lstlisting}
+
 
 \todo[color=cyan]{Daniel schreiben: \ac{CSS}}
 
