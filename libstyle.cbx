@@ -25,7 +25,7 @@
         \usebibmacro{cite:paren:labelyear+extrayear}}}
     {\usebibmacro{cite:shorthand}}}}
 
-\renewbibmacro*{cite:paren:labelyear+extrayear}{%
+\newbibmacro*{cite:paren:labelyear+extrayear}{%
   \iffieldundef{labelyear}
     {}
     {\printtext[parens]{%
