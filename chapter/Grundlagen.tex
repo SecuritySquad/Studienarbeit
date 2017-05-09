@@ -92,6 +92,8 @@ Zu einer umfassenden Analyse gehört selbstverständlich auch die Analyse des Ne
 
 In diesem Abschnitt werden nun einige übliche Angriffstypen von Webseiten auf den Nutzer vorgestellt und eine mögliche Überprüfung in webifier dargestellt.
 
+\todo{Samuel: Noch allgemeiner auf das Thema eingehen\ldots}
+
 \subsection{Malware}
 
 Spyware, Root Kits, Trojaner und viele mehr - alles das ist Malware, welche den Nutzern in unterschiedlichen Weisen kleineren, oder größeren Schaden zuführen. Kurz: Malware ist Software mit bösartiger Wirkung. In diesem Abschnitt werden nun einige Formen von Schadsoftware beschrieben und wie diese in ein System gelangen kann.\footcite[Vgl.][95]{netzwerkDatensicherheit}
@@ -102,7 +104,16 @@ Bei der Verbreitungsmethode kann zwischen Viren, Trojanern und Würmern untersch
 
 Anhand des angerichteten Schadens kann Malware in Spyware, Adware, Malware-Dialer, Zombie-Malware, Backdoors und Root Kits unterteilt werden. Spyware ist Software, welche ohne Wissen des Nutzers Informationen sammelt und weiterleitet. Dadurch könne vertrauliche Daten gestohlen und missbraucht werden.\footcite[Vgl.][95\psq]{netzwerkDatensicherheit} Solche Daten können beispielsweise Benutzernamen und Passworter, E-Mailadressen, Bankaccounts und Kreditkartennummern oder Softwarelizenzschlüssel sein. Mitte der 1990er Jahre war erste Spyware zu finden.\footcite[Vgl.][16]{virusesMalware} Als Adware werden Programme bezeichnet, welche dem Benutzer Werbeanzeigen einblenden.\footcite[Vgl.][96]{netzwerkDatensicherheit} Adware ist ähnlich zu Spyware, da beide Informationen über den Nutzer sammeln. Allerdings ist Adware mehr auf Marketing fokussiert und nutzt die Informationen um dem Nutzer Webung zu präsentieren.\footcite[Vgl.][17]{virusesMalware} Dialer sind Programme, welche Computern über Modems oder Telefonnetze Zugang zum Internet anbieten. Malware-Dialer nutzen das aus und wählen die Rechner ohne Kentniss des Nutzers in teure Service-Rufnummern oder Anwahlpunkte im Ausland ein. Allerdings findet man diese Art von Malware nur noch selten, da es inzwischen telefonbasierten Internetzugänge an Bedeutung verlieren. Software, welche Rechner komprommitiert, wird als Zombie-Malware bezeichnet, da dieser so von Angreifern ferngesteuert werden kann.\footcite[Vgl.][96]{netzwerkDatensicherheit} Am häufigsten werden Zombie-Rechner eingesetzt um Spam zu versenden oder mit vielen anderen Denial of Service Angriffe auszuführen.\footcite[Vgl.][18]{virusesMalware} Backdoors sind modifizierte Programme des Systems, über welche Hacker Sicherheitsmechanismen umgehen und sich so unbefugten Zugriff auf den Rechner verschaffen kann. Modifizierte Softwaregruppen, welche zum Ziel haben deren Aktivität oder die eines Angreifers vor Systembenutzern, inklusive Administratoren zu verstecken werden als Root Kits bezeichnet.\footcite[Vgl.][96]{netzwerkDatensicherheit}
 
-\todo Statistik einfügen
+\begin{figure}[h]
+\centerline{%
+\includegraphics[width=0.5\textwidth]{images/malware-all-years_sum_de}%
+\includegraphics[width=0.5\textwidth]{images/malware-all-years_de}%
+}%
+\caption{Malware Statistik}
+\label{fig:malware-statistics}
+\end{figure}
+
+\todo{Statistik einfügen}
 
 Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\footcite[Vgl.][97]{netzwerkDatensicherheit} Deshalb ist es notwendig mit webifier Webseiten auf Malware zu prüfen.
 
@@ -112,37 +123,20 @@ Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\
 
 \subsection{JavaScript Port Scanning}
 
-\todo Jani
+\todo{Jani}
 
 \subsection{JavaScript IP Scanning}
 
-\todo Jani
+\todo{Jani}
 
 \subsection{Clickjacking}
 
-\todo Jani
+\todo{Jani}
 
 \subsection{Phishing}
 
 Beim Phishing versucht ein Angreifer, in diesem Fall auch Phisher genannt, auf betrügerische Weise vertrauliche oder sensible Anmeldedaten zu bekommen. Um dies zu erreichen gibt fälscht er die elektronische Kommunikation zwischen Opfer und einer vertrauenswürdigen oder öffentlichen Organisation, indem er sich selbst als diese ausgibt. Dies geschieht meist durch E-Mails, welche das Opfer auf eine Webseite locken, welche vermeindlich zur vertrauenswürdigen Organisation gehört, in Wahrheit aber vom Angreifer kontrolliert wird und deshalb Informationen, vorzugsweise Passwörter oder Krefitkartennummern abfängt.\footcite[Vgl.][1]{phishing}
 
-Phishing gibt es seit Anfang der 1990er Jahre, allerdings sind die Zahlen von Phishing-Angriffen in den letzten Jahren weiter gestiegen.
+Phishing gibt es seit Anfang der 1990er Jahre, allerdings sind die Zahlen von Phishing-Angriffen in den letzten Jahren drastisch gestiegen. Phishing ist zu einer gefährlichen Kombination aus Social Engeneering und technischen Angriffen geworden, welche zum Ziel hat vertrauliche Informationen zu erlangen. Die gewonnenen Daten werden für Betrug, Identitätsdiebstahl und Spionage missbraucht. \footcite[Vgl.][1\psq]{phishing}
 
-%1.1 Was ist Phishing
-%
-%In den letzten Jahren gab es einen alarmierenden Trend einer Zunahme sowohl der Zahl als auch der Raffinesse von Phishing-Attacken. Wie die Definition vorschlägt, ist Phishing eine neuartige Kreuzung von Social Engineering und technischen Angriffen, die entworfen sind, um vertrauliche Informationen von einem Opfer zu entlocken. Die gesammelten Informationen werden dann für eine Reihe von ruchlosen Taten verwendet, darunter Betrug, Identitätsdiebstahl und Spionage. Die wachsende Häufigkeit und der Erfolg dieser Angriffe hat dazu geführt, dass eine Reihe von Forschern und Unternehmen das Problem ernst nehmen. Sie haben versucht, es zu behandeln, indem sie neue Gegenmaßnahmen ergreifen und neue und neuartige Techniken erforschen, um Phishing zu verhindern. In einigen Fällen haben die Forscher alte und bewährte Techniken vorgeschlagen, deren Gebrauch aus der Gunst gefallen ist. Oder wurden überholt. In anderen Fällen. Neue Ansätze werden entwickelt. In diesem Buch wird ein Überblick über aktuelle und zukünftige zukünftige Entwicklungen von Phishing-Angriffen gegeben. Addi-
-%. Ein Überblick über die Sicherheitsgegenmaßnahmen, die entwickelt werden, um ihnen entgegenzuwirken. Wir haben versucht, einen allumfassenden Ansatz zu verfolgen, der sich mit Technologien auseinandersetzt, von technischen Lösungen, die darauf abzielen, die Angriffe direkt zu stoppen; Zu den wahrscheinlichen Elfeets der Gesetzgebung und sozialen Netzwerken, die darauf abzielen, die Angriffe riskanter oder leicht identifizierbarer zu machen und daher für Phisher weniger geeignet zu sein. Darüber hinaus, da Phishing-Angriffe sind oft erfolgreich, weil der durchschnittliche Benutzer nicht verstehen und somit nicht nutzen können, viele der derzeit verfügbaren und eingesetzten Sicherheitsmechanismen. Wir betrachten menschzentrierte Lösungen und appmaches, die eine ganzheitlichere Sicht der Sicherheit betrachten, die den Benutzer einschließt. Dieser Ansatz akzeptiert die Tatsache, dass die durchschnittlichen Nutzer Dinge tun, die Sicherheitsexperten lieber nicht hätten. Wie zB das gleiche Passwort an mehreren Standorten. Oder die Wahl der Namen ihrer Hunde als Passwörter für ihre Online-Bankkonten.
-%
-%Im verbleib dieses kapitels wird für die uneingeweihten Es beginnt mit einer kurzen Phishing-Geschichte und fährt fort, die Notwendigkeit zu motivieren, das Problem zu erörtern, indem man die mit dem Angriff verbundenen dill'erent Kosten erörtert. Als nächstes die typische Anatomie. Werkzeuge und Techniken der aktuellen Phishing-Angriffe werden abgedeckt, darunter zwei relativ einfache Beispiele für tatsächliche Phishing-Angriffe. Schließlich haben sich Phishing-Angriffe ständig weiterentwickelt und werden es auch weiterhin tun. Deswegen. Die natürliche Evolution des Phishing und die Schwierigkeit, die Benutzer vor diesen Angriffen zu schützen, werden diskutiert. Hoffentlich wird der Leser zu diesem Zeitpunkt die potenziellen Probleme erkennen, die das Phishing in der Zukunft rcalimieren kann, und gut motiviert sein, weiter in das Buch zu gehen, das sowohl erwartete Entwicklungen des Phishing als auch mögliche Gegenmaßnahmen diskutiert.
-%
-%1.2 Geschichte
-%
-%Phishing entstand Anfang der 1990er Jahre auf den America Online (AOL) Netzwerksystemen. Zu der Zeit würden viele Hacker falsche AOL-Benutzerkonten erstellen, indem sie sich mit einer falschen Identität registrieren und eine automatisch generierte, betrügerische Kreditkartennummer bereitstellen. Während diese Kreditkartennummern nicht den tatsächlichen Kreditkarten oder der identifizierten Identität entsprechen, würden sie die einfachen Gültigkeitstests auf die Kreditkartennummern übergeben, die von AOL (und anderen Händlern zu der Zeit) durchgeführt wurden. AOL zu glauben, dass sie legitim waren. So. AOL würde die Konten aktivieren. Die AOL-Konten, die aus solchen Angriffen resultierten, würden dann verwendet werden, um auf AOL-Ressourcen ohne Kosten und Gefahr für den Hacker zuzugreifen; Das Konto würde aktiv bleiben, bis AOL tatsächlich die Abrechnung der Kreditkarte mit betrügerischen Konto verbunden, festgestellt, dass es ungültig war, und deaktiviert das Konto. Solche Angriffe sollten nicht als Phishing betrachtet werden. Die Antwort von AOL auf diese Angriffe würde Hackern führen, um Phishing zu entwickeln.
-%
-%Mitte der neunziger Jahre hat AOL proaktive Maßnahmen ergriffen, um zu verhindern, dass der zuvor genannte Angriff auf die Verabschiedung der Legitimität der Kreditkartennummern und der damit verbundenen Abrechnungsidentität geht. Dies führte dazu, dass Hacker ihre Methode zum Erwerb von AOL-Konten ändern. Anstatt neue Konten mit betrügerischen Abrechnungsinformationen zu erstellen, die mit konfirmierten Identitäten verbunden sind. Phishcrs würde die legitimen Konten anderer Benutzer stehlen. Um dies zu tun, würden Phishcrs als Angestellte von AOL posieren und legitime AOL-Nutzer kontaktieren. Ihr Passwort anfordern. Natürlich sind die Benutzer nicht ganz naiv und fragen direkt nach einem Passwort war es unwahrscheinlich, dass es dazu veranlasste, dass es gegeben wurde, aber die Phisher würden den Benutzern eine legitim-klingenden Geschichte geben, die sie in die Bereitstellung der Informationen lockt. Zum Beispiel. Ein Phishcr würde sich oft mit einem Benutzer in Verbindung setzen und ihnen mitteilen, dass sie aus Sicherheitsgründen das Kennwort des Benutzers überprüfen müssen und es dann vorgeben müssen. Dieser Kontakt würde in der Regel per E-Mail oder durch AOL's Instant Messaging-Service initiiert werden, aber die
-%E-Mail und Instant Messages würden "spoofed" erscheinen, um von einem AOL-Mitarbeiter zu kommen. Wegen der legitimen klingenden Vernunft und dem Aussehen, dass die Anfrage für das Passwort kam aus einer maßgeblichen Quelle. Viele Benutzer haben ihre Passwörter vorsätzlich den Phisher aufgegeben. Die Phisher würden dann die Konten für ihre eigenen Zwecke verwenden. Zugriff auf verschiedene berechnete Teile der AOL-Website, wobei die Gebühren an den legitimen Kontoinhaber in Rechnung gestellt werden.
-%
-%Angriffe der soeben beschriebenen Form sind wohl das erste Beispiel für echte Phishing-Angriffe. Phishers würden Social Engineering und Identity Identitätsdiebstahl durch Spoo fi ng zu sreal legitimen Benutzer Passwörter für betrügerische Zwecke verwenden. Des Weiteren. In diesem Punkt war der Begriff Phishing bereits geprägt, um solche Angriffe zu beschreiben. Das Zitat unten, von einem Hacker Posting auf einer frühen Usenet Newsgroup alt. 2600. ist eine der frühesten bekannten Zitate auf Phishing und Referenzen der Art des Angriffs gerade beschrieben.
-%Änderung vorschlagen
-
-\todo Samuel
+\todo{Samuel: Klassischen Verlauf beschreiben}
