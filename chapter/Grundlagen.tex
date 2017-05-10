@@ -14,7 +14,13 @@ Markupinformationen hingegen definieren den Aufbau und die Semantik der Inhalte.
 Innerhalb dieser beiden Tags können wiederum neue Tags (Zeile ), aber auch einfache Textdaten stehen (s. Zeilen 4, 7, 8, 9).
 Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelementen entsteht. Zu den wichtigsten Tags zählt der \lstinline{<html>}-Tag. Er ist der äußerste Wurzeltag, der alle anderen Tags umschließt. Der \lstinline{<head>}- und \lstinline{<body>}-Tag stehen beide eine Ebene tiefer und beinhalten Metadaten für das gesamte Dokument bzw. den Seiteninhalt.\footcite[Vgl.][57]{webTechnologies}
 
-\begin{lstlisting}[language=html,caption={Beispiel.html},label=lst:Beispiel.html]
+\begin{scriptsize}
+\lstset{
+    style=eclipsehtml,
+    caption={Beispiel.html},
+    label={lst:Beispiel.html}
+}
+\begin{lstlisting}
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +33,7 @@ Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelemente
 </body>
 </html>
 \end{lstlisting}
-
+\end{scriptsize}
 
 \todo[color=cyan]{Daniel schreiben: \ac{CSS}}
 
@@ -138,5 +144,7 @@ Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\
 Beim Phishing versucht ein Angreifer, in diesem Fall auch Phisher genannt, auf betrügerische Weise vertrauliche oder sensible Anmeldedaten zu bekommen. Um dies zu erreichen gibt fälscht er die elektronische Kommunikation zwischen Opfer und einer vertrauenswürdigen oder öffentlichen Organisation, indem er sich selbst als diese ausgibt. Dies geschieht meist durch E-Mails, welche das Opfer auf eine Webseite locken, welche vermeindlich zur vertrauenswürdigen Organisation gehört, in Wahrheit aber vom Angreifer kontrolliert wird und deshalb Informationen, vorzugsweise Passwörter oder Krefitkartennummern abfängt.\footcite[Vgl.][1]{phishing}
 
 Phishing gibt es seit Anfang der 1990er Jahre, allerdings sind die Zahlen von Phishing-Angriffen in den letzten Jahren drastisch gestiegen. Phishing ist zu einer gefährlichen Kombination aus Social Engeneering und technischen Angriffen geworden, welche zum Ziel hat vertrauliche Informationen zu erlangen. Die gewonnenen Daten werden für Betrug, Identitätsdiebstahl und Spionage missbraucht. \footcite[Vgl.][1\psq]{phishing}
+
+Im Folgenden wird ein beispielhafter Phishingangriff auf PayPal geschildert. PayPal ist\ldots\footcite[Vgl.][]{paypal}
 
 \todo{Samuel: Klassischen Verlauf beschreiben}
