@@ -211,6 +211,8 @@ colorinlistoftodos,	% Farbe in Verzeichnis einblenden
 \definecolor{eclipsehtmlstrings}{HTML}{0000FF}
 \definecolor{eclipsehtmlbasic}{HTML}{000000}
 
+\definecolor{link}{HTML}{0000FF}
+
 \lstdefinestyle{eclipse}{
 	float,
 	frame=single,
@@ -268,6 +270,13 @@ colorinlistoftodos,	% Farbe in Verzeichnis einblenden
 	keywordstyle=\color{eclipsejavakeywords},
 	morecomment=[l]{\#},
 	moredelim=[il][\textcolor{eclipsejavastrings}]{\%}{}
+}
+
+\lstdefinestyle{nonumbers}{
+	style=eclipse,
+    numbers=none,
+	belowcaptionskip=0pt,
+	moredelim=[is][\color{link}\underbar]{(*}{*)}
 }
 
 %\newcommand{\todo}[0]{\textbf{\textit{\textcolor{red}{TODO }}}}

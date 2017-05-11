@@ -145,6 +145,70 @@ Beim Phishing versucht ein Angreifer, in diesem Fall auch Phisher genannt, auf b
 
 Phishing gibt es seit Anfang der 1990er Jahre, allerdings sind die Zahlen von Phishing-Angriffen in den letzten Jahren drastisch gestiegen. Phishing ist zu einer gefährlichen Kombination aus Social Engeneering und technischen Angriffen geworden, welche zum Ziel hat vertrauliche Informationen zu erlangen. Die gewonnenen Daten werden für Betrug, Identitätsdiebstahl und Spionage missbraucht. \footcite[Vgl.][1\psq]{phishing}
 
-Im Folgenden wird ein beispielhafter Phishingangriff auf PayPal geschildert. PayPal ist\ldots\footcite[Vgl.][]{paypal}
+Im Folgenden wird ein beispielhafter Phishingangriff auf PayPal geschildert. PayPal ist ein Online-Bezahldienst mit über 18 Millionen Nutzern alleine in Deutschland. \footcite[Vgl.][]{paypal} Am häufigsten wird PayPal genutzt um Internetkäufe zu bezahlen. Listing \ref{lst:phishing-mail} zeigt eine E-Mail, mit der ein PayPal-Nutzer auf eine Phishing-Seite gelockt werden soll.\footcite[Vgl.][10]{phishing}
 
-\todo{Samuel: Klassischen Verlauf beschreiben}
+\begin{scriptsize}
+\lstset{
+    style=nonumbers,
+    caption=[Phishing Lockmail]{Phishing Lockmail\protect\footnotemark},
+    label={lst:phishing-mail}
+}
+\begin{lstlisting}
+Sehr geehrter PayPal-Kunde, sehr geehrte PayPal-Kundin,
+
+wir haben gerade einen oder mehrere Loginversuche von einer fremden IP-Adresse auf Ihr
+PayPal-Konto festgestellt.
+
+Wenn Sie in der letzten Zeit unterwegs auf Ihren Account zugegriffen haben, könnten die
+ungewöhlichen Loginversuche von Ihnen stammen. Auch wenn die Loginversuche nicht von Ihnen
+stammen, besuchen Sie PayPal bitte sobald wie möglich um Ihre Identität zu verifizieren:
+
+(*https://www.paypal.com/signin?country.x=DE&locale.x=de_DE*)
+
+Die Bestätigung Ihrer Identität ist eine Sicherheitsmaßnahme, mit der sichergestellt wird,
+dass Sie die enzige Person sind, die Zugriff auf Ihr Konto hat.
+
+Vielen Dank für Ihre Unterstützung um gemeinsam Ihr Konto zu schützen.
+
+Mit freundlichen Grüßen,
+PayPal
+-------------------------------------------------------------------------
+                        SCHÜTZEN SIE IHR PASSWORT
+
+Geben Sie ihr Passwort niemals an Dritte weiter und nutzen Sie es ausschließlich um sich auf
+(*https://www.paypal.com/*) anzumelden. Schützen Sie sich vor Betrug, indem Sie einen
+neuen Browser öffnen und jedes mal die PayPal Url eintippen um sich anzumelden.
+-------------------------------------------------------------------------
+
+Bitte antworten Sie nicht auf diese E-Mail. Nachrichten, die an diese Adresse gesendet werden
+können nicht beantwortet werden. Wenn Sie Hilfe benötigen melden Sie sich in Ihrem
+PayPal-Konto an und klicken Sie auf den \enquote{Hilfe}-Link im Menü.
+
+PayPal E-Mail ID PP321
+\end{lstlisting}
+\end{scriptsize}
+\footnotetext{\cite{phishing}, S. 11 Abbildung 1.4, Übersetzung Samuel Philipp}
+
+Die in Listing \ref{lst:phishing-mail} dargestellte E-Mail täuscht dem Kontoinhaber vor, dass eine Fremde Person auf das Konto zugegriffen hat und animiert ihn so dazu dem vermeindlich sichern Link zu folgen um seine Identität zu verifizieren um seinen Account zu schützen. Nebenbei sei noch erwähnt, dass der Link in der E-Mail natürlich nicht auf die orginale PayPal-Webseite verweist, sondern auf die Phishing-Seite des Angreifers. Der Hinweiß \enquote{Schützen Sie Ihr Passwort} verleiht der E-Mail noch ein authentischeres Aussehen und würde der Nutzer dem Rat folgen wäre dieser Phishing-Angriff wirkungslos. Viele Nutzer nehmen diesen Rat auch wahr, nutzen aber trotzdem den bereitgestellten Link aus der E-Mail, da diese ja offensichtlich von PayPal stammt und deshalb vertrauenswürdig ist.\footcite[Vgl.][10]{phishing}
+
+Üblicher Weise wird auch die Absenderadresse der E-Mail gefälscht und eine orginaladresse von PayPal, beispielsweise \textit{service@paypal.com} verwendet. Wenn der Empfänger der E-Mail nun den Link aus selbiger öffnet wird er auf die in Abbildung \ref{fig:paypal-phishing-site} dargestellte Webseite geleitet, welche Ihn zur eingabe seiner Anmeldedaten auffordert.\footcite[Vgl.][10]{phishing}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{images/paypal-phishing-site}
+  \caption{PayPal Phishing Webseite}
+  \label{fig:paypal-phishing-site}
+\end{figure}
+
+Das aussehen der Phishing-Webseite ist dem des Originals (Abbildung \ref{fig:paypal-original-site}) sehr ähnlich. Wenn das Opfer nun seine Benutzernamen und sein Passwort eingegeben hat ist das erste Ziel des Angreifers bereits erreicht, denn er hat gültige Zugangsdaten zu einem PayPal-Account erhalten. Um aber noch mehr Daten zu bekommen und dem Opfer den Angriff weiterhin zu verschleiern wird der Nutzer in vielen Fällen auf einer nachfolgenden Seite gebeten auch noch seine Anschrift und Kreditkartendaten zu bestätigen, indem er diese auch noch eingeben muss. Danach wird der Nutzer wieder \enquote{abgemeldet} und anschließend auf die orginale PayPal-Webseite (Abbildung \ref{fig:paypal-original-site}) weitergeleitet. Damit ist der Phishing-Angriff abgeschlossen und der Angreifer wird keine Zeit verlieren die Daten zu missbrauchen.\footcite[Vgl.][10\psqq]{phishing}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{images/paypal-original-site}
+  \caption{PayPal Original Webseite}
+  \label{fig:paypal-original-site}
+\end{figure}
+
+Das Vorgehen im vorausgegangen Beispiel ist sehr typisch für Phishing-Angriffe und kann deshalb auf sehr viele andere Seiten übertragen werden.
+
+\todo{Samuel}
