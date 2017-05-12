@@ -37,7 +37,7 @@ Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelemente
 
 \todo[color=cyan]{Daniel schreiben: \ac{CSS}}
 
-\label{javascript}
+\label{par:javascript}
 \todo[color=cyan]{Daniel schreiben: JavaScript}
 \todo[color=cyan]{Daniel schreiben: jQuery}
 \todo[color=cyan]{Daniel schreiben: Bootstrap}
@@ -80,7 +80,7 @@ In diesem Kapitel werden diejenigen Technologien und Frameworks erläutert, die 
 Python ist eine Programmiersprache, die einen schnellen Projektstart ermöglicht und ist auf Integration von verschiedenen Systemen spezialisiert.
 Die Sprache wird von der Python Software Foundation nach Open Source Standards entwickelt.
 Die aktuellste Version ist Python 3.6.1, wobei bei der Implementierung der Tests keine einheitliche Version verwendet wird\todo{diesen Nebensatz in Retrospektive, als Punkt zur Verbesserung?}.
-Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, das es wie bei JavaScript\ref{javascript} erst zur Laufzeit zu einer Typenprüfung kommt.
+Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, das es wie bei JavaScript\ref{par:javascript} erst zur Laufzeit zu einer Typenprüfung kommt.
 Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Klammern in Java) gekennzeichnet, sondern definieren sich an der Einrückungstiefe.
 \footcite{pythonHomepage}
 %Deshalb verwenden sechs von neun Tests Python.
@@ -110,22 +110,58 @@ Bei der Verbreitungsmethode kann zwischen Viren, Trojanern und Würmern untersch
 
 Anhand des angerichteten Schadens kann Malware in Spyware, Adware, Malware-Dialer, Zombie-Malware, Backdoors und Root Kits unterteilt werden. Spyware ist Software, welche ohne Wissen des Nutzers Informationen sammelt und weiterleitet. Dadurch könne vertrauliche Daten gestohlen und missbraucht werden.\footcite[Vgl.][95\psq]{netzwerkDatensicherheit} Solche Daten können beispielsweise Benutzernamen und Passworter, E-Mailadressen, Bankaccounts und Kreditkartennummern oder Softwarelizenzschlüssel sein. Mitte der 1990er Jahre war erste Spyware zu finden.\footcite[Vgl.][16]{virusesMalware} Als Adware werden Programme bezeichnet, welche dem Benutzer Werbeanzeigen einblenden.\footcite[Vgl.][96]{netzwerkDatensicherheit} Adware ist ähnlich zu Spyware, da beide Informationen über den Nutzer sammeln. Allerdings ist Adware mehr auf Marketing fokussiert und nutzt die Informationen um dem Nutzer Webung zu präsentieren.\footcite[Vgl.][17]{virusesMalware} Dialer sind Programme, welche Computern über Modems oder Telefonnetze Zugang zum Internet anbieten. Malware-Dialer nutzen das aus und wählen die Rechner ohne Kentniss des Nutzers in teure Service-Rufnummern oder Anwahlpunkte im Ausland ein. Allerdings findet man diese Art von Malware nur noch selten, da es inzwischen telefonbasierten Internetzugänge an Bedeutung verlieren. Software, welche Rechner komprommitiert, wird als Zombie-Malware bezeichnet, da dieser so von Angreifern ferngesteuert werden kann.\footcite[Vgl.][96]{netzwerkDatensicherheit} Am häufigsten werden Zombie-Rechner eingesetzt um Spam zu versenden oder mit vielen anderen Denial of Service Angriffe auszuführen.\footcite[Vgl.][18]{virusesMalware} Backdoors sind modifizierte Programme des Systems, über welche Hacker Sicherheitsmechanismen umgehen und sich so unbefugten Zugriff auf den Rechner verschaffen kann. Modifizierte Softwaregruppen, welche zum Ziel haben deren Aktivität oder die eines Angreifers vor Systembenutzern, inklusive Administratoren zu verstecken werden als Root Kits bezeichnet.\footcite[Vgl.][96]{netzwerkDatensicherheit}
 
-\begin{figure}[h]
-\centerline{%
-\includegraphics[width=0.5\textwidth]{images/malware-all-years_sum_de}%
-\includegraphics[width=0.5\textwidth]{images/malware-all-years_de}%
-}%
-\caption{Malware Statistik}
-\label{fig:malware-statistics}
-\end{figure}
+Wie Abbildung \ref{fig:malware} zeigt nimmt die Verbreitung von Malware in Deutschland weiterhin zu und verliert deshalb nicht an Bedeutung.
 
-\todo{Statistik einfügen}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/malware-all-years_sum_de}
+  \caption[Malware Verbreitung in Deutschland]{Malware Verbreitung in Deutschland\protect\footnotemark}
+  \label{fig:malware}
+\end{figure}
+\footnotetext{\cite{avtest}, Abbildung 1}
+
+Interessant ist allerdings dass in Abbildung \ref{fig:malware-new} ein deutlicher Rückgang in der Verreitung von neuer Malware zu erkennen ist. Daraus lässt sich schließen, dass deshalb die bereits in Umlauf gebrachte Schadware nach wie vor ausreicht um dem großteil der Nutzer zu schaden.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/malware-all-years_de}
+  \caption[Verbreitung neuer Malware in Deutschland]{Verbreitung neuer Malware in Deutschland\protect\footnotemark}
+  \label{fig:malware-new}
+\end{figure}
+\footnotetext{\cite{avtest}, Abbildung 2}
 
 Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\footcite[Vgl.][97]{netzwerkDatensicherheit} Deshalb ist es notwendig mit webifier Webseiten auf Malware zu prüfen.
 
-\subsection{Request Header Investigation}
 
-\todo[color=cyan]{Daniel schreiben: Request Header Investigation}
+\subsection{User Agent Sniffing}
+
+Wer sich im \ac{WWW} bewegt benutzt meist Software, die die Navigationsbefehle des Users in HTTP-Requests umwandeln und an den jeweiligen Webserver schicken.
+Diese Programme werden \textit{User Agents} genannt.
+Menschen verwenden Browseranwendungen als \textit{User Agents}, um sich auf einer grafischen Oberfläche durch das Netz zu klicken.
+Ein weitaus kleinerer, aber umso wichtigerer Teil der Websurfer sind Maschinen, die selbstständig arbeiten: Webcrawler.
+Dies sind Programme, die nach komplexen Algorithmen arbeiten, indem sie Webseiteninhalte über HTTP herunterladen, analysieren und daraus wieder neue HTTP-Requests generieren.
+\footcite[Vgl.][19]{httpGuide}
+HTTP-Requests beinhalten einen Request-Header, der dem Server Auskunft über den Browser des Clients und den gewünschten Ressourcentyp geben kann.
+\footcite[Vgl.][9]{httpReference}
+Das wichtigste Header-Feld zur Identifizierung heißt \textit{User Agent}.Es enthält im Normalfall den Browsertyp, die Browserversion und das Betriebssystem des Browsers und wird von einigen Webservern und Webanwendungen benutzt, um je nach Wert des Feldes unterschiedliche Ressourcen zurückzuliefern.
+\footcite[Vgl.][259, 528\psq]{httpGuide}
+
+Diese Technik wird \textit{User Agent Sniffing} genannt und ist ein heute unerwünschter Eingriff, der nur selten seine Berechtigung hat.
+Sie zählt zu den Bad Pracitces in der Webentwicklung.
+\footcite[Vgl.][]{mdnBrowserDetection}
+Das Zurückliefern unterschiedlicher Ressourcen je nach \textit{User Agent} wird in der Fachliteratur hingegen unterschiedlich bewertet.
+In \cite{httpGuide} (S. 228) wird zunächst ein entscheidendes Problem dieses Verhaltens aufgezeigt.
+Viele Webseiten passen ihre Inhalte für verschiedene \textit{User Agents} an.
+Ihr Ziel ist es sicherzustellen, dass ihre Anwendungen auf möglichst allen Geräten laufen.
+Funktioniert etwas nicht, weil bspw. die Browserversion zu alt ist, dann wird eine Fehlerseite zurückgeliefert.
+Vollautomatisierte Webcrawler bekommen häufig diese Fehlerseiten zurückgeliefert und arbeiten mit diesen weiter, obwohl sie die Funktionen der Seiten an sich gar nicht anwenden, sondern lediglich deren Quelltext analysieren wollen.
+Im Gegensatz dazu wird später (S. 402) die Aussage gemacht, dass Webserver durchaus ihre Antworten an den \textit{User Agent} anpassen können und dies nicht so schlimm sei.
+
+Habe der Client einen veralteten Browser, der kein z.B. JavaScript unterstützt, so könne der Webserver in diesem Fall einfach eine Webseite ohne JavaScript zurückliefern.
+\cite{mdnBrowserDetection} erläutert drei Hauptgründe, warum \textit{User Agent Sniffing} betrieben wird: Bug-Workarounds, Feature-Unterstützung und Browserspezifisches HTML.
+\footcite[Vgl.][]{mdnBrowserDetection}
+Da es für all diese Beweggründe bessere Lösungsansätze gibt und \textit{User Agent Sniffing} als Vorstufe zum Browserexploit genutzt werden kann, wird es in dieser Arbeit als Angriff auf den Client angesehen.
+
 
 \subsection{JavaScript Port \& IP Scanning}
 Um Angriffe über das Netzwerk zu starten muss der Angreifer Kenntnisse über den Netzwerkaufbau und die erreichbaren Services des anzugreifenden Systems haben.\footcite[Vgl.][937]{port1}
@@ -134,7 +170,7 @@ Um Angriffe über das Netzwerk zu starten muss der Angreifer Kenntnisse über de
 
 Port Scanning liefert hierbei Informationen welche Ports eines Systems offen für Netzwerkverbindungen sind.
 
-In Listing \ref{lst:portscanner}\footcite[Vgl.][]{portscanner} wird ein Beispielcode für einen, in Java implementierten, simplen Portscanner gezeigt. Dieser prüft alle 65535 TCP Ports eines gegebenen Hosts. Er versucht über jeden dieser Ports eine Socketverbindung aufzubauen (siehe Zeile 19-32), welche er anschließend wieder schließt. Wenn hierbei keine Fehlermeldung vom System geworfen wird weiß der Scanner, dass die Verbindung mit dem getesteten Port aufgebaut wurde und somit dieser Port offen ist. Dieser einfache Portscanner liefert als Ergebnis eine Anzahl an offenen Ports im getesten System. 
+In Listing \ref{lst:portscanner}\footcite[Vgl.][]{portscanner} wird ein Beispielcode für einen, in Java implementierten, simplen Portscanner gezeigt. Dieser prüft alle 65535 TCP Ports eines gegebenen Hosts. Er versucht über jeden dieser Ports eine Socketverbindung aufzubauen (siehe Zeile 19-32), welche er anschließend wieder schließt. Wenn hierbei keine Fehlermeldung vom System geworfen wird weiß der Scanner, dass die Verbindung mit dem getesteten Port aufgebaut wurde und somit dieser Port offen ist. Dieser einfache Portscanner liefert als Ergebnis eine Anzahl an offenen Ports im getesten System.
 
 \begin{scriptsize}
 \lstset{
@@ -186,6 +222,68 @@ Beim Phishing versucht ein Angreifer, in diesem Fall auch Phisher genannt, auf b
 
 Phishing gibt es seit Anfang der 1990er Jahre, allerdings sind die Zahlen von Phishing-Angriffen in den letzten Jahren drastisch gestiegen. Phishing ist zu einer gefährlichen Kombination aus Social Engeneering und technischen Angriffen geworden, welche zum Ziel hat vertrauliche Informationen zu erlangen. Die gewonnenen Daten werden für Betrug, Identitätsdiebstahl und Spionage missbraucht. \footcite[Vgl.][1\psq]{phishing}
 
-Im Folgenden wird ein beispielhafter Phishingangriff auf PayPal geschildert. PayPal ist\ldots\footcite[Vgl.][]{paypal}
+Im Folgenden wird ein beispielhafter Phishingangriff auf PayPal geschildert. PayPal ist ein Online-Bezahldienst mit über 18 Millionen Nutzern alleine in Deutschland. \footcite[Vgl.][]{paypal} Am häufigsten wird PayPal genutzt um Internetkäufe zu bezahlen. Listing \ref{lst:phishing-mail} zeigt eine E-Mail, mit der ein PayPal-Nutzer auf eine Phishing-Seite gelockt werden soll.\footcite[Vgl.][10]{phishing}
 
-\todo{Samuel: Klassischen Verlauf beschreiben}
+\begin{scriptsize}
+\lstset{
+    style=nonumbers,
+    caption=[Phishing Lockmail]{Phishing Lockmail\protect\footnotemark},
+    label={lst:phishing-mail}
+}
+\begin{lstlisting}
+Sehr geehrter PayPal-Kunde, sehr geehrte PayPal-Kundin,
+
+wir haben gerade einen oder mehrere Loginversuche von einer fremden IP-Adresse auf Ihr
+PayPal-Konto festgestellt.
+
+Wenn Sie in der letzten Zeit unterwegs auf Ihren Account zugegriffen haben, könnten die
+ungewöhlichen Loginversuche von Ihnen stammen. Auch wenn die Loginversuche nicht von Ihnen
+stammen, besuchen Sie PayPal bitte sobald wie möglich um Ihre Identität zu verifizieren:
+
+(*https://www.paypal.com/signin?country.x=DE&locale.x=de_DE*)
+
+Die Bestätigung Ihrer Identität ist eine Sicherheitsmaßnahme, mit der sichergestellt wird,
+dass Sie die enzige Person sind, die Zugriff auf Ihr Konto hat.
+
+Vielen Dank für Ihre Unterstützung um gemeinsam Ihr Konto zu schützen.
+
+Mit freundlichen Grüßen,
+PayPal
+-------------------------------------------------------------------------
+                        SCHÜTZEN SIE IHR PASSWORT
+
+Geben Sie ihr Passwort niemals an Dritte weiter und nutzen Sie es ausschließlich um sich auf
+(*https://www.paypal.com/*) anzumelden. Schützen Sie sich vor Betrug, indem Sie einen
+neuen Browser öffnen und jedes mal die PayPal Url eintippen um sich anzumelden.
+-------------------------------------------------------------------------
+
+Bitte antworten Sie nicht auf diese E-Mail. Nachrichten, die an diese Adresse gesendet werden
+können nicht beantwortet werden. Wenn Sie Hilfe benötigen melden Sie sich in Ihrem
+PayPal-Konto an und klicken Sie auf den \enquote{Hilfe}-Link im Menü.
+
+PayPal E-Mail ID PP321
+\end{lstlisting}
+\end{scriptsize}
+\footnotetext{\cite{phishing}, S. 11 Abbildung 1.4, Übersetzung Samuel Philipp}
+
+Die in Listing \ref{lst:phishing-mail} dargestellte E-Mail täuscht dem Kontoinhaber vor, dass eine Fremde Person auf das Konto zugegriffen hat und animiert ihn so dazu dem vermeindlich sichern Link zu folgen um seine Identität zu verifizieren um seinen Account zu schützen. Nebenbei sei noch erwähnt, dass der Link in der E-Mail natürlich nicht auf die orginale PayPal-Webseite verweist, sondern auf die Phishing-Seite des Angreifers. Der Hinweiß \enquote{Schützen Sie Ihr Passwort} verleiht der E-Mail noch ein authentischeres Aussehen und würde der Nutzer dem Rat folgen wäre dieser Phishing-Angriff wirkungslos. Viele Nutzer nehmen diesen Rat auch wahr, nutzen aber trotzdem den bereitgestellten Link aus der E-Mail, da diese ja offensichtlich von PayPal stammt und deshalb vertrauenswürdig ist.\footcite[Vgl.][10]{phishing}
+
+Üblicher Weise wird auch die Absenderadresse der E-Mail gefälscht und eine orginaladresse von PayPal, beispielsweise \textit{service@paypal.com} verwendet. Wenn der Empfänger der E-Mail nun den Link aus selbiger öffnet wird er auf die in Abbildung \ref{fig:paypal-phishing-site} dargestellte Webseite geleitet, welche Ihn zur eingabe seiner Anmeldedaten auffordert.\footcite[Vgl.][10]{phishing}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{images/paypal-phishing-site}
+  \caption{PayPal Phishing Webseite}
+  \label{fig:paypal-phishing-site}
+\end{figure}
+
+Das aussehen der Phishing-Webseite ist dem des Originals (Abbildung \ref{fig:paypal-original-site}) sehr ähnlich. Wenn das Opfer nun seine Benutzernamen und sein Passwort eingegeben hat ist das erste Ziel des Angreifers bereits erreicht, denn er hat gültige Zugangsdaten zu einem PayPal-Account erhalten. Um aber noch mehr Daten zu bekommen und dem Opfer den Angriff weiterhin zu verschleiern wird der Nutzer in vielen Fällen auf einer nachfolgenden Seite gebeten auch noch seine Anschrift und Kreditkartendaten zu bestätigen, indem er diese auch noch eingeben muss. Danach wird der Nutzer wieder \enquote{abgemeldet} und anschließend auf die orginale PayPal-Webseite (Abbildung \ref{fig:paypal-original-site}) weitergeleitet. Damit ist der Phishing-Angriff abgeschlossen und der Angreifer wird keine Zeit verlieren die Daten zu missbrauchen.\footcite[Vgl.][10\psqq]{phishing}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{images/paypal-original-site}
+  \caption{PayPal Original Webseite}
+  \label{fig:paypal-original-site}
+\end{figure}
+
+Das Vorgehen im vorausgegangen Beispiel ist sehr typisch für Phishing-Angriffe und kann deshalb auf sehr viele andere Seiten übertragen werden.

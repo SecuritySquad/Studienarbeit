@@ -183,6 +183,11 @@ colorinlistoftodos,	% Farbe in Verzeichnis einblenden
 \usepackage{soul}
 \newcommand{\hlc}[2][yellow]{{\sethlcolor{#1}\hl{#2}}}
 
+% Markierungsfarben
+\newcommand{\daniel}[1]{\hlc[cyan]{#1}}
+\newcommand{\jani}[1]{\hlc[green]{#1}}
+\newcommand{\samuel}[1]{\hlc[yellow]{#1}}
+
 % \usepackage{ifthen}
 % \renewcommand{\footcite}[2][]{\footnote{Vgl. \citetitle{#2}\ifthenelse{\equal{#1}{}}{}{ #1} \cite{#2}}}
 
@@ -210,6 +215,8 @@ colorinlistoftodos,	% Farbe in Verzeichnis einblenden
 \definecolor{eclipsehtmlcomments}{HTML}{3F7F5F}
 \definecolor{eclipsehtmlstrings}{HTML}{0000FF}
 \definecolor{eclipsehtmlbasic}{HTML}{000000}
+
+\definecolor{link}{HTML}{0000FF}
 
 \lstdefinestyle{eclipse}{
 	float,
@@ -270,11 +277,19 @@ colorinlistoftodos,	% Farbe in Verzeichnis einblenden
 	moredelim=[il][\textcolor{eclipsejavastrings}]{\%}{}
 }
 
+\lstdefinestyle{nonumbers}{
+	style=eclipse,
+    numbers=none,
+	belowcaptionskip=0pt,
+	moredelim=[is][\color{link}\underbar]{(*}{*)}
+}
+
 %\newcommand{\todo}[0]{\textbf{\textit{\textcolor{red}{TODO }}}}
 %\newcommand{\progress}[0]{\textbf{\textit{\textcolor{orange}{In Progress }}}}
 
 % besserer Blocksatz
 \sloppy
+
 %
 % EOF
 %
