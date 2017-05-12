@@ -132,9 +132,34 @@ Interessant ist allerdings dass in Abbildung \ref{fig:malware-new} ein deutliche
 
 Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\footcite[Vgl.][97]{netzwerkDatensicherheit} Deshalb ist es notwendig mit webifier Webseiten auf Malware zu prüfen.
 
-\subsection{Request Header Investigation}
+\subsection{User Agent Sniffing}
 
-\todo[color=cyan]{Daniel schreiben: Request Header Investigation}
+Wer sich im \ac{WWW} bewegt benutzt meist Software, die die Navigationsbefehle des Users in HTTP-Requests umwandeln und an den jeweiligen Webserver schicken.
+Diese Programme werden \textit{User Agents} genannt.
+Menschen verwenden Browseranwendungen als \textit{User Agents}, um sich auf einer grafischen Oberfläche durch das Netz zu klicken.
+Ein weitaus kleinerer, aber umso wichtigerer Teil der Websurfer sind Maschinen, die selbstständig arbeiten: Webcrawler.
+Dies sind Programme, die nach komplexen Algorithmen arbeiten, indem sie Webseiteninhalte über HTTP herunterladen, analysieren und daraus wieder neue HTTP-Requests generieren.
+\footcite[Vgl.][19]{httpGuide}
+HTTP-Requests beinhalten einen Request-Header, der dem Server Auskunft über den Browser des Clients und den gewünschten Ressourcentyp geben kann.
+\footcite[Vgl.][9]{httpReference}
+Das wichtigste Header-Feld zur Identifizierung heißt \textit{User Agent}.Es enthält im Normalfall den Browsertyp, die Browserversion und das Betriebssystem des Browsers und wird von einigen Webservern und Webanwendungen benutzt, um je nach Wert des Feldes unterschiedliche Ressourcen zurückzuliefern.
+\footcite[Vgl.][259, 528\psq]{httpGuide}
+
+Diese Technik wird \textit{User Agent Sniffing} genannt und ist ein heute unerwünschter Eingriff, der nur selten seine Berechtigung hat.
+Sie zählt zu den Bad Pracitces in der Webentwicklung.
+\footcite[Vgl.][]{mdnBrowserDetection}
+Das Zurückliefern unterschiedlicher Ressourcen je nach \textit{User Agent} wird in der Fachliteratur hingegen unterschiedlich bewertet.
+In \cite{httpGuide} (S. 228) wird zunächst ein entscheidendes Problem dieses Verhaltens aufgezeigt.
+Viele Webseiten passen ihre Inhalte für verschiedene \textit{User Agents} an.
+Ihr Ziel ist es sicherzustellen, dass ihre Anwendungen auf möglichst allen Geräten laufen.
+Funktioniert etwas nicht, weil bspw. die Browserversion zu alt ist, dann wird eine Fehlerseite zurückgeliefert.
+Vollautomatisierte Webcrawler bekommen häufig diese Fehlerseiten zurückgeliefert und arbeiten mit diesen weiter, obwohl sie die Funktionen der Seiten an sich gar nicht anwenden, sondern lediglich deren Quelltext analysieren wollen.
+Im Gegensatz dazu wird später (S. 402) die Aussage gemacht, dass Webserver durchaus ihre Antworten an den \textit{User Agent} anpassen können und dies nicht so schlimm sei.
+
+Habe der Client einen veralteten Browser, der kein z.B. JavaScript unterstützt, so könne der Webserver in diesem Fall einfach eine Webseite ohne JavaScript zurückliefern.
+\cite{mdnBrowserDetection} erläutert drei Hauptgründe, warum \textit{User Agent Sniffing} betrieben wird: Bug-Workarounds, Feature-Unterstützung und Browserspezifisches HTML.
+\footcite[Vgl.][]{mdnBrowserDetection}
+Da es für all diese Beweggründe bessere Lösungsansätze gibt und \textit{User Agent Sniffing} als Vorstufe zum Browserexploit genutzt werden kann, wird es in dieser Arbeit als Angriff auf den Client angesehen.
 
 \subsection{JavaScript Port \& IP Scanning}
 

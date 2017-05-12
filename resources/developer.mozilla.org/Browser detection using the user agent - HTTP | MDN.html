@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html dir="ltr" class="redesign " data-ffo-opensans="true" data-ffo-opensanslight="true" lang="en-US"><head prefix="og: http://ogp.me/ns#">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script async="" src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/analytics.js"></script><script>(function(d) { d.className = d.className.replace(/\bno-js/, ''); })(document.documentElement);</script>
+  
+    
+  
+
+  
+  <title>Browser detection using the user agent - HTTP | MDN</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+    <link rel="home" href="https://developer.mozilla.org/en-US/">
+    <link rel="copyright" href="#copyright">
+  
+
+  
+    
+    
+    <link href="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/mdn.css" rel="stylesheet" type="text/css">
+
+    
+  
+    <link href="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/wiki.css" rel="stylesheet" type="text/css">
+
+    
+
+    <!-- common social tags -->
+    
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
+    <meta property="og:site_name" content="Mozilla Developer Network">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
+    <meta name="twitter:site" content="@MozDevNet">
+    <meta name="twitter:creator" content="@MozDevNet">
+    <link rel="search" type="application/opensearchdescription+xml" href="https://developer.mozilla.org/en-US/search/xml" title="Mozilla Developer Network">
+  
+
+  <!-- third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://developer.cdn.mozilla.net/static/img/favicon144.a6e4162070f4.png">
+  <!-- iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://developer.cdn.mozilla.net/static/img/favicon114.0e9fabd44f85.png">
+  <!-- first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://developer.cdn.mozilla.net/static/img/favicon72.8ff9d87c82a0.png">
+  <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="https://developer.cdn.mozilla.net/static/img/favicon57.a2490b9a2d76.png">
+  <!-- basic favicon -->
+  
+    
+  
+  <link rel="shortcut icon" href="https://developer.cdn.mozilla.net/static/img/favicon32.e02854fdcf73.png">
+  <!--[if IE]>
+  <meta http-equiv="imagetoolbar" content="no">
+  <script type="text/javascript" src="https://developer.cdn.mozilla.net/static/build/js/html5shiv.3948ccddab6f.js" charset="utf-8"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/font-check.js" charset="utf-8"></script>
+
+  
+  <link rel="alternate" type="application/json" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$json">
+  <link rel="canonical" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent">
+
+  
+    
+      <link rel="alternate" hreflang="fr" href="https://developer.mozilla.org/fr/docs/Detection_du_navigateur_en_utilisant_le_user_agent" title="Browser detection using the user agent">
+    
+      <link rel="alternate" hreflang="zh-CN" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Browser_detection_using_the_user_agent" title="使用用户代理字段进行浏览器检测">
+    
+      <link rel="alternate" hreflang="zh-TW" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Browser_detection_using_the_user_agent" title="透過用戶代理偵測瀏覽器">
+    
+  
+
+  <!-- document-specific social tags -->
+  <meta property="og:title" content="Browser detection using the user agent">
+  <meta property="og:url" content="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent">
+  <meta name="twitter:url" content="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent">
+  <meta name="twitter:title" content="Browser detection using the user agent">
+  
+  <meta property="og:description" content="Serving different Web pages or services to different browsers is usually a bad idea. The Web is meant to be accessible to everyone, regardless of which browser or device they're using. There are ways to develop your web site to progressively enhance itself based on the availability of features rather than by targeting specific browsers.">
+  <meta name="description" content="Serving different Web pages or services to different browsers is usually a bad idea. The Web is meant to be accessible to everyone, regardless of which browser or device they're using. There are ways to develop your web site to progressively enhance itself based on the availability of features rather than by targeting specific browsers.">
+  <meta name="twitter:description" content="Serving different Web pages or services to different browsers is usually a bad idea. The Web is meant to be accessible to everyone, regardless of which browser or device they're using. There are ways to develop your web site to progressively enhance itself based on the availability of features rather than by targeting specific browsers.">
+  
+
+  
+  <script type="text/javascript">
+    
+      var document_saved = 0;
+    
+  </script>
+
+
+
+  
+    
+
+<script type="text/javascript">
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-36116321-5', 'mozilla.org');
+    ga('set', 'anonymizeIp', true);
+
+    
+
+    // dimension9 == "Section editing"
+    
+        ga('set', 'dimension9', 'Enabled');
+    
+        // dimension12 == 'Page Revision'
+        ga('set', 'dimension12', '1105513');
+        // dimension17 == 'English Slug'
+        ga('set', 'dimension17', 'Web/HTTP/Browser_detection_using_the_user_agent');
+
+    (function() {
+        // http://cfsimplicity.com/61/removing-analytics-clutter-from-campaign-urls
+        var win = window;
+        var removeUtms = function(){
+            var location = win.location;
+            if (location.href.indexOf('utm') != -1 && win.history.replaceState) {
+                win.history.replaceState({}, '', location.pathname);
+            }
+        };
+
+        ga('send', 'pageview', {'hitCallback': removeUtms});
+    })();
+</script>
+
+  
+</head>
+<body data-slug="Web/HTTP/Browser_detection_using_the_user_agent" contextmenu="edit-history-menu" data-search-url="" class="document  ">
+
+  <script type="text/javascript">
+    // make sure global mdn object exists
+    var mdn = window.mdn || {};
+
+    (function(win) {
+        'use strict';
+
+        
+            (function(){
+  var FLAGS = {
+    'compat_api': false,'kumaediting': false,'page_move': false,'registration_disabled': false,'search_suggestions': false,'section_edit': true,'sg_task_completion': false,'spam_admin_override': false,'spam_checks_enabled': true,'spam_spammer_override': false,'spam_submissions_enabled': false,'spam_testing_mode': false,'wiki_samples': true,'wiki_spam_exempted': false,'wiki_spam_training': false
+    },
+    SWITCHES = {
+    'wiki_error_on_delete': false,'wiki_force_immediate_rendering': false,'enable_optimizely': false,'welcome_email': true,'application_ACAO': true,'store_revision_ips': true,'dumb_doc_urls': true,'newsletter': true,'newsletter_article': true,'foundation_callout': false,'helpful-survey-2': true
+    },
+    SAMPLES = {
+    
+    };
+  window.waffle = {
+    "flag_is_active": function waffle_flag(flag_name) {
+      
+      return !!FLAGS[flag_name];
+    },
+    "switch_is_active": function waffle_switch(switch_name) {
+      
+      return !!SWITCHES[switch_name];
+    },
+    "sample_is_active": function waffle_sample(sample_name) {
+      
+      return !!SAMPLES[sample_name];
+    },
+    "FLAGS": FLAGS,
+    "SWITCHES": SWITCHES,
+    "SAMPLES": SAMPLES
+  };
+})();
+
+        
+
+        // This needs to be set before ckeditor.js loads
+        window.CKEDITOR_BASEPATH = '/static/js/libs/ckeditor/build/ckeditor/';
+
+        // Site configuration
+        win.mdn.ckeditor = {};
+        win.mdn.features = {};
+        win.mdn.staticPath = 'https://developer.cdn.mozilla.net/static/';
+        win.mdn.optimizely = win['optimizely'] || [];
+        win.mdn.wiki = {
+            autosuggestTitleUrl: '/en-US/docs/get-documents'
+        };
+        win.mdn.assets = {
+            css: {
+                'editor-content': ['https://developer.cdn.mozilla.net/static/build/styles/editor-content.4ff76d57161d.css',]
+            },
+            js: {
+                'syntax-prism': ['https://developer.cdn.mozilla.net/static/build/js/syntax-prism.66bd4038bff3.js',]
+            }
+        };
+
+        win.mdn.notifications = [];
+
+        
+    })(this);
+</script>
+    
+
+  <ul id="nav-access">
+    <li><a href="#document-main" id="skip-main">Skip to main content</a></li>
+    <li><a id="skip-language" href="#language">Select language</a></li>
+    <li><a href="#q" id="skip-search">Skip to search</a></li>
+  </ul>
+
+  <!-- Header -->
+  <header id="main-header"><div class="center">
+    <div id="tabzilla">
+      <a href="https://www.mozilla.org/" class="no-track">mozilla</a>
+    </div>
+
+    <div class="clear header-clear"></div>
+
+    <a href="https://developer.mozilla.org/en-US/" class="logo">Mozilla Developer Network</a>
+
+    <div id="nav-sec">
+    
+      <ul>
+      <li><div class="login">
+    
+        
+        <a href="https://developer.mozilla.org/users/github/login/?next=%2Fen-US%2Fdocs%2FWeb%2FHTTP%2FBrowser_detection_using_the_user_agent" class="login-link js-login-link" data-service="GitHub">
+            Sign in
+            <i class="icon-github" aria-hidden="true"></i>
+        </a>
+    
+</div></li>
+      </ul>
+    
+    </div>
+
+    <nav id="main-nav" role="navigation"><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web">Web Technologies<i aria-hidden="true" class="icon-caret-down"></i></a>
+      <div class="submenu submenu-cols-2 js-submenu" id="nav-platform-submenu" style="z-index: 99998;" aria-hidden="true">
+        <div class="submenu-column">
+          <div class="title">Technologies</div>
+          <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Graphics">Graphics</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API">APIs / DOM</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions">WebExtensions</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/MathML">MathML</a></li>
+          </ul>
+        </div><div class="submenu-column last">
+          <div class="title">References &amp; Guides</div>
+          <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Learn">Learn web development</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/Tutorials">Tutorials</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/Reference">References</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide">Developer Guides</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility">Accessibility</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Games">Game development</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web">...more docs</a></li>
+          </ul>
+        </div>
+      <button type="button" class="submenu-close transparent"><span class="offscreen">Close submenu</span><i aria-hidden="true" class="icon-remove-sign"></i></button></div>
+      </li><li><a href="https://developer.mozilla.org/en-US/docs/Zones">Mozilla Docs<i aria-hidden="true" class="icon-caret-down"></i></a>
+        <div class="submenu js-submenu" id="nav-zones-submenu" style="z-index: 99998; display: none;" aria-hidden="true">
+          <div class="submenu-column">
+            <ul>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons">Add-ons</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Firefox">Firefox</a></li>
+            </ul>
+          </div>
+        <button type="button" class="submenu-close transparent"><span class="offscreen">Close submenu</span><i aria-hidden="true" class="icon-remove-sign"></i></button></div>
+      </li><li><a href="https://developer.mozilla.org/en-US/docs/Tools">Developer Tools</a></li><li><a href="https://developer.mozilla.org/en-US/docs/MDN/Feedback">Feedback<i aria-hidden="true" class="icon-caret-down"></i></a>
+        <div class="submenu js-submenu" id="nav-contact-submenu">
+          <div class="submenu-column">
+            <ul>
+              <li><a href="https://support.mozilla.org/">Get Firefox help<i aria-hidden="true" class="icon-external-link"></i></a></li>
+              <li><a href="https://stackoverflow.com/">Get web development help<i aria-hidden="true" class="icon-external-link"></i></a></li>
+            </ul>
+            <ul>
+              <li><a href="https://developer.mozilla.org/en-US/docs/MDN/Community">Join the MDN community</a></li>
+              <li><a target="_blank" href="https://bugzilla.mozilla.org/form.doc?bug_file_loc=https%3A//developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent">Report a content problem<i aria-hidden="true" class="icon-external-link"></i></a></li>
+              <li><a target="_blank" href="https://bugzilla.mozilla.org/form.mdn">Report a bug<i aria-hidden="true" class="icon-external-link"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </li><li class="nav-search-link"><a href="https://developer.mozilla.org/en-US/search" title="Search"><i aria-hidden="true" class="icon-search"></i></a></li><li class="main-nav-search"><form action="/en-US/search" method="get" role="search">
+        <div class="search-wrap">
+          <label for="main-q" class="offscreen">Search</label>
+          <input id="main-q" name="q" placeholder="Search" data-value="" type="search">
+          <span class="search-trigger"><i aria-hidden="true" class="icon-search"></i></span>&nbsp;
+          <button type="submit" class="offscreen">Search</button>
+        </div>
+      </form></li></ul></nav>
+  </div></header>
+
+  <!-- Content will go here -->
+  <main id="content"><div class="center clear">
+  
+
+   <!-- end is_zone -->
+
+
+    <div class="wiki-main-content" id="document-main" role="main"><div class="center">
+      
+      <div class="article-meta">
+        <!-- action buttons -->
+        
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  <ul class="page-buttons" data-sticky="false">
+      
+      <li><button id="languages-menu" class="transparent" aria-haspopup="true" aria-owns="languages-menu-submenu" aria-expanded="false"><span>Languages</span><i aria-hidden="true" class="icon-language"></i></button>
+
+        <div class="submenu js-submenu" id="languages-menu-submenu">
+          <div class="submenu-column">
+            <ul id="translations">
+              
+                
+                
+                
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/fr/docs/Detection_du_navigateur_en_utilisant_le_user_agent" title="French">Français (fr)</a></bdi></li>
+                
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Browser_detection_using_the_user_agent" title="Chinese (Simplified)">中文 (简体) (zh-CN)</a></bdi></li>
+                
+                  <li><bdi><a rel="internal" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Browser_detection_using_the_user_agent" title="Chinese (Traditional)">正體中文 (繁體) (zh-TW)</a></bdi></li>
+                
+              
+
+              
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$locales" rel="nofollow, noindex" id="translations-add">Add a translation</a></li>
+              
+            </ul>
+          </div>
+        </div>
+      </li>
+      
+      <li class="page-buttons-edit"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit" class="button" data-optimizely-hook="button-edit-doc" id="edit-button" rel="nofollow, noindex">Edit<i aria-hidden="true" class="icon-pencil"></i></a></li>
+      
+
+        
+
+        <li><button id="advanced-menu" class="only-icon" aria-haspopup="true" aria-owns="advanced-menu-submenu" aria-expanded="false"><span>Advanced</span><i aria-hidden="true" class="icon-cog"></i></button>
+        <div class="submenu js-submenu" id="advanced-menu-submenu">
+          <!-- this page -->
+          <div class="submenu-column">
+            <div class="title">Advanced</div>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$history" rel="nofollow, noindex">History</a></li>
+                
+                
+                
+
+
+                
+
+                
+                
+                
+                <li class="page-print"><a href="#" onclick="return window.print();">Print this article</a></li>
+            </ul>
+          </div>
+        </div>
+  </li></ul>
+
+        <!-- crumbs -->
+        
+  <nav class="crumbs" role="navigation"><ol xmlns:v="http://rdf.data-vocabulary.org/#" aria-label="breadcrumbs">
+    <li typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US" rel="v:url" property="v:title">MDN</a></li>
+    
+      <li class="crumb" typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US/docs/Web" rel="v:url" property="v:title">Web technology for developers</a></li>
+    
+      <li class="crumb" typeof="v:Breadcrumb"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" rel="v:url" property="v:title">HTTP</a></li>
+    
+    <li class="crumb" typeof="v:Breadcrumb" property="v:title">Browser detection using the user agent</li>
+  </ol></nav>
+      </div>
+
+      <!-- heading -->
+      <div id="wiki-document-head" class="document-head">
+          <span class="from-search-previous-box">
+            <a class="button from-search-previous only-icon disabled" title="Previous Search Result" data-empty-title="No Previous Search Result"><i aria-hidden="true" class="icon-chevron-left"></i></a>
+          </span>
+          <span class="from-search-navigate-wrap">
+            <a href="#" class="from-search-navigate"><span class="from-search-navigate-up"><i aria-hidden="true" class="icon-double-angle-up"></i></span><span class="from-search-navigate-down"><i aria-hidden="true" class="icon-double-angle-down"></i></span></a>
+          </span>
+          <div class="from-search-toc submenu">
+            <span class="title">Your Search Results</span>
+            <ol></ol>
+          </div>
+          <span class="from-search-next-box">
+            <a class="button from-search-next only-icon disabled" title="Next Search Result" data-empty-title="No Previous Search Result"><i aria-hidden="true" class="icon-chevron-right"></i></a>
+          </span>
+
+        
+        <div class="contributor-avatars" data-all-text="see all contributors" data-alternate-message="hide contributors" data-has-hidden="1">
+            <ul>
+            
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/ericperez" title="View profile: ericperez">
+                <img src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/0feeee1a3e49cabecf611fad3d511003.png" class="avatar loaded" alt="ericperez" width="34" height="34"></a>
+                </li>
+            
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/fscholz" title="View profile: fscholz">
+                <img src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/e24391c9174352988d819a9b9ea77c9e.jpeg" class="avatar loaded" alt="fscholz" width="34" height="34"></a>
+                </li>
+            
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/coleman" title="View profile: coleman">
+                <img src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/b85389d89f77cca96cacb9435c53ca95.jpeg" class="avatar loaded" alt="coleman" width="34" height="34"></a>
+                </li>
+            
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/mhubenthal" title="View profile: mhubenthal">
+                <img src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/8ac3907027d88b98c637bf09ec286a3e.jpeg" class="avatar loaded" alt="mhubenthal" width="34" height="34"></a>
+                </li>
+            
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/richt" title="View profile: richt">
+                <img src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/59eef7689d609d2647cc76ef3ea44e33.png" class="avatar loaded" alt="richt" width="34" height="34"></a>
+                </li>
+            
+                <li class="shown">
+                <a href="https://developer.mozilla.org/en-US/profiles/karlmoz" title="View profile: karlmoz">
+                <img src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/cdc9226fddb4811784289469b0aa0843.png" class="avatar loaded" alt="karlmoz" width="34" height="34"></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/fbender" title="View profile: fbender">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="fbender" data-src="https://secure.gravatar.com/avatar/89db5ccbe71d2e916c218c85076fbd96?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">fbender</noscript></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/wilkinson" title="View profile: wilkinson">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="wilkinson" data-src="https://secure.gravatar.com/avatar/b9959d00148d3b1f892b7e5239051447?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">wilkinson</noscript></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/kohei.yoshino" title="View profile: kohei.yoshino">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="kohei.yoshino" data-src="https://secure.gravatar.com/avatar/f84bbc6968ecda0a64ab50d1060c320e?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">kohei.yoshino</noscript></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/Gerv" title="View profile: Gerv">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="Gerv" data-src="https://secure.gravatar.com/avatar/559c3cf31c98a95b23421186b78df500?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">Gerv</noscript></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/wbamberg" title="View profile: wbamberg">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="wbamberg" data-src="https://secure.gravatar.com/avatar/576b94c81f8ad97e58d63f12e5fdb00c?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">wbamberg</noscript></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/teoli" title="View profile: teoli">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="teoli" data-src="https://secure.gravatar.com/avatar/d0d90148e08e3b64ccf75c46f31442c5?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">teoli</noscript></a>
+                </li>
+            
+                <li class="hidden">
+                <a href="https://developer.mozilla.org/en-US/profiles/Sheppy" title="View profile: Sheppy">
+                <noscript data-width="34" data-height="34" data-class="avatar" data-alt="Sheppy" data-src="https://secure.gravatar.com/avatar/945076feb88f2d7003891ffbf06f32bf?s=34&amp;r=pg&amp;d=https%3A%2F%2Fdeveloper.cdn.mozilla.net%2Fmedia%2Fimg%2Favatar.png">Sheppy</noscript></a>
+                </li>
+            
+            </ul>
+        <button id="contributors-toggle" type="button" class="transparent" data-alternate-message="hide contributors">see all contributors</button></div>
+        
+
+        <h1><wbr>Browser detection using the user agent</h1>
+
+      </div>
+      
+
+      <!-- start the main content container -->
+        <div id="wiki-column-container" class="wiki-right-present wiki-left-present">
+
+          <!-- content row with three strips -->
+          <div class="column-container column-container-reverse">
+
+            
+              <!-- TOC, approvals, etc -->
+              <div class="column-strip wiki-column" id="wiki-right">
+              
+              <!-- table of contents -->
+              <div id="toc" class="toc toggleable" data-closed="true" style="width: auto; max-height: none;">
+                <a href="#toc" class="title toggler" data-open-icon="icon-caret-right" data-closed-icon="icon-caret-down" aria-haspopup="true">In This Article<i class="icon-caret-right"></i></a>
+                <ol class="toggle-container" aria-expanded="false" style="">
+                  <li><a href="#Considerations_before_using_browser_detection" rel="internal">Considerations before using browser detection</a></li><li><a href="#Avoiding_user_agent_detection" rel="internal">Avoiding user agent detection</a></li><li><a href="#Which_part_of_the_user_agent_contains_the_information_you_are_looking_for" rel="internal">Which part of the user agent contains the information you are looking for</a><ol><li><a href="#Browser_Name" rel="internal">Browser Name</a></li><li><a href="#Browser_version" rel="internal">Browser version</a></li><li><a href="#Rendering_engine" rel="internal">Rendering engine</a></li></ol></li><li><a href="#Rendering_engine_version" rel="internal">Rendering engine version</a></li><li><a href="#OS" rel="internal">OS</a><ol><li><a href="#Mobile_Tablet_or_Desktop" rel="internal">Mobile, Tablet or Desktop</a></li></ol></li>
+                </ol>
+              </div>
+              
+              </div>
+            
+
+            
+            
+              
+            
+
+            <!-- center: main article content -->
+            <div id="wiki-content" class="column-half wiki-column text-content">
+
+              
+
+              
+              
+
+              
+
+              
+                
+              
+              
+
+              <!-- just the article content -->
+              <article id="wikiArticle">
+                
+                  
+                    <div><section class="Quick_links" id="Quick_Links"><!-- --></section></div>
+
+<p>Serving different Web pages or services to different browsers is 
+usually a bad idea. The Web is meant to be accessible to everyone, 
+regardless of which browser or device they're using. There are ways to 
+develop your web site to progressively enhance itself based on the 
+availability of features rather than by targeting specific browsers.</p>
+
+<p>But browsers and standards are not perfect, and there are still some 
+edge cases where detecting the browser is needed. Using the user agent 
+to detect the browser looks simple, but doing it well is in fact a very 
+hard problem. This document will guide you in doing this as correctly as
+ possible.</p>
+
+<div class="note">
+<p>It's worth re-iterating: it's very rarely a good idea to use user 
+agent sniffing. You can almost always find a better, more broadly 
+compatible way to solve your problem!</p>
+</div>
+
+<h2 id="Considerations_before_using_browser_detection">Considerations before using browser detection<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit#Considerations_before_using_browser_detection" class="button section-edit only-icon" rel="nofollow, noindex"><i aria-hidden="true" class="icon-pencil"></i><span>Edit</span></a></h2>
+
+<p>When considering using the user agent string to detect which browser 
+is being used, your first step is to try to avoid it if possible. Start 
+by trying to identify <strong>why</strong> you want to do it.</p>
+
+<dl>
+ <dt>Are you trying to work around a specific bug in some version of a browser?</dt>
+ <dd>Look, or ask, in specialized forums: you're unlikely to be the 
+first to hit this problem. Also experts, or simply people with another 
+point of view, can give you ideas for working around the bug. If the 
+problem seems uncommon, it's worth checking if this bug has been 
+reported to the browser vendor via their bug tracking system (<a href="https://bugzilla.mozilla.org/" class="external link-https external-icon">Mozilla</a>; <a href="http://bugs.webkit.org/" class="external external-icon">WebKit</a>; <a href="https://bugs.opera.com/" class="external link-https external-icon">Opera</a>). Browser makers do pay attention to bug reports, and the analysis may hint about other work-arounds for the bug.</dd>
+ <dt>Are you trying to check for the existence of a specific feature?</dt>
+ <dd>Your site needs to use a specific Web feature that some browsers 
+don't yet support, and you want to send those users to an older Web site
+ with fewer features but that you know will work. This is the worst 
+reason to use user agent detection, because odds are eventually all the 
+other browsers will catch up. You should do your best to avoid using 
+user agent sniffing in this scenario, and do feature detection instead.</dd>
+ <dt>Do you want to provide different HTML depending on which browser is being used?</dt>
+ <dd>This is usually a bad practice, but there are some cases in which 
+this is necessary. In these cases, you should first analyze your 
+situation to be sure it's really necessary. Can you prevent it by adding
+ some non-semantic <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div" title="The HTML &lt;div&gt; element is the generic container for flow content and does not inherently represent anything. Use it to group elements for purposes such as styling (using the class or id attributes), marking a section of a document in a different language (using the lang attribute), and so on."><code>&lt;div&gt;</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span" title="The HTML &lt;span&gt; element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang."><code>&lt;span&gt;</code></a>
+ elements? The difficulty of successfully using user agent detection is 
+worth a few disruptions to the purity of your HTML. Also, rethink your 
+design: can you use progressive enhancement or fluid layouts to help 
+remove the need to do this?</dd>
+</dl>
+
+<h2 id="Avoiding_user_agent_detection">Avoiding user agent detection<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit#Avoiding_user_agent_detection" class="button section-edit only-icon" rel="nofollow, noindex"><i aria-hidden="true" class="icon-pencil"></i><span>Edit</span></a></h2>
+
+<p>If you want to try to avoid using user agent detection, there are options in some cases!</p>
+
+<dl>
+ <dt>Feature detection</dt>
+ <dd>Feature detection is where you don't try to figure out which 
+browser is rendering your page, but instead you check to see if the 
+specific feature you need is available. If it's not, you use a fallback.
+ However, never use feature detection in the rare cases when you 
+actually want browser detection, since other browsers may implement the 
+feature in the future, but differently. Bugs caused by this can be 
+insidiously hard to find and fix.</dd>
+ <dt>Progressive enhancement</dt>
+ <dd>This design technique involves developing your Web site in 
+'layers', using a bottom-up approach, starting with a simpler layer and 
+improving the capabilities of the site in successive layers, each using 
+more features.</dd>
+ <dt>Graceful degradation</dt>
+ <dd>This is a top-down approach in which you build the best possible 
+site using all the features you want, then tweak it to make it work on 
+older browsers. This can be harder to do, and less effective, than 
+progressive enhancement, but may be useful in some cases.</dd>
+</dl>
+
+<h2 id="Which_part_of_the_user_agent_contains_the_information_you_are_looking_for">Which part of the user agent contains the information you are looking for<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit#Which_part_of_the_user_agent_contains_the_information_you_are_looking_for" class="button section-edit only-icon" rel="nofollow, noindex"><i aria-hidden="true" class="icon-pencil"></i><span>Edit</span></a></h2>
+
+<p>As there is no uniformity of the different part of the user agent string, this is the tricky part.</p>
+
+<h3 id="Browser_Name">Browser Name</h3>
+
+<p>When people say they want "browser detection", often they actually 
+want "rendering engine detection". Do you actually want to detect 
+Firefox, as opposed to SeaMonkey, or Chrome as opposed to Chromium? Or 
+do you actually simply want to see if the browser is using the Gecko or 
+the WebKit rendering engine? If this is what you need, see further down 
+the page.</p>
+
+<p>Most browser set the name and version in the format <em>BrowserName/VersionNumber</em>,
+ with the notable exception of Internet Explorer. But as the name is not
+ the only information in a user agent string that is in that format, you
+ can not discover the name of the browser, you can only check if the 
+name you are looking for. But note that some browsers are lying: Chrome 
+for example reports both as Chrome and Safari. So to detect Safari you 
+have to check for the Safari string and the absence of the Chrome 
+string, Chromium often reports itself as Chrome too or Seamonkey 
+sometimes reports itself as Firefox.</p>
+
+<p>Also pay attention not to use a simple regular expression on the 
+BrowserName, user agents also contain&nbsp;strings outside the 
+Keyword/Value syntax. Safari &amp; Chrome contain&nbsp;the&nbsp;string 
+'like Gecko', for instance.</p>
+
+<table class="standard-table">
+ <thead>
+  <tr>
+   <th scope="col">&nbsp;</th>
+   <th scope="col">Must contain</th>
+   <th scope="col">Must not contain</th>
+   <th scope="col">&nbsp;</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Firefox</td>
+   <td>Firefox/xyz</td>
+   <td>Seamonkey/xyz</td>
+   <td>&nbsp;</td>
+  </tr>
+  <tr>
+   <td>Seamonkey</td>
+   <td>Seamonkey/xyz</td>
+   <td>&nbsp;</td>
+   <td>&nbsp;</td>
+  </tr>
+  <tr>
+   <td>Chrome</td>
+   <td>Chrome/xyz</td>
+   <td>Chromium/xyz</td>
+   <td>&nbsp;</td>
+  </tr>
+  <tr>
+   <td>Chromium</td>
+   <td>Chromium/xyz</td>
+   <td>&nbsp;</td>
+   <td>&nbsp;</td>
+  </tr>
+  <tr>
+   <td>Safari</td>
+   <td>Safari/xyz</td>
+   <td>Chrome/xyz or Chromium/xyz</td>
+   <td>Safari gives two version number, one technical in the Safari/xyz token, one user-friendly in a Version/xyz token</td>
+  </tr>
+  <tr>
+   <td>Opera</td>
+   <td>
+    <p>OPR/xyz <sup>[1]</sup></p>
+
+    <p>Opera/xyz&nbsp;<sup>[2]</sup></p>
+   </td>
+   <td>&nbsp;</td>
+   <td>
+    <p><sup>[1]</sup>&nbsp; Opera 15+ (Blink-based engine)&nbsp;</p>
+
+    <p><sup>[2]</sup>&nbsp;Opera 12- (Presto-based engine)</p>
+   </td>
+  </tr>
+  <tr>
+   <td>Internet Explorer</td>
+   <td>; MSIE xyz;</td>
+   <td>&nbsp;</td>
+   <td>Internet Explorer doesn't put its name in the <em>BrowserName/VersionNumber</em> format</td>
+  </tr>
+ </tbody>
+</table>
+
+<p>Of course, there is absolutely no guarantee that another browser will
+ not hijack some of these things (like Chrome hijacked the Safari string
+ in the past). That's why browser detection using the user agent string 
+is unreliable and should be done only with the check of version number 
+(hijacking of past versions is less likely).</p>
+
+<h3 id="Browser_version">Browser version</h3>
+
+<p>The browser version is often, but not always, put in the value part of the <em>BrowserName/VersionNumber</em>
+ token in the User Agent String. This is of course not the case for 
+Internet Explorer (which puts the version number right after the MSIE 
+token), and for Opera after version 10, which has added a Version/<em>VersionNumber</em> token.</p>
+
+<p>Here again, be sure to take the right token for the browser you are 
+looking for, as there is no guarantee that others will contain a valid 
+number.</p>
+
+<h3 id="Rendering_engine">Rendering engine</h3>
+
+<p>As seen earlier, in most cases, looking for the rendering engine is a
+ better way to go. This will help to not exclude&nbsp;lesser known 
+browsers. Browsers sharing a common rendering engine will display a page
+ in the same way: it is often a fair assumption that what will work in 
+one will work in the other.</p>
+
+<p>There are five major rendering engines: Trident, Gecko, Presto, Blink
+ and WebKit. As sniffing the rendering engines names is common, a lot of
+ user agents added other rendering names to trigger detection. It is 
+therefore important to pay attention not to trigger false-positives when
+ detecting the rendering engine.</p>
+
+<table class="standard-table">
+ <thead>
+  <tr>
+   <th scope="col">&nbsp;</th>
+   <th scope="col">Must contain</th>
+   <th scope="col">&nbsp;</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Gecko</td>
+   <td>Gecko/xyz</td>
+   <td>&nbsp;</td>
+  </tr>
+  <tr>
+   <td>WebKit</td>
+   <td>AppleWebKit/xyz</td>
+   <td>Pay attention, WebKit browsers add a 'like Gecko' string that may
+ trigger false positive for Gecko if the detection is not careful.</td>
+  </tr>
+  <tr>
+   <td>Presto</td>
+   <td>Opera/xyz</td>
+   <td><strong>Note:</strong> Presto is no longer used in Opera browser builds &gt;= version 15 (see 'Blink')</td>
+  </tr>
+  <tr>
+   <td>Trident</td>
+   <td>Trident/xyz</td>
+   <td>Internet Explorer put this token in the <em>comment</em> part of the User Agent String</td>
+  </tr>
+  <tr>
+   <td>Blink</td>
+   <td>Chrome/xyz</td>
+   <td>&nbsp;</td>
+  </tr>
+ </tbody>
+</table>
+
+<h2 id="Rendering_engine_version">Rendering engine version<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit#Rendering_engine_version" class="button section-edit only-icon" rel="nofollow, noindex"><i aria-hidden="true" class="icon-pencil"></i><span>Edit</span></a></h2>
+
+<p>Most rendering engine put the version number in the <em>RenderingEngine/VersionNumber</em>
+ token, with the notable exception of Gecko. Gecko puts the Gecko 
+version number in the comment part of the User Agent after the <code>rv:</code> string. From Gecko 14 for the mobile version and Gecko 17 for the desktop version, it also puts this value in the <code>Gecko/version</code> token (previous version put there the build date, then a fixed date called the GeckoTrail).</p>
+
+<h2 id="OS">OS<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit#OS" class="button section-edit only-icon" rel="nofollow, noindex"><i aria-hidden="true" class="icon-pencil"></i><span>Edit</span></a></h2>
+
+<p>The Operating System is given in most User Agent strings (although 
+not web-focussed platforms like Firefox OS), but the format varies a 
+lot. It is a fixed string between two semi-colons, in the comment part 
+of the User Agent. These strings are specific for each browsers. They 
+indicates the OS, but also often its version and information on the 
+relying hardware (32 or 64 bits, or Intel/PPC for Mac).</p>
+
+<p>Like in all cases, these strings may change in the future, one should
+ use them only in conjunction for the detection of already released 
+browsers. A technological survey must be in place to adapt the script 
+when new browser versions are coming out.</p>
+
+<h3 id="Mobile_Tablet_or_Desktop">Mobile, Tablet or Desktop</h3>
+
+<p>The most common reason to perform user agent sniffing is to determine
+ which type of device the browser runs on. The goal is to serve 
+different HTML to different device types.</p>
+
+<ul>
+ <li>Never assume that a browser or a rendering engine only runs on one 
+type of device. Especially don't make different defaults for different 
+browsers or rendering engines.</li>
+ <li>Never use the OS token to define if a browser is on mobile, tablet 
+or desktop. The OS may run on more than one type of (for example, 
+Android runs on tablets as well as phones).</li>
+</ul>
+
+<p>The following table summarizes the way major browser vendors indicate that their browsers are running on a mobile device:</p>
+
+<table>
+ <caption>Common browsers User Agent strings</caption>
+ <thead>
+  <tr>
+   <th scope="col">Browser</th>
+   <th scope="col">Rule</th>
+   <th scope="col">Example</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td>Mozilla (Gecko, Firefox)</td>
+   <td><a href="https://developer.mozilla.org/en-US/docs/Gecko_user_agent_string_reference"><strong>Mobile</strong> or <strong>Tablet</strong> token</a> in the comment.</td>
+   <td>Mozilla/5.0 (Android; Mobile; rv:13.0) Gecko/13.0 Firefox/13.0</td>
+  </tr>
+  <tr>
+   <td>WebKit-based (Android, Safari)</td>
+   <td><a href="https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariWebContent/OptimizingforSafarioniPhone/OptimizingforSafarioniPhone.html#//apple_ref/doc/uid/TP40006517-SW3" class="external external-icon"><strong>Mobile Safari</strong> token</a> outside the comment.</td>
+   <td>Mozilla/5.0 (Linux; U; Android 4.0.3; de-ch; HTC Sensation 
+Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile 
+Safari/534.30</td>
+  </tr>
+  <tr>
+   <td>Blink-based (Chromium, Google Chrome, Opera 15+)</td>
+   <td><a href="https://developers.google.com/chrome/mobile/docs/user-agent" class="external external-icon"><strong>Mobile Safari</strong> token</a> outside the comment</td>
+   <td>Mozilla/5.0 (Linux; Android 4.4.2); Nexus 5 Build/KOT49H) 
+AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Mobile 
+Safari/537.36 OPR/20.0.1396.72047</td>
+  </tr>
+  <tr>
+   <td>Presto-based (Opera 12-)</td>
+   <td>
+    <p><a href="http://my.opera.com/community/openweb/idopera/" class="external external-icon"><strong>Opera Mobi/xyz</strong> token</a> in the comment (Opera 12-)</p>
+   </td>
+   <td>
+    <p>Opera/9.80 (Android 2.3.3; Linux; Opera Mobi/ADR-1111101157; U; es-ES) Presto/2.9.201 Version/11.50</p>
+   </td>
+  </tr>
+  <tr>
+   <td>Internet Explorer</td>
+   <td><strong>IEMobile/xyz</strong> token in the comment.</td>
+   <td>Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)</td>
+  </tr>
+ </tbody>
+</table>
+
+<p>In summary, we recommend looking for the string “Mobi” anywhere in the User Agent to detect a mobile device.</p>
+
+<div class="note">
+<p>If the device is large enough that it's not marked with “Mobi”, you 
+should serve your desktop site (which, as a best practice, should 
+support touch input anyway, as more desktop machines are appearing with 
+touchscreens).</p>
+</div>
+                  
+                
+
+              
+                <aside class="helpful-survey" id="helpful-survey">
+                  <p>Was this article helpful?</p>
+
+                  <div class="helpful-survey-content">
+                    <div class="helpful-survey-buttons">
+                      <button type="button" class="helpful-survey-vote helpful-survey-yes">
+                        <span class="offscreen">Yes</span>
+                        <i class="icon-thumbs-o-up" aria-hidden="true"></i>
+                      </button>
+                      <button type="button" class="helpful-survey-vote helpful-survey-no">
+                        <span class="offscreen">No</span>
+                        <i class="icon-thumbs-o-down" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                    <div class="helpful-survey-thankyou">Thank you!</div>
+                  </div>
+                </aside>
+              
+              </article>
+
+              
+
+                <!-- contributors -->
+                <div class="wiki-block contributors">
+                  <h2 class="offscreen">Document Tags and Contributors</h2>
+                  
+                  
+  <div class="tag-attach-list contributors-sub">
+    <i aria-hidden="true" class="icon-tags icon-fw"></i>
+    <strong>Tags:</strong>&nbsp;
+    <ul class="tags tags-small">
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/tag/Compatibility" rel="nofollow, noindex">Compatibility</a></li>
+      
+        <li><a href="https://developer.mozilla.org/en-US/docs/tag/Web%20Development" rel="nofollow, noindex">Web Development</a></li>
+      
+    </ul>
+  </div>
+
+
+                  
+                    <div class="contributors-sub">
+                      <i aria-hidden="true" class="icon-group icon-fw"></i>&nbsp;<strong>Contributors to this page:</strong> 
+        <a href="https://developer.mozilla.org/en-US/profiles/ericperez">ericperez</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/fscholz">fscholz</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/coleman">coleman</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/mhubenthal">mhubenthal</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/richt">richt</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/karlmoz">karlmoz</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/fbender">fbender</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/wilkinson">wilkinson</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/kohei.yoshino">kohei.yoshino</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/Gerv">Gerv</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/wbamberg">wbamberg</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/teoli">teoli</a>, 
+    
+        <a href="https://developer.mozilla.org/en-US/profiles/Sheppy">Sheppy</a>
+    
+                    </div>
+                  
+
+                  
+                    <div class="contributors-sub">
+                      <i aria-hidden="true" class="icon-clock-o icon-fw"></i>&nbsp;<strong>Last updated by:</strong>
+                      <a href="https://developer.mozilla.org/en-US/profiles/ericperez">ericperez</a>,
+                      <time datetime="2016-08-15T13:35:18-07:00">Aug 15, 2016, 1:35:18 PM</time>
+                    </div>
+                  
+                </div>
+              
+
+              
+                  <div class="newsletter-box">
+                    <div class="newsletter">
+    <form id="newsletterForm" name="newsletter-form" class="nodisable" action="https://www.mozilla.org/en-US/newsletter/" method="post">
+        <h2 class="newsletter-teaser">Learn the best of web development</h2>
+        <p class="newsletter-description">Sign up for our newsletter:</p>
+        <input id="fmt" name="fmt" value="H" type="hidden">
+        <input id="newsletterNewslettersInput" name="newsletters" value="app-dev" type="hidden">
+
+        <div id="newsletterErrors" class="newsletter-errors"></div>
+
+        <div id="newsletterEmail" class="form-group">
+            <label for="newsletterEmailInput" class="form-label offscreen">E-mail</label>
+            <input id="newsletterEmailInput" name="email" class="form-input newsletter-input-email" required="" placeholder="you@example.com" size="30" type="email">
+        </div>
+
+        <div id="newsletterPrivacy" class="form-group form-group-agree hidden">
+            <input id="newsletterPrivacyInput" name="privacy" required="" type="checkbox">
+            <label for="newsletterPrivacyInput">
+            I'm okay with Mozilla handling my info as explained in this <a href="https://www.mozilla.org/privacy/">Privacy Policy</a>.
+            </label>
+        </div>
+        <div id="newsletterSubmit">
+            <button id="newsletter-submit" type="submit" class="button positive">Sign up now</button>
+        </div>
+        
+    </form>
+    <div id="newsletterThanks" class="newsletter-thanks hidden">
+        <h2>Thanks! Please check your inbox to confirm your subscription.</h2>
+        <p>If you haven’t previously confirmed a subscription to a 
+Mozilla-related newsletter you may have to do so. Please check your 
+inbox or your spam filter for an email from us.
+        </p>
+    </div>
+    <button id="newsletterHide" type="button" class="only-icon newsletter-hide"><span>Hide Newsletter Sign-up</span><i aria-hidden="true" class="icon-times"></i></button>
+</div>
+                  </div>
+              
+            </div>
+
+            
+              <!-- quick links and zone subnav strip -->
+              <div id="wiki-left" class="column-strip wiki-column">
+
+              
+
+                
+
+                
+                  <!-- quick links -->
+                  
+  <div class="quick-links" id="quick-links">
+    <div class="title see-also">See also</div>
+    
+  <ol>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP"><strong><em>HTTP</em></strong></a></li>
+    <li><strong>Guides:</strong></li>
+    <li class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Resources_and_URIs" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Resources and URIs</a>
+    <ol class="toggle-container" style="display: none;">
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Identifying_resources_on_the_Web">Identifying resources on the Web</a>
+        </li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs">Data URIs</a>
+        </li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_Types">Introduction to MIME Types</a>
+        </li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">Complete list of MIME Types</a>
+        </li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Choosing_between_www_and_non-www_URLs">Choosing between www and non-www URLs</a>
+    </li></ol></li>
+    <li class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>Basics of HTTP</a>
+    <ol class="toggle-container" style="display: none;">
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview">Overview of HTTP</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP">Evolution of HTTP</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages">HTTP Messages</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Session">A typical HTTP session</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Connection_management_in_HTTP_1.x">Connection management in HTTP/1.x</a></li>
+    </ol>
+    </li>
+    <li class="toggleable" data-closed="true"><a href="#" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>HTTP security</a>
+    <ol class="toggle-container" style="display: none;">
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Public_Key_Pinning">HTTP Public Key Pinning (HPKP)</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">HTTP Strict Transport Security (HSTS)</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#Secure_and_HttpOnly_cookies">Cookie security</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">X-Content-Type-Options</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">X-Frame-Options</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">X-XSS-Protection</a></li>
+        <li><a href="https://wiki.mozilla.org/Security/Guidelines/Web_Security">Mozilla web security guidelines</a></li>
+        <li><a href="https://observatory.mozilla.org/">Mozilla Observatory</a></li>
+    </ol>
+    </li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS">HTTP access control (CORS)</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">HTTP caching</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Compression">HTTP compression</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Conditional_requests">HTTP conditional requests</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation">HTTP content negotiation</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">HTTP cookies</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests">HTTP range requests</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections">HTTP redirects</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Resources_and_specifications">HTTP specifications</a></li>
+    <li><strong>References:</strong></li>
+    <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>HTTP headers</a>
+      <ol class="toggle-container" style="display: none;"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept" title="The Accept request HTTP header advertises which content types, expressed as MIME types, the client is able to understand. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice with the Content-Type response header. Browsers set adequate values for this header depending of the context where the request is done: when fetching a CSS stylesheet a different value is set for the request than when fetching an image,&nbsp;video or a script."><code>Accept</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Charset" title="The Accept-Charset request HTTP header advertises which character set the client is able to understand. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice within the Content-Type response header. Browsers usually don't set this header as the default value for each content type is usually correct and transmitting it would allow easier fingerprinting."><code>Accept-Charset</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding" title="The Accept-Encoding request HTTP header advertises which content encoding, usually a compression algorithm, the client is able to understand. Using content negotiation, the server selects one of the proposals, uses it and informs the client of its choice with the Content-Encoding response header."><code>Accept-Encoding</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language" title="The Accept-Language request HTTP header advertises which languages the client is able to understand, and which locale variant is preferred. Using content negotiation, the server then selects one of the proposals, uses it and informs the client of its choice with the Content-Language response header. Browsers set adequate values for this header according their user interface language and even if a user can change it, this happens rarely (and is frown upon as it leads to fingerprinting)."><code>Accept-Language</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Ranges" title="The Accept-Ranges response HTTP header is a marker used by the server to advertise its support of partial requests. The value of this field indicates the unit that can be used to define a range."><code>Accept-Ranges</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials" title="The Access-Control-Allow-Credentials response header indicates whether or not the response to the request can be exposed to the page. It can be exposed when the true value is returned; it can't in other cases."><code>Access-Control-Allow-Credentials</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers" title="The Access-Control-Allow-Headers response header is used in response to a preflight request to indicate which HTTP&nbsp;headers will be available via Access-Control-Expose-Headers when making the actual request."><code>Access-Control-Allow-Headers</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods" title="The Access-Control-Allow-Methods response header specifies the method or methods allowed when accessing the resource in response to a preflight request."><code>Access-Control-Allow-Methods</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin" title="The Access-Control-Allow-Origin response header indicates whether the response can be shared with resources with the given origin."><code>Access-Control-Allow-Origin</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers" title="The Access-Control-Expose-Headers response header indicates which headers can be exposed as part of the response by listing their names."><code>Access-Control-Expose-Headers</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age" title="The Access-Control-Max-Age response header indicates how long the results of a preflight request (that is the information contained in the Access-Control-Allow-Methods and Access-Control-Allow-Headers headers) can be cached."><code>Access-Control-Max-Age</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Request-Headers" title="The Access-Control-Request-Headers request header is used when issuing a preflight request to let the server know which HTTP headers will be used when the actual request is made."><code>Access-Control-Request-Headers</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Request-Method" title="The Access-Control-Request-Method request header is used when issuing a preflight request to let the server know which HTTP method will be used when the actual request is made. This header is necessary as the preflight request is always an OPTIONS and doesn't use the same method as the actual request."><code>Access-Control-Request-Method</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Age" title="The Age header contains the time in seconds the object has been in a proxy cache."><code>Age</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization" title="The HTTP Authorization request header contains the credentials to authenticate a user agent with a server, usually after the server has responded with a 401 Unauthorized status and the WWW-Authenticate header."><code>Authorization</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" title="The&nbsp;Cache-Control general-header field is used to specify directives for caching mechanisms in both, requests and responses. Caching directives are unidirectional, meaning that a given directive in a request is not implying that the same directive is to be given in the response."><code>Cache-Control</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Connection" title="The Connection general header controls whether or not the network connection stays open after the current transaction finishes. If the value sent is keep-alive, the connection is persistent and not closed, allowing for subsequent requests to the same server to be done."><code>Connection</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition" title="In a multipart/form-data body, the HTTP Content-Disposition general header is a header that can be used on the subpart of a multipart body to give information about the field it applies to. The subpart is delimited by the boundary defined in the Content-Type header. Used on the body itself, Content-Disposition has no effect."><code>Content-Disposition</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding" title="The Content-Encoding entity header is used to compress the media-type. When present, its value indicates what additional content encoding has been applied to the entity-body. It lets the client know, how to decode in order to obtain the media-type referenced by the Content-Type header."><code>Content-Encoding</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language" title="The Content-Language entity header is used to describe the language(s) intended for the audience, so that it allows a user to differentiate according to the users' own preferred language."><code>Content-Language</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length" title="The Content-Length entity header is indicating the size of the entity-body, in decimal number of octets, sent to the recipient."><code>Content-Length</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Location" title="The Content-Location header indicates an alternate location for the returned data. The principal use case is to indicate the URL of the resource transmitted as the result of content negotiation."><code>Content-Location</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range" title="The Content-Range response HTTP header indicates where in a full body message a partial message belongs."><code>Content-Range</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" title="The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS)."><code>Content-Security-Policy</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only" title="The HTTP Content-Security-Policy-Report-Only response header allows web developers to experiment with policies by monitoring (but not enforcing) their effects. These violation reports consist of JSON documents sent via an HTTP POST request to the specified URI."><code>Content-Security-Policy-Report-Only</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type" title="The Content-Type entity header is used to indicate the media type of the resource."><code>Content-Type</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie" title="The Cookie HTTP request header contains stored HTTP cookies previously sent by the server with the Set-Cookie header."><code>Cookie</code></a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie2" title="The obsolete Cookie2 HTTP request header used to&nbsp;advise the server that the user agent understands &quot;new-style&quot; cookies, but nowadays user agents will use the Cookie header instead, not this one."><code>Cookie2</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/DNT" title="The DNT (Do Not Track) request header indicates the user's tracking preference. It lets users indicate whether would prefer privacy rather than personalized content."><code>DNT</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Date" title="The Date general HTTP header contains the date and time at which the message was originated."><code>Date</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag" title="The ETag HTTP response header is an identifier for a specific version of a resource. It allows caches to be more efficient, and saves bandwidth, as a web server does not need to send a full response if the content has not changed. On the other side, if the content has changed, etags are useful to help prevent simultaneous updates of a resource from overwriting each other (&quot;mid-air collisions&quot;)."><code>ETag</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires" title="The Expires header contains the date/time after which the response is considered stale."><code>Expires</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded" title="The Forwarded header contains information from the client-facing side of proxy servers that is altered or lost when a proxy is involved in the path of the request."><code>Forwarded</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/From" title="The From request header contains an Internet email address for a human user who controls the requesting user agent."><code>From</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host" title="The Host request header specifies the domain name of the server (for virtual hosting), and (optionally) the TCP port number on which the server is listening."><code>Host</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match" title="The If-Match HTTP request header makes the request conditional. For GET and HEAD methods, the server will send back the requested resource only if it matches one of the listed ETags. For PUT and other non-safe methods, it will only upload the resource in this case."><code>If-Match</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Modified-Since" title="The If-Modified-Since request HTTP header makes the request conditional: the server will send back the requested resource, with a 200 status, only if it has been last modified after the given date. If the request has not been modified since, the response will be a 304 without any body; the Last-Modified header will contain the date of last modification. Unlike If-Unmodified-Since, If-Modified-Since can only be used with a GET or HEAD."><code>If-Modified-Since</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match" title="The If-None-Match HTTP request header makes the request conditional. For GET and HEAD methods, the server will send back the requested resource, with a 200 status, only if it doesn't have an ETag matching the given ones. For other methods, the request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed."><code>If-None-Match</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Range" title="The If-Range HTTP request header makes a range request conditional: if the condition is fulfilled, the range request will be issued and the server sends back a 206 Partial Content answer with the appropriate body. If the condition is not fulfilled, the full resource is sent back, with a 200 OK status."><code>If-Range</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Unmodified-Since" title="The If-Unmodified-Since request HTTP header makes the request conditional: the server will send back the requested resource, or accept it in the case of a POST or another non-safe method, only if it has not been last modified after the given date. If the request has been modified after the given date, the response will be a 412 (Precondition Failed) error."><code>If-Unmodified-Since</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Keep-Alive" title="The Keep-Alive general header allows the sender to hint about how the connection and may be used to set a timeout and a maximum amount of requests."><code>Keep-Alive</code></a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Large-Allocation" title="The Large-Allocation response header tells the browser that the page being loaded is going to want to perform a large allocation."><code>Large-Allocation</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified" title="The Last-Modified response HTTP header contains the date and time at which the origin server believes the resource was last modified. It is used as a validator to determine if a resource received or stored is the same. Less accurate than an ETag header, it is a fallback mechanism. Conditional requests containing If-Modified-Since or If-Unmodified-Since headers make use of this field."><code>Last-Modified</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location" title="The Location response header indicates the URL to redirect a page to. It only provides a meaning when served with a 3xx status response."><code>Location</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin" title="The Origin request header indicates where a fetch originates from. It doesn't include any path information, but only the server name. It is sent with CORS requests, as well as with POST requests. It is similar to the Referer header, but, unlike this header, it doesn't disclose the whole path."><code>Origin</code></a></li><li><span class="sidebar-icon"><span title="This deprecated API should no longer be used, but will probably still work."><i class="icon-thumbs-down-alt"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma" title="The Pragma HTTP/1.0 general header is an implementation-specific header that may have various effects along the request-response chain. It is used for backwards compatibility with HTTP/1.0 caches where the Cache-Control HTTP/1.1 header is not yet present."><code>Pragma</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Proxy-Authenticate" title="The HTTP Proxy-Authenticate response header defines the authentication method that should be used to gain access to a resource behind a proxy server. It authenticate the request to the proxy server, allowing it to transmit the request further."><code>Proxy-Authenticate</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Proxy-Authorization" title="The HTTP Proxy-Authorization request header contains the credentials to authenticate a user agent to a proxy server, usually after the server has responded with a 407 Proxy Authentication Required status and the Proxy-Authenticate header."><code>Proxy-Authorization</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Public-Key-Pins" title="The HTTP Public-Key-Pins response header associates a specific cryptographic public key with a certain web server to decrease the risk of MITM attacks with forged certificates. If one or several keys are pinned and none of them are used by the server, the browser will not accept the response as legitimate, and will not display it."><code>Public-Key-Pins</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Public-Key-Pins-Report-Only" title="The HTTP Public-Key-Pins-Report-Only response header sends reports of pinning violation to the report-uri specified in the header but, unlike Public-Key-Pins still allows browsers to connect to the server if the pinning is violated."><code>Public-Key-Pins-Report-Only</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range" title="The Range HTTP request header indicates the part of a document that the server should return. Several parts can be requested with one Range header at once, and the server may send back these ranges in a multipart document. If the server sends back ranges, it uses the 206 Partial Content for the response. If the ranges are invalid, the server returns the 416 Range Not Satisfiable error. The server can also ignore the Range header and return the whole document with a 200 status code."><code>Range</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer" title="The Referer request header contains the address of the previous web page from which a link to the currently requested page was followed. The Referer header allows servers to identify where people are visiting them from and may use that data for analytics, logging, or optimized caching, for example."><code>Referer</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" title="The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made."><code>Referrer-Policy</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After" title="The Retry-After response HTTP header indicates how long the user agent should wait before making a follow-up request. There are two main cases this header is used:"><code>Retry-After</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server" title="The Server header contains information about the software used by the origin server to handle the request."><code>Server</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie" title="The Set-Cookie HTTP response header is used to send cookies from the server to the user agent."><code>Set-Cookie</code></a></li><li><span class="sidebar-icon"><span title="This is an obsolete API and is no longer guaranteed to work."><i class="icon-trash"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie2" title="The obsolete Set-Cookie2 HTTP response header used to send cookies from the server to the user agent, but has been deprecated by the specification. Use Set-Cookie instead."><code>Set-Cookie2</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security" title="The HTTP Strict-Transport-Security response header (often abbreviated as HSTS) is a security feature that lets a web site tell browsers that it should only be communicated with using HTTPS, instead of using HTTP."><code>Strict-Transport-Security</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/TE" title="The TE request header specifies the transfer encodings the user agent is willing to accept. (you could informally call it Accept-Transfer-Encoding, which would be more intuitive)."><code>TE</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Tk" title="The Tk response header indicates the tracking status that applied to the corresponding request."><code>Tk</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Trailer" title="The Trailer response header allows the sender to include additional fields at the end of chunked messages in order to supply metadata that might be dynamically generated while the message body is sent, such as a message integrity check, digital signature, or post-processing status."><code>Trailer</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Transfer-Encoding" title="The Transfer-Encoding header specifies the form of encoding used to safely transfer the entity to the user."><code>Transfer-Encoding</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Upgrade-Insecure-Requests" title="The HTTP Upgrade-Insecure-Requests request header sends a signal to the server expressing the client’s preference for an encrypted and authenticated response, and that it can successfully handle the upgrade-insecure-requests CSP directive."><code>Upgrade-Insecure-Requests</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent" title="The User-Agent request header contains a characteristic string that allows the network protocol peers to identify the application type, operating system, software vendor or software version of the requesting software user agent."><code>User-Agent</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary" title="The Vary HTTP response header determines how to match future request headers to decide whether a cached response can be used rather than requesting a fresh one from the origin server. It is used by the server to indicate which headers it used when selecting a representation of a resource in a content negotiation algorithm."><code>Vary</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Via" title="The Via general header is added by proxies, both forward and reverse proxies, and can appear in the request headers and the response headers. It is used for tracking message forwards, avoiding request loops, and identifying the protocol capabilities of senders along the request/response chain."><code>Via</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/WWW-Authenticate" title="The HTTP WWW-Authenticate response header defines the authentication method that should be used to gain access to a resource."><code>WWW-Authenticate</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Warning" title="The Warning general HTTP header contains information about possible problems with the status of the message. More than one Warning header may appear in a response."><code>Warning</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options" title="The X-Content-Type-Options response HTTP header is a marker used by the server to indicate that the MIME types advertised in the Content-Type headers should not be changed and be followed. This allows to opt-out of MIME type sniffing, or, in other words, it is a way to say that the webmasters knew what they were doing."><code>X-Content-Type-Options</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control" title="The X-DNS-Prefetch-Control HTTP response header controls DNS prefetching, a feature by which browsers proactively perform domain name resolution on both links that the user may choose to follow as well as URLs for items referenced by the document, including images, CSS, JavaScript, and so forth."><code>X-DNS-Prefetch-Control</code></a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For" title="The X-Forwarded-For (XFF) header is a de-facto standard header for identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer. When traffic is intercepted between clients and servers, server access logs contain the IP address of the proxy or load balancer only. To see the original IP address of the client, the X-Forwarded-For request header is used."><code>X-Forwarded-For</code></a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host" title="The X-Forwarded-Host (XFH) header is a de-facto standard header for identifying the original host requested by the client in the Host HTTP request header."><code>X-Forwarded-Host</code></a></li><li><span class="sidebar-icon"><span title="This API has not been standardized."><i class="icon-warning-sign"> </i></span></span><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto" title="The X-Forwarded-Proto (XFP) header is a de-facto standard header for identifying the protocol (HTTP or HTTPS) that a client used to connect to your proxy or load balancer. Your server access logs contain the protocol used between the server and the load balancer, but not the protocol used between the client and the load balancer. To determine the protocol used between the client and the load balancer, the X-Forwarded-Proto request header can be used."><code>X-Forwarded-Proto</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options" title="The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a &lt;frame&gt;, &lt;iframe&gt; or &lt;object&gt;&nbsp;. Sites can use this to avoid clickjacking attacks, by ensuring that their content is not embedded into other sites."><code>X-Frame-Options</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection" title="The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks. Although these protections are largely unnecessary in modern browsers when sites implement a strong Content-Security-Policy that disables the use of inline JavaScript ('unsafe-inline'), they can still provide protections for users of older web browsers that don't yet support CSP."><code>X-XSS-Protection</code></a></li></ol>
+    </li>
+    <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>HTTP request methods</a>
+      <ol class="toggle-container" style="display: none;"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/CONNECT" title="The HTTP CONNECT method&nbsp;method starts two-way communications with the requested resource. It can be used to open a tunnel."><code>CONNECT</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET" title="The HTTP GET method requests a representation of the specified resource. Requests using GET should only retrieve data."><code>GET</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD" title="The HTTP HEAD method requests the headers that are returned if the specified resource would be requested with an HTTP GET method. Such a request can be done before deciding to download a large resource to save bandwidth, for example."><code>HEAD</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS" title="The HTTP OPTIONS method is used to describe the communication options for the target resource. The client can specify a specific URL for the OPTIONS method, or an asterisk (*) to refer to the entire server."><code>OPTIONS</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST" title="The HTTP POST method sends data to the server. The type of the body of the request is indicated by the Content-Type header."><code>POST</code></a></li></ol>
+    </li>
+    <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>HTTP response status codes</a>
+      <ol class="toggle-container" style="display: none;"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/100" title="The HTTP 100 Continue informational status response code indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished."><code>100 Continue</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200" title="The HTTP 200 OK success status response code indicates that the request has succeeded. A 200 response is cacheable by default."><code>200 OK</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201" title="The HTTP 201 Created success status response code indicates that the request has succeeded and has led to the creation of a resource. The new resource is effectively created before this response is sent back. and the new resource is returned in the body of the message, its location being either the URL of the request, or the content of the Location header."><code>201 Created</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204" title="The HTTP 204 No Content success status response code indicates that the request has succeed, but that the client doesn't need to go away from its current page. A 204 response is cacheable by default. An ETag header is included in such a response."><code>204 No Content</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206" title="The HTTP 206 Partial Content success status response code indicates that the request has succeeded and has the body contains the requested ranges of data, as described in the Range header of the request."><code>206 Partial Content</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301" title="The HTTP 301 Moved Permanently redirect status response code indicates that the resource requested has been definitively moved to the URL given by the Location headers. A browser redirects to this page, and search engines update their links to the resource (In SEO-speak, it is said that the link-juice is sent to the new URL)."><code>301 Moved Permanently</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302" title="The HTTP 302 Found redirect status response code indicates that the resource requested has been temporarily moved to the URL given by the Location headers. A browser redirects to this page, but search engines don't update their links to the resource (In SEO-speak, it is said that the link-juice is not sent to the new URL)."><code>302 Found</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303" title="The HTTP 303 See Other redirect status response code, usually sent back as a result of a PUT or POST operation, indicates that the redirects don't link to the newly uploaded resources but to another page, like a confirmation page or an upload progress page. The method used to display this redirected page is always GET."><code>303 See Other</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304" title="The HTTP 304 Not Modified client redirection response code indicates that there is no need to retransmit the requested resources. It is an implicit redirection to a cached resource. This happens when the request method is safe, like a GET or a HEAD request, or when the request is conditional and uses a If-None-Match or a If-Modified-Since header."><code>304 Not Modified</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307" title="The method and the body of the original request are reused to perform the redirected request. In the cases where you want the method used to be changed to GET, use 303 See Also instead. This is useful when you want to give an answer to a PUT method that is not the uploaded resources, but a confirmation message (like &quot;You successfully uploaded XYZ&quot;)."><code>307 Temporary Redirect</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308" title="The request method and the body will not be altered, whereas 301 may incorrectly sometimes be changed to a GET method."><code>308 Permanent Redirect</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401" title="The HTTP 401 Unauthorized client error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource."><code>401 Unauthorized</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403" title="The HTTP 403 Forbidden client error status response code indicates that the server understood the request but refuses to authorize it."><code>403 Forbidden</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404" title="The HTTP 404 Not Found client error response code indicates that a server can not find the requested resource. This response code probably is most famous one due to its frequency to occur in the web. These are often called broken or dead links and lead to link rot."><code>404 Not Found</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406" title="The HTTP 406 Not Acceptable client error response code indicates that a response matching the list of acceptable values defined in Accept-Charset and Accept-Language cannot be served."><code>406 Not Acceptable</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/407" title="The HTTP 407 Proxy Authentication Required  client error status response code indicates that the request has not been applied because it lacks valid authentication credentials for a proxy server that is between the browser and the server that can access the requested resource."><code>407 Proxy Authentication Required</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/410" title="The HTTP 410 Gone client error response code indicates that access to the target resource is no longer available at the origin server and that this condition is likely to be permanent."><code>410 Gone</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/412" title="The HTTP 412 Precondition Failed client error response code indicates that access to the target resource has been denied. This happens with conditional requests on methods other than GET or HEAD when the condition defined by the If-Unmodified-Since or If-None-Match headers is not fulfilled. In that case, the request, usually an upload or a modification of a resource, cannot be made and this error response is sent back."><code>412 Precondition Failed</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416" title="The HTTP 416 Range Not Satisfiable error response code indicates that a server cannot serve the requested ranges. The most likely reason is that the document doesn't contain such ranges, or that the Range header value, though syntactically correct, doesn't make a sense."><code>416 Range Not Satisfiable</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/451" title="The HTTP 451 Unavailable For Legal Reasons client error response code indicates that the user requested a resource which is not available due to legal reasons, such as a web page for which a legal action has been issued."><code>451 Unavailable For Legal Reasons</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500" title="The HTTP 500 Internal Server Error server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request."><code>500 Internal Server Error</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501" title="The HTTP 501 Not Implemented server error response code indicates that the request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD."><code>501 Not Implemented</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502" title="The HTTP 502 Bad Gateway server error response code indicates that the server, while acting as a gateway or proxy, received an invalid response from the upstream server."><code>502 Bad Gateway</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503" title="The HTTP 503 Service Unavailable server error response code indicates that the server is not ready to handle the request."><code>503 Service Unavailable</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504" title="The HTTP 504 Gateway Timeout server error response code indicates that the server, while acting as a gateway or proxy, cannot get a response in time."><code>504 Gateway Timeout</code></a></li></ol>
+    </li>
+    <li data-default-state="closed" class="toggleable" data-closed="true"><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" class="toggler" aria-haspopup="true"><i aria-hidden="true" class="icon-caret-right"></i>CSP directives</a>
+      <ol class="toggle-container" style="display: none;"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri" title="The HTTP Content-Security-Policy base-uri directive restricts the URLs which can be used in a document's &lt;base&gt; element. If this value is absent, then any URI is allowed. If this directive is absent, the user agent will use the value in the &lt;base&gt; element."><code>CSP: base-uri</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content" title="The HTTP Content-Security-Policy (CSP) block-all-mixed-content directive prevents loading any assets using HTTP when the page is loaded using HTTPS."><code>CSP: block-all-mixed-content</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/child-src" title="The HTTP Content-Security-Policy (CSP) child-src directive defines the valid sources for web workers and nested browsing contexts loaded using elements such as &lt;frame&gt; and &lt;iframe&gt;. For workers, non-compliant requests are treated as fatal network errors by the user agent."><code>CSP: child-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/connect-src" title="The HTTP Content-Security-Policy (CSP) connect-src directive restricts the&nbsp;URLs which can be loaded using script interfaces. The APIs that are restricted are:"><code>CSP: connect-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src" title="The HTTP Content-Security-Policy (CSP) default-src directive serves as a fallback for the other CSP fetch directives. For each of the following directives that are absent, the user agent will look for the default-src directive and will use this value for it:"><code>CSP: default-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src" title="The HTTP Content-Security-Policy (CSP) font-src directive specifies valid sources for fonts loaded using @font-face."><code>CSP: font-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/form-action" title="The HTTP Content-Security-Policy (CSP) form-action directive restricts the URLs which can be used as the target of a form submissions from a given context."><code>CSP: form-action</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors" title="The HTTP Content-Security-Policy (CSP) frame-ancestors directive specifies valid parents that may embed a page using &lt;frame&gt;,&nbsp;&lt;iframe&gt;,&nbsp;&lt;object&gt;,&nbsp;&lt;embed&gt;, or &lt;applet&gt;."><code>CSP: frame-ancestors</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src" title="The HTTP Content-Security-Policy (CSP) frame-src directive specifies valid sources for nested browsing contexts loading using elements such as &lt;frame&gt; and &lt;iframe&gt;."><code>CSP: frame-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src" title="The HTTP Content-Security-Policy: img-src directive specifies valid sources of images and favicons."><code>CSP: img-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/manifest-src" title="The HTTP Content-Security-Policy: manifest-src directive specifies which manifest can be applied to the resource."><code>CSP: manifest-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/media-src" title="The HTTP Content-Security-Policy (CSP) media-src directive specifies valid sources for loading media using the &lt;audio&gt; and &lt;video&gt; elements."><code>CSP: media-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/object-src" title="The HTTP Content-Security-Policy object-src directive specifies valid sources for the &lt;object&gt;, &lt;embed&gt;, and &lt;applet&gt; elements."><code>CSP: object-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/plugin-types" title="The HTTP Content-Security-Policy (CSP) plugin-types directive restricts the set of plugins that can be embedded into a document by limiting the types of resources which can be loaded."><code>CSP: plugin-types</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/referrer" title="The HTTP Content-Security-Policy (CSP) referrer directive used to specify information in the Referer header (with a single r as this was a typo in the orignal spec) for links away from a page. This API is deprecated and removed from browsers."><code>CSP: referrer</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri" title="The HTTP Content-Security-Policy (CSP) report-uri directive instructs the user agent to report attempts to violate the Content Security Policy. These violation reports consist of JSON documents sent via an HTTP POST request to the specified URI."><code>CSP: report-uri</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for" title="The HTTP Content-Security-Policy require-sri-for directive instructis the client to require the use of Subresource Integrity for scripts or styles on the page."><code>CSP: require-sri-for</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox" title="The HTTP Content-Security-Policy (CSP) sandbox directive enables a sandbox for the requested resource similar to the &lt;iframe&gt; sandbox attribute. It applies restrictions to a page's actions including preventing popups, preventing the execution of plugins and scripts, and enforcing a same-origin policy."><code>CSP: sandbox</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src" title="The HTTP Content-Security-Policy (CSP) script-src directive specifies valid sources for sources for JavaScript. This includes not only URLs loaded directly into &lt;script&gt; elements, but also things like inline script event handlers (onclick) and XSLT stylesheets which can trigger script execution."><code>CSP: script-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src" title="The HTTP Content-Security-Policy (CSP) style-src directive specifies valid sources for sources for stylesheets."><code>CSP: style-src</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests" title="The HTTP Content-Security-Policy (CSP) upgrade-insecure-requests directive instructs user agents to treat all of a site's insecure URLs (those served over HTTP) as though they have been replaced with secure URLs (those served over HTTPS). This directive is intended for web sites with large numbers of insecure legacy URLs that need to be rewritten."><code>CSP: upgrade-insecure-requests</code></a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/worker-src" title="The HTTP Content-Security-Policy (CSP) worker-src directive specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts."><code>CSP: worker-src</code></a></li></ol>
+    </li>
+  </ol>
+
+  </div>
+                
+
+                <!-- approvals -->
+                
+
+              
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div> <!-- ends "main-content" -->
+
+  <menu type="context" id="edit-history-menu">
+    <menuitem data-action="/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit" label="Edit page"></menuitem>
+    <menuitem data-action="/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$history" label="View page history"></menuitem>
+  </menu>
+
+  </div></main>
+
+  <!-- Footer -->
+  <footer id="main-footer"><div class="center">
+    <div class="column-container">
+      <div class="column-main">
+        
+        <div class="contentinfo">
+          <p>© 2005-2017 Mozilla Developer Network and individual contributors.</p> <p>Content is available under <a href="https://developer.mozilla.org/en-US/docs/MDN/About#Copyrights_and_licenses">these licenses</a>.</p>
+          <ul>
+            <li><a href="https://developer.mozilla.org/docs/MDN/About">About MDN</a></li>
+            <li><a href="https://www.mozilla.org/about/legal/terms/mozilla">Terms</a></li>
+            <li><a href="https://www.mozilla.org/privacy/websites/">Privacy</a></li>
+            <li><a href="https://www.mozilla.org/privacy/websites/#cookies">Cookies</a></li>
+            <li><a href="https://github.com/mozilla/kuma">Contribute to the code</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      <div class="column-strip">
+        
+          
+  
+    <form class="languages go" method="get" action="/en-US/docs/Web">
+      <label for="language">Other languages:</label>
+      <select id="language" class="wiki-l10n" name="next" dir="ltr">
+        <option title="English (US)" value="/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent" selected="selected">
+          English (US) (en-US)
+        </option>
+        
+          <option title="French" value="/fr/docs/Detection_du_navigateur_en_utilisant_le_user_agent">
+            Français (fr)
+          </option>
+          <option title="Chinese (Simplified)" value="/zh-CN/docs/Web/HTTP/Browser_detection_using_the_user_agent">
+            中文 (简体) (zh-CN)
+          </option>
+          <option title="Chinese (Traditional)" value="/zh-TW/docs/Web/HTTP/Browser_detection_using_the_user_agent">
+            正體中文 (繁體) (zh-TW)
+          </option>
+      </select>
+      <noscript><button type="submit">Go</button></noscript>
+    </form>
+  
+
+        
+      </div>
+    </div>
+  </div></footer>
+
+  <!-- site js -->
+  
+    
+    <!--[if lte IE 8]><script type="text/javascript" src="https://developer.cdn.mozilla.net/static/build/js/selectivizr.091e18cf669b.js" charset="utf-8"></script><![endif]-->
+
+    
+    <script type="text/javascript" src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/javascript.js"></script>
+    <script type="text/javascript" src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/main.js" charset="utf-8"></script>
+    
+      <script>
+        if(window.mdn && mdn.analytics) mdn.analytics.trackOutboundLinks();
+      </script>
+    
+    
+
+  
+    <script async="" type="text/javascript" src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/wiki.js" charset="utf-8"></script>
+
+
+  
+
+  
+    <script type="text/javascript">
+        (function($) {
+            $('#wikiArticle').children('h2[id]').each(function() {
+                var id = $(this).attr('id');
+                var href = '/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent$edit#' + id;
+
+                $('<a>').attr({
+                    href: href,
+                    'class': 'button section-edit only-icon',
+                    'rel': 'nofollow, noindex'
+                })
+                .append($('<i aria-hidden="true" class="icon-pencil"></i>'))
+                .append($('<span>'))
+                .find('span')
+                .text(gettext('Edit'))
+                .end()
+                .on('click', function(e) {
+                    e.preventDefault();
+
+                    mdn.analytics.trackEvent({
+                        category: 'Section Edit',
+                        action: id
+                    }, function() {
+                        window.location = href;
+                    });
+                })
+                .appendTo(this);
+            });
+        })(jQuery);
+    </script>
+  
+
+  
+
+  
+    <script async="" type="text/javascript" src="Browser%20detection%20using%20the%20user%20agent%20-%20HTTP%20%7C%20MDN_files/newsletter.js" charset="utf-8"></script>
+  
+
+
+
+</body></html>
