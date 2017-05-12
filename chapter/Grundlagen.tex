@@ -110,16 +110,25 @@ Bei der Verbreitungsmethode kann zwischen Viren, Trojanern und Würmern untersch
 
 Anhand des angerichteten Schadens kann Malware in Spyware, Adware, Malware-Dialer, Zombie-Malware, Backdoors und Root Kits unterteilt werden. Spyware ist Software, welche ohne Wissen des Nutzers Informationen sammelt und weiterleitet. Dadurch könne vertrauliche Daten gestohlen und missbraucht werden.\footcite[Vgl.][95\psq]{netzwerkDatensicherheit} Solche Daten können beispielsweise Benutzernamen und Passworter, E-Mailadressen, Bankaccounts und Kreditkartennummern oder Softwarelizenzschlüssel sein. Mitte der 1990er Jahre war erste Spyware zu finden.\footcite[Vgl.][16]{virusesMalware} Als Adware werden Programme bezeichnet, welche dem Benutzer Werbeanzeigen einblenden.\footcite[Vgl.][96]{netzwerkDatensicherheit} Adware ist ähnlich zu Spyware, da beide Informationen über den Nutzer sammeln. Allerdings ist Adware mehr auf Marketing fokussiert und nutzt die Informationen um dem Nutzer Webung zu präsentieren.\footcite[Vgl.][17]{virusesMalware} Dialer sind Programme, welche Computern über Modems oder Telefonnetze Zugang zum Internet anbieten. Malware-Dialer nutzen das aus und wählen die Rechner ohne Kentniss des Nutzers in teure Service-Rufnummern oder Anwahlpunkte im Ausland ein. Allerdings findet man diese Art von Malware nur noch selten, da es inzwischen telefonbasierten Internetzugänge an Bedeutung verlieren. Software, welche Rechner komprommitiert, wird als Zombie-Malware bezeichnet, da dieser so von Angreifern ferngesteuert werden kann.\footcite[Vgl.][96]{netzwerkDatensicherheit} Am häufigsten werden Zombie-Rechner eingesetzt um Spam zu versenden oder mit vielen anderen Denial of Service Angriffe auszuführen.\footcite[Vgl.][18]{virusesMalware} Backdoors sind modifizierte Programme des Systems, über welche Hacker Sicherheitsmechanismen umgehen und sich so unbefugten Zugriff auf den Rechner verschaffen kann. Modifizierte Softwaregruppen, welche zum Ziel haben deren Aktivität oder die eines Angreifers vor Systembenutzern, inklusive Administratoren zu verstecken werden als Root Kits bezeichnet.\footcite[Vgl.][96]{netzwerkDatensicherheit}
 
-\begin{figure}[h]
-\centerline{%
-\includegraphics[width=0.5\textwidth]{images/malware-all-years_sum_de}%
-\includegraphics[width=0.5\textwidth]{images/malware-all-years_de}%
-}%
-\caption{Malware Statistik}
-\label{fig:malware-statistics}
-\end{figure}
+Wie Abbildung \ref{fig:malware} zeigt nimmt die Verbreitung von Malware in Deutschland weiterhin zu und verliert deshalb nicht an Bedeutung.
 
-\todo{Statistik einfügen}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/malware-all-years_sum_de}
+  \caption[Malware Verbreitung in Deutschland]{Malware Verbreitung in Deutschland\protect\footnotemark}
+  \label{fig:malware}
+\end{figure}
+\footnotetext{\cite{avtest}, Abbildung 1}
+
+Interessant ist allerdings dass in Abbildung \ref{fig:malware-new} ein deutlicher Rückgang in der Verreitung von neuer Malware zu erkennen ist. Daraus lässt sich schließen, dass deshalb die bereits in Umlauf gebrachte Schadware nach wie vor ausreicht um dem großteil der Nutzer zu schaden.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/malware-all-years_de}
+  \caption[Verbreitung neuer Malware in Deutschland]{Verbreitung neuer Malware in Deutschland\protect\footnotemark}
+  \label{fig:malware-new}
+\end{figure}
+\footnotetext{\cite{avtest}, Abbildung 2}
 
 Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\footcite[Vgl.][97]{netzwerkDatensicherheit} Deshalb ist es notwendig mit webifier Webseiten auf Malware zu prüfen.
 
@@ -203,4 +212,4 @@ Das aussehen der Phishing-Webseite ist dem des Originals (Abbildung \ref{fig:pay
 
 Das Vorgehen im vorausgegangen Beispiel ist sehr typisch für Phishing-Angriffe und kann deshalb auf sehr viele andere Seiten übertragen werden.
 
-\todo{Samuel}
+\todo{Samuel: Statistiken hinzufügen\ldots}
