@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<!-- saved from url=(0095)https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html -->
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>
+                Anwendungen mit Docker transportabel machen |
+                heise Developer
+    </title>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://1.f.ix.de/">
+<link rel="dns-prefetch" href="https://m.heise.de/">
+<link rel="dns-prefetch" href="https://script.ioam.de/">
+<link rel="dns-prefetch" href="https://ad.yieldlab.net/">
+<link rel="dns-prefetch" href="https://www.googletagservices.com/">
+
+<meta name="publisher" content="Heise Medien">
+<meta name="viewport" content="width=1175">    <link rel="canonical" href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html">
+<link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html" id="mobil_variante">
+
+<link rel="home" type="text/html" title="Startseite" href="https://www.heise.de/developer/">
+<link rel="copyright" title="Copyright" href="https://www.heise.de/developer/impressum.html">    <meta name="date" content="2014-02-28T13:59:00">
+    <meta name="keywords" content="Container, Docker">
+    <meta name="author" content="Golo Roden">
+
+            <meta name="fulltitle" content="Anwendungen mit Docker transportabel machen - Seite 1/4">
+        <meta name="topic" content="Werkzeuge">
+        <meta name="feature" content="true">
+        <meta name="DC.title" content="Anwendungen mit Docker transportabel machen">        <meta name="DC.description" content="Jede Anwendung hat Abhängigkeiten. Die Palette reicht von der Konfiguration des lokalen Betriebssystems bis zur Integration von Netzwerk- und Webdiensten. Das erschwert das Verteilen von Anwendungen auf unterschiedliche Systeme. Das Open-Source-Werkzeug Docker verspricht Abhilfe.">        <meta name="DC.identifier" content="http://heise.de/-2127220" scheme="DCTERMS.URI">
+        
+        <link rel="next prefetch" href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=2">
+                    <meta name="description" content="Jede Anwendung hat Abhängigkeiten. Die Palette reicht von der Konfiguration des lokalen Betriebssystems bis zur Integration von Netzwerk- und Webdiensten. Das erschwert das Verteilen von Anwendungen auf unterschiedliche Systeme. Das Open-Source-Werkzeug Docker verspricht Abhilfe.">            <!--googleoff: all-->
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@heisedc">
+    <meta name="twitter:domain" content="heise.de">
+    
+    <meta property="og:title" content="Anwendungen mit Docker transportabel machen">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:url" content="http://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html">
+    <meta property="og:site_name" content="heise Developer">
+    <meta property="og:image" content="http://www.heise.de/developer/imgs/06/1/1/8/1/4/1/7/0002-afad67f31d556e9e.jpeg">
+    <meta property="og:description" content="Jede Anwendung hat Abhängigkeiten. Die Palette reicht von der Konfiguration des lokalen Betriebssystems bis zur Integration von Netzwerk- und Webdiensten. Das erschwert das Verteilen von Anwendungen auf unterschiedliche Systeme. Das Open-Source-Werkzeug Docker verspricht Abhilfe.">
+
+    <!--googleon: all--><!--googleoff: all-->
+<meta name="generator" content="InterRed V16.4.1, http://www.interred.de/, InterRed GmbH">
+<!--googleon: all-->
+
+    
+
+
+<script async="" type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/288689636920174"></script><script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/rc"></script><script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/mobile-deflect.min.js"></script>
+
+
+<script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
+        <script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/jquery-ui-1.8.18_cycle.custom.min.js"></script>
+    <script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/link_inline_images.min.js"></script>
+
+
+<script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/iam.js"></script>
+
+    
+<link href="./Anwendungen mit Docker transportabel machen _ heise Developer_files/standard2008.css" rel="stylesheet" type="text/css">
+
+<link href="./Anwendungen mit Docker transportabel machen _ heise Developer_files/heise.css" rel="stylesheet" type="text/css">
+
+
+    <!--googleoff: all-->
+    <link href="https://www.heise.de/developer/icons/favicon.ico" rel="shortcut icon">
+    <link rel="author" title="Kontakt" href="mailto:developer@heise.de">
+    <link rel="search" title="Suche" href="http://www.heise.de/developer/suche/">
+    <link rel="alternate" type="application/atom+xml" title="Neueste Meldungen von heise Developer" href="http://www.heise.de/developer/rss/news-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: Babel-Bulletin" href="http://www.heise.de/developer/rss/babel-bulletin/blog-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: Der Dotnet-Doktor" href="http://www.heise.de/developer/rss/dotnet-doktor/blog-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: The World of IT" href="http://www.heise.de/developer/rss/world-of-it/blog-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: Embedded-Blogger" href="http://www.heise.de/developer/rss/embedded-blogger/blog-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: the next big thing" href="http://www.heise.de/developer/rss/the-next-big-thing/blog-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: Die mobile Denkfabrik" href="http://www.heise.de/developer/rss/die-mobile-denkfabrik/blog-atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Developer-Blog: Neuigkeiten von der Insel" href="http://www.heise.de/developer/rss/neuigkeiten-von-der-insel/blog-atom.xml">
+    <link rel="alternate" type="application/rss+xml" title="Developer-Podcast: SoftwareArchitekTOUR" href="http://www.heise.de/developer/podcast/itunes/heise-developer-podcast-softwarearchitektour.rss">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://www.heise.de/developer/icons/apple-touch-icon-60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://www.heise.de/developer/icons/apple-touch-icon-120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://www.heise.de/developer/icons/apple-touch-icon-76.png">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.heise.de/developer/icons/apple-touch-icon-152.png">
+    <meta name="application-name" content="heise-developer.de">
+    <meta name="msapplication-tooltip" content="heise Developer">
+    <meta name="msapplication-starturl" content="/developer/">
+    <meta name="msapplication-TileColor" content="#911e40">
+    <meta name="msapplication-square70x70logo" content="/developer/icons/windows_tiny.png">
+    <meta name="msapplication-square150x150logo" content="/developer/icons/windows_square.png">
+    <meta name="msapplication-wide310x150logo" content="/developer/icons/windows_wide.png">
+    <meta name="msapplication-square310x310logo" content="/developer/icons/windows_large.png">
+    <meta name="msapplication-notification" content="frequency=30;polling-uri=http://notifications.buildmypinnedsite.com/?feed=http://www.heise.de/developer/rss/news-atom.xml&amp;id=1;polling-uri2=http://notifications.buildmypinnedsite.com/?feed=http://www.heise.de/developer/rss/news-atom.xml&amp;id=2;polling-uri3=http://notifications.buildmypinnedsite.com/?feed=http://www.heise.de/developer/rss/news-atom.xml&amp;id=3;polling-uri4=http://notifications.buildmypinnedsite.com/?feed=http://www.heise.de/developer/rss/news-atom.xml&amp;id=4;polling-uri5=http://notifications.buildmypinnedsite.com/?feed=http://www.heise.de/developer/rss/news-atom.xml&amp;id=5; cycle=1">
+    <meta name="DC.creator" content="heise Developer">
+    <link href="./Anwendungen mit Docker transportabel machen _ heise Developer_files/developer2012.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/event_calendar_teaser.js"></script>
+    
+
+
+    <!-- Start nugg.ad tag -->
+    <script type="text/javascript">
+    var NUGGjson;
+    var nuggrid      = encodeURIComponent(top.location.href);
+    var nuggadios    = navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    var nuggadmobile = navigator.userAgent.match(/mobile/i);
+    var nugghost     = "https://heise.nuggad.net";
+    var nuggn        = 923071392;
+    var nuggsid      = 1216322088;
+    var nuggtg       = encodeURIComponent("www.heise.de/developer/dev-inhalt");
+
+    if (nuggadmobile) {
+        nugghost = "https://heise.nuggad.net";
+        nuggn    = 777637131;
+        nuggsid  = 1216322088;
+    }
+
+    var nugguri = "";
+    var nuggscr = document.createElement('script');
+    nuggscr.type = 'text/javascript';
+
+    if (nuggadios) {
+        nugguri += "/javascripts/nuggad-ls.js";
+    }
+    else {
+        nugguri += "/rc?nuggn=" + nuggn + "&nuggsid=" + nuggsid + "&nuggtg=" + nuggtg + "&nuggrid=" + nuggrid;
+    }
+    nuggscr.src = nugghost + nugguri;
+    var n = document.getElementsByTagName('script')[0];
+    n.parentNode.insertBefore(nuggscr, n);
+    </script>
+
+    <script type="text/javascript">
+    if (nuggadios) {
+        nuggad.init({"rptn-url": nugghost}, function(api) {
+            api.rc({"nuggn": nuggn, "nuggsid": nuggsid, "nuggtg": nuggtg });
+        });
+    }
+    </script>
+    <!-- End nugg.ad tag -->
+    
+<script src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/gpt.js"></script><script id="gpt-impl-0.20552027901379555" src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_116.js"></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-8/html/container.html">
+<script type="text/javascript" src="https://ad.yieldlab.net/yp/66446,66442,66430,66444,223159,505108,591208,66424?formats_223159=101,102,103,108,117,119;ts=4192628213"></script>
+
+<script type="text/javascript">
+    function ypGetInfo(yield_id, param) {
+        if (typeof yl === "undefined" || yl.YpResult === "undefined") {
+            return;
+        }
+        var yp_res = yl.YpResult.get(yield_id);
+        if (yp_res) {
+            if (param == "format") {
+                return yp_res.format;
+            }
+            else if (param == "pid") {
+                return yp_res.pid;
+            }
+            else {
+                return yp_res.pricerange;
+            }
+        }
+    }
+
+
+    googletag.defineSlot("/6514/www.heise.de/developer/dev-inhalt", [[500,500],[540,65]], "div-gpt-ad-1")
+        .addService(googletag.pubads());
+
+    googletag.defineSlot("/6514/www.heise.de/developer/dev-inhalt", [[300,250],[300,600],[336,280]], "div-gpt-ad-2")
+        .addService(googletag.pubads())
+                .setTargeting("pricerange_66446", ypGetInfo("66446"))
+                .setTargeting("pid_66446", ypGetInfo("66446", "pid"))
+                .setTargeting("pricerange_66442", ypGetInfo("66442"))
+                .setTargeting("pid_66442", ypGetInfo("66442", "pid"));
+                    var gallery_adUnit = "/6514/www.heise.de/developer/dev-inhalt";
+
+    googletag.defineSlot("/6514/www.heise.de/developer/dev-inhalt", [[468,60],[728,90],[970,250]], "div-gpt-ad-3")
+        .addService(googletag.pubads())
+                .setTargeting("pricerange_66430", ypGetInfo("66430"))
+                .setTargeting("pid_66430", ypGetInfo("66430", "pid"))
+                .setTargeting("pricerange_66444", ypGetInfo("66444"))
+                .setTargeting("pid_66444", ypGetInfo("66444", "pid"))
+                .setTargeting("pricerange_223159", ypGetInfo("223159"))
+                .setTargeting("pid_223159", ypGetInfo("223159", "pid"))
+                .setTargeting("pricerange_505108", ypGetInfo("505108"))
+                .setTargeting("pid_505108", ypGetInfo("505108", "pid"))
+                .setTargeting("pricerange_591208", ypGetInfo("591208"))
+                .setTargeting("pid_591208", ypGetInfo("591208", "pid"))
+                .setTargeting("yl_format", ypGetInfo("223159", "format"));
+
+    googletag.defineSlot("/6514/www.heise.de/developer/dev-inhalt", [[160,600],[200,800]], "div-gpt-ad-4")
+        .addService(googletag.pubads())
+                .setTargeting("pricerange_66424", ypGetInfo("66424"))
+                .setTargeting("pid_66424", ypGetInfo("66424", "pid"))
+                .setTargeting("pricerange_223159", ypGetInfo("223159"))
+                .setTargeting("pid_223159", ypGetInfo("223159", "pid"))
+                .setTargeting("yl_format", ypGetInfo("223159", "format"));
+
+if (typeof NUGGjson === "object") {
+    for (var nuggkey in NUGGjson) {
+        googletag.pubads().setTargeting(nuggkey, NUGGjson[nuggkey]);
+    }
+}
+googletag.pubads().setTargeting("kw", ["Container","Docker"]);
+googletag.pubads().setTargeting("themenhub", "yes");
+googletag.pubads().enableSyncRendering();
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+</script>
+
+
+
+<style type="text/css">.jw-reset{color:inherit;background-color:transparent;padding:0;margin:0;float:none;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1em;list-style:none;text-align:left;text-transform:none;vertical-align:baseline;border:0;direction:ltr;font-variant:inherit;font-stretch:inherit;-webkit-tap-highlight-color:rgba(255,255,255,0)}@font-face{font-family:'jw-icons';src:url(data:application/font-woff;base64,d09GRgABAAAAABQ4AAsAAAAAE+wAAQABAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgDxID2WNtYXAAAAFoAAAAVAAAAFQaVsydZ2FzcAAAAbwAAAAIAAAACAAAABBnbHlmAAABxAAAD3AAAA9wKJaoQ2hlYWQAABE0AAAANgAAADYIhqKNaGhlYQAAEWwAAAAkAAAAJAmCBdxobXR4AAARkAAAAGwAAABscmAHPWxvY2EAABH8AAAAOAAAADg2EDnwbWF4cAAAEjQAAAAgAAAAIAAiANFuYW1lAAASVAAAAcIAAAHCwZOZtHBvc3QAABQYAAAAIAAAACAAAwAAAAMEmQGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5hYDwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADgAAAAKAAgAAgACAAEAIOYW//3//wAAAAAAIOYA//3//wAB/+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAABABgAAAFoAOAADoAPwBEAEkAACUVIi4CNTQ2Ny4BNTQ+AjMyHgIVFAYHHgEVFA4CIxEyFhc+ATU0LgIjIg4CFRQWFz4BMxExARUhNSEXFSE1IRcVITUhAUAuUj0jCgoKCkZ6o11do3pGCgoKCiM9Ui4qSh4BAjpmiE1NiGY6AQIeSioCVQIL/fWWAXX+i0oBK/7VHh4jPVIuGS4VH0MiXaN6RkZ6o10iQx8VLhkuUj0jAcAdGQ0bDk2IZjo6ZohNDhsNGR3+XgNilZXglZXglZUAAAABAEAAAAPAA4AAIQAAExQeAjMyPgI1MxQOAiMiLgI1ND4CMxUiDgIVMYs6ZohNTYhmOktGeqNdXaN6RkZ6o11NiGY6AcBNiGY6OmaITV2jekZGeqNdXaN6Rks6ZohNAAAEAEAAAATAA4AADgAcACoAMQAAJS4BJyERIREuAScRIREhByMuAyc1HgMXMSsBLgMnNR4DFzErATUeARcxAn8DBQQCDPxGCysLBDz9v1NaCERrjE9irINTCLVbByc6Sio9a1I1CLaBL0YMQgsoCgLB/ukDCgIBSPzCQk6HaEIIWAhQgKdgKUg5JgdYBzRRZzx9C0QuAAAAAAUAQAAABMADgAAOABkAJwA1ADwAACUuASchESERLgEnESERIQE1IREhLgMnMQEjLgMnNR4DFzErAS4DJzUeAxcxKwE1HgEXMQKAAgYFAg38QAwqCgRA/cD+gANA/iAYRVlsPgEtWghFa4xPYq2DUgmzWgcnO0oqPGpSNgm6gDBEDEAMKAwCwP7tAggDAUb8wAHQ8P3APWdUQRf98E2IaEIHWghQgKhgKUg4JgdaCDVRZzt9DEMuAAAEAEAAAAXAA4AABAAJAGcAxQAANxEhESEBIREhEQU+ATc+ATMyFhceARceARceARcjLgEnLgEnLgEnLgEjIgYHDgEHDgEHDgEVFBYXHgEXHgEXHgEzMjY3PgE3Mw4BBw4BBw4BBw4BIyImJy4BJy4BJy4BNTQ2Nz4BNzEhPgE3PgEzMhYXHgEXHgEXHgEXIy4BJy4BJy4BJy4BIyIGBw4BBw4BBw4BFRQWFx4BFx4BFx4BMzI2Nz4BNzMOAQcOAQcOAQcOASMiJicuAScuAScuATU0Njc+ATcxQAWA+oAFNvsUBOz8Iw4hExQsGBIhEA8cDQwUCAgLAlsBBQUECgYHDggIEAkQGgsLEgcHCgMDAwMDAwoHBxILCxoQFiEMDA8DWgIJBwgTDQwcERAkFBgsFBMhDg0VBwcHBwcHFQ0Bug0hFBMsGREhEBAcDAwVCAgKAloCBQQECwYGDggIEQgQGwsLEgcHCgMDAwMDAwoHBxILCxsQFSIMDA4DWwIJCAcUDAwdEBEkExksExQhDQ4UBwcICAcHFA4AA4D8gAM1/RYC6tcQGAgJCQUFBQ8KChgPDiETCQ4HBwwFBQgDAwIGBgYRCgoYDQ0cDg0aDQ0XCgoRBgYGDQ0OIhYUJBEQHAsLEgYGBgkICRcPDyQUFCwXGC0VFCQPEBgICQkFBQUPCgoYDw4hEwkOBwcMBQUIAwMCBgYGEQoKGA0NHA4NGg0NFwoKEQYGBg0NDiIWFCQREBwLCxIGBgYJCAkXDw8kFBQsFxgtFRQkDwAAAAADAEAAAAXAA4AAEABvAM4AACUhIiY1ETQ2MyEyFhURFAYjAT4BNz4BNz4BMzIWFx4BFx4BFx4BFzMuAScuAScuAScuASMiBgcOAQcOAQcOARUUFhceARceARceATMyNjc+ATc+ATc+ATcjDgEHDgEjIiYnLgEnLgEnLgE1NDY3OQEhPgE3PgE3PgEzMhYXHgEXHgEXHgEXMy4BJy4BJy4BJy4BIyIGBw4BBw4BBw4BFRQWFx4BFx4BFx4BMzI2Nz4BNz4BNz4BNyMOAQcOASMiJicuAScuAScuATU0Njc5AQUs+6g9V1c9BFg9V1c9/JoDCgcGEgsLGxAJEAgIDgYHCgQEBgFaAgoICBQNDBwQDyESGCwUEyEODRUHBwcHBwcVDQ4hExQrGRQkEBAdDAwUCAcJAloDDwwMIhUQGwsLEgYHCgMEAwMEAbkDCgcHEgsLGxAIEQgHDwYGCwQEBQFbAgoICBUMDBwQECERGSwTFCENDhQHBwgIBwcUDg0hFBMsGRMkERAdDAwUBwgJAlsDDgwNIRUQGwsLEgcHCgMDAwMDAFc+AlY+V1c+/ao+VwH0DRgKCxAGBgYCAwMIBQUMBwcOCRMhDg8YCgoOBgUFCQkIGBAPJBQVLRgXLBQUJA8PFwkICQYGBhILCxwQESQUFiIODQ0GBgYRCgoXDQ0aDg4bDQ0YCgsQBgYGAgMDCAUFDAcHDgkTIQ4PGAoKDgYFBQkJCBgQDyQUFS0YFywUFCQPDxcJCAkGBgYSCwscEBEkFBYiDg0NBgYGEQoKFw0NGg4OGw0AAAABAOAAoAMgAuAAFAAAARQOAiMiLgI1ND4CMzIeAhUDIC1OaTw8aU4tLU5pPDxpTi0BwDxpTi0tTmk8PGlOLS1OaTwAAAMAQAAQBEADkAADABAAHwAANwkBISUyNjU0JiMiBhUUFjMTNCYjIgYVERQWMzI2NRFAAgACAPwAAgAOFRUODhUVDiMVDg4VFQ4OFRADgPyAcBYQDxgWERAWAeYPGBYR/tcPGBYRASkAAgBAAAADwAOAAAcADwAANxEXNxcHFyEBIREnByc3J0CAsI2wgP5zAfMBjYCwjbCAAAGNgLCNsIADgP5zgLCNsIAAAAAFAEAAAAXAA4AABAAJABYAMwBPAAA3ESERIQEhESERATM1MxEjNSMVIxEzFSUeARceARceARUUBgcOAQcOAQcOASsBETMeARcxBxEzMjY3PgE3PgE3PgE1NCYnLgEnLgEnLgErAUAFgPqABTb7FATs/FS2YGC2ZGQCXBQeDg8UBwcJBgcHEwwMIRMTLBuwsBYqE6BHCRcJChIIBw0FBQUEAwINBwcTDAwgETcAA4D8gAM2/RcC6f7Arf5AwMABwK2dBxQODyIWFTAbGC4TFiIPDhgKCQcBwAIHB0P+5gQDAg0HBxcMDCETER0PDhgKCQ8EBQUABAA9AAAFwAOAABAAHQA7AFkAACUhIiY1ETQ2MyEyFhURFAYjASMVIzUjETM1MxUzEQUuAScuAScuASsBETMyNjc+ATc+ATc+ATUuASc5AQcOAQcOASsBETMyFhceARceARceARUUBgcOAQc5AQUq+6k+WFg+BFc+WFg+/bNgs2Rks2ABsAcXDA4fExMnFrCwGywTEx4PDBMHBwYCCAl3CBIKCRQMRzcTHgwMEwcHCwQDBAUFBQ0HAFg+AlQ+WFg+/aw+WAKdra3+QMDAAcB9FiIODxQHBwb+QAkHCRgPDiUTFiwYHTAW4ggNAgMEAR8EBQUPCgoYDw4fERMfDwwXBwAAAAABAEMABgOgA3oAjwAAExQiNScwJic0JicuAQcOARUcARUeARceATc+ATc+ATE2MhUwFAcUFhceARceATMyNjc+ATc+ATc+AzE2MhUwDgIVFBYXHgEXFjY3PgE3PgE3PgE3PgM3PAE1NCYnJgYHDgMxBiI1MDwCNTQmJyYGBw4BBw4DMQYiNTAmJy4BJyYGBw4BMRWQBgQIBAgCBQ4KBwkDFgcHIQ8QDwcHNgUEAwMHBQsJChcMBQ0FBwsHDBMICR8cFQUFAwQDCAUHFRERJBEMEwgJEgUOGQwGMjgvBAkHDBYEAz1IPAQFLyQRIhEQFgoGIiUcBQUEAgMYKCcmCgcsAboFBQwYDwUKBwUEAgMNBwcLBxRrDhENBwggDxOTCgqdMBM1EQwTCAcFBAIFCgcPIw4UQ0IxCgpTc3glEyMREBgIBwEKBxUKESUQJ00mE6/JrA8FBgIHDQMECAkGla2PCQk1VGYxNTsHAgUKChwQC2BqVQoKehYfTwUDRx8TkAMAAAAAAgBGAAAENgOAAAQACAAAJREzESMJAhEDxnBw/IADgPyAAAOA/IADgP5A/kADgAAAAgCAAAADgAOAAAQACQAAJREhESEBIREhEQKAAQD/AP4AAQD/AAADgPyAA4D8gAOAAAAAAAEAgAAABAADgAADAAAJAREBBAD8gAOAAcD+QAOA/kAAAgBKAAAEOgOAAAQACAAANxEjETMJAhG6cHADgPyAA4AAA4D8gAOA/kD+QAOAAAAAAQBDACADQwOgACkAAAEeARUUDgIjIi4CNTQ+AjM1DQE1Ig4CFRQeAjMyPgI1NCYnNwMNGhw8aYxPT4xoPT1ojE8BQP7APGlOLS1OaTw8aU4tFhNTAmMrYzVPjGg9PWiMT0+MaD2ArbOALU5pPDxpTi0tTmk8KUsfMAAAAAEAQABmAiADEwAGAAATETMlESUjQM0BE/7tzQEzARPN/VPNAAQAQAAABJADgAAXACsAOgBBAAAlJz4DNTQuAic3HgMVFA4CBzEvAT4BNTQmJzceAxUOAwcxJz4BNTQmJzceARUUBgcnBREzJRElIwPaKiY+KxcXKz4mKipDMBkZMEMqpCk5REQ5KSE0JBQBFCQzIcMiKCgiKiYwMCYq/c3NARP+7c0AIyheaXI8PHFpXikjK2ZyfEFBfHJmK4MjNZFUVJE1Ix5IUFgvL1lRRx2zFkgpK0YVIxxcNDVZHykDARPN/VPNAAACAEAAAAPDA4AABwAPAAABFyERFzcXBwEHJzcnIREnAypw/qlwl3mZ/iaWepZwAVdtAnNwAVdwlnqT/iOWepZw/qpsAAMAQAETBcACYAAMABkAJgAAARQGIyImNTQ2MzIWFSEUBiMiJjU0NjMyFhUhFAYjIiY1NDYzMhYVAY1iRUVhYUVFYgIWYUVFYmJFRWECHWFFRWJiRUVhAbpFYmJFRWFhRUViYkVFYWFFRWJiRUVhYUUAAAAAAQBmACYDmgNaACAAAAEXFhQHBiIvAQcGIicmND8BJyY0NzYyHwE3NjIXFhQPAQKj9yQkJGMd9vYkYx0kJPf3JCQkYx329iRjHSQk9wHA9iRjHSQk9/ckJCRjHfb2JGMdJCT39yQkJGMd9gAABgBEAAQDvAN8AAQACQAOABMAGAAdAAABIRUhNREhFSE1ESEVITUBMxUjNREzFSM1ETMVIzUBpwIV/esCFf3rAhX96/6dsrKysrKyA3xZWf6dWVn+nVlZAsaysv6dsrL+nbKyAAEAAAABGZqh06s/Xw889QALBAAAAAAA0dQiKwAAAADR1CIrAAAAAAXAA6AAAAAIAAIAAAAAAAAAAQAAA8D/wAAABgAAAAAABcAAAQAAAAAAAAAAAAAAAAAAABsEAAAAAAAAAAAAAAACAAAABgAAYAQAAEAFAABABQAAQAYAAEAGAABABAAA4ASAAEAEAABABgAAQAYAAD0D4ABDBIAARgQAAIAEAACABIAASgOAAEMEwABABMAAQAQAAEAGAABABAAAZgQAAEQAAAAAAAoAFAAeAIgAuAEEAWAChgOyA9QECAQqBKQFJgXoBgAGGgYqBkIGgAaSBvQHFgdQB4YHuAABAAAAGwDPAAYAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEADAAAAAEAAAAAAAIABwCNAAEAAAAAAAMADABFAAEAAAAAAAQADACiAAEAAAAAAAUACwAkAAEAAAAAAAYADABpAAEAAAAAAAoAGgDGAAMAAQQJAAEAGAAMAAMAAQQJAAIADgCUAAMAAQQJAAMAGABRAAMAAQQJAAQAGACuAAMAAQQJAAUAFgAvAAMAAQQJAAYAGAB1AAMAAQQJAAoANADganctc2l4LWljb25zAGoAdwAtAHMAaQB4AC0AaQBjAG8AbgBzVmVyc2lvbiAxLjEAVgBlAHIAcwBpAG8AbgAgADEALgAxanctc2l4LWljb25zAGoAdwAtAHMAaQB4AC0AaQBjAG8AbgBzanctc2l4LWljb25zAGoAdwAtAHMAaQB4AC0AaQBjAG8AbgBzUmVndWxhcgBSAGUAZwB1AGwAYQByanctc2l4LWljb25zAGoAdwAtAHMAaQB4AC0AaQBjAG8AbgBzRm9udCBnZW5lcmF0ZWQgYnkgSWNvTW9vbi4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==) format('woff'),url(data:application/octet-stream;base64,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) format('truetype');font-weight:normal;font-style:normal}.jw-icon-inline,.jw-icon-tooltip,.jw-icon-display,.jw-controlbar .jw-menu .jw-option:before{font-family:'jw-icons';-webkit-font-smoothing:antialiased;font-style:normal;font-weight:normal;text-transform:none;background-color:transparent;font-variant:normal;-webkit-font-feature-settings:"liga";-ms-font-feature-settings:"liga" 1;-o-font-feature-settings:"liga";font-feature-settings:"liga";-moz-osx-font-smoothing:grayscale}.jw-icon-audio-tracks:before{content:"\e600"}.jw-icon-buffer:before{content:"\e601"}.jw-icon-cast:before{content:"\e603"}.jw-icon-cast.jw-off:before{content:"\e602"}.jw-icon-cc:before{content:"\e605"}.jw-icon-cue:before{content:"\e606"}.jw-icon-menu-bullet:before{content:"\e606"}.jw-icon-error:before{content:"\e607"}.jw-icon-fullscreen:before{content:"\e608"}.jw-icon-fullscreen.jw-off:before{content:"\e613"}.jw-icon-hd:before{content:"\e60a"}.jw-watermark:before,.jw-rightclick-logo:before{content:"\e60b"}.jw-icon-next:before{content:"\e60c"}.jw-icon-pause:before{content:"\e60d"}.jw-icon-play:before{content:"\e60e"}.jw-icon-prev:before{content:"\e60f"}.jw-icon-replay:before{content:"\e610"}.jw-icon-volume:before{content:"\e612"}.jw-icon-volume.jw-off:before{content:"\e611"}.jw-icon-more:before{content:"\e614"}.jw-icon-close:before{content:"\e615"}.jw-icon-playlist:before{content:"\e616"}.jwplayer{width:100%;font-size:16px;position:relative;display:block;min-height:0;overflow:hidden;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;background-color:#000;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.jwplayer *{box-sizing:inherit}.jwplayer.jw-flag-aspect-mode{height:auto !important}.jwplayer.jw-flag-aspect-mode .jw-aspect{display:block}.jwplayer .jw-aspect{display:none}.jwplayer.jw-no-focus:focus,.jwplayer .jw-swf{outline:none}.jwplayer.jw-ie:focus{outline:#585858 dotted 1px}.jwplayer:hover .jw-display-icon-container{background-color:#333;background:#333;background-size:#333}.jw-media,.jw-preview,.jw-overlays,.jw-controls{position:absolute;width:100%;height:100%;top:0;left:0;bottom:0;right:0}.jw-media{overflow:hidden;cursor:pointer}.jw-overlays{cursor:auto}.jw-media.jw-media-show{visibility:visible;opacity:1}.jw-controls.jw-controls-disabled{display:none}.jw-controls .jw-controls-right{position:absolute;top:0;right:0;left:0;bottom:2em}.jw-text{height:1em;font-family:Arial,Helvetica,sans-serif;font-size:.75em;font-style:normal;font-weight:normal;color:white;text-align:center;font-variant:normal;font-stretch:normal}.jw-plugin{position:absolute;bottom:2.5em}.jw-plugin .jw-banner{max-width:100%;opacity:0;cursor:pointer;position:absolute;margin:auto auto 0 auto;left:0;right:0;bottom:0;display:block}.jw-cast-screen{width:100%;height:100%}.jw-instream{position:absolute;top:0;right:0;bottom:0;left:0;display:none}.jw-icon-playback:before{content:"\e60e"}.jw-preview,.jw-captions,.jw-title,.jw-overlays,.jw-controls{pointer-events:none}.jw-overlays>div,.jw-media,.jw-controlbar,.jw-dock,.jw-logo,.jw-skip,.jw-display-icon-container{pointer-events:all}.jwplayer video{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;margin:auto;background:transparent}.jwplayer video::-webkit-media-controls-start-playback-button{display:none}.jwplayer video::-webkit-media-text-track-display{-webkit-transform:translateY(-1.5em);transform:translateY(-1.5em)}.jwplayer.jw-flag-user-inactive.jw-state-playing video::-webkit-media-text-track-display{-webkit-transform:translateY(0);transform:translateY(0)}.jwplayer.jw-stretch-uniform video{-o-object-fit:contain;object-fit:contain}.jwplayer.jw-stretch-none video{-o-object-fit:none;object-fit:none}.jwplayer.jw-stretch-fill video{-o-object-fit:cover;object-fit:cover}.jwplayer.jw-stretch-exactfit video{-o-object-fit:fill;object-fit:fill}.jw-click{position:absolute;width:100%;height:100%}.jw-preview{position:absolute;display:none;opacity:1;visibility:visible;width:100%;height:100%;background:#000 no-repeat 50% 50%}.jwplayer .jw-preview,.jw-error .jw-preview,.jw-stretch-uniform .jw-preview{background-size:contain}.jw-stretch-none .jw-preview{background-size:auto auto}.jw-stretch-fill .jw-preview{background-size:cover}.jw-stretch-exactfit .jw-preview{background-size:100% 100%}.jw-display-icon-container{position:relative;top:50%;display:table;height:3.5em;width:3.5em;margin:-1.75em auto 0;cursor:pointer}.jw-display-icon-container .jw-icon-display{position:relative;display:table-cell;text-align:center;vertical-align:middle !important;background-position:50% 50%;background-repeat:no-repeat;font-size:2em}.jw-flag-audio-player .jw-display-icon-container,.jw-flag-dragging .jw-display-icon-container{display:none}.jw-icon{font-family:'jw-icons';-webkit-font-smoothing:antialiased;font-style:normal;font-weight:normal;text-transform:none;background-color:transparent;font-variant:normal;-webkit-font-feature-settings:"liga";-ms-font-feature-settings:"liga" 1;-o-font-feature-settings:"liga";font-feature-settings:"liga";-moz-osx-font-smoothing:grayscale}.jw-controlbar{display:table;position:absolute;right:0;left:0;bottom:0;height:2em;padding:0 .25em}.jw-controlbar .jw-hidden{display:none}.jw-controlbar.jw-drawer-expanded .jw-controlbar-left-group,.jw-controlbar.jw-drawer-expanded .jw-controlbar-center-group{opacity:0}.jw-background-color{background-color:#414040}.jw-group{display:table-cell}.jw-controlbar-center-group{width:100%;padding:0 .25em}.jw-controlbar-center-group .jw-slider-time,.jw-controlbar-center-group .jw-text-alt{padding:0}.jw-controlbar-center-group .jw-text-alt{display:none}.jw-controlbar-left-group,.jw-controlbar-right-group{white-space:nowrap}.jw-knob:hover,.jw-icon-inline:hover,.jw-icon-tooltip:hover,.jw-icon-display:hover,.jw-option:before:hover{color:#eee}.jw-icon-inline,.jw-icon-tooltip,.jw-slider-horizontal,.jw-text-elapsed,.jw-text-duration{display:inline-block;height:2em;position:relative;line-height:2em;vertical-align:middle;cursor:pointer}.jw-icon-inline,.jw-icon-tooltip{min-width:1.25em;text-align:center}.jw-icon-playback{min-width:2.25em}.jw-icon-volume{min-width:1.75em;text-align:left}.jw-time-tip{line-height:1em;pointer-events:none}.jw-icon-inline:after,.jw-icon-tooltip:after{width:100%;height:100%;font-size:1em}.jw-icon-cast{display:none}.jw-slider-volume.jw-slider-horizontal,.jw-icon-inline.jw-icon-volume{display:none}.jw-dock{margin:.75em;display:block;opacity:1;clear:right}.jw-dock:after{content:'';clear:both;display:block}.jw-dock-button{cursor:pointer;float:right;position:relative;width:2.5em;height:2.5em;margin:.5em}.jw-dock-button .jw-arrow{display:none;position:absolute;bottom:-0.2em;width:.5em;height:.2em;left:50%;margin-left:-0.25em}.jw-dock-button .jw-overlay{display:none;position:absolute;top:2.5em;right:0;margin-top:.25em;padding:.5em;white-space:nowrap}.jw-dock-button:hover .jw-overlay,.jw-dock-button:hover .jw-arrow{display:block}.jw-dock-image{width:100%;height:100%;background-position:50% 50%;background-repeat:no-repeat;opacity:.75}.jw-title{display:none;position:absolute;top:0;width:100%;font-size:.875em;height:8em;background:-webkit-linear-gradient(top, #000 0, #000 18%, rgba(0,0,0,0) 100%);background:linear-gradient(to bottom, #000 0, #000 18%, rgba(0,0,0,0) 100%)}.jw-title-primary,.jw-title-secondary{padding:.75em 1.5em;min-height:2.5em;width:100%;color:white;white-space:nowrap;text-overflow:ellipsis;overflow-x:hidden}.jw-title-primary{font-weight:bold}.jw-title-secondary{margin-top:-0.5em}.jw-slider-container{display:inline-block;height:1em;position:relative;-ms-touch-action:none;touch-action:none}.jw-rail,.jw-buffer,.jw-progress{position:absolute;cursor:pointer}.jw-progress{background-color:#fff}.jw-rail{background-color:#aaa}.jw-buffer{background-color:#202020}.jw-cue,.jw-knob{position:absolute;cursor:pointer}.jw-cue{background-color:#fff;width:.1em;height:.4em}.jw-knob{background-color:#aaa;width:.4em;height:.4em}.jw-slider-horizontal{width:4em;height:1em}.jw-slider-horizontal.jw-slider-volume{margin-right:5px}.jw-slider-horizontal .jw-rail,.jw-slider-horizontal .jw-buffer,.jw-slider-horizontal .jw-progress{width:100%;height:.4em}.jw-slider-horizontal .jw-progress,.jw-slider-horizontal .jw-buffer{width:0}.jw-slider-horizontal .jw-rail,.jw-slider-horizontal .jw-progress,.jw-slider-horizontal .jw-slider-container{width:100%}.jw-slider-horizontal .jw-knob{left:0;margin-left:-0.325em}.jw-slider-vertical{width:.75em;height:4em;bottom:0;position:absolute;padding:1em}.jw-slider-vertical .jw-rail,.jw-slider-vertical .jw-buffer,.jw-slider-vertical .jw-progress{bottom:0;height:100%}.jw-slider-vertical .jw-progress,.jw-slider-vertical .jw-buffer{height:0}.jw-slider-vertical .jw-slider-container,.jw-slider-vertical .jw-rail,.jw-slider-vertical .jw-progress{bottom:0;width:.75em;height:100%;left:0;right:0;margin:0 auto}.jw-slider-vertical .jw-slider-container{height:4em;position:relative}.jw-slider-vertical .jw-knob{bottom:0;left:0;right:0;margin:0 auto}.jw-slider-time{right:0;left:0;width:100%}.jw-tooltip-time{position:absolute}.jw-slider-volume .jw-buffer{display:none}.jw-captions{position:absolute;display:none;margin:0 auto;width:100%;left:0;bottom:3em;right:0;max-width:90%;text-align:center}.jw-captions.jw-captions-enabled{display:block}.jw-captions-window{display:none;padding:.25em;border-radius:.25em}.jw-captions-window.jw-captions-window-active{display:inline-block}.jw-captions-text{display:inline-block;color:white;background-color:black;word-wrap:break-word;white-space:pre-line;font-style:normal;font-weight:normal;text-align:center;text-decoration:none;line-height:1.3em;padding:.1em .8em}.jw-rightclick{display:none;position:absolute;white-space:nowrap}.jw-rightclick.jw-open{display:block}.jw-rightclick ul{list-style:none;font-weight:bold;border-radius:.15em;margin:0;border:1px solid #444;padding-left:0}.jw-rightclick .jw-rightclick-logo{font-size:2em;color:#ff0147;vertical-align:middle;padding-right:.3em;margin-right:.3em;border-right:1px solid #444}.jw-rightclick li{background-color:#000;border-bottom:1px solid #444;margin:0}.jw-rightclick a{color:#fff;text-decoration:none;padding:1em;display:block;font-size:.6875em}.jw-rightclick li:last-child{border-bottom:none}.jw-rightclick li:hover{background-color:#1a1a1a;cursor:pointer}.jw-rightclick .jw-featured{background-color:#252525;vertical-align:middle}.jw-rightclick .jw-featured a{color:#777}.jw-logo{position:absolute;margin:.75em;cursor:pointer;pointer-events:all;background-repeat:no-repeat;background-size:contain;top:auto;right:auto;left:auto;bottom:auto}.jw-logo .jw-flag-audio-player{display:none}.jw-logo-top-right{top:0;right:0}.jw-logo-top-left{top:0;left:0}.jw-logo-bottom-left{bottom:0;left:0}.jw-logo-bottom-right{bottom:0;right:0}.jw-watermark{position:absolute;top:50%;left:0;right:0;bottom:0;text-align:center;font-size:14em;color:#eee;opacity:.33;pointer-events:none}.jw-icon-tooltip.jw-open .jw-overlay{opacity:1;visibility:visible}.jw-icon-tooltip.jw-hidden{display:none}.jw-overlay-horizontal{display:none}.jw-icon-tooltip.jw-open-drawer:before{display:none}.jw-icon-tooltip.jw-open-drawer .jw-overlay-horizontal{opacity:1;display:inline-block;vertical-align:top}.jw-overlay:before{position:absolute;top:0;bottom:0;left:-50%;width:100%;background-color:rgba(0,0,0,0);content:" "}.jw-slider-time .jw-overlay:before{height:1em;top:auto}.jw-time-tip,.jw-volume-tip,.jw-menu{position:relative;left:-50%;border:solid 1px #000;margin:0}.jw-volume-tip{width:100%;height:100%;display:block}.jw-time-tip{text-align:center;font-family:inherit;color:#aaa;bottom:1em;border:solid 4px #000}.jw-time-tip .jw-text{line-height:1em}.jw-controlbar .jw-overlay{margin:0;position:absolute;bottom:2em;left:50%;opacity:0;visibility:hidden}.jw-controlbar .jw-overlay .jw-contents{position:relative}.jw-controlbar .jw-option{position:relative;white-space:nowrap;cursor:pointer;list-style:none;height:1.5em;font-family:inherit;line-height:1.5em;color:#aaa;padding:0 .5em;font-size:.8em}.jw-controlbar .jw-option:hover,.jw-controlbar .jw-option:before:hover{color:#eee}.jw-controlbar .jw-option:before{padding-right:.125em}.jw-playlist-container ::-webkit-scrollbar-track{background-color:#333;border-radius:10px}.jw-playlist-container ::-webkit-scrollbar{width:5px;border:10px solid black;border-bottom:0;border-top:0}.jw-playlist-container ::-webkit-scrollbar-thumb{background-color:white;border-radius:5px}.jw-tooltip-title{border-bottom:1px solid #444;text-align:left;padding-left:.7em}.jw-playlist{max-height:11em;min-height:4.5em;overflow-x:hidden;overflow-y:scroll;width:calc(100% - 4px)}.jw-playlist .jw-option{height:3em;margin-right:5px;color:white;padding-left:1em;font-size:.8em}.jw-playlist .jw-label,.jw-playlist .jw-name{display:inline-block;line-height:3em;text-align:left;overflow:hidden;white-space:nowrap}.jw-playlist .jw-label{width:1em}.jw-playlist .jw-name{width:11em}.jw-skip{cursor:default;position:absolute;float:right;display:inline-block;right:.75em;bottom:3em}.jw-skip.jw-skippable{cursor:pointer}.jw-skip.jw-hidden{visibility:hidden}.jw-skip .jw-skip-icon{display:none;margin-left:-0.75em}.jw-skip .jw-skip-icon:before{content:"\e60c"}.jw-skip .jw-text,.jw-skip .jw-skip-icon{color:#aaa;vertical-align:middle;line-height:1.5em;font-size:.7em}.jw-skip.jw-skippable:hover{cursor:pointer}.jw-skip.jw-skippable:hover .jw-text,.jw-skip.jw-skippable:hover .jw-skip-icon{color:#eee}.jw-skip.jw-skippable .jw-skip-icon{display:inline;margin:0}.jwplayer.jw-state-playing.jw-flag-casting .jw-display-icon-container,.jwplayer.jw-state-paused.jw-flag-casting .jw-display-icon-container{display:table}.jwplayer.jw-flag-casting .jw-display-icon-container{border-radius:0;border:1px solid white;position:absolute;top:auto;left:.5em;right:.5em;bottom:50%;margin-bottom:-12.5%;height:50%;width:50%;padding:0;background-repeat:no-repeat;background-position:center}.jwplayer.jw-flag-casting .jw-display-icon-container .jw-icon{font-size:3em}.jwplayer.jw-flag-casting.jw-state-complete .jw-preview{display:none}.jw-cast{position:absolute;width:100%;height:100%;background-repeat:no-repeat;background-size:auto;background-position:50% 50%}.jw-cast-label{position:absolute;left:.5em;right:.5em;bottom:75%;margin-bottom:1.5em;text-align:center}.jw-cast-name{color:#ccc}.jw-state-idle .jw-preview{display:block}.jw-state-idle .jw-icon-display:before{content:"\e60e"}.jw-state-idle .jw-controlbar{display:none}.jw-state-idle .jw-captions{display:none}.jw-state-idle .jw-title{display:block}.jwplayer.jw-state-playing .jw-display-icon-container{display:none}.jwplayer.jw-state-playing .jw-display-icon-container .jw-icon-display:before{content:"\e60d"}.jwplayer.jw-state-playing .jw-icon-playback:before{content:"\e60d"}.jwplayer.jw-state-paused .jw-display-icon-container{display:none}.jwplayer.jw-state-paused .jw-display-icon-container .jw-icon-display:before{content:"\e60e"}.jwplayer.jw-state-paused .jw-icon-playback:before{content:"\e60e"}.jwplayer.jw-state-buffering .jw-display-icon-container .jw-icon-display{-webkit-animation:spin 2s linear infinite;animation:spin 2s linear infinite}.jwplayer.jw-state-buffering .jw-display-icon-container .jw-icon-display:before{content:"\e601"}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.jwplayer.jw-state-buffering .jw-display-icon-container .jw-text{display:none}.jwplayer.jw-state-buffering .jw-icon-playback:before{content:"\e60d"}.jwplayer.jw-state-complete .jw-preview{display:block}.jwplayer.jw-state-complete .jw-display-icon-container .jw-icon-display:before{content:"\e610"}.jwplayer.jw-state-complete .jw-display-icon-container .jw-text{display:none}.jwplayer.jw-state-complete .jw-icon-playback:before{content:"\e60e"}.jwplayer.jw-state-complete .jw-captions{display:none}body .jw-error .jw-title,.jwplayer.jw-state-error .jw-title{display:block}body .jw-error .jw-title .jw-title-primary,.jwplayer.jw-state-error .jw-title .jw-title-primary{white-space:normal}body .jw-error .jw-preview,.jwplayer.jw-state-error .jw-preview{display:block}body .jw-error .jw-controlbar,.jwplayer.jw-state-error .jw-controlbar{display:none}body .jw-error .jw-captions,.jwplayer.jw-state-error .jw-captions{display:none}body .jw-error:hover .jw-display-icon-container,.jwplayer.jw-state-error:hover .jw-display-icon-container{cursor:default;color:#fff;background:#000}body .jw-error .jw-icon-display,.jwplayer.jw-state-error .jw-icon-display{cursor:default;font-family:'jw-icons';-webkit-font-smoothing:antialiased;font-style:normal;font-weight:normal;text-transform:none;background-color:transparent;font-variant:normal;-webkit-font-feature-settings:"liga";-ms-font-feature-settings:"liga" 1;-o-font-feature-settings:"liga";font-feature-settings:"liga";-moz-osx-font-smoothing:grayscale}body .jw-error .jw-icon-display:before,.jwplayer.jw-state-error .jw-icon-display:before{content:"\e607"}body .jw-error .jw-icon-display:hover,.jwplayer.jw-state-error .jw-icon-display:hover{color:#fff}body .jw-error{font-size:16px;background-color:#000;color:#eee;width:100%;height:100%;display:table;opacity:1;position:relative}body .jw-error .jw-icon-container{position:absolute;width:100%;height:100%;top:0;left:0;bottom:0;right:0}.jwplayer.jw-flag-cast-available .jw-controlbar{display:table}.jwplayer.jw-flag-cast-available .jw-icon-cast{display:inline-block}.jwplayer.jw-flag-skin-loading .jw-captions,.jwplayer.jw-flag-skin-loading .jw-controls,.jwplayer.jw-flag-skin-loading .jw-title{display:none}.jwplayer.jw-flag-fullscreen{width:100% !important;height:100% !important;top:0;right:0;bottom:0;left:0;z-index:1000;margin:0;position:fixed}.jwplayer.jw-flag-fullscreen.jw-flag-user-inactive{cursor:none;-webkit-cursor-visibility:auto-hide}.jwplayer.jw-flag-live .jw-controlbar .jw-text-elapsed,.jwplayer.jw-flag-live .jw-controlbar .jw-text-duration,.jwplayer.jw-flag-live .jw-controlbar .jw-slider-time{display:none}.jwplayer.jw-flag-live .jw-controlbar .jw-text-alt{display:inline}.jwplayer.jw-flag-user-inactive.jw-state-playing .jw-controlbar,.jwplayer.jw-flag-user-inactive.jw-state-playing .jw-dock{display:none}.jwplayer.jw-flag-user-inactive.jw-state-playing .jw-logo.jw-hide{display:none}.jwplayer.jw-flag-user-inactive.jw-state-playing .jw-plugin,.jwplayer.jw-flag-user-inactive.jw-state-playing .jw-captions{bottom:.5em}.jwplayer.jw-flag-user-inactive.jw-state-buffering .jw-controlbar{display:none}.jwplayer.jw-flag-media-audio .jw-controlbar{display:table}.jwplayer.jw-flag-media-audio.jw-flag-user-inactive .jw-controlbar{display:table}.jw-flag-media-audio .jw-preview{display:block}.jwplayer.jw-flag-ads .jw-preview,.jwplayer.jw-flag-ads .jw-dock{display:none}.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-inline,.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-tooltip,.jwplayer.jw-flag-ads .jw-controlbar .jw-text,.jwplayer.jw-flag-ads .jw-controlbar .jw-slider-horizontal{display:none}.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-playback,.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-volume,.jwplayer.jw-flag-ads .jw-controlbar .jw-slider-volume,.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-fullscreen{display:inline-block}.jwplayer.jw-flag-ads .jw-controlbar .jw-text-alt{display:inline}.jwplayer.jw-flag-ads .jw-controlbar .jw-slider-volume.jw-slider-horizontal,.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-inline.jw-icon-volume{display:inline-block}.jwplayer.jw-flag-ads .jw-controlbar .jw-icon-tooltip.jw-icon-volume{display:none}.jwplayer.jw-flag-ads .jw-logo,.jwplayer.jw-flag-ads .jw-captions{display:none}.jwplayer.jw-flag-ads-googleima .jw-controlbar{display:table;bottom:0}.jwplayer.jw-flag-ads-googleima.jw-flag-touch .jw-controlbar{font-size:1em}.jwplayer.jw-flag-ads-googleima.jw-flag-touch.jw-state-paused .jw-display-icon-container{display:none}.jwplayer.jw-flag-ads-googleima.jw-skin-seven .jw-controlbar{font-size:.9em}.jwplayer.jw-flag-ads-vpaid .jw-controlbar{display:none}.jwplayer.jw-flag-ads-hide-controls .jw-controls{display:none !important}.jwplayer.jw-flag-ads.jw-flag-touch .jw-controlbar{display:table}.jwplayer.jw-flag-overlay-open .jw-title{display:none}.jwplayer.jw-flag-overlay-open .jw-controls-right .jw-logo{display:none}.jwplayer.jw-flag-overlay-open-sharing .jw-controls,.jwplayer.jw-flag-overlay-open-related .jw-controls,.jwplayer.jw-flag-overlay-open-sharing .jw-title,.jwplayer.jw-flag-overlay-open-related .jw-title{display:none}.jwplayer.jw-flag-rightclick-open{overflow:visible}.jwplayer.jw-flag-rightclick-open .jw-rightclick{z-index:16777215}.jw-flag-controls-disabled .jw-controls{visibility:hidden}.jw-flag-controls-disabled .jw-logo{visibility:visible}.jw-flag-controls-disabled .jw-media{cursor:auto}body .jwplayer.jw-flag-flash-blocked .jw-title{display:block}body .jwplayer.jw-flag-flash-blocked .jw-controls,body .jwplayer.jw-flag-flash-blocked .jw-overlays,body .jwplayer.jw-flag-flash-blocked .jw-preview{display:none}.jw-flag-touch .jw-controlbar,.jw-flag-touch .jw-skip,.jw-flag-touch .jw-plugin{font-size:1.5em}.jw-flag-touch .jw-captions{bottom:4.25em}.jw-flag-touch .jw-icon-tooltip.jw-open-drawer:before{display:inline}.jw-flag-touch .jw-icon-tooltip.jw-open-drawer:before{content:"\e615"}.jw-flag-touch .jw-display-icon-container{pointer-events:none}.jw-flag-touch.jw-state-paused .jw-display-icon-container{display:table}.jw-flag-touch.jw-state-paused.jw-flag-dragging .jw-display-icon-container{display:none}.jw-flag-compact-player .jw-icon-playlist,.jw-flag-compact-player .jw-text-elapsed,.jw-flag-compact-player .jw-text-duration{display:none}.jwplayer.jw-flag-audio-player{background-color:transparent}.jwplayer.jw-flag-audio-player .jw-media{visibility:hidden}.jwplayer.jw-flag-audio-player .jw-media object{width:1px;height:1px}.jwplayer.jw-flag-audio-player .jw-preview,.jwplayer.jw-flag-audio-player .jw-display-icon-container{display:none}.jwplayer.jw-flag-audio-player .jw-controlbar{display:table;height:auto;left:0;bottom:0;margin:0;width:100%;min-width:100%;opacity:1}.jwplayer.jw-flag-audio-player .jw-controlbar .jw-icon-fullscreen,.jwplayer.jw-flag-audio-player .jw-controlbar .jw-icon-tooltip{display:none}.jwplayer.jw-flag-audio-player .jw-controlbar .jw-slider-volume.jw-slider-horizontal,.jwplayer.jw-flag-audio-player .jw-controlbar .jw-icon-inline.jw-icon-volume{display:inline-block}.jwplayer.jw-flag-audio-player .jw-controlbar .jw-icon-tooltip.jw-icon-volume{display:none}.jwplayer.jw-flag-audio-player.jw-flag-user-inactive .jw-controlbar{display:table}.jw-skin-seven .jw-background-color{background:#000}.jw-skin-seven .jw-controlbar{border-top:#333 1px solid;height:2.5em}.jw-skin-seven .jw-group{vertical-align:middle}.jw-skin-seven .jw-playlist{background-color:rgba(0,0,0,0.5)}.jw-skin-seven .jw-playlist-container{left:-43%;background-color:rgba(0,0,0,0.5)}.jw-skin-seven .jw-playlist-container .jw-option{border-bottom:1px solid #444}.jw-skin-seven .jw-playlist-container .jw-option:hover,.jw-skin-seven .jw-playlist-container .jw-option.jw-active-option{background-color:black}.jw-skin-seven .jw-playlist-container .jw-option:hover .jw-label{color:#ff0046}.jw-skin-seven .jw-playlist-container .jw-icon-playlist{margin-left:0}.jw-skin-seven .jw-playlist-container .jw-label .jw-icon-play{color:#ff0046}.jw-skin-seven .jw-playlist-container .jw-label .jw-icon-play:before{padding-left:0}.jw-skin-seven .jw-tooltip-title{background-color:#000;color:#fff}.jw-skin-seven .jw-text{color:#fff}.jw-skin-seven .jw-button-color{color:#fff}.jw-skin-seven .jw-button-color:hover{color:#ff0046}.jw-skin-seven .jw-toggle{color:#ff0046}.jw-skin-seven .jw-toggle.jw-off{color:#fff}.jw-skin-seven .jw-controlbar .jw-icon:before,.jw-skin-seven .jw-text-elapsed,.jw-skin-seven .jw-text-duration{padding:0 .7em}.jw-skin-seven .jw-controlbar .jw-icon-prev:before{padding-right:.25em}.jw-skin-seven .jw-controlbar .jw-icon-playlist:before{padding:0 .45em}.jw-skin-seven .jw-controlbar .jw-icon-next:before{padding-left:.25em}.jw-skin-seven .jw-icon-prev,.jw-skin-seven .jw-icon-next{font-size:.7em}.jw-skin-seven .jw-icon-prev:before{border-left:1px solid #666}.jw-skin-seven .jw-icon-next:before{border-right:1px solid #666}.jw-skin-seven .jw-icon-display{color:#fff}.jw-skin-seven .jw-icon-display:before{padding-left:0}.jw-skin-seven .jw-display-icon-container{border-radius:50%;border:1px solid #333}.jw-skin-seven .jw-rail{background-color:#384154;box-shadow:none}.jw-skin-seven .jw-buffer{background-color:#666f82}.jw-skin-seven .jw-progress{background:#ff0046}.jw-skin-seven .jw-knob{width:.6em;height:.6em;background-color:#fff;box-shadow:0 0 0 1px #000;border-radius:1em}.jw-skin-seven .jw-slider-horizontal .jw-slider-container{height:.95em}.jw-skin-seven .jw-slider-horizontal .jw-rail,.jw-skin-seven .jw-slider-horizontal .jw-buffer,.jw-skin-seven .jw-slider-horizontal .jw-progress{height:.2em;border-radius:0}.jw-skin-seven .jw-slider-horizontal .jw-knob{top:-0.2em}.jw-skin-seven .jw-slider-horizontal .jw-cue{top:-0.05em;width:.3em;height:.3em;background-color:#fff;border-radius:50%}.jw-skin-seven .jw-slider-vertical .jw-rail,.jw-skin-seven .jw-slider-vertical .jw-buffer,.jw-skin-seven .jw-slider-vertical .jw-progress{width:.2em}.jw-skin-seven .jw-slider-vertical .jw-knob{margin-bottom:-0.3em}.jw-skin-seven .jw-volume-tip{width:100%;left:-45%;padding-bottom:.7em}.jw-skin-seven .jw-text-duration{color:#666f82}.jw-skin-seven .jw-controlbar-right-group .jw-icon-tooltip:before,.jw-skin-seven .jw-controlbar-right-group .jw-icon-inline:before{border-left:1px solid #666}.jw-skin-seven .jw-controlbar-right-group .jw-icon-inline:first-child:before{border:none}.jw-skin-seven .jw-dock .jw-dock-button{border-radius:50%;border:1px solid #333}.jw-skin-seven .jw-dock .jw-overlay{border-radius:2.5em}.jw-skin-seven .jw-icon-tooltip .jw-active-option{background-color:#ff0046;color:#fff}.jw-skin-seven .jw-icon-volume{min-width:2.6em}.jw-skin-seven .jw-time-tip,.jw-skin-seven .jw-menu,.jw-skin-seven .jw-volume-tip,.jw-skin-seven .jw-skip{border:1px solid #333}.jw-skin-seven .jw-time-tip{padding:.2em;bottom:1.3em}.jw-skin-seven .jw-menu,.jw-skin-seven .jw-volume-tip{bottom:.24em}.jw-skin-seven .jw-skip{padding:.4em;border-radius:1.75em}.jw-skin-seven .jw-skip .jw-text,.jw-skin-seven .jw-skip .jw-icon-inline{color:#fff;line-height:1.75em}.jw-skin-seven .jw-skip.jw-skippable:hover .jw-text,.jw-skin-seven .jw-skip.jw-skippable:hover .jw-icon-inline{color:#ff0046}.jw-skin-seven.jw-flag-touch .jw-controlbar .jw-icon:before,.jw-skin-seven.jw-flag-touch .jw-text-elapsed,.jw-skin-seven.jw-flag-touch .jw-text-duration{padding:0 .35em}.jw-skin-seven.jw-flag-touch .jw-controlbar .jw-icon-prev:before{padding:0 .125em 0 .7em}.jw-skin-seven.jw-flag-touch .jw-controlbar .jw-icon-next:before{padding:0 .7em 0 .125em}.jw-skin-seven.jw-flag-touch .jw-controlbar .jw-icon-playlist:before{padding:0 .225em}</style><script type="text/javascript" src="https://advertiser.wbtrk.net/js/advertiser.js"></script></head>
+
+<body class="developer" id="pre-akwa" data-device="desktop">
+
+
+    
+
+
+<div class="heisetopnavi v14">
+    <div class="heisetopnavi_header">
+        <header>
+            <div class="heisetopnavi_login">
+                
+                    
+                    <script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/login.min.js"></script>
+                
+                <div id="navi_login">
+                    <p><span class="heise_foren">Heise-Foren:</span> <a href="https://www.heise.de/sso/login/?forward=https%3A%2F%2Fwww.heise.de%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html">Einloggen</a> | <a href="https://www.heise.de/sso/registration?forward=https%3A%2F%2Fwww.heise.de%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html">Registrieren</a></p>
+                </div>
+            </div>
+            <div class="heisetopnavi_hover_legacy">
+                <nav>
+                    <a href="https://www.heise.de/" class="heisetopnavi_logo" title="heise online">
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/heise_online_logo_top.gif" alt="heise online" id="heisetopnavi_ho_logo_top_img">
+                    </a>
+                    <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html#heisetopnavi_sub_container" class="heisetopnavi_button" aria-haspopup="true"></a>
+                    <div id="heisetopnavi_sub_container">
+                        <ul id="heisetopnavi_sub">
+                            <li class="new_list one">
+                                <ul>
+                                    <li class="heisetopnavi_ho"><a href="https://www.heise.de/" title="heise online – IT-News" name="dachzeile.ho.ho">News</a></li>
+                                    <li class="heisetopnavi_dev"><a href="https://www.heise.de/developer/" title="heise Developer – Informationen für Entwickler" name="dachzeile.ho.developer">heise Developer</a></li>
+                                    <li class="heisetopnavi_net"><a href="https://www.heise.de/thema/Netze" title="Themenseite Netze" name="dachzeile.ho.netze">heise Netze</a></li>
+                                    <li class="heisetopnavi_op"><a href="https://www.heise.de/thema/Linux-und-Open-Source" title="Themenseite Linux und Open Source" name="dachzeile.ho.open">heise Open Source</a></li>
+                                    <li class="heisetopnavi_sec"><a href="https://www.heise.de/security/" title="heise Security – News, Dienste und Foren zum Thema Computer-Sicherheit" name="dachzeile.ho.security">heise Security</a></li>
+                                </ul>
+                            </li>
+                            <li class="new_list two">
+                                <ul>
+                                    <li class="heisetopnavi_ct"><a href="https://www.heise.de/ct/" title="c&#39;t – Magazin für Computertechnik" name="dachzeile.ho.ct">c't</a></li>
+                                    <li class="heisetopnavi_ix"><a href="https://www.heise.de/ix/" title="iX – Magazin für professionelle Informationstechnik" name="dachzeile.ho.ix">iX</a></li>
+                                    <li class="heisetopnavi_tr"><a href="https://www.heise.de/tr/" title="Technology Review – Das M.I.T.-Magazin für Innovation" name="dachzeile.ho.tr">Technology Review</a></li>
+                                    <li class="heisetopnavi_df"><a href="https://www.heise.de/foto/" title="c&#39;t Fotografie" name="dachzeile.ho.ct-fotografie">c't Fotografie</a></li>
+                                    <li class="heisetopnavi_mac"><a href="https://www.heise.de/mac-and-i/" title="Mac &amp; i – Nachrichten, Tests, Tipps und Meinungen rund um Apple" name="dachzeile.ho.mac-and-i">Mac &amp; i</a></li>
+                                    <li class="heisetopnavi_hh"><a href="https://www.heise.de/make/" title="Make – Kreativ mit Technik" name="dachzeile.ho.make">Make</a></li>
+                                </ul>
+                            </li>
+                            <li class="new_list three">
+                                <ul>
+                                    <li class="heisetopnavi_tp"><a href="https://www.heise.de/tp/" title="Telepolis" name="dachzeile.ho.tp">Telepolis</a></li>
+                                    <li class="heisetopnavi_aut"><a href="https://www.heise.de/autos/" title="heise Autos – News, Tests, Technik, Service rund ums Auto" name="dachzeile.ho.autos">heise Autos</a></li>
+                                    <li class="heisetopnavi_tech"><a href="https://www.techstage.de/" title="TechStage – News, Tests &amp; Praxis zu Smartphones und Tablets mit Android, iOS, Windows Phone &amp; Co." name="dachzeile.ho.techstage">TechStage</a></li>
+                                </ul>
+                            </li>
+                            <li class="new_list four">
+                                <ul>
+                                    <li class="heisetopnavi_swv"><a href="https://www.heise.de/download/" title="heise Download – Software zum Download fuer Windows, Mac, Linux, iPhone, Symbian, Android" name="dachzeile.ho.download">heise Download</a></li>
+                                    <li class="heisetopnavi_pvg"><a href="https://www.heise.de/preisvergleich/" title="Preisvergleich – Günstige Preise, Meinungen und Bewertungen zu vielen Produkten" name="dachzeile.ho.preisvergleich">Preisvergleich</a></li>
+                                    <li class="heisetopnavi_hbs"><a href="https://business-services.heise.de/?source=wptopnavi" title="heise Business Services – Produkte und Lösungen namhafter IT-Hersteller" name="dachzeile.ho.whitepapers">Whitepapers</a></li>
+                                    <li class="heisetopnavi_hbs"><a href="https://business-services.heise.de/?source=wctopnavi" title="heise Business Services – Produkte und Lösungen namhafter IT-Hersteller" name="dachzeile.ho.webcasts">Webcasts</a></li>
+                                    <li class="heisetopnavi_job"><a href="https://www.heise.de/jobs/" title="heise jobs – Jobbörse für qualifizierte Fach- und Führungskräfte aus der IT-Branche" name="dachzeile.ho.jobs">Stellenmarkt</a></li>
+                                    <li class="heisetopnavi_gutscheine"><a href="https://gutscheine.heise.de/" title="heise Gutscheine – Online-Gutscheine helfen dir schnell und einfach Geld zu sparen" name="dachzeile.ho.gutscheine">Gutscheine</a></li>
+                                    <li class="heisetopnavi_itm"><a href="https://www.heise.de/itmarkt/" title="IT-Markt – Branchenverzeichnis der IT-Fachhändler" name="dachzeile.ho.itmarkt">IT-Markt</a></li>
+                                    <li class="heisetopnavi_tarifr"><a href="https://www.heise.de/tarifrechner/" title="Tarifrechner – DSL, Mobiles Internet, Handy, Telefon, Strom, Gas" name="dachzeile.ho.tarifrechner">Tarifrechner</a></li>
+                                    <li class="heisetopnavi_tools"><a href="https://www.heise.de/tools/" title="Netzwerk-Tools" name="dachzeile.ho.tools">Netzwerk-Tools</a></li>
+                                    <li class="heisetopnavi_spiele"><a href="https://spiele.heise.de/" title="Spielen bei Heise" name="dachzeile.ho.spiele">Spielen bei Heise</a></li>
+                                </ul>
+                            </li>
+                            <li class="new_list five">
+                                <ul>
+                                    <li class="heisetopnavi_shop"><a href="https://shop.heise.de/" title="heise shop – IT Fachzeitschriften, Bücher, CD/DVD/Blu-ray" name="dachzeile.ho.shop">heise shop</a></li>
+                                    <li class="heisetopnavi_kio"><a href="https://shop.heise.de/artikel-archiv/" title="Artikel-Archiv – c&#39;t, iX, Technology Review, c&#39;t Fotografie, Mac &amp; i, Make, Sonderhefte" name="dachzeile.ho.artikel-archiv">Artikel-Archiv</a></li>
+                                    <li class="heisetopnavi_abo"><a href="https://shop.heise.de/abo" title="Abo – c&#39;t, iX, Technology Review, c&#39;t Fotografie, Mac &amp; i" name="dachzeile.ho.abo">Zeitschriften-Abo</a></li>
+                                    <li class="heisetopnavi_eve"><a href="https://www.heise.de/events/" title="heise Events – Konferenzen, Seminare, Workshops" name="dachzeile.ho.events">Veranstaltungen</a></li>
+                                    <li class="heisetopnavi_hmg"><a href="https://heise-gruppe.de/-1812545" title="Arbeiten bei heise – Heise als Arbeitgeber" name="dachzeile.ho.hmg">Arbeiten bei Heise</a></li>
+                                    <li class="heisetopnavi_media"><a href="https://www.heise.de/mediadaten/" title="Mediadaten Heise Medien" name="dachzeile.ho.mediadaten">Mediadaten</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            
+
+            
+                
+                    
+                    
+            
+
+            <form accept-charset="utf-8" method="get" action="https://www.heise.de/developer/suche/" id="heisetopnavi_search" role="search">
+                <fieldset>
+                    <input type="search" class="search_text ui-autocomplete-input" value="" name="q" placeholder="in heise Developer suchen" data-autocomplete="true" data-searchpath="/developer/suche/" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"><input type="image" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/heise_online_lupe.gif" alt="Los" class="search_submit" name="search_submit">
+                    <input type="hidden" class="search_hidden" value="search" name="rm">
+                </fieldset>
+            </form>
+        </header>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+if (typeof jQuery !== "undefined") {
+    jQuery(document).ready(function($) {
+        // Support Touch-Devices
+        $('.heisetopnavi_button').bind('touchstart', function(e) {
+            e.preventDefault();
+            if ($(e.target).is('a.heisetopnavi_button')) {
+                $(this).toggleClass('active');
+                $('.heisetopnavi header > nav').toggleClass('hover');
+            }
+        });
+
+        $('.heisetopnavi .heisetopnavi_button').click(function(e) {
+            e.preventDefault();
+        });
+
+        // Support Keyboard
+        $('.heisetopnavi .heisetopnavi_button').keyup(function(e) {
+            if (e.which == 13 && $(e.target).is('a.heisetopnavi_button')) {
+                $('.heisetopnavi .heisetopnavi_button').toggleClass('active');
+                $('.heisetopnavi header > nav').toggleClass('hover');
+            }
+        });
+
+        /*
+         * Open/Close Menu with JavaScript for more Usability
+         */
+
+        $('.heisetopnavi').removeClass('no-touch');
+
+        // Logo + Icon
+        $('.heisetopnavi .heisetopnavi_hover_legacy').mouseenter(function() {
+            var timeout_id = window.setTimeout(function() {
+                $('.heisetopnavi .heisetopnavi_button').addClass('active');
+                $('.heisetopnavi nav').addClass('hover');
+                $('body').addClass('refreshDOM');
+                $('body').removeClass('refreshDOM');
+            }, 300);
+            $(this).data('timeout_id', timeout_id);
+        });
+        $('.heisetopnavi .heisetopnavi_hover_legacy').mouseleave(function() {
+            var timeout_id = $(this).data('timeout_id');
+            window.clearTimeout(timeout_id);
+            timeout_id = window.setTimeout(function() {
+                $('.heisetopnavi .heisetopnavi_button').removeClass('active');
+                $('.heisetopnavi nav').removeClass('hover');
+                $('body').addClass('refreshDOM');
+                $('body').removeClass('refreshDOM');
+            }, 0);
+            $(this).data('timeout_id', timeout_id);
+        });
+    });
+
+    if (typeof heiseLogin != "undefined") {
+        heiseLogin.login_fill_navigation({});
+    }
+}
+</script>
+
+
+<div id="container">
+    <div id="container_content">
+        <div id="logo_bereich">
+         <div id="logo">
+                <a href="https://www.heise.de/developer/" title="heise Developer">
+                    <svg preserveAspectRatio="xMinYMin" xmlns="http://www.w3.org/2000/svg" width="280" height="40" viewBox="0 0 595 86"><path data-name="developer" d="M228.8 64v-3.8h6V21.3h-6v-3.7h23.8c8.3 0 14.7 2 19.1 6s6.6 9.7 6.6 17.2-2.2 13.2-6.6 17.2-10.8 6-19.1 6h-23.8zm17.9-3.7h4.3c4.8 0 8.4-1.6 10.6-4.7s3.3-8 3.3-14.8-1.1-11.7-3.3-14.7-5.8-4.6-10.6-4.6h-4.3v38.7zM319.8 49h-22.7v.2c0 4.2.7 7.4 1.9 9.2s3.3 2.8 6.3 2.8a8.6 8.6 0 0 0 5.8-1.9 9.1 9.1 0 0 0 2.8-5.5h5.1a13.3 13.3 0 0 1-5.3 8.3c-2.7 1.8-6.3 2.7-11.2 2.7s-10.1-1.5-13.2-4.5-4.6-7.3-4.6-12.9 1.6-9.7 4.7-12.8 7.5-4.6 13-4.6 9.7 1.6 12.6 4.8 4.7 8 4.8 14.2zm-12.1-3.6c0-4.3-.4-7.4-1.2-9.2a4.2 4.2 0 0 0-4.2-2.6 4.3 4.3 0 0 0-4.1 2.6c-.8 1.7-1.2 4.6-1.2 8.6v.6h10.6zM338.2 64l-11.7-29.3h-3.6v-3.8h19v3.8h-4l8.3 20.8 8.3-20.8h-4.3v-3.8h12.4v3.8h-3.8L347.1 64h-8.9zm61.7-15h-22.7v.2c0 4.2.7 7.4 1.9 9.2s3.3 2.8 6.3 2.8a8.6 8.6 0 0 0 5.8-1.9 9.1 9.1 0 0 0 2.8-5.5h5.1a13.3 13.3 0 0 1-5.3 8.3c-2.7 1.8-6.3 2.7-11.2 2.7s-10.1-1.5-13.2-4.5-4.6-7.3-4.6-12.9 1.6-9.7 4.7-12.8 7.5-4.6 13-4.6 9.7 1.6 12.6 4.8 4.6 8 4.8 14.2zm-12.1-3.6c0-4.3-.4-7.4-1.2-9.2a4.2 4.2 0 0 0-4.2-2.6 4.3 4.3 0 0 0-4.1 2.6c-.8 1.7-1.2 4.6-1.2 8.6v.6h10.6zm34.1 14.9h4.7V64h-20.4v-3.8h4.7V19.3h-4.7v-3.7h15.7v44.6zm28.9 4.6c-5.8 0-10.4-1.6-13.7-4.6s-5-7.4-5-12.8 1.6-9.7 5-12.8S445 30 450.8 30s10.4 1.6 13.7 4.6 4.9 7.4 4.9 12.8-1.6 9.7-5 12.8-7.8 4.7-13.6 4.7zm0-3.5a5 5 0 0 0 4.9-3c1-2 1.4-5.7 1.4-10.9s-.4-8.9-1.4-10.9a5 5 0 0 0-4.9-3 4.9 4.9 0 0 0-4.9 3c-1 2-1.4 5.7-1.4 10.9s.4 8.9 1.4 10.9a4.8 4.8 0 0 0 4.9 3zm28.6-26.6h-4.7v-3.9h15.7v4.2a9.5 9.5 0 0 1 3.8-3.9 12.5 12.5 0 0 1 5.9-1.3c4.7 0 8.4 1.6 11.1 4.6s4.1 7.4 4.1 12.7-1.3 9.8-4.1 12.9-6.4 4.7-11.1 4.7a12.9 12.9 0 0 1-5.9-1.3 8.7 8.7 0 0 1-3.8-3.9v13.7h5.1v3.8h-20.7v-3.8h4.7V34.7zm11 11.1v3.3c0 3.9.5 6.6 1.5 8.3a5.1 5.1 0 0 0 4.8 2.6 4.8 4.8 0 0 0 4.8-2.8c.9-1.8 1.4-5.1 1.4-9.8s-.4-8-1.4-9.8a5 5 0 0 0-4.8-2.8 5 5 0 0 0-4.8 2.6c-1 1.7-1.4 4.5-1.4 8.3zm66.3 3.1H534v.2c0 4.2.7 7.4 1.9 9.2s3.3 2.8 6.3 2.8a8.6 8.6 0 0 0 5.8-1.9 9.1 9.1 0 0 0 2.8-5.5h5.1a13.3 13.3 0 0 1-5.3 8.3c-2.7 1.8-6.3 2.7-11.2 2.7s-10.1-1.5-13.2-4.5-4.6-7.3-4.6-12.9 1.6-9.7 4.7-12.8 7.5-4.6 13-4.6 9.7 1.6 12.6 4.8 4.6 8 4.8 14.2zm-12.1-3.6c0-4.3-.4-7.4-1.2-9.2a4.2 4.2 0 0 0-4.2-2.6 4.3 4.3 0 0 0-4.1 2.6c-.8 1.7-1.2 4.6-1.2 8.6v.6h10.6zM595 30.6v9.8h-3.5a6.4 6.4 0 0 0-1.4-3.9 4.6 4.6 0 0 0-3.6-1.3 6.3 6.3 0 0 0-5.7 3.2c-1.4 2.1-2.1 5.1-2.1 8.8v13h6V64H563v-3.8h4.7V34.7h-5.1v-3.8h16.1v5.9a11.8 11.8 0 0 1 4.2-5.1 12.1 12.1 0 0 1 6.5-1.6h2.4z" fill="#661136"></path><path d="M100.9 27.9h4.4v15.4h.1a8.6 8.6 0 0 1 3.2-3.1 9.5 9.5 0 0 1 4.6-1.3c3.3 0 8.6 2 8.6 10.5V64h-4.4V49.9c0-3.9-1.5-7.3-5.7-7.3a6.4 6.4 0 0 0-6 4.4 6 6 0 0 0-.3 2.1V64H101V27.9zm30.7 24.6c.1 6 3.9 8.5 8.4 8.5a17.1 17.1 0 0 0 6.8-1.3l.7 3.2a19 19 0 0 1-8.1 1.6c-7.6 0-12.1-5-12.1-12.4s4.4-13.3 11.5-13.3 10.1 7 10.1 11.6a13.3 13.3 0 0 1-.1 2.1h-17.2zm13-3.3c.1-2.8-1.2-7.3-6.2-7.3s-6.5 4.1-6.8 7.3h13zm14.8-16.7a2.6 2.6 0 0 1-2.8 2.7 2.6 2.6 0 0 1-2.7-2.7 2.8 2.8 0 0 1 2.8-2.8 2.6 2.6 0 0 1 2.7 2.8zm-5 31.4V39.4h4.4v24.5h-4.4zm11.3-4.5a11.4 11.4 0 0 0 5.9 1.8c3.3 0 4.7-1.6 4.7-3.6s-1.3-3.3-4.6-4.5-6.5-4-6.5-7 3.2-7.2 8.4-7.2a11.8 11.8 0 0 1 6 1.6l-1.1 3.3a9.7 9.7 0 0 0-5-1.4c-2.7 0-4.1 1.6-4.1 3.3s1.5 3 4.7 4.1 6.4 3.8 6.4 7.4-3.3 7.4-9.2 7.4a14.5 14.5 0 0 1-6.9-1.7zm23.2-6.9c.1 6 3.9 8.5 8.4 8.5a17.1 17.1 0 0 0 6.8-1.3l.7 3.2a19 19 0 0 1-8.1 1.6c-7.6 0-12.1-5-12.1-12.4s4.4-13.3 11.5-13.3 10.1 7 10.1 11.6a13.3 13.3 0 0 1-.1 2.1h-17.2zm13-3.3c.1-2.8-1.2-7.3-6.2-7.3s-6.5 4.1-6.8 7.3h13zM71.4 57.6L68.3 55a28.3 28.3 0 0 0 6.2-17.3C74.5 19.7 60.4 8 43 8 19.7 8 11.5 26.4 11.5 47c0 18.2 13.4 33.3 31.9 33.3a45.9 45.9 0 0 0 26.4-8.4 28 28 0 0 0 4.2-3.6l1.8 2.7a43.2 43.2 0 0 1-31.9 15C19.9 86.1 0 68.6 0 43.9S18.3 0 43.5 0c20.8 0 38.1 13.1 38.1 35 0 8.1-4.3 17.1-10.2 22.6zM49.3 27.7l-14 31.7c-1.2 2.7-3 5.8-6.3 5.8a4.2 4.2 0 0 1-4.3-4.2c0-1.9 1-3.7 1.7-5.4l15.1-34.5c1.2-2.6 2.6-4.5 5.6-4.5a4 4 0 0 1 4.2 4.2c0 2.5-1.1 4.8-2 6.9zm11 19.3l-5.6 12.6c-1.3 2.7-3 5.6-6.4 5.6a4 4 0 0 1-4.2-4.2 12.9 12.9 0 0 1 1.7-5.3l6.7-15.2c1.2-2.5 2.6-4.5 5.6-4.5a4 4 0 0 1 4.2 4.2 16.2 16.2 0 0 1-2 6.8z" fill="#888"></path></svg>
+                 </a>
+            </div>
+            <nav class="dev-nav-socialmedia">
+                <a href="https://www.heise.de/forum/heise-Developer/Themen-Hilfe/forum-36206/" title="heise Developer Foren" class="dev-nav-socialmedia__foren">Foren</a>
+                <a href="https://www.heise.de/developer/kontakt/" title="Kontakt zur Redaktion" class="dev-nav-socialmedia__kontakt">Kontakt</a>
+                <a href="http://twitter.com/#!/heisedc" title="heise Developer auf Twitter folgen" target="_blank" class="dev-nav-socialmedia__twitter dev-socialmedia">
+                    <svg height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin"><path fill="#fff" d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5T1369.5 1125 1185 1335.5t-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5T285 1033q33 5 61 5 43 0 85-11-112-23-185.5-111.5T172 710v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5T884 653q-8-38-8-74 0-134 94.5-228.5T1199 256q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"></path></svg>
+                </a>
+                <a href="https://www.heise.de/newsletter/manage/developer" title="heise Developer Newsletter" class="dev-nav-socialmedia__newsletter dev-socialmedia">
+                    <svg preserveAspectRatio="xMinYMin" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 710v794q0 66-47 113t-113 47H160q-66 0-113-47T0 1504V710q44 49 101 87 362 246 497 345 57 42 92.5 65.5t94.5 48 110 24.5h2q51 0 110-24.5t94.5-48 92.5-65.5q170-123 498-345 57-39 100-87zm0-294q0 79-49 151t-122 123q-376 261-468 325-10 7-42.5 30.5t-54 38-52 32.5-57.5 27-50 9h-2q-23 0-50-9t-57.5-27-52-32.5-54-38T639 1015q-91-64-262-182.5T172 690q-62-42-117-115.5T0 438q0-78 41.5-130T160 256h1472q65 0 112.5 47t47.5 113z" fill="#fff"></path></svg>
+                </a>
+                <a href="https://www.heise.de/developer/rss/news-atom.xml" title="heise Developer RSS-Feed abonnieren" target="_blank" class="dev-nav-socialmedia__rss dev-socialmedia">
+                  <svg preserveAspectRatio="xMinYMin" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M576 1344q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm512 123q2 28-17 48-18 21-47 21H889q-25 0-43-16.5t-20-41.5q-22-229-184.5-391.5T250 902q-25-2-41.5-20T192 839V704q0-29 21-47 17-17 43-17h5q160 13 306 80.5T826 902q114 113 181.5 259t80.5 306zm512 2q2 27-18 47-18 20-46 20h-143q-26 0-44.5-17.5T1329 1476q-12-215-101-408.5t-231.5-336-336-231.5T252 398q-25-1-42.5-19.5T192 335V192q0-28 20-46 18-18 44-18h3q262 13 501.5 120T1186 542q187 186 294 425.5t120 501.5z" fill="#fff"></path></svg>
+                </a>
+            </nav>
+
+            <nav id="main_navigation" class="touch_detect">
+                <ul class="clearfix">
+                    <li>
+                        <a href="https://www.heise.de/developer/" title="News">News</a>
+                          <span class="sub"></span>
+                           <ul class="subnavigation">
+                                <li>
+                                    <a href="https://www.heise.de/developer/news/" title="7-Tage-News">7-Tage-News</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/news/archiv/" title="News-Archiv">News-Archiv</a>
+                                </li>
+                            </ul>
+                    </li>
+                    <li class="aktiv">
+                        <a href="https://www.heise.de/developer/rubriken/" title="Rubriken">Rubriken</a>
+                          <span class="sub"></span>
+                           <ul class="subnavigation">
+                                <li>
+                                    <a href="https://www.heise.de/developer/sprachen-1037.html" title="Sprachen">Sprachen</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/architektur-methoden-1031.html" title="Architektur/Methoden">Architektur/Methoden</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/werkzeuge-1041.html" title="Werkzeuge">Werkzeuge</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/know-how-1033.html" title="Know-how">Know-how</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/standards-1039.html" title="Standards">Standards</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/literatur-1035.html" title="Literatur">Literatur</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/videos-3294461.html" title="Videos">Videos</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/Veranstaltungsberichte-3344266.html" title="Veranstaltungsberichte">Veranstaltungsberichte</a>
+                                </li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="https://www.heise.de/developer/blog/" title="Blogs">Blogs</a>
+                          <span class="sub"></span>
+                           <ul class="subnavigation">
+                                <li>
+                                    <a href="https://www.heise.de/developer/babel-bulletin-980714.html" title="Babel-Bulletin">Babel-Bulletin</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/der-dotnet-doktor-1292.html" title="Der Dotnet-Doktor">Der Dotnet-Doktor</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/the-world-of-it-1296.html" title="The World of IT">The World of IT</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/the-next-big-thing-1790061.html" title="the next big thing">the next big thing</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/neuigkeiten-von-der-insel-1920360.html" title="Neuigkeiten von der Insel">Neuigkeiten von der Insel</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/Tales_from_the_Web_side-2548664.html" title="Tales from the Web side">Tales from the Web side</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/Continuous-Architecture-2687847.html" title="Continuous Architecture">Continuous Architecture</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/Der_Pragmatische_Architekt-2732748.html" title="Der Pragmatische Architekt">Der Pragmatische Architekt</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/UeberKreuz-2753600.html" title="ÜberKreuz ">ÜberKreuz </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.heise.de/developer/ModernesCplusplus-3691794.html" title="Modernes C++">Modernes C++</a>
+                                </li>
+                            </ul>
+                    </li>
+                    <li>
+                        <a href="https://www.heise.de/developer/podcast/" title="Podcast">Podcast</a>
+                    </li>
+                    <li>
+                        <a href="https://www.heise.de/developer/videos-3294461.html" title="Videos">Videos</a>
+                    </li>
+                    <li>
+                        <a href="https://www.heise.de/developer/Konferenzen-von-heise-Developer-2725968.html" title="Konferenzen">Konferenzen</a>
+                    </li>
+                    <li>
+                        <a href="https://www.heise.de/developer/termine/" title="Termine">Termine</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+
+    <ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="https://www.heise.de/developer/" title="heise Developer">
+                    <span itemprop="name">heise Developer</span>
+                </a>
+                <meta itemprop="position" content="1">
+            </li>
+            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="https://www.heise.de/developer/rubriken/" title="Rubriken">
+                    <span itemprop="name">Rubriken</span>
+                </a>
+                <meta itemprop="position" content="2">
+            </li>
+            <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="https://www.heise.de/developer/werkzeuge-1041.html" title="Werkzeuge">
+                    <span itemprop="name">Werkzeuge</span>
+                </a>
+                <meta itemprop="position" content="3">
+            </li>
+                    <li class="active">
+                        Anwendungen mit Docker transportabel machen
+                    </li>
+    </ol>
+
+
+        <div id="mitte">
+            <div id="mitte_links">
+        <!--googleon: all-->
+        
+
+<div id="mitte_artikel" class="article-wrapper">
+
+  <article>
+
+    <!--googleon: all-->
+    <header class="article-header article-header--article">
+
+  
+
+  
+
+
+
+
+    <h1 class="article__heading">
+      Anwendungen mit Docker transportabel machen
+    </h1>
+
+
+
+    <div class="publish-info">
+        <span class="publish-info__rubrik">Werkzeuge </span>
+      <time class="publish-info__date" datetime="2014-02-28T13:59:00">28.02.2014 13:59 Uhr</time>
+
+          <span class="publish-info__author">Golo Roden</span>
+    </div>
+</header>
+
+
+    <div class="article-content">
+
+        <!--googleoff: all-->
+
+        <!--googleon: all-->
+
+      <!--googleoff: all-->
+  <nav class="pre-akwa-toc">
+    <header class="pre-akwa-toc__header">Inhaltsverzeichnis</header>
+
+    <ol class="pre-akwa-toc__list">
+      <li class="pre-akwa-toc__item pre-akwa-toc__item--current">
+        
+          <span class="pre-akwa-toc__text" aria-current="page">
+        
+
+        
+
+          Anwendungen mit Docker transportabel machen
+
+        
+
+        
+          </span>
+      </li>
+      <li class="pre-akwa-toc__item">
+        
+          <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=2" class="pre-akwa-toc__link">
+        
+
+        
+
+          Grundlagen
+
+        
+
+        
+          </a>
+        
+      </li>
+      <li class="pre-akwa-toc__item">
+        
+          <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=3" class="pre-akwa-toc__link">
+        
+
+        
+
+          Netzwerkzugriff
+
+        
+
+        
+          </a>
+        
+      </li>
+      <li class="pre-akwa-toc__item">
+        
+          <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=4" class="pre-akwa-toc__link">
+        
+
+        
+
+          Fazit 
+
+        
+
+        
+          </a>
+        
+      </li>
+    
+    </ol>
+  </nav>
+
+      <!--googleon: all-->
+
+      
+
+        <p><strong class="manuell_vorspann"><!-- RSPEAK_STOP -->
+<span class="bild_links" style="width:200px;">
+    <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/aufmacher-662e3d817bece6e5.png" width="200" height="189" alt="Anwendungen mit Docker transportabel machen">
+    
+    
+    
+</span>
+<!-- RSPEAK_START -->
+Jede Anwendung hat Abhängigkeiten. Die Palette reicht von der Konfiguration des lokalen Betriebssystems bis zur Integration von Netzwerk- und Webdiensten. Das erschwert das Verteilen von Anwendungen auf unterschiedliche Systeme. Das Open-Source-Werkzeug Docker verspricht Abhilfe.<br> </strong></p>
+<p>Die grundlegende Problematik ist rasch erklärt: Jede Anwendung hängt von einigen Elementen ihrer Umgebung ab, die sich auf unterschiedlichen Systemen nur schwerlich garantieren lassen. Bereits die verwendete Programmiersprache kann ein Problem darstellen, wenn unterschiedliche Versionen gemischt zum Einsatz kommen: Brüche in der Abwärtskompatibilität sind in der Praxis keine Seltenheit. Ein solcher hat beispielsweise mit der <a href="https://www.heise.de/meldung/Node-js-0-10-mit-neuem-Streams-Modul-1800003.html">Einführung der Version 0.10 von Node.js</a> stattgefunden, deren Streams-Modul Inkompatibilitäten zu dem der Vorgängerversion aufwies.</p>
+<p>Dieses Beispiel zeigt nur einen winzigen Ausschnitt aus der Palette der potenziellen Schwachstellen: Weitere Faktoren sind unter anderem das installierte Betriebssystem, dessen Version und Einstellungen, sämtliche hinzugefügten Pakete und Module oder auch die Konfiguration des Netzwerks. Die Liste der möglichen Störfaktoren, die die fehlerfreie Ausführung einer Anwendung gefährden können, ist quasi endlos. Daher lässt sich die Aufgabe, das eigene System für eine einzige Anwendung passend einzurichten, als enorme Herausforderung begreifen.</p>
+<p>Zahlreiche Entwickler arbeiten in Teams und veröffentlichen ihre Anwendung in unterschiedlichen Umgebungen, beispielsweise auf einem Test- und einem Produktivsystem, was die Komplexität weiter steigert (siehe Tabelle).</p>
+<p></p><section class="table-wrapper">
+    <table class="heise-table">
+        
+        <tbody>
+        <tr>
+            <td style="text-align:left;">
+                
+            </td>
+            <td style="text-align:left;">
+                Entwickler 1
+            </td>
+            <td style="text-align:left;">
+                Entwickler 2
+            </td>
+            <td style="text-align:left;">
+                Testsystem
+            </td>
+            <td style="text-align:left;">
+                Produktivsystem
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td style="text-align:left;">
+                OS
+            </td>
+            <td style="text-align:left;">
+                Ubuntu 13.10
+            </td>
+            <td style="text-align:left;">
+                Windows 7
+            </td>
+            <td style="text-align:left;">
+                CentOS 6.4
+            </td>
+            <td style="text-align:left;">
+                Ubuntu12.04 LTS
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td style="text-align:left;">
+                Node.js
+            </td>
+            <td style="text-align:left;">
+                0.10.23
+            </td>
+            <td style="text-align:left;">
+                0.10.21
+            </td>
+            <td style="text-align:left;">
+                0.10.17
+            </td>
+            <td style="text-align:left;">
+                0.8.16
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td style="text-align:left;">
+                Express
+            </td>
+            <td style="text-align:left;">
+                3.3.0
+            </td>
+            <td style="text-align:left;">
+                3.4.6
+            </td>
+            <td style="text-align:left;">
+                3.4.7
+            </td>
+            <td style="text-align:left;">
+                3.1.3
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td style="text-align:left;">
+                ...
+            </td>
+            <td style="text-align:left;">
+                ...
+            </td>
+            <td style="text-align:left;">
+                ...
+            </td>
+            <td style="text-align:left;">
+                ...
+            </td>
+            <td style="text-align:left;">
+                ...
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+<br><span class="tx_smaller rte__tx--smaller">Die Komplexität der Abhängigkeiten einer Anwendung steigt mit der Anzahl der Systeme.</span><p></p>
+<p>Die gezeigte Tabelle lässt sich gut mit dem Transport von Waren vergleichen: Im Transportwesen müssen Güter auf unterschiedlichen Wegen transportieren werden, wobei je nach Kombination von Gut und Transportmedium spezielle Bedingungen einzuhalten sind. Die Lösung hierfür besteht in genormten Containern, die sich gleichermaßen für den Transport per Bahn, Schiff oder Flugzeug eignen und die gewünschten Waren von dem gewählten Transportmedium abstrahieren.<br> </p>
+<h3 class="subheading">Ein Container ist keine virtuelle Maschine<br> </h3>
+<p>Genau die Idee greift Docker auf: Statt die Anwendung direkt auf den Systemen einzurichten, packt man sie einschließlich all ihrer Abhängigkeiten in einen Container, der sich anschließend auf einheitlichem Weg verteilen und ausführen lässt. Bislang war solch ein Vorgehen virtuellen Maschinen vorbehalten, doch weisen Letztere einige Nachteile auf. Dazu zählen insbesondere der hohe Bedarf an Festplatten- und Arbeitsspeicher und der langwierige Ladevorgang beim Start: Die Anzahl der zeitgleich ausführbaren virtuellen Maschinen ist daher ausgesprochen gering. Werkzeuge wie <a href="http://www.heise.de/developer/artikel/VMs-mit-Vagrant-erstellen-2066800.html">Vagrant</a> erleichtern zwar das Einrichten und Verwalten von virtuellen Maschinen, können an diesen Einschränkungen allerdings nichts ändern.<br> </p>
+<p>Docker basiert daher nicht auf virtuellen Maschinen, sondern auf Linux-Containern (LXC). Ein solcher ist eine vom Betriebssystem bereitgestellte virtuelle Umgebung zur isolierten Ausführung von Prozessen. Alle Container teilen sich allerdings einen gemeinsamen Kernel. Daher ist es mit den Containern beispielsweise nicht möglich, eine Windows-Anwendung auf Linux auszuführen: Hierfür benötigt man nach wie vor eine virtuelle Maschine.<br> </p>
+<p>Der größte Vorteil von Linux-Containern gegenüber virtuellen Maschinen liegt in ihrem äußerst sparsamen Umgang mit Ressourcen und einer kurzen Startzeit, die sich im Rahmen weniger Sekunden bewegt. Ihr größter Nachteil ist die für den unbedarften Anwender komplexe und aufwändige Konfiguration. Diese Aufgabe übernimmt Docker und stellt daher einen für jeden verständlichen und leicht benutzbaren Zugang zu Containern dar. Das Werkzeug steht kostenfrei zum Herunterladen <a href="https://www.docker.io/" target="_blank" rel="external">bereit</a> und ist unter der Apache License 2.0 lizenziert.<br> </p>
+<p>Die Installation erfolgt, abhängig vom verwendeten Betriebssystem, auf mehr oder minder aufwändigem Weg: Unter Umständen ist es nämlich erforderlich, zuvor den Kernel des Betriebssystems zu aktualisieren. Die <a href="http://docs.docker.io/en/latest/installation/" target="_blank" rel="external">Dokumentation</a> leistet allerdings eine vergleichsweise gute Hilfestellung. Generell kann die Installation ausschließlich auf einem 64-Bit-basierten Linux erfolgen, wobei Ubuntu lange Zeit die erste Wahl der Entwickler von Docker war. Seit der am 5. Februar 2014 veröffentlichten Version 0.8 unterstützt Docker zudem OS X nativ. Das bezieht sich allerdings nur auf das Kommandozeilenwerkzeug, nicht auf den eigentlichen Docker-Server: Für dessen Einsatz ist unter dem Mac-Betriebssystem nach wie vor eine virtuelle Maschine erforderlich.<br> </p>
+<p>Äußerst hilfreich ist, dass Vagrant seit der im Dezember 2013 veröffentlichten Version 1.4 Docker<br>zum <a href="http://docs.vagrantup.com/v2/provisioning/docker.html" target="_blank" rel="external">Provisionieren</a> von virtuellen Maschinen unterstützt und in der Lage ist, es zu installieren. Daher lässt sich in wenigen Zeilen ein einfaches Vagrantfile schreiben, das eine mit Ubuntu und Docker arbeitende virtuelle Maschine einrichtet:<br> </p>
+<pre class="rte__tx--listing">Vagrant.configure(2) do |config|<br>  config.vm.box = "precise64"<br><br>  # When running VMware use http://files.vagrantup.com/precise64_vmware.box<br>  config.vm.box_url = "http://files.vagrantup.com/precise64.box"<br><br>  # Insert network configuration here<br><br>  config.vm.provision "docker" do |d|<br>    d.pull_images "ubuntu"<br>  end<br>end</pre>
+<p>Alternativ kann man <a href="https://github.com/goloroden/dockervm" target="_blank" rel="external">dockervm</a> nutzen, das im aktuellen Verzeichnis ein Vagrantfile anlegt und darauf aufbauend anschließend eine virtuelle Maschine erzeugt, die Docker enthält:</p>
+<pre class="rte__tx--listing">$ dockervm</pre>
+<p>Docker umfasst, wie im Zusammenhang mit OS X bereits erwähnt, eine Client- und eine Serverkomponente. Im einfachsten Fall sind beide auf dem gleichen System installiert, alternativ lässt sich der Server jedoch von einem Client über das Netzwerk steuern. Führt man das Kommando<br> </p>
+<pre class="rte__tx--listing">$ docker version<br> </pre>
+<p>aus, erhält man die Versionsnummer der beiden Komponenten und gegebenenfalls einen Hinweis auf eine verfügbare Aktualisierung.<br> </p>
+<h3 class="subheading">Docker verstehen: Images, Container und Layer<br> </h3>
+<p>Damit Docker eine Anwendung ausführen kann, benötigt es zunächst ein Abbild des Systems, das als Basis dienen soll. Ein solches bezeichnet Docker als "Image". Interessant ist, dass das Betriebssystem des Abbilds nicht jenem des Wirts entsprechen muss: Lediglich der verwendete Kernel muss zueinander passen. Daher ist es mit Docker beispielsweise problemlos möglich, Ubuntu auf <a href="https://coreos.com/" target="_blank" rel="external">CoreOS</a> auszuführen. Ein Image lässt sich auf zwei Wegen beschaffen: Entweder <a href="http://docs.docker.io/en/latest/articles/baseimages/" target="_blank" rel="external">entwickelt man ein eigenes</a> von Grund auf, oder man lädt ein vorgefertigtes aus dem Web herunter. Letzteres entspricht der von Docker empfohlenen Vorgehensweise, weshalb einige offizielle Images zur Verfügung stehen.</p>
+<p>Selbstverständlich ist das von Docker bereitgestellte Image, das Ubuntu enthält, nicht gleichermaßen für jeden geeignet. Daher lassen sich die Abbilder den individuellen Anforderungen und Wünschen anpassen. Allerdings werden die Modifikationen niemals innerhalb eines Images vorgenommen: Stattdessen entsteht ein neues, das auf seinen Vorgänger verweist und zusätzlich lediglich die Unterschiede zu ihm speichert. Auf die Weise bildet sich nach und nach das gewünschte System als Kette von Images. Eine Kette darf seit Version 0.7.2 von Docker maximal 127 Images umfassen, zuvor lag die Obergrenze bei 42. Startet man eine Anwendung, führt Docker die benötigte Kette von Images in ein einziges Abbild zusammen und instanziiert es: Die ausgeführte Instanz bezeichnet Docker als "Container". An ihm lassen sich Änderungen vornehmen, die beim Beenden verfallen.</p>
+
+
+    </div>
+
+    <!--googleoff: all-->
+    
+
+<div class="article-footer artikel">
+
+        <p class="kapitel">            Auf der nächsten Seite:
+            <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=2">Grundlagen</a>        </p>
+
+
+
+    <nav class="seitenweise_navigation paginiert">
+      <div class="seitenweise_navigation--flex">
+          <span class="seite_zurueck">Vorherige Seite</span>
+          <span class="pagination">
+                  <b>1</b>
+                  <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=2" rel="next">2</a>
+                  <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=3">3</a>
+                  <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=4">4</a>
+          </span>
+              <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?artikelseite=2" class="seite_weiter" rel="next">Nächste Seite</a>
+        </div>
+        
+    </nav>
+
+
+
+
+
+
+        
+            
+        
+        <div class="link_forum_beitrag">
+            <p><a href="https://www.heise.de/forum/heise-Developer/Kommentare/Anwendungen-mit-Docker-transportabel-machen/forum-42202/comment/"><b>
+            
+                Kommentare lesen
+            
+            
+                (7 Beiträge)
+            
+            </b></a></p>
+        </div>
+
+
+        <p class="themen_foren">
+            Forum zum Thema: <a href="https://www.heise.de/forum/heise-Developer/Themen-Hilfe/Sonstige-Sprachen/forum-1511/comment/">Sonstige Sprachen</a>
+        </p>
+
+
+    <div data-backend-url="/shariff-backend/" class="shariff clear" data-services="[&quot;facebook&quot;,&quot;twitter&quot;,&quot;googleplus&quot;,&quot;mail&quot;,&quot;info&quot;]"><ul class="theme-color orientation-horizontal col-5"><li class="shariff-button facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.heise.de%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html" data-rel="popup" title="Bei Facebook teilen" role="button" aria-label="Bei Facebook teilen"><span class="fa fa-facebook"></span><span class="share_text">teilen</span>&nbsp;<span class="share_count">3</span></a></li><li class="shariff-button twitter"><a href="https://twitter.com/intent/tweet?text=Anwendungen%20mit%20Docker%20transportabel%20machen%20-%20heise%20Developer&amp;url=https%3A%2F%2Fwww.heise.de%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html" data-rel="popup" title="Bei Twitter teilen" role="button" aria-label="Bei Twitter teilen"><span class="fa fa-twitter"></span><span class="share_text">tweet</span></a></li><li class="shariff-button googleplus"><a href="https://plus.google.com/share?url=https%3A%2F%2Fwww.heise.de%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html" data-rel="popup" title="Bei Google+ teilen" role="button" aria-label="Bei Google+ teilen"><span class="fa fa-google-plus"></span><span class="share_text">teilen</span>&nbsp;<span class="share_count">3</span></a></li><li class="shariff-button mail"><a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?view=mail" target="_blank" title="Per E-Mail versenden" role="button" aria-label="Per E-Mail versenden"><span class="fa fa-envelope"></span><span class="share_text">mail</span></a></li><li class="shariff-button info"><a href="http://ct.de/-2467514" target="_blank" title="weitere Informationen" role="button" aria-label="weitere Informationen"><span class="fa fa-info"></span><span class="share_text">Info</span></a></li></ul></div>
+
+
+        <p class="permalink">Permalink: <a href="https://heise.de/-2127220">https://heise.de/-2127220</a></p>
+    
+        <p class="printversion">
+            <a href="https://www.heise.de/developer/artikel/Anwendungen-mit-Docker-transportabel-machen-2127220.html?view=print" rel="nofollow">Version zum Drucken</a>
+        </p>
+
+</div>
+
+    
+  </article>
+
+
+  
+
+
+
+
+  
+<p class="themenseiten">
+    <span class="themen_label">Mehr zum Thema</span>
+    
+        <a href="https://www.heise.de/thema/Docker" title="Themenseite Docker">Docker</a>
+    
+</p>
+
+
+  
+
+  
+
+
+  
+
+</div>
+
+
+        <!--googleoff: all-->
+        <div class="adbottom"><!--googleoff: index-->
+<!-- RSPEAK_STOP -->
+<a href="http://www.heise.de/mediadaten/online/" target="_blank" class="hinweis_anzeige">Anzeige</a><br>  <div id="div-gpt-ad-1">
+    
+    <script type="text/javascript">
+      googletag.display("div-gpt-ad-1");
+    </script><script type="text/javascript" src="https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&amp;correlator=2422880080600468&amp;output=json_html&amp;callback=googletag.impl.pubads.setAdContentsBySlotForSync&amp;impl=ss&amp;json_a=1&amp;eid=108809080&amp;sc=1&amp;sfv=1-0-8&amp;iu_parts=6514%2Cwww.heise.de%2Cdeveloper%2Cdev-inhalt&amp;enc_prev_ius=%2F0%2F1%2F2%2F3%2C%2F0%2F1%2F2%2F3%2C%2F0%2F1%2F2%2F3%2C%2F0%2F1%2F2%2F3&amp;prev_iu_szs=500x500%7C540x65%2C300x250%7C300x600%7C336x280%2C468x60%7C728x90%7C970x250%2C160x600%7C200x800&amp;prev_scp=%7Cpricerange_66446%3D%26pid_66446%3D%26pricerange_66442%3D%26pid_66442%3D%7Cpricerange_66430%3D%26pid_66430%3D%26pricerange_66444%3D%26pid_66444%3D%26pricerange_223159%3D%26pid_223159%3D%26pricerange_505108%3D%26pid_505108%3D%26pricerange_591208%3D%26pid_591208%3D%26yl_format%3D%7Cpricerange_66424%3D%26pid_66424%3D%26pricerange_223159%3D%26pid_223159%3D%26yl_format%3D&amp;cust_params=kw%3DContainer%252CDocker%26themenhub%3Dyes&amp;cookie_enabled=1&amp;abxe=1&amp;lmt=1494528069&amp;dt=1494528069758&amp;cc=98&amp;frm=20&amp;biw=1680&amp;bih=953&amp;oid=3&amp;adxs=0%2C-9%2C-9%2C-9&amp;adys=0%2C-9%2C-9%2C-9&amp;adks=145253639%2C1554060606%2C3450912820%2C2429779718&amp;gut=v2&amp;ifi=1&amp;u_tz=120&amp;u_his=2&amp;u_h=1050&amp;u_w=1680&amp;u_ah=1050&amp;u_aw=1625&amp;u_cd=24&amp;u_nplug=4&amp;u_nmime=5&amp;u_sd=1&amp;flash=0&amp;url=https%3A%2F%2Fwww.heise.de%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html&amp;dssz=17&amp;icsg=1045411&amp;std=0&amp;csl=46&amp;vrg=116&amp;vrp=116&amp;ga_vid=944259045.1494528070&amp;ga_sid=1494528070&amp;ga_hid=975955701" id="sae-script-1"></script>
+    <noscript>&lt;div&gt;&lt;a href="//pubads.g.doubleclick.net/gampad/jump?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=500x500%7C540x65&amp;tile=1" target="_blank"&gt;&lt;img alt="" src="//pubads.g.doubleclick.net/gampad/ad?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=500x500%7C540x65&amp;tile=1" /&gt;&lt;/a&gt;&lt;/div&gt;</noscript>
+  </div>
+
+<!-- RSPEAK_START -->
+<!--googleon: index--></div><!--googleoff: all-->
+
+            </div>
+            <div id="mitte_rechts">
+                    <!--googleoff: index-->
+<!-- RSPEAK_STOP -->
+<div class="bcadv ISI_IGNORE bcadv_oben"><a href="http://www.heise.de/mediadaten/online/" target="_blank" class="hinweis_anzeige">Anzeige</a><br>  <div id="div-gpt-ad-2" data-google-query-id="">
+    
+    <script type="text/javascript">
+      googletag.display("div-gpt-ad-2");
+    </script>
+    <noscript>&lt;div&gt;&lt;a href="//pubads.g.doubleclick.net/gampad/jump?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=300x250%7C300x600%7C336x280&amp;tile=2" target="_blank"&gt;&lt;img alt="" src="//pubads.g.doubleclick.net/gampad/ad?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=300x250%7C300x600%7C336x280&amp;tile=2" /&gt;&lt;/a&gt;&lt;/div&gt;</noscript>
+  </div>
+</div>
+<!-- RSPEAK_START -->
+<!--googleon: index--> <!--googleoff: all--><!-- RSPEAK_STOP -->
+                
+                
+    
+
+
+
+                
+                
+    <div class="teaser_adliste">
+        <p><a href="https://www.heise.de/mediadaten/heise-online/" target="_blank" class="hinweis_anzeige">Anzeige</a></p>
+        <ul class="microsites">
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=53798510&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Mehr IT-Sicherheit – durch Mitarbeiterschulungen!</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=53540150&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">IBM Maas360 und Watson entlasten den Admin</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=49672070&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Schwachstelle Drucker – Einfallstor für Hacker</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=52457390&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Unternehmensdaten in der Cloud – ein Risiko?</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=52348310&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">heise jobs, dein Stellenmarkt für den IT-Sektor</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=51190070&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Schöpfen Sie das Potenzial von Flash-Arrays aus?</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=48602150&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Erfüllt Ihre Lösung die Erwartungen der Nutzer?</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=33650150&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Kostenlos: Nützliche eBooks für Bildung und Beruf!</a></li>
+            <li><a href="http://pubads.g.doubleclick.net/gampad/clk?id=47404070&amp;iu=/6514/www.heise.de/clicktracking/textlink" rel="nofollow" target="_blank">Über 5.000 Gutscheine für heise online User</a></li>
+        </ul>
+    </div>
+
+                
+    
+
+
+
+                
+    
+
+
+
+                
+    
+    
+    
+
+<section class="teaser_aktuelle_beitraege">
+        <header class="teaser_titel">
+                <a href="https://www.heise.de/developer/news/">Topmeldungen  </a>
+        </header>
+        <article class="anriss">
+            <a href="https://www.heise.de/developer/meldung/Build-2017-Debugger-App-hat-direkte-Anbindung-an-Visual-Studio-3711540.html" title="Build 2017: Debugger-App hat direkte Anbindung an Visual Studio">
+                <header>
+                    <h3>Build 2017: Debugger-App hat direkte Anbindung an Visual Studio</h3>
+                </header>
+                    <figure>
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/mobile-786e4fe817786909.jpeg" width="100" height="56" alt="Build 2017: App für Android und iOS hat direkte Anbindung an Visual Studio" title="Build 2017: App für Android und iOS hat direkte Anbindung an Visual Studio">
+                    </figure>
+                    <p>Die Xamarin Live Player App ermöglicht das Debuggen von Anwendungen aus Visual Studio auf physischen Android- und iOS-Endgeräten ohne Installation separater SDKs. Außerdem hat Microsoft das Visual Studio Mobile Center erweitert.</p>
+            </a>
+         </article>
+        <article class="anriss">
+            <a href="https://www.heise.de/developer/meldung/Windows-10-VR-Brille-von-Acer-mit-Motion-Controllern-und-Inside-Out-Tracking-3710521.html" title="Windows 10: VR-Brille von Acer mit Motion-Controllern und Inside-Out-Tracking">
+                <header>
+                    <h3>Windows 10: VR-Brille von Acer mit Motion-Controllern und Inside-Out-Tracking</h3>
+                </header>
+                    <figure>
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/acer-fad04b2178349223.jpeg" width="100" height="56" alt="Build 2017: VR-Brillen mit neuen Controllern und Inside-Out-Tracking für Windows 10" title="Build 2017: VR-Brillen mit neuen Controllern und Inside-Out-Tracking für Windows 10">
+                    </figure>
+                    <p>Als erster Anbieter will Acer seine VR-Brille mit neuen Controllern für 400 US-Dollar auf den Markt bringen. Neu dabei: Das System kommt ohne externe Kameras aus.
+</p>
+            </a>
+         </article>
+        <article class="anriss">
+            <a href="https://www.heise.de/developer/meldung/Windows-10-Ausblick-auf-das-Fall-Creators-Update-3710485.html" title="Windows 10: Ausblick auf das Fall Creators Update">
+                <header>
+                    <h3>Windows 10: Ausblick auf das Fall Creators Update</h3>
+                </header>
+                    <figure>
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/creators_update-3cfbfff7d6dbdb06.jpeg" width="100" height="56" alt="Build 2017: Ausblick auf das Fall Creators Update für Windows 10" title="Build 2017: Ausblick auf das Fall Creators Update für Windows 10">
+                    </figure>
+                    <p>Im Herbst steht das nächste große Update für Windows 10 an. Für das zweite Creators Update verspricht Microsoft eine Anbindung von Android und iOS, Linux-Integration und iOS-App-Entwicklungen sowie eine neue App für Fotos und Videos.</p>
+            </a>
+         </article>
+        <article class="anriss">
+            <a href="https://www.heise.de/developer/meldung/Cross-Plattform-Entwicklung-Qt-Chefentwickler-Lars-Knoll-haelt-Keynote-der-XPC-2017-3711884.html" title="Cross-Plattform-Entwicklung: Qt-Chefentwickler Lars Knoll hält Keynote der XPC 2017">
+                <header>
+                    <h3>Cross-Plattform-Entwicklung: Qt-Chefentwickler Lars Knoll hält Keynote der XPC 2017</h3>
+                </header>
+                    <figure>
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/ir_engine-a4d8d05e2033f9a6.jpeg" width="100" height="56" alt="Cross-Plattform-Entwicklung: Qt-Chefentwickler Lars Knoll hält Keynote der XPC 2017" title="Cross-Plattform-Entwicklung: Qt-Chefentwickler Lars Knoll hält Keynote der XPC 2017">
+                    </figure>
+                    <p>Mittlerweile ist das Programm der XPC nahezu komplett. Die Konferenz will wieder einen zeitgemäßen Überblick zum Status quo plattformunabhängiger Softwareentwicklung geben.</p>
+            </a>
+         </article>
+        <article class="anriss">
+            <a href="https://www.heise.de/developer/meldung/Oracles-Cloud-Plattform-bekommt-API-Dienst-3711339.html" title="Oracles Cloud-Plattform bekommt API-Dienst">
+                <header>
+                    <h3>Oracles Cloud-Plattform bekommt API-Dienst</h3>
+                </header>
+                    <figure>
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/cloudComponents-8c2334dd402fe3e2.jpeg" width="100" height="56" alt="Oracles Cloud-Plattform bekommt API-Dienst" title="Oracles Cloud-Plattform bekommt API-Dienst">
+                    </figure>
+                    <p>Oracle API Platform Cloud Service soll die Cloud-Plattform des Unternehmens um Optionen zum Erstellen und Absichern von Programmierschnittstellen in der Cloud ergänzen.</p>
+            </a>
+         </article>
+        <article class="anriss">
+            <a href="https://www.heise.de/developer/meldung/Oesterreichischer-Bundeskanzler-wuerdigt-Entwickler-als-Arbeiter-an-einer-besseren-Welt-3711313.html" title="Österreichischer Bundeskanzler würdigt Entwickler als &quot;Arbeiter an einer besseren Welt&quot;">
+                <header>
+                    <h3>Österreichischer Bundeskanzler würdigt Entwickler als "Arbeiter an einer besseren Welt"</h3>
+                </header>
+                    <figure>
+                        <img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/20170511_122825-eb6177bf469ff11f.jpeg" width="100" height="56" alt="Österreichischer Bundeskanzler würdigt Entwickler als &quot;Arbeiter an einer besseren Welt&quot;" title="Österreichischer Bundeskanzler würdigt Entwickler als &quot;Arbeiter an einer besseren Welt&quot;">
+                    </figure>
+                    <p>3800 Entwickler – damit ist die WeAreDevelopers-Konferenz in Wien zur vermutlich größten europäischen Entwicklerveranstaltung geworden. Da verwundert es nur geringfügig, dass mit Christian Kern hoher Besuch bei der Eröffnung mitwirkte.</p>
+            </a>
+         </article>
+</section>
+
+
+
+
+                
+    
+
+
+
+                
+                
+    
+
+
+<section class="forum_latest_posting_teaser print-avoid-pagebreak-inside">
+    <header class="latest_posting_title">
+        <a href="https://www.heise.de/forum/forum-36206/">
+            Themenforen
+        </a>
+    </header>
+    
+    <ol class="forum_latest_posting_list">
+        <li>
+            <article class="latest_posting_snippet">
+                <header class="title">
+                    <a href="https://www.heise.de/forum/posting-30317700/show/">
+                       Re: Hilfe bei Keywort-Suche in Nachrichten!
+                    </a>
+                </header>
+                <a href="https://www.heise.de/forum/posting-30317700/show/" class="comment">
+                    Ihr sucht Daten? Bitteschön:
+
+Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola, Angola,…
+                </a>
+                <p class="forum">
+                    <span>Forum:&nbsp;</span>
+                    <a class="comments_forum" href="https://www.heise.de/forum/forum-18/">Ohne Bezug</a>
+                </p>
+            </article>
+
+            <figure class="latest_posting_meta clearfix">
+                
+                    <img class="avatar no_avatar" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/avatar_48.png" alt="wer-braucht-schon-ein-pseudonym hat keinen Avatar">
+                
+                <figcaption class="forum_latest_posting_meta">
+                    <span class="user">von wer-braucht-schon-ein-pseudonym;</span>
+                    <time datetime="2017-04-29T14:32:28+02:00" title="29.04.2017 14:32" class="comments_time">29.04.2017 14:32</time>
+                </figcaption>
+            </figure>
+
+        </li>
+    
+    
+    
+        <li>
+            <article class="latest_posting_snippet">
+                <header class="title">
+                    <a href="https://www.heise.de/forum/posting-30261665/show/">
+                       Re: Webinhalt erst durch Klick laden
+                    </a>
+                </header>
+                <a href="https://www.heise.de/forum/posting-30261665/show/" class="comment">
+                    Ist schon ein wenig länger her und wahrscheinlich hast Du schon eine Lösung gefunden.
+
+Trotzdem hier ein Vorschlag:
+
+Verwende dafür jQuery und…
+                </a>
+                <p class="forum">
+                    <span>Forum:&nbsp;</span>
+                    <a class="comments_forum" href="https://www.heise.de/forum/forum-364308/">Webentwicklung</a>
+                </p>
+            </article>
+
+            <figure class="latest_posting_meta clearfix">
+                
+                    <img class="avatar no_avatar" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/avatar_48.png" alt="WeirdKong hat keinen Avatar">
+                
+                <figcaption class="forum_latest_posting_meta">
+                    <span class="user">von WeirdKong;</span>
+                    <time datetime="2017-04-18T12:08:35+02:00" title="18.04.2017 12:08" class="comments_time">18.04.2017 12:08</time>
+                </figcaption>
+            </figure>
+
+        </li>
+    
+    
+</ol></section>
+
+
+
+
+
+
+
+
+
+                
+    
+
+
+<section class="forum_latest_posting_teaser print-avoid-pagebreak-inside">
+    <header class="latest_posting_title">
+        <a href="https://www.heise.de/forum/forum-35079/">
+            Artikelforum
+        </a>
+    </header>
+    
+    <ol class="forum_latest_posting_list">
+        <li>
+            <article class="latest_posting_snippet">
+                <header class="title">
+                    <a href="https://www.heise.de/forum/posting-30375062/show/">
+                       Re: Alternative: node-compiler
+                    </a>
+                </header>
+                <a href="https://www.heise.de/forum/posting-30375062/show/" class="comment">
+                    Du meinst, Verwaltung von Installationspaketen von Windows ist immernoch praktisch unbrauchbar?
+
+Würde ich auch so sehen ;)
+
+Wir sollten…
+                </a>
+                <p class="forum">
+                    <span>Forum:&nbsp;</span>
+                    <a class="comments_forum" href="https://www.heise.de/forum/forum-379944/">Node.js kompiliert</a>
+                </p>
+            </article>
+
+            <figure class="latest_posting_meta clearfix">
+                
+                    <img class="avatar no_avatar" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/avatar_48.png" alt="gingerws hat keinen Avatar">
+                
+                <figcaption class="forum_latest_posting_meta">
+                    <span class="user">von gingerws;</span>
+                    <time datetime="2017-05-11T17:03:14+02:00" title="11.05.2017 17:03" class="comments_time">11.05.2017 17:03</time>
+                </figcaption>
+            </figure>
+
+        </li>
+    
+    
+    
+        <li>
+            <article class="latest_posting_snippet">
+                <header class="title">
+                    <a href="https://www.heise.de/forum/posting-30372816/show/">
+                       Re: Compiler?
+                    </a>
+                </header>
+                <a href="https://www.heise.de/forum/posting-30372816/show/" class="comment">
+                    Alex Kloss schrieb am 11.05.2017 05:58:
+
+Jop.
+
+"Bring your own runtime" hat auch Security Implikationen...
+
+Einen "klassischen" Compiler für JS…
+                </a>
+                <p class="forum">
+                    <span>Forum:&nbsp;</span>
+                    <a class="comments_forum" href="https://www.heise.de/forum/forum-379944/">Node.js kompiliert</a>
+                </p>
+            </article>
+
+            <figure class="latest_posting_meta clearfix">
+                
+                    <img class="avatar" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/saved_resource" alt="Avatar von MetaCircularEvaluator">
+                
+                <figcaption class="forum_latest_posting_meta">
+                    <span class="user">von MetaCircularEvaluator;</span>
+                    <time datetime="2017-05-11T12:08:48+02:00" title="11.05.2017 12:08" class="comments_time">11.05.2017 12:08</time>
+                </figcaption>
+            </figure>
+
+        </li>
+    
+    
+</ol></section>
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div id="sitemap">
+        <ul>
+            <li><b><a href="https://www.heise.de/developer/" title="News">News</a></b>
+                <a href="https://www.heise.de/developer/news/" title="7-Tage-News">7-Tage-News</a>
+                <a href="https://www.heise.de/developer/news/archiv/" title="News-Archiv">News-Archiv</a>
+            </li>
+            <li><b><a href="https://www.heise.de/developer/rubriken/" title="Rubriken">Rubriken</a></b>
+                <a href="https://www.heise.de/developer/sprachen-1037.html" title="Sprachen">Sprachen</a>
+                <a href="https://www.heise.de/developer/architektur-methoden-1031.html" title="Architektur/Methoden">Architektur/Methoden</a>
+                <a href="https://www.heise.de/developer/werkzeuge-1041.html" title="Werkzeuge">Werkzeuge</a>
+                <a href="https://www.heise.de/developer/know-how-1033.html" title="Know-how">Know-how</a>
+                <a href="https://www.heise.de/developer/standards-1039.html" title="Standards">Standards</a>
+                <a href="https://www.heise.de/developer/literatur-1035.html" title="Literatur">Literatur</a>
+                <a href="https://www.heise.de/developer/videos-3294461.html" title="Videos">Videos</a>
+                <a href="https://www.heise.de/developer/Veranstaltungsberichte-3344266.html" title="Veranstaltungsberichte">Veranstaltungsberichte</a>
+            </li>
+            <li><b><a href="https://www.heise.de/developer/blog/" title="Blogs">Blogs</a></b>
+                <a href="https://www.heise.de/developer/babel-bulletin-980714.html" title="Babel-Bulletin">Babel-Bulletin</a>
+                <a href="https://www.heise.de/developer/der-dotnet-doktor-1292.html" title="Der Dotnet-Doktor">Der Dotnet-Doktor</a>
+                <a href="https://www.heise.de/developer/the-world-of-it-1296.html" title="The World of IT">The World of IT</a>
+                <a href="https://www.heise.de/developer/the-next-big-thing-1790061.html" title="the next big thing">the next big thing</a>
+                <a href="https://www.heise.de/developer/neuigkeiten-von-der-insel-1920360.html" title="Neuigkeiten von der Insel">Neuigkeiten von der Insel</a>
+                <a href="https://www.heise.de/developer/Tales_from_the_Web_side-2548664.html" title="Tales from the Web side">Tales from the Web side</a>
+                <a href="https://www.heise.de/developer/Continuous-Architecture-2687847.html" title="Continuous Architecture">Continuous Architecture</a>
+                <a href="https://www.heise.de/developer/Der_Pragmatische_Architekt-2732748.html" title="Der Pragmatische Architekt">Der Pragmatische Architekt</a>
+                <a href="https://www.heise.de/developer/UeberKreuz-2753600.html" title="ÜberKreuz ">ÜberKreuz </a>
+                <a href="https://www.heise.de/developer/ModernesCplusplus-3691794.html" title="Modernes C++">Modernes C++</a>
+            </li>
+            <li><b><a href="https://www.heise.de/developer/podcast/" title="Podcast">Podcast</a></b>
+            </li>
+            <li><b><a href="https://www.heise.de/developer/videos-3294461.html" title="Videos">Videos</a></b>
+            </li>
+            <li><b><a href="https://www.heise.de/developer/Konferenzen-von-heise-Developer-2725968.html" title="Konferenzen">Konferenzen</a></b>
+            </li>
+            <li><b><a href="https://www.heise.de/developer/termine/" title="Termine">Termine</a></b>
+            </li>
+       </ul>
+    </div>
+    <div id="bannerzone">
+        <div class="leaderboard">  <div id="div-gpt-ad-3" data-google-query-id="">
+    
+    <script type="text/javascript">
+      googletag.display("div-gpt-ad-3");
+    </script>
+    <noscript>&lt;div&gt;&lt;a href="//pubads.g.doubleclick.net/gampad/jump?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=468x60%7C728x90%7C970x250&amp;tile=3" target="_blank"&gt;&lt;img alt="" src="//pubads.g.doubleclick.net/gampad/ad?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=468x60%7C728x90%7C970x250&amp;tile=3" /&gt;&lt;/a&gt;&lt;/div&gt;</noscript>
+  </div>
+</div>
+        <div class="skyscraper">  <div id="div-gpt-ad-4" data-google-query-id="">
+    
+    <script type="text/javascript">
+      googletag.display("div-gpt-ad-4");
+    </script>
+    <noscript>&lt;div&gt;&lt;a href="//pubads.g.doubleclick.net/gampad/jump?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=160x600%7C200x800&amp;tile=4" target="_blank"&gt;&lt;img alt="" src="//pubads.g.doubleclick.net/gampad/ad?iu=%2F6514%2Fwww.heise.de%2Fdeveloper%2Fdev-inhalt%2F&amp;kw=Container%2CDocker&amp;c=4192628213&amp;sz=160x600%7C200x800&amp;tile=4" /&gt;&lt;/a&gt;&lt;/div&gt;</noscript>
+  </div>
+</div>
+    </div>
+</div>
+
+
+
+
+<div style="display: inline;"><img id="ivw_pixel_intern" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/Anwendungen-mit-Docker-transportabel-machen-2127220.html" width="1" height="1" alt=""></div>
+    
+    
+    
+    
+    <script type="text/javascript">
+    var iam_data = {
+        "st":"heise",
+        "cp":"dev",
+        "sv":"in",
+        "co":"%2Fdeveloper%2Fartikel%2FAnwendungen-mit-Docker-transportabel-machen-2127220.html"
+    }
+    iom.c(iam_data);
+    </script><script src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/tx.io"></script>
+
+
+
+
+<!-- Webtrekk 4.3.5, (c) www.webtrekk.com -->
+    <script type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/webtrekk-v4.3.5-bundle-heise-2017-01-20.js"></script>
+    <script type="text/javascript">
+    <!--
+    var pageConfig = {
+        linkTrack : "standard", // Activate Link Tracking    [link or standard]
+        heatmap : "0",          // Activate Heatmap Tracking [1 = on | 0 = off]
+        form : "0",             // Activate Form Tracking    [1 = on | 0 = off]
+              trackId : "288689636920174",
+      
+        pixelSampling : "",
+        contentId: "www.heise.de.developer.artikel.anwendungen-mit-docker-transportabel-machen-2127220"
+    };
+    var wt = new webtrekkV3(pageConfig);
+    wt.contentGroup = {};
+    wt.contentGroup['1']  = "www.heise.de";
+    wt.contentGroup['2']  = "developer";
+    wt.contentGroup['3']  = "artikel";
+    wt.contentGroup['4']  = "anwendungen-mit-docker-transportabel-machen-2127220";
+    wt.contentGroup['9']  = "anwendungen-mit-docker-transportabel-machen-2127220";
+    wt.contentGroup['10']  = "artikel";
+    wt.customParameter = {};
+    wt.customParameter['1']  = "1/4";
+    wt.customParameter['2']  = "container;docker";
+    wt.customParameter['6']  = "container;docker";
+    wt.customParameter['8']  = "2014-02-28T13:59:00";
+    wt.customParameter['9']  = "developer";
+    wt.customParameter['15']  = "Golo Roden";
+    wt.customParameter['17']  = "undefiniert";
+    
+    wt.customSessionParameter = {};
+    try {
+        if (window.heiseLogin) {
+            wt.customSessionParameter['1'] =
+                window.heiseLogin.sso_logged_in ? "1" : "0";
+        }
+    } catch(e) { }
+
+    
+    
+
+    wt.executePluginFunction = "wt_teaserTracking";
+    window.wt_ttv2 = window.wt_ttv2 || [];
+    $('.widget-werbung').each(function(i, el) {
+        var elj = $(el);
+        var teaser_config = {
+            selector: "#" + elj.attr('id'),
+            data: {
+                name: elj.attr('data-widget-werbung-name'),
+                rank: elj.attr('data-widget-werbung-rank'),
+                content: elj.attr('data-widget-werbung-content')
+            }
+        };
+        window.wt_ttv2.push(teaser_config);
+    });
+    $('[data-teaser-tracking-id]').each(function(i, el) {
+        var elj = $(el);
+        var teaser_config = {
+            selector: '[data-teaser-tracking-id="' + elj.attr('data-teaser-tracking-id') + '"]',
+            data: {
+                name: elj.attr('data-teaser-tracking-name'),
+                rank: elj.attr('data-teaser-tracking-rank'),
+                content: elj.attr('data-teaser-tracking-content')
+            }
+        };
+        window.wt_ttv2.push(teaser_config);
+    });
+
+    wt.heatmapRefpoint = 'container_content';
+    wt.sendinfo();
+
+    //-->
+    </script>
+    <noscript>&lt;div&gt;&lt;img src="//prophet.heise.de/288689636920174/wt.pl?p=435,www.heise.de.developer.artikel.anwendungen-mit-docker-transportabel-machen-2127220&amp;cg1=www.heise.de&amp;cg10=artikel&amp;cg2=developer&amp;cg3=artikel&amp;cg4=anwendungen-mit-docker-transportabel-machen-2127220&amp;cg9=anwendungen-mit-docker-transportabel-machen-2127220&amp;cp1=1%2F4&amp;cp15=Golo%20Roden&amp;cp17=undefiniert&amp;cp2=container%3Bdocker&amp;cp6=container%3Bdocker&amp;cp8=2014-02-28T13%3A59%3A00&amp;cp9=developer" height="1" width="1" alt="" /&gt;&lt;/div&gt;</noscript>
+
+
+<!-- /Webtrekk -->
+
+
+
+    
+    <script type="text/javascript">
+        <!--//--><![CDATA[//><!--
+        // VGWORT-CROP-MARKER
+        var vgwort_token='61697eb8b2124cbba1077192d6d2e643';
+                document.write('<div style="display: inline;"><img src="https://ssl-heise.met.vgwort.de/na/' +  vgwort_token);
+        document.write('" width="1" height="1" alt="" /><' + '/div>');
+        //--><!]]>
+    </script><div style="display: inline;"><img src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/61697eb8b2124cbba1077192d6d2e643" width="1" height="1" alt=""></div>
+
+
+
+
+<script type="text/javascript">
+    function _heise_sf_section_from_pathname() {
+        var path    = window.location.pathname;
+        var section = path.split('/')[1] || 'homepage';
+        if ( path === '/newsticker/' || path === '/newsticker/classic/' || path === '/newsticker/archiv/' ) {
+            section = 'homepage';
+        }
+        return section;
+    }
+    var _sf_async_config={};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = 59838;
+    _sf_async_config.domain = 'heise.de';
+    _sf_async_config.useCanonical = false;
+    _sf_async_config.path = window.location.pathname;
+    _sf_async_config.sections = _heise_sf_section_from_pathname();
+    _sf_async_config.authors = 'die Redaktionen';
+    /** CONFIGURATION END **/
+    (function(){
+      function loadChartbeat() {
+        window._sf_endpt=(new Date()).getTime();
+        var e = document.createElement('script');
+        e.setAttribute('language', 'javascript');
+        e.setAttribute('type', 'text/javascript');
+        e.setAttribute('src', '//static.chartbeat.com/js/chartbeat_video.js');
+        document.body.appendChild(e);
+      }
+      var oldonload = window.onload;
+      window.onload = (typeof window.onload != 'function') ?
+         loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+    
+
+	<ul id="navi_bottom">
+
+	
+		<li class="left"><a href="https://www.heise.de/Privacy-Policy-der-Heise-Medien-GmbH-Co-KG-4860.html">Datenschutzhinweis</a> </li>
+	
+
+	
+		<li class="left"><a href="https://www.heise.de/developer/impressum.html">Impressum</a></li>
+	
+
+	
+		<li class="left"><a href="https://www.heise.de/developer/kontakt/">Kontakt</a></li>
+	
+
+	
+		<li class="left"><a href="https://www.heise.de/mediadaten/online/">Mediadaten</a> </li>
+	
+
+	
+		<li class="left"><a href="http://m.heise.de/developer/">News mobil</a> </li>
+	
+
+
+<li class="bid_anzeige">
+1181417
+</li>
+
+
+    
+        <li class="right"><a href="https://www.interred.de/" rel="external" style="margin-right: 0;">Content Management</a> by <b style="margin-right: 0.5em;">Inter<span class="tx_red">Red</span></b></li>
+    
+
+	
+		
+		<li class="right"><a href="https://www.heise-medien.de/">Copyright © 2017 Heise Medien</a></li>
+		
+	
+
+	
+		
+	
+</ul>
+
+
+
+
+
+
+<script src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/suche.js"></script><ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 225501; top: 0px; left: 0px; display: none;"></ul>
+
+<script src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/heise.min.js"></script><section class="heise-modal newsletter_2014_modal"><div class="wrapper-transparent"></div><div class="stage"><button data-role="close">×</button></div></section>
+
+
+
+
+<!-- Created with InterRed V16.4.1, http://www.interred.de/, by InterRed GmbH -->
+<!-- BID: 1181417, iBID: 2190248, CID: 2127220, iCID: 3696756 -->
+<!-- Link: $(LB1181417:Linktext)$ $(LC2127220:Linktext)$ -->
+<!-- Generiert: 2017-04-26 13:25:43 -->
+
+<script language="javascript" type="text/javascript" src="./Anwendungen mit Docker transportabel machen _ heise Developer_files/chartbeat_video.js"></script></body></html>

@@ -127,9 +127,58 @@ Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\
 
 \todo[color=cyan]{Daniel schreiben: Request Header Investigation}
 
-\subsection{JavaScript Port & IP Scanning}
+\subsection{JavaScript Port \& IP Scanning}
+Um Angriffe über das Netzwerk zu starten muss der Angreifer Kenntnisse über den Netzwerkaufbau und die erreichbaren Services des anzugreifenden Systems haben.\footcite[Vgl.][937]{port1}
 
-\todo{Jani}
+Über die offenen Ports eines Systems kann sich ein potenzieller Angreifer Zugang beschaffen. Jedoch muss zunächst herausgefunden werden, welche Ports erreichbar sind. Hierfür wird eine Technik Namens \textit{Port Scanning} genutzt. Port Scanning ist im Grunde das Abfragen einiger oder auch aller Ports eines Systems. Es gibt heutzutage 65.535 TCP und 65.535 UDP Ports, von denen einige in Systemen offen sind, jedoch die meisten davon geschlossen.\footcite[Vgl.][937]{port1} UDP und TCP sind zwei verschiedene Internet Protokolle. Sie unterscheiden sich zum einen darin, dass TCP verbindungsorientiert arbeitet, während UDP verbindungslose Kommunikation nutzt.\footcite[Vgl.][]{tcpudp} Die Unterschiede werden hier aber nicht weiter beleuchtet. Einige dieser Ports sind standardisiert und werden von bestimmten Webservices genutzt, wie beispielsweise TCP Port 80, welcher in der Regel von Web Servern eingesetzt wird.
+
+Port Scanning liefert hierbei Informationen welche Ports eines Systems offen für Netzwerkverbindungen sind.
+
+In Listing \ref{lst:portscanner}\footcite[Vgl.][]{portscanner} wird ein Beispielcode für einen, in Java implementierten, simplen Portscanner gezeigt. Dieser prüft alle 65535 TCP Ports eines gegebenen Hosts. Er versucht über jeden dieser Ports eine Socketverbindung aufzubauen (siehe Zeile 19-32), welche er anschließend wieder schließt. Wenn hierbei keine Fehlermeldung vom System geworfen wird weiß der Scanner, dass die Verbindung mit dem getesteten Port aufgebaut wurde und somit dieser Port offen ist. Dieser einfache Portscanner liefert als Ergebnis eine Anzahl an offenen Ports im getesten System. 
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejava,
+    caption={Beispiel eines simplen Java PortScanners},
+    label={lst:portscanner}
+}
+\begin{lstlisting}
+public class Portscanner {
+    public static void main(final String... args) {
+        final ExecutorService es = Executors.newFixedThreadPool(20);
+        final String ip = "127.0.0.1";
+        final int timeout = 200;
+        final List<Future<Boolean>> futures = new ArrayList<>();
+        for (int port = 1; port <= 65535; port++) {
+            futures.add(portIsOpen(es, ip, port, timeout));
+        }
+        es.shutdown();
+        int openPorts = 0;
+        for (final Future<Boolean> f : futures) {
+            if (f.get()) {
+                openPorts++;
+            }
+        }
+        System.out.println("There are " + openPorts + " open ports on host " + ip + " (probed with a timeout of " + timeout + "ms)");
+    }
+    public static Future<Boolean> portIsOpen(final ExecutorService es, final String ip, final int port, final int timeout) {
+        return es.submit(new Callable<Boolean>() {
+            @Override public Boolean call() {
+                try {
+                    Socket socket = new Socket();
+                    socket.connect(new InetSocketAddress(ip, port), timeout);
+                    socket.close();
+                    return true;
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        });
+    }
+}
+\end{lstlisting}
+\end{scriptsize}
+
 
 \subsection{Phishing}
 

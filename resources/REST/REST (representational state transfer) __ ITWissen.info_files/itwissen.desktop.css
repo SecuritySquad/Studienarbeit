@@ -1,0 +1,215 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20.12.2016, 20:26:25
+    Author     : boris_lipinski
+*/
+/*
+
+Color Theme: google light blue (https://material.google.com/style/color.html#color-color-palette)
+
+-50: #E1F5FE
+-100: #B3E5FC 
+-200: #81D4FA
+-300: #4FC3F7
+-400: #29B6F6
+-500: #03A9F4
+-600: #039BE5 (text weiß))
+-700: #0288D1 (text weiß))
+-800: #0277BD  (text weiß))
+-900: #01579B  (text weiß))
+A100: #80D8FF
+A200: #40C4FF
+A400: #00B0FF 
+A700: #0091EA  (text weiß))
+
+*/
+
+/* 
+    *** GLOBAL ***
+*/
+
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: #E1F5FE;
+}
+
+.container {
+    background-color: white;
+}
+
+h1 {
+    font-size: 160%;
+}
+h2 {
+    font-size: 120%;
+}
+
+/*
+    *** HEADER ****
+*/
+.itw-header-navbar {
+    margin-top: 10px;
+    background-color:  #03A9F4;
+    color: white;
+}
+
+nav .itw-header-navbar a:hover {
+    color: #03A9F4;
+    background-color: white;
+}
+
+.itw-header-navbar a {
+    color: white;
+}
+
+#itw-navbar-search {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #03A9F4 ;
+}
+
+/* Korrektur für Darstellung navbar-brand */
+.navbar-brand {
+    padding: 0px; /* firefox bug fix */
+}
+
+.navbar-brand>img {
+    height: 100%;
+    padding: 5px; /* firefox bug fix */
+    width: auto;
+}
+
+/*
+    *** CONTENT (Article/List) *****
+*/
+.itw-cms h1 {
+    font-size: 180%;
+}
+
+.itw-cms h2 {
+    font-size: 120%;
+}
+
+.itw-cms h3 {
+    font-size: 100%;
+    color: grey;
+    margin-top: 0px;
+}
+
+.itw-cms img {
+    
+}
+
+
+.itw-abstract 
+{
+    font-weight: 700;
+}
+
+bold {
+    font-weight: 700;
+
+}
+
+.itw-headline {
+    text-decoration: underline;
+    font-weight: 700;
+
+}
+.itw-article-picture-box 
+{
+    padding: 10px 0 10px 0;
+
+}
+
+.itw-article-header h1
+{
+    font-size: 140%;
+    margin-top: 1em;
+}
+
+.itw-article-header h2
+{
+    font-size: 120%;
+    margin-top: 0;
+}
+
+
+.itw-list-tags > h2 
+{
+    border-bottom: 1px solid;
+}
+
+.itw-list-tags > ul
+{
+    font-size: 18px;
+}
+
+/*
+
+    Rechte Spalte
+*/
+
+.itw-col-right {
+    font-size: 80%;
+}
+
+.itw-col-right .panel-heading
+{
+    border-bottom: 1px solid #B3E5FC ;
+    padding-bottom: 0px;
+}
+
+.itw-col-right .panel
+{
+    padding-bottom: 0px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-bottom: 0px; 
+}
+
+.itw-col-right .table > tbody > tr > td, 
+.itw-col-right .table > tbody > tr > th, 
+.itw-col-right .table > tfoot > tr > td, 
+.itw-col-right .table > tfoot > tr > th, 
+.itw-col-right .table > thead > tr > td, 
+.itw-col-right .table > thead > tr > th {
+    border: 0px;
+}
+
+
+/*
+    *** FOOTER ***
+*/
+
+.itw-page-footer {
+    padding-top: 10px;
+    text-align: center;
+    background-color:  #03A9F4;
+    margin-bottom: 10px;
+}
+
+footer  a
+{
+    color: white;
+    padding-left: 10px ;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+footer p
+{
+    padding-top: 10px;
+    font-size: 70%;
+    color: #B3E5FC;
+}
+
+
+

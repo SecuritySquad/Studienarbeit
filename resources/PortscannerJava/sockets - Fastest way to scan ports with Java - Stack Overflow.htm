@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>sockets - Fastest way to scan ports with Java - Stack Overflow</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" content="stackoverflow.com">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Fastest way to scan ports with Java">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I made very simple port scanner, but it runs too slow, so I&#39;m looking for way to make it scan faster. Here is my code:
+
+public boolean portIsOpen(String ip, int port, int timeout) {
+        try {
+ ...">
+    <meta property="og:url" content="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java">
+    <link rel="canonical" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java">
+
+    
+    
+    <script type="text/javascript" async="" src="http://engine.adzerk.net/ados?t=1494527927881&amp;request={%22Placements%22:[{%22A%22:22,%22S%22:8277,%22D%22:%22adzerk530607815%22,%22AT%22:4,%22Z%22:[43]},{%22A%22:22,%22S%22:8277,%22D%22:%22adzerk1457158281%22,%22AT%22:4,%22Z%22:[44]},{%22A%22:22,%22S%22:8277,%22D%22:%22adzerk141427520%22,%22ATA%22:[5,17,2221,1129,43],%22Z%22:[45]}],%22Keywords%22:%22java%2Csockets%2Cip%2Cport-scanning%2Cx-cross-site-serverfault.com%22,%22Referrer%22:%22https%3A%2F%2Fwww.google.de%2F%22,%22IsAsync%22:true}"></script><script src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/rules-p-c1rF4kxgLUzNc.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/quant.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/beacon.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/analytics.js"></script><script type="text/javascript" async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/ados.js"></script><script src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/jquery.min.js"></script>
+    <script src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Fastest way to scan ports with Java&#39;" href="http://stackoverflow.com/feeds/question/11547082">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:1,shownCommentCount:1,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:11547082});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '11547082');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1494527920,"routeName":"Questions/Show","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableInsertDocLinkDialog":true,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"http"},"user":{"fkey":"4fe5061d1429dad621b91a687d93f6e8","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true,"ab":{"devstory_onboarding_exp":{"v":"alt_respons_label","g":3}}},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableNewLinkInsertDialog":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"6d666437fa89","js/moderator.en.js":"81bea9bf807a","js/full-anon.en.js":"a13f76ee5a5c","js/full.en.js":"c64361a801b6","js/wmd.en.js":"2028235ff263","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"978c4e09340e","js/help.en.js":"118cb359bcc6","js/tageditor.en.js":"29bb7d9d2ed6","js/tageditornew.en.js":"ec05a1cf9fc2","js/inline-tag-editing.en.js":"2ddfa79492e7","js/revisions.en.js":"8f22ba768cac","js/review.en.js":"1f663f8ced8f","js/tagsuggestions.en.js":"7dfec0d2a2d7","js/post-validation.en.js":"02d708245e1a","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"194918dbb4b7","js/keyboard-shortcuts.en.js":"89aca02f2d6d","js/external-editor.en.js":"e574ed908cf3","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"e574ed908cf3","js/snippet-javascript.en.js":"a2935e2a1a88","js/snippet-javascript-codemirror.en.js":"680d8b9bf838"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/full-anon.en.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/snippet-javascript.en.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/post-validation.en.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/prettify-full.en.js"></script><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/external-editor.en.js"></script><script type="text/javascript" src="http://static.adzerk.net/Extensions/adFeedback.js"></script><link rel="stylesheet" href="http://static.adzerk.net/Extensions/adFeedback.css"><link rel="stylesheet" href="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/cp.min.css" type="text/css"></head>
+<body class="question-page new-topbar">
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+<header class="so-header js-so-header _fixed _scrolling">
+    <div class="-container">
+        <div class="-main">            
+            <a href="http://stackoverflow.com/" class="-logo js-gps-track " data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+
+                <span class="-img">Stack Overflow</span>
+            </a>
+
+            <nav class="navigation" role="navigation" aria-label="site navigation">
+                <ol class="-list">
+                        <li class="-item _current">
+        <a id="nav-questions" href="http://stackoverflow.com/questions" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+
+    <li class="-item">
+        <a id="nav-jobs" href="http://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Jobs</a>
+    </li>
+                        <li class="-item">
+        <a id="nav-docs" href="http://stackoverflow.com/documentation" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:7})">Documentation <small class="beta-badge">beta</small></a>
+    </li>
+                        <li class="-item">
+        <a id="nav-tags" href="http://stackoverflow.com/tags" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+
+                        <li class="-item">
+        <a id="nav-users" href="http://stackoverflow.com/users" class="-link js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+
+                </ol>
+            </nav>
+
+                <form id="search" action="http://stackoverflow.com/search" method="get" class="searchbar" autocomplete="off" role="search">
+                    <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"></path></svg>
+                    <input name="q" type="text" placeholder="Search..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field">
+                    <button type="submit" class="btn js-search-submit">
+                        <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"></path></svg>
+                    </button>
+                </form>
+
+        </div>
+        
+
+
+    
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="http://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+            <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="http://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="http://stackoverflow.com/" class="current-site-link site-link js-gps-track" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f11547082%2ffastest-way-to-scan-ports-with-java" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="http://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="http://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+
+
+    <li class="-item"><a href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" class="-link js-help-button" title="Help Center and other resources">
+        <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M9 0a9 9 0 1 0 .001 18.001A9 9 0 0 0 9 0zm.812 13.126c-.02.716-.55 1.157-1.238 1.137-.659-.02-1.177-.49-1.157-1.209.02-.715.566-1.17 1.225-1.15.691.021 1.194.507 1.17 1.222zm1.956-5.114c-.168.237-.546.542-1.02.912l-.527.361c-.257.197-.417.43-.502.695-.044.141-.076.507-.084.752-.004.048-.032.156-.181.156H7.883c-.165 0-.185-.096-.18-.144.023-.667.12-1.218.397-1.66.374-.594 1.426-1.221 1.426-1.221.161-.12.286-.25.382-.39.177-.24.321-.51.321-.8 0-.333-.08-.65-.293-.915-.249-.31-.518-.458-1.036-.458-.51 0-.808.257-1.021.594-.213.338-.177.735-.177 1.097H5.746c0-1.366.357-2.238 1.112-2.752.51-.35 1.162-.502 1.921-.502.996 0 1.788.184 2.487.715.647.49.988 1.181.988 2.113 0 .575-.2 1.057-.486 1.447z"></path></svg>
+    </a></li>
+                <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 167 Stack Exchange sites">
+            <svg viewBox="0 0 18 19" width="18" height="19" role="icon"><path fill-rule="evenodd" d="M0 14a2 2 0 0 0 2 2h10v3l3-3h1a2 2 0 0 0 2-2v-2H0v2zM16 0H2a2 2 0 0 0-2 2v2h18V2a2 2 0 0 0-2-2zM0 6h18v4H0V6z"></path></svg>
+        </a>
+    </li>
+
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                <a href="https://stackoverflow.com/users/login?ssrc=head&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f11547082%2ffastest-way-to-scan-ports-with-java" class="login-link btn-clear" rel="nofollow">Log In</a>
+                    <a href="https://stackoverflow.com/users/signup?ssrc=head&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init(); });
+            StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+
+<div id="herobox" class="alternate">
+    <div class="test"></div>
+        <div id="close">
+            <a title="click to minimize"><span>x</span> Dismiss</a>
+        </div>
+    <div class="content">
+        <b>Join the Stack Overflow Community</b>
+        <div class="separator"></div>
+        <div class="blurb">
+            Stack Overflow is a community of 7.1 million programmers, just like you, helping each other.
+                <br>
+Join them; it only takes a minute:                <br>
+        </div>
+        <a href="http://stackoverflow.com/users/signup?ssrc=hero&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" id="tell-me-more" class="button">Sign up</a>
+    </div>
+</div>
+<script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java" class="question-hyperlink">Fastest way to scan ports with Java</a></h1>
+
+            
+<div class="aside-cta" role="navigation" aria-label="ask new question">
+    <a href="http://stackoverflow.com/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+		</div>
+			<div id="mainbar" role="main" aria-label="question and answers">
+
+			
+
+<div class="question" data-questionid="11547082" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk530607815",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk530607815"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDIxMCwiYXQiOjQsImJ0IjowLCJjbSI6NTU0MDQ4LCJjaCI6MTE3OCwiY2siOnt9LCJjciI6MjIzOTY1MywiZGkiOiIwNjAxZjhmYjY1YmU0MGY3OWRlY2U2ZTQ2NTUwNzUxMyIsImRtIjoxLCJmYyI6Mjc3MDE4MCwiZmwiOjMwNDg0NjUsImlwIjoiODQuMTc5Ljk3LjY4Iiwia3ciOiJqYXZhLHNvY2tldHMsaXAscG9ydC1zY2FubmluZyx4LWNyb3NzLXNpdGUtc2VydmVyZmF1bHQuY29tIiwibWsiOiJzb2NrZXRzIiwibnciOjIyLCJwYyI6Ny42LCJlYyI6Ny42LCJwciI6NzY1LCJydCI6MiwicmYiOiJodHRwczovL3d3dy5nb29nbGUuZGUvIiwic2IiOiJpLTBmODRjMTU4YmVjMjViNmM2Iiwic3AiOjM1NjQsInN0Ijo4Mjc3LCJ1ayI6InVlMS0zYTE0NTk5M2IxZjc0Y2EyYWI2OGRhZTI2NmE4NTRkNSIsInpuIjo0MywidHMiOjE0OTQ1Mjc5MjEzMzYsImJmIjp0cnVlLCJwbiI6ImFkemVyazUzMDYwNzgxNSIsInVyIjoiaHR0cHM6Ly9zb2Z0d2FyZS5pbnRlbC5jb20vbW9kZXJuLWNvZGUvY29kZS1zYW1wbGVzP3V0bV9zb3VyY2U9U3RhY2tfT3ZlcmZsb3cmdXRtX21lZGl1bT1iYW5uZXImdXRtX2NvbnRlbnQ9SFBDX0RldmVsb3BlcnMmdXRtX2NhbXBhaWduPURSRF8xN18zNiJ9&amp;s=Glk5E8l_KuCJZ-HknOQxtlbXcr4" rel="nofollow" target="_blank" title=""><img src="http://static.adzerk.net/Advertisers/c177820f4a884e8e83b17f6666dbef56.jpg" title="" alt="" border="0" width="728" height="90" style="display: none !important;"></a><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="http://engine.adzerk.net/i.gif?e=eyJhdiI6NDIxMCwiYXQiOjQsImJ0IjowLCJjbSI6NTU0MDQ4LCJjaCI6MTE3OCwiY2siOnt9LCJjciI6MjIzOTY1MywiZGkiOiIwNjAxZjhmYjY1YmU0MGY3OWRlY2U2ZTQ2NTUwNzUxMyIsImRtIjoxLCJmYyI6Mjc3MDE4MCwiZmwiOjMwNDg0NjUsImlwIjoiODQuMTc5Ljk3LjY4Iiwia3ciOiJqYXZhLHNvY2tldHMsaXAscG9ydC1zY2FubmluZyx4LWNyb3NzLXNpdGUtc2VydmVyZmF1bHQuY29tIiwibWsiOiJzb2NrZXRzIiwibnciOjIyLCJwYyI6Ny42LCJlYyI6Ny42LCJwciI6NzY1LCJydCI6MiwicmYiOiJodHRwczovL3d3dy5nb29nbGUuZGUvIiwic2IiOiJpLTBmODRjMTU4YmVjMjViNmM2Iiwic3AiOjM1NjQsInN0Ijo4Mjc3LCJ1ayI6InVlMS0zYTE0NTk5M2IxZjc0Y2EyYWI2OGRhZTI2NmE4NTRkNSIsInpuIjo0MywidHMiOjE0OTQ1Mjc5MjEzMzgsImJmIjp0cnVlLCJwbiI6ImFkemVyazUzMDYwNzgxNSIsImZxIjowfQ&amp;s=Ceos0gdNODVVGiZkP8wHqac9JvE"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="11547082">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">23</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#">favorite</a>
+        <div class="favoritecount"><b>22</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I made very simple port scanner, but it runs too slow, so I'm looking for way to make it scan faster. Here is my code:</p>
+
+<pre class="lang-java prettyprint prettyprinted"><code><span class="kwd">public</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> portIsOpen</span><span class="pun">(</span><span class="typ">String</span><span class="pln"> ip</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> timeout</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="typ">Socket</span><span class="pln"> socket </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Socket</span><span class="pun">();</span><span class="pln">
+            socket</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">InetSocketAddress</span><span class="pun">(</span><span class="pln">ip</span><span class="pun">,</span><span class="pln"> port</span><span class="pun">),</span><span class="pln"> timeout</span><span class="pun">);</span><span class="pln">
+            socket</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln">
+            </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Exception</span><span class="pln"> ex</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">}</span></code></pre>
+
+<p>this code here test if specific port is open on specific ip. For timeout I use minimum value of 200 because when I go lower it doesnt have enough time to test the port. Well It works well, but takes too much to scan from 0 to 65535. Is there any other way that could maybe scan from 0 to 65535 in less than 5 minutes?</p>
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/java" class="post-tag js-gps-track" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="http://stackoverflow.com/questions/tagged/sockets" class="post-tag js-gps-track" title="show questions tagged &#39;sockets&#39;" rel="tag">sockets</a> <a href="http://stackoverflow.com/questions/tagged/ip" class="post-tag js-gps-track" title="show questions tagged &#39;ip&#39;" rel="tag">ip</a> <a href="http://stackoverflow.com/questions/tagged/port-scanning" class="post-tag js-gps-track" title="show questions tagged &#39;port-scanning&#39;" rel="tag">port-scanning</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/q/11547082" title="short permalink to this question" class="short-link" id="link-post-11547082">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/11547082/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/11547082/revisions" title="show all edits to this post">edited <span title="2015-02-10 09:00:58Z" class="relativetime">Feb 10 '15 at 9:00</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/927408/jurgemaister"><div class="gravatar-wrapper-32"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/5b569692de127b2f110ac8c44eae5c06" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/927408/jurgemaister">jurgemaister</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">4,543</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="27 silver badges"><span class="badge2"></span><span class="badgecount">27</span></span><span title="49 bronze badges"><span class="badge3"></span><span class="badgecount">49</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2012-07-18 17:32:46Z" class="relativetime">Jul 18 '12 at 17:32</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1301750/rohit-malish"><div class="gravatar-wrapper-32"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/c402bb4e35c8faaf84a9b22a7abfd0b8" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1301750/rohit-malish">Rohit Malish</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,246</span><span title="9 gold badges"><span class="badge1"></span><span class="badgecount">9</span></span><span title="29 silver badges"><span class="badge2"></span><span class="badgecount">29</span></span><span title="63 bronze badges"><span class="badge3"></span><span class="badgecount">63</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11547082" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-15269680" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">3</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Have you tried with threads?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/368926/elias" title="5,982 reputation" class="comment-user">elias</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#comment15269680_11547082"><span title="2012-07-18 17:36:17Z" class="relativetime-clean">Jul 18 '12 at 17:36</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-11547082" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" onclick=""></a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								4 Answers
+                                <span style="display:none;" itemprop="answerCount">4</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="11547117"></a>
+<div id="answer-11547117" class="answer accepted-answer" data-answerid="11547117" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="11547117">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">53</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you need 200ms for each of the 65536 ports (in the worst case, a firewall is blocking everything, thus making you hit your timeout for every single port), the maths is pretty simple: you need 13k seconds, or about 3 hours and a half.</p>
+
+<p>You have 2 (non-exclusive) options to make it faster:</p>
+
+<ul>
+<li>reduce your timeout</li>
+<li>paralellize your code</li>
+</ul>
+
+<p>Since the operation is I/O bound (in contrast to CPU bound -- that is, you spend time waiting for I/O, and not for some huge calculation to complete), <strong>you can use many, many threads</strong>. Try starting with 20. They would divide the 3 hours and a half among them, <strong>so the maximum expected time is about 10 minutes</strong>. Just remember that this will put pressure on the other side, ie, the scanned host will see huge network activity with "unreasonable" or "strange" patterns, making the scan extremely easy to detect.</p>
+
+<p>The easiest way (ie, with minimal changes) is to use the ExecutorService and Future APIs:</p>
+
+<pre class="lang-java prettyprint prettyprinted"><code><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="typ">Future</span><span class="pun">&lt;</span><span class="typ">Boolean</span><span class="pun">&gt;</span><span class="pln"> portIsOpen</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ExecutorService</span><span class="pln"> es</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> ip</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> timeout</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">return</span><span class="pln"> es</span><span class="pun">.</span><span class="pln">submit</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Callable</span><span class="pun">&lt;</span><span class="typ">Boolean</span><span class="pun">&gt;()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="lit">@Override</span><span class="pln"> </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Boolean</span><span class="pln"> call</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+          </span><span class="typ">Socket</span><span class="pln"> socket </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Socket</span><span class="pun">();</span><span class="pln">
+          socket</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">InetSocketAddress</span><span class="pun">(</span><span class="pln">ip</span><span class="pun">,</span><span class="pln"> port</span><span class="pun">),</span><span class="pln"> timeout</span><span class="pun">);</span><span class="pln">
+          socket</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln">
+          </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Exception</span><span class="pln"> ex</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+          </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+      </span><span class="pun">}</span><span class="pln">
+   </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>Then, you can do something like:</p>
+
+<pre class="lang-java prettyprint prettyprinted"><code><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pun">...</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ExecutorService</span><span class="pln"> es </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Executors</span><span class="pun">.</span><span class="pln">newFixedThreadPool</span><span class="pun">(</span><span class="lit">20</span><span class="pun">);</span><span class="pln">
+  </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> ip </span><span class="pun">=</span><span class="pln"> </span><span class="str">"127.0.0.1"</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> timeout </span><span class="pun">=</span><span class="pln"> </span><span class="lit">200</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">Future</span><span class="pun">&lt;</span><span class="typ">Boolean</span><span class="pun">&gt;&gt;</span><span class="pln"> futures </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;&gt;();</span><span class="pln">
+  </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> port </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> port </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">65535</span><span class="pun">;</span><span class="pln"> port</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    futures</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">portIsOpen</span><span class="pun">(</span><span class="pln">es</span><span class="pun">,</span><span class="pln"> ip</span><span class="pun">,</span><span class="pln"> port</span><span class="pun">,</span><span class="pln"> timeout</span><span class="pun">));</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+  es</span><span class="pun">.</span><span class="pln">shutdown</span><span class="pun">();</span><span class="pln">
+  </span><span class="kwd">int</span><span class="pln"> openPorts </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Future</span><span class="pun">&lt;</span><span class="typ">Boolean</span><span class="pun">&gt;</span><span class="pln"> f </span><span class="pun">:</span><span class="pln"> futures</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">f</span><span class="pun">.</span><span class="pln">get</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      openPorts</span><span class="pun">++;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+  </span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"There are "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> openPorts </span><span class="pun">+</span><span class="pln"> </span><span class="str">" open ports on host "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> ip </span><span class="pun">+</span><span class="pln"> </span><span class="str">" (probed with a timeout of "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> timeout </span><span class="pun">+</span><span class="pln"> </span><span class="str">"ms)"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>If you need to know <em>which ports are open</em> (and not just <em>how many</em>, as in the above example), you'd need to change the return type of the function to <code>Future&lt;SomethingElse&gt;</code>, where <code>SomethingElse</code> would hold the port and the result of the scan, something like:</p>
+
+<pre class="lang-java prettyprint prettyprinted"><code><span class="kwd">public</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">ScanResult</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">;</span><span class="pln">
+  </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> isOpen</span><span class="pun">;</span><span class="pln">
+  </span><span class="com">// constructor</span><span class="pln">
+  </span><span class="com">// getters</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>Then, change <code>Boolean</code> to <code>ScanResult</code> in the first snippet, and return <code>new ScanResult(port, true)</code> or <code>new ScanResult(port, false)</code> instead of just <code>true</code> or <code>false</code></p>
+
+<p>EDIT: Actually, I just noticed: in this particular case, you don't need the ScanResult class to hold result + port, and still know which port is open. Since you add the futures to a <strong>List</strong>, which is <strong>ordered</strong>, and, later on, you <strong>process them in the same order you added them</strong>, you could have a counter that you'd increment on each iteration to know which port you are dealing with. But, hey, this is just to be complete and precise. <strong>Don't ever try doing that</strong>, it is horrible, I'm mostly ashamed that I thought about this... <strong>Using the ScanResult object is much cleaner</strong>, the code is way easier to read and maintain, and allows you to, later, for example, use a <code>CompletionService</code> to improve the scanner.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/11547117" title="short permalink to this answer" class="short-link" id="link-post-11547117">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/11547117/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="http://stackoverflow.com/posts/11547117/revisions" title="show all edits to this post">edited <span title="2012-07-18 22:02:17Z" class="relativetime">Jul 18 '12 at 22:02</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2012-07-18 17:34:51Z" class="relativetime">Jul 18 '12 at 17:34</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/150339/bruno-reis"><div class="gravatar-wrapper-32"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/55fd8ebbdc83c65f2d0fd26b4899df0a" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/150339/bruno-reis">Bruno Reis</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 24,152" dir="ltr">24.2k</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="85 silver badges"><span class="badge2"></span><span class="badgecount">85</span></span><span title="125 bronze badges"><span class="badge3"></span><span class="badgecount">125</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11547117" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="8" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-15270850" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I haven't used it but wouldn't a SocketFactory (<a href="http://docs.oracle.com/javase/7/docs/api/javax/net/SocketFactory.html" rel="nofollow noreferrer">docs.oracle.com/javase/7/docs/api/javax/net/SocketFactory.h‌​tml</a>) help too ?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/720564/winorwin" title="926 reputation" class="comment-user">WinOrWin</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#comment15270850_11547117"><span title="2012-07-18 18:23:08Z" class="relativetime-clean">Jul 18 '12 at 18:23</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-15270906" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I can't really see how using a SocketFactory relates to this problem. Would you care to explain what you have in mind?</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/150339/bruno-reis" title="24,152 reputation" class="comment-user">Bruno Reis</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#comment15270906_11547117"><span title="2012-07-18 18:25:23Z" class="relativetime-clean">Jul 18 '12 at 18:25</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-15271487" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I thought SocketFactory can be implemented to have something like a SocketPool in the backing, which can result in speed-up. Not sure if this works.. it is not a suggestion, just a query on your approach.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/720564/winorwin" title="926 reputation" class="comment-user">WinOrWin</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#comment15271487_11547117"><span title="2012-07-18 18:45:23Z" class="relativetime-clean">Jul 18 '12 at 18:45</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-15271984" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">4</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">A "SocketPool", in this context, makes no sense at all. A TCP socket is the quadruple <code>(src-ip, src-port, dest-ip, dest-port)</code> which is immutable (ie, you cannot change ips or ports in the middle of a connection); since each port you test is a different dest-port, you see that you need a different TCP Socket for each port you test, therefore, no pooling can help.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/150339/bruno-reis" title="24,152 reputation" class="comment-user">Bruno Reis</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#comment15271984_11547117"><span title="2012-07-18 19:03:39Z" class="relativetime-clean">Jul 18 '12 at 19:03</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-15274015" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks, this is often a confusion for me as a newbie.</span>
+                    –&nbsp;<a href="http://stackoverflow.com/users/720564/winorwin" title="926 reputation" class="comment-user">WinOrWin</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#comment15274015_11547117"><span title="2012-07-18 20:26:05Z" class="relativetime-clean">Jul 18 '12 at 20:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-11547117" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" onclick="">show <b>8</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1457158281",4).setZone(44); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1457158281"><a href="http://engine.adzerk.net/r?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjo0NzE0OTMsImNoIjoxMTc4LCJjayI6e30sImNyIjoxNjI3NzcxLCJkaSI6IjE1NmE4ZjFlNDRhNzQzOWM4MjEyZDIxMjliM2I4NTU0IiwiZG0iOjEsImZjIjoxOTI0NDUwLCJmbCI6MjE0MjMxMiwiaXAiOiI4NC4xNzkuOTcuNjgiLCJrdyI6ImphdmEsc29ja2V0cyxpcCxwb3J0LXNjYW5uaW5nLHgtY3Jvc3Mtc2l0ZS1zZXJ2ZXJmYXVsdC5jb20iLCJudyI6MjIsInBjIjowLCJlYyI6MCwicHIiOjE2MDQsInJ0IjoxLCJyZiI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5kZS8iLCJzYiI6ImktMGY4NGMxNThiZWMyNWI2YzYiLCJzcCI6MzU2NCwic3QiOjgyNzcsInVrIjoidWUxLTNhMTQ1OTkzYjFmNzRjYTJhYjY4ZGFlMjY2YTg1NGQ1Iiwiem4iOjQ0LCJ0cyI6MTQ5NDUyNzkyMTMzOSwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMTQ1NzE1ODI4MSIsInVyIjoiaHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL2pvYnMvcmVtb3RlP3V0bV9zb3VyY2U9d2Vic2l0ZSZ1dG1fbWVkaXVtPWJhbm5lciZ1dG1fY29udGVudD1sZWFkZXJib2FyZF81JnV0bV9jYW1wYWlnbj1ob3VzZV9hZHNfUk9TX1NPIn0&amp;s=vohBJsqZs9fXGI4rMZZ124fheSs" rel="nofollow" target="_blank" title=""><img src="http://static.adzerk.net/Advertisers/f380ecc42410414693b467ac7a97901b.png" title="" alt="" border="0" width="728" height="90" style="display: none !important;"></a><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="http://engine.adzerk.net/i.gif?e=eyJhdiI6NDE0LCJhdCI6NCwiYnQiOjAsImNtIjo0NzE0OTMsImNoIjoxMTc4LCJjayI6e30sImNyIjoxNjI3NzcxLCJkaSI6IjE1NmE4ZjFlNDRhNzQzOWM4MjEyZDIxMjliM2I4NTU0IiwiZG0iOjEsImZjIjoxOTI0NDUwLCJmbCI6MjE0MjMxMiwiaXAiOiI4NC4xNzkuOTcuNjgiLCJrdyI6ImphdmEsc29ja2V0cyxpcCxwb3J0LXNjYW5uaW5nLHgtY3Jvc3Mtc2l0ZS1zZXJ2ZXJmYXVsdC5jb20iLCJudyI6MjIsInBjIjowLCJlYyI6MCwicHIiOjE2MDQsInJ0IjoxLCJyZiI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5kZS8iLCJzYiI6ImktMGY4NGMxNThiZWMyNWI2YzYiLCJzcCI6MzU2NCwic3QiOjgyNzcsInVrIjoidWUxLTNhMTQ1OTkzYjFmNzRjYTJhYjY4ZGFlMjY2YTg1NGQ1Iiwiem4iOjQ0LCJ0cyI6MTQ5NDUyNzkyMTM0MCwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMTQ1NzE1ODI4MSIsImZxIjowfQ&amp;s=91QMPNs8jdMBYY9RToPP_kDB7f4"></div>
+  
+<a name="11547373"></a>
+<div id="answer-11547373" class="answer" data-answerid="11547373" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="11547373">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Apart from parallelizing the scan, you can use more advanced port scanning techniques like the ones (TCP SYN and TCP FIN scanning) explained here: <a href="http://nmap.org/nmap_doc.html" rel="nofollow">http://nmap.org/nmap_doc.html</a>. VB code of an implementation can be found here: <a href="http://h.ackack.net/spoon-worlds-fastest-port-scanner.html" rel="nofollow">http://h.ackack.net/spoon-worlds-fastest-port-scanner.html</a></p>
+
+<p>In order to use these techniques, however, you need to use raw TCP/IP sockets. You should use <a href="http://www.savarese.com/software/rocksaw/" rel="nofollow">RockSaw</a> library for this.</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/11547373" title="short permalink to this answer" class="short-link" id="link-post-11547373">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/11547373/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2012-07-18 17:49:40Z" class="relativetime">Jul 18 '12 at 17:49</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/1397268/hakan-serce"><div class="gravatar-wrapper-32"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/ec92f3564ef0ea9d6fd73bcd6888cea1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/1397268/hakan-serce">Hakan Serce</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">9,215</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="17 silver badges"><span class="badge2"></span><span class="badgecount">17</span></span><span title="39 bronze badges"><span class="badge3"></span><span class="badgecount">39</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11547373" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-11547373" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="30351738"></a>
+<div id="answer-30351738" class="answer" data-answerid="30351738" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="30351738">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">2</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Code sample is inspired by "Bruno Reis"</p>
+
+<pre class="lang-java prettyprint prettyprinted"><code><span class="kwd">class</span><span class="pln"> </span><span class="typ">PortScanner</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pun">...</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pun">,</span><span class="pln"> </span><span class="typ">ExecutionException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ExecutorService</span><span class="pln"> es </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Executors</span><span class="pun">.</span><span class="pln">newFixedThreadPool</span><span class="pun">(</span><span class="lit">20</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> ip </span><span class="pun">=</span><span class="pln"> </span><span class="str">"127.0.0.1"</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> timeout </span><span class="pun">=</span><span class="pln"> </span><span class="lit">200</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">List</span><span class="pun">&lt;</span><span class="typ">Future</span><span class="pun">&lt;</span><span class="typ">ScanResult</span><span class="pun">&gt;&gt;</span><span class="pln"> futures </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;&gt;();</span><span class="pln">
+    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> port </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> port </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">65535</span><span class="pun">;</span><span class="pln"> port</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="com">// for (int port = 1; port &lt;= 80; port++) {</span><span class="pln">
+        futures</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">portIsOpen</span><span class="pun">(</span><span class="pln">es</span><span class="pun">,</span><span class="pln"> ip</span><span class="pun">,</span><span class="pln"> port</span><span class="pun">,</span><span class="pln"> timeout</span><span class="pun">));</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+    es</span><span class="pun">.</span><span class="pln">awaitTermination</span><span class="pun">(</span><span class="lit">200L</span><span class="pun">,</span><span class="pln"> </span><span class="typ">TimeUnit</span><span class="pun">.</span><span class="pln">MILLISECONDS</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">int</span><span class="pln"> openPorts </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Future</span><span class="pun">&lt;</span><span class="typ">ScanResult</span><span class="pun">&gt;</span><span class="pln"> f </span><span class="pun">:</span><span class="pln"> futures</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">f</span><span class="pun">.</span><span class="pln">get</span><span class="pun">().</span><span class="pln">isOpen</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            openPorts</span><span class="pun">++;</span><span class="pln">
+            </span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">f</span><span class="pun">.</span><span class="pln">get</span><span class="pun">().</span><span class="pln">getPort</span><span class="pun">());</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+    </span><span class="typ">System</span><span class="pun">.</span><span class="pln">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"There are "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> openPorts </span><span class="pun">+</span><span class="pln"> </span><span class="str">" open ports on host "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> ip </span><span class="pun">+</span><span class="pln"> </span><span class="str">" (probed with a timeout of "</span><span class="pln">
+            </span><span class="pun">+</span><span class="pln"> timeout </span><span class="pun">+</span><span class="pln"> </span><span class="str">"ms)"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="typ">Future</span><span class="pun">&lt;</span><span class="typ">ScanResult</span><span class="pun">&gt;</span><span class="pln"> portIsOpen</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ExecutorService</span><span class="pln"> es</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> ip</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">,</span><span class="pln">
+        </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> timeout</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> es</span><span class="pun">.</span><span class="pln">submit</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Callable</span><span class="pun">&lt;</span><span class="typ">ScanResult</span><span class="pun">&gt;()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="lit">@Override</span><span class="pln">
+        </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">ScanResult</span><span class="pln"> call</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                </span><span class="typ">Socket</span><span class="pln"> socket </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Socket</span><span class="pun">();</span><span class="pln">
+                socket</span><span class="pun">.</span><span class="pln">connect</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">InetSocketAddress</span><span class="pun">(</span><span class="pln">ip</span><span class="pun">,</span><span class="pln"> port</span><span class="pun">),</span><span class="pln"> timeout</span><span class="pun">);</span><span class="pln">
+                socket</span><span class="pun">.</span><span class="pln">close</span><span class="pun">();</span><span class="pln">
+                </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ScanResult</span><span class="pun">(</span><span class="pln">port</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><span class="pln">
+            </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Exception</span><span class="pln"> ex</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+                </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ScanResult</span><span class="pun">(</span><span class="pln">port</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
+            </span><span class="pun">}</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">});</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">ScanResult</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> isOpen</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">ScanResult</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> isOpen</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">super</span><span class="pun">();</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">port </span><span class="pun">=</span><span class="pln"> port</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">isOpen </span><span class="pun">=</span><span class="pln"> isOpen</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> getPort</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> port</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setPort</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> port</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">port </span><span class="pun">=</span><span class="pln"> port</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> isOpen</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> isOpen</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setOpen</span><span class="pun">(</span><span class="kwd">boolean</span><span class="pln"> isOpen</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">isOpen </span><span class="pun">=</span><span class="pln"> isOpen</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/30351738" title="short permalink to this answer" class="short-link" id="link-post-30351738">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/30351738/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2015-05-20 13:51:06Z" class="relativetime">May 20 '15 at 13:51</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/2902714/jack"><div class="gravatar-wrapper-32"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/c7d716d8dba6310158211ef15b800447" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/2902714/jack">Jack</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">21</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-30351738" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-30351738" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+
+  
+<a name="11568018"></a>
+<div id="answer-11568018" class="answer" data-answerid="11568018" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="11568018">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you decide to use the Nmap option and want to continue with Java, you should look at Nmap4j on SourceForge.net (http://nmap4j.sourceforge.net). It's a simple API that allows you to integrate Nmap into a java app.</p>
+
+<p>--Jon</p>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="http://stackoverflow.com/a/11568018" title="short permalink to this answer" class="short-link" id="link-post-11568018">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/11568018/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2012-07-19 19:35:48Z" class="relativetime">Jul 19 '12 at 19:35</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="http://stackoverflow.com/users/748943/jon"><div class="gravatar-wrapper-32"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/7a7298b6923b4a409c41b4f0dc807fbc" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="http://stackoverflow.com/users/748943/jon">Jon</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">182</span><span title="11 bronze badges"><span class="badge3"></span><span class="badgecount">11</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-11568018" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-11568018" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+									<a name="new-answer"></a>
+						<form id="post-form" action="http://stackoverflow.com/questions/11547082/answer/submit" method="post" class="post-form">
+						    <input type="hidden" id="post-id" value="11547082">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.de/">
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="4fe5061d1429dad621b91a687d93f6e8">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="http://stackoverflow.com/users/login?ssrc=question_page&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f11547082%2ffastest-way-to-scan-ports-with-java%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f11547082%2ffastest-way-to-scan-ports-with-java%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="http://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="http://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?							Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="http://stackoverflow.com/questions/tagged/sockets" class="post-tag" title="show questions tagged &#39;sockets&#39;" rel="tag">sockets</a> <a href="http://stackoverflow.com/questions/tagged/ip" class="post-tag" title="show questions tagged &#39;ip&#39;" rel="tag">ip</a> <a href="http://stackoverflow.com/questions/tagged/port-scanning" class="post-tag" title="show questions tagged &#39;port-scanning&#39;" rel="tag">port-scanning</a>  or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tbody><tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2012-07-18 17:32:46Z"><b>4 years, 9 months ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>37155 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="http://stackoverflow.com/questions/11547082/fastest-way-to-scan-ports-with-java?lastactivity" class="lastactivity-link" title="2015-05-20 13:51:06Z">1 year, 11 months ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </tbody></table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Blog
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://stackoverflow.blog/2017/05/11/favorite-open-source-technology-growth-decline/?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="https://stackoverflow.blog/2017/05/11/favorite-open-source-technology-growth-decline/?cb=1" class="question-hyperlink">Is Your Favorite Open Source Technology in Growth or Decline?</a>
+                </div>
+                <br class="cbt">
+            </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://stackoverflow.blog/2017/05/09/introducing-stack-overflow-trends/?cb=1" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="https://stackoverflow.blog/2017/05/09/introducing-stack-overflow-trends/?cb=1" class="question-hyperlink">Introducing Stack Overflow Trends</a>
+                </div>
+                <br class="cbt">
+            </div>
+    </div>
+</div>			
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk141427520",[5,17,2221,1129,43]).setZone(45); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk141427520"><div id="careersadsdoublehigh" style="display:none;"></div><img height="0px" width="0px" border="0" style="position: absolute; display: none !important;" src="http://engine.adzerk.net/i.gif?e=eyJhdiI6NDE0LCJhdCI6NSwiYnQiOjAsImNtIjo5MjEsImNoIjoxMTc4LCJjayI6e30sImNyIjoyNjg4LCJkaSI6IjYwMTgzNDQ1MzMyYjQ5NjQ4NDI2YmM0NWQ5ZjZlNDM0IiwiZG0iOjEsImZjIjoyNDg1LCJmbCI6MjY2MywiaXAiOiI4NC4xNzkuOTcuNjgiLCJrdyI6ImphdmEsc29ja2V0cyxpcCxwb3J0LXNjYW5uaW5nLHgtY3Jvc3Mtc2l0ZS1zZXJ2ZXJmYXVsdC5jb20iLCJudyI6MjIsInBjIjowLCJlYyI6MCwicHIiOjYxNzM3LCJydCI6MSwicmYiOiJodHRwczovL3d3dy5nb29nbGUuZGUvIiwic2IiOiJpLTBmODRjMTU4YmVjMjViNmM2Iiwic3AiOjM1NjQsInN0Ijo4Mjc3LCJ1ayI6InVlMS0zYTE0NTk5M2IxZjc0Y2EyYWI2OGRhZTI2NmE4NTRkNSIsInpuIjo0NSwidHMiOjE0OTQ1Mjc5MjEzNDIsImJmIjp0cnVlLCJwbiI6ImFkemVyazE0MTQyNzUyMCIsImZxIjowfQ&amp;s=AkAVw7mTt9ZrGvedjlO8cV-3-Ps"></div>
+            <div id="hireme" class="tex2jax_ignore"><div class="clc-cp-container"><div class="clc-cp-sb"><div class="clc-cp-sb-header blue"><a href="https://stackoverflow.com/jobs/companies/ITK-Engineering-GmbH" data-clc-click="https://clc.stackoverflow.com/click?an=AUUAuv8KWVxw8pyY1EgFyHVFRAICBMrjwAU7A7KQB62_CL-iDwAUAAXAWcADOiyOMT8DA8KrCAO_rAgDtKwIAD98pqM83yZNm8k&amp;cr=250175&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2FITK-Engineering-GmbH%3Fmed=clc&amp;sig=v0dvcNH0dSCFEA" class="clc-cp-link" target="_blank"></a><div class="clc-cp-sb-header-image"><div class="clc-cp-sb-bgcover"><div class="clc-cp-sb-blur-and-anim" style="background-image: url(https://i.stack.imgur.com/twLXwm.jpg)"></div></div><div class="clc-cp-sb-openjobs blue">We have 3 open jobs ♥</div><div class="clc-cp-sb-logo"><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/Ndd3L.jpg" alt="ITK Engineering GmbH"></div></div><div class="clc-cp-sb-header-title"><p class="clc-cp-sb-company-name">ITK Engineering GmbH</p><p class="clc-cp-sb-location">Ruelzheim, Germany</p></div></div><div class="clc-cp-sb-overview"><a href="https://stackoverflow.com/jobs/companies/ITK-Engineering-GmbH" data-clc-click="https://clc.stackoverflow.com/click?an=AUUAuv8KWVxw8pyY1EgFyHVFRAICBMrjwAU7A7KQB62_CL-iDwAUAAXAWcADOiyOMT8DA8KrCAO_rAgDtKwIAD98pqM83yZNm8k&amp;cr=250175&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2FITK-Engineering-GmbH%3Fmed=clc&amp;sig=v0dvcNH0dSCFEA" class="clc-cp-link" target="_blank"></a><div><div class="overview-icon industries"></div><div class="overview-icon company-status"></div><div class="overview-icon company-size"></div></div><div><span>Automotive, Embedded</span><span>Private</span><span>500-1k people</span></div></div><div class="clc-cp-sb-core"><div class="clc-cp-sb-jobs"><ul><li><a class="clc-cp-job-link" target="_blank" href="https://stackoverflow.com/jobs/136642/softwareentwickler-embedded-systems-itk-engineering-gmbh" data-clc-click="https://clc.stackoverflow.com/click?an=AUUAuv8KWVxw8pyY1EgFyHVFRAICBMrjwAU7A7KQB62_CL-iDwAUAAXAWcADOiyOMT8DA8KrCAO_rAgDtKwIAD98pqM83yZNm8k&amp;cr=250175&amp;ct=3&amp;ctid=136642&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F136642%2Fsoftwareentwickler-embedded-systems-itk-engineering-gmbh%3Fmed=clc&amp;sig=EMF_19RtcHdHsA"> <p class="title">Softwareentwickler Embedded Systems</p><p class="salary"></p><p></p><span class="clc-cp-tag">c</span><span class="clc-cp-tag">autosar</span></a> </li><li><a class="clc-cp-job-link" target="_blank" href="https://stackoverflow.com/jobs/136767/senior-softwareentwickler-c-plus-plus-itk-engineering-gmbh" data-clc-click="https://clc.stackoverflow.com/click?an=AUUAuv8KWVxw8pyY1EgFyHVFRAICBMrjwAU7A7KQB62_CL-iDwAUAAXAWcADOiyOMT8DA8KrCAO_rAgDtKwIAD98pqM83yZNm8k&amp;cr=250175&amp;ct=3&amp;ctid=136767&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F136767%2Fsenior-softwareentwickler-c-plus-plus-itk-engineering-gmbh%3Fmed=clc&amp;sig=y7oNek2vhHcqdQ"> <p class="title">Senior Softwareentwickler C++</p><p class="salary"></p><p></p><span class="clc-cp-tag">c++</span><span class="clc-cp-tag">boost</span></a> </li><li><a class="clc-cp-job-link" target="_blank" href="https://stackoverflow.com/jobs/136756/junior-softwareentwickler-c-plus-plus-c-sharp-itk-engineering-gmbh" data-clc-click="https://clc.stackoverflow.com/click?an=AUUAuv8KWVxw8pyY1EgFyHVFRAICBMrjwAU7A7KQB62_CL-iDwAUAAXAWcADOiyOMT8DA8KrCAO_rAgDtKwIAD98pqM83yZNm8k&amp;cr=250175&amp;ct=3&amp;ctid=136756&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F136756%2Fjunior-softwareentwickler-c-plus-plus-c-sharp-itk-engineering-gmbh%3Fmed=clc&amp;sig=Q1DQYNSXhGOLIA"> <p class="title">Junior Softwareentwickler C++ / C#</p><p class="salary"></p><p></p><span class="clc-cp-tag">c++</span><span class="clc-cp-tag">c#</span></a> </li></ul></div></div><div class="clc-cp-sb-learnmore-wrap"><div class="clc-cp-sb-learnmore"><a href="https://stackoverflow.com/jobs/companies/ITK-Engineering-GmbH" data-clc-click="https://clc.stackoverflow.com/click?an=AUUAuv8KWVxw8pyY1EgFyHVFRAICBMrjwAU7A7KQB62_CL-iDwAUAAXAWcADOiyOMT8DA8KrCAO_rAgDtKwIAD98pqM83yZNm8k&amp;cr=250175&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2Fcompanies%2FITK-Engineering-GmbH%3Fmed=clc&amp;sig=v0dvcNH0dSCFEA" class="clc-cp-sb-learnmore-button" target="_blank">Learn more</a></div></div></div><img src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div></div>
+        <script>
+window.clc_request = 'AjQSpfGcmNQIAAAAAMoxsAACAAAAAgAAAAA8AAAAfGphdmF8c29ja2V0c3xpcHxwb3J0LXNjYW5uaW5nfHgtY3Jvc3Mtc2l0ZS1zZXJ2ZXJmYXVsdC5jb218ABcDEJEEUVcu--M';;(function(n){var u={log:window.console.log.bind(window.console,"[clc]"),error:window.console.error.bind(window.console,"[clc]")},f,e,t,r,i;try{if(typeof[].indexOf!="function")return;if(window.attachEvent&&!window.addEventListener)return;if(f=n.allowed,!f)return;if(e=new RegExp(n.allowed),!e.test(location.hostname)){u.error("Invalid host: "+location.hostname);return}if(t=window,t.clc=t.clc||{},t.clc.init=t.clc.init||[],t.clc.init.push(function(n){return n.load()}),t.clc.options){for(r in t.clc.options)n[r]=t.clc.options[r];t.clc.options=n}else t.clc.options=n;i=document.createElement("script");i.async=!0;i.src=n.lib;document.body.appendChild(i)}catch(o){u.error("[clc] Error in loader:",o)}}).call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=436861d2e2c5","u":"https://clc.stackoverflow.com/markup.js","azw":true,"kt":2000,"tto":true,"d":{"sb":["hireme","clc-sb"],"tlb":["careers1","clc-tlb"],"mlb":["careers3","clc-mlb"]},"h":"clc.stackoverflow.com","autoload":true,"allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$"});        </script>
+			<div style="margin-bottom: 10px;">
+        
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+        <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b> In it, you'll get:</p>
+        <ul>
+            <li>The week's top questions and answers</li>
+            <li>Important community announcements</li>
+            <li>Questions that need answers</li>
+        </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter"></div>
+    <p id="newsletter-preview-container">see an <a href="https://stackexchange.com/newsletters/newsletter?site=stackoverflow.com" id="newsletter-preview">example newsletter</a></p>
+</div>
+
+    </div>
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/12982653?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">4</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/12982653/find-server-ip-in-local-network-with-known-port-in-java-android?noredirect=1&amp;lq=1" class="question-hyperlink">Find server IP in local network with known port in Java/Android</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/25000930?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">2</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/25000930/port-scanning-in-scala-application-hangs-for-a-closed-port-on-the-remote-host?noredirect=1&amp;lq=1" class="question-hyperlink">Port scanning in Scala: Application hangs for a closed port on the remote host</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/23214860?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/23214860/trying-to-test-connection-on-localhost-ports-using-socket-and-get-connectexcepti?noredirect=1&amp;lq=1" class="question-hyperlink">Trying to test connection on localhost ports using Socket and get ConnectException</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/32941762?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/32941762/ip-range-and-port-scanner?noredirect=1&amp;lq=1" class="question-hyperlink">ip range and port scanner</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/27240324?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">-1</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/27240324/how-should-i-do-to-check-if-the-service-running-on-a-remote-host?noredirect=1&amp;lq=1" class="question-hyperlink">How should I do to check if the service running on a remote host?</a>
+</div>
+<div class="spacer">
+	<a href="http://stackoverflow.com/q/34624489?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted default">0</div>
+	</a>
+	<a href="http://stackoverflow.com/questions/34624489/socket-connection-always-returns-true-even-if-port-is-not-open-port-scan?noredirect=1&amp;lq=1" class="question-hyperlink">Socket Connection always returns true even if Port is not open (Port Scan)</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/295579?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">933</div></a><a href="http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer?rq=1" class="question-hyperlink">Fastest way to determine if an integer's square root is an integer</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/6240486?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/6240486/how-can-i-identify-machines-on-home-network-using-java?rq=1" class="question-hyperlink">how can I identify machines on home network using Java</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/9481865?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">169</div></a><a href="http://stackoverflow.com/questions/9481865/getting-the-ip-address-of-the-current-machine-using-java?rq=1" class="question-hyperlink">Getting the IP address of the current machine using Java</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/9526166?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">4</div></a><a href="http://stackoverflow.com/questions/9526166/udp-port-scanning-java-finds-only-1-open-udp-port?rq=1" class="question-hyperlink">UDP port scanning Java finds only 1 open UDP port</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/12736260?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="http://stackoverflow.com/questions/12736260/how-to-discover-ip-addresses-where-listening-on-port-x?rq=1" class="question-hyperlink">How to discover Ip Addresses where listening on port x</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/13551707?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/13551707/speed-up-port-scan-c-sharp?rq=1" class="question-hyperlink">Speed up Port Scan C#</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/21257420?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/21257420/fastest-way-to-scan-for-open-port-in-network?rq=1" class="question-hyperlink">Fastest Way to scan for Open port in network</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/27208369?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/27208369/jdbc-java-app-port-scanning?rq=1" class="question-hyperlink">JDBC/Java App Port Scanning?</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/29041951?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="http://stackoverflow.com/questions/29041951/type-of-scan-used-in-this-program?rq=1" class="question-hyperlink">Type of scan used in this program</a></div><div class="spacer js-gps-track"><a href="http://stackoverflow.com/q/34624489?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="http://stackoverflow.com/questions/34624489/socket-connection-always-returns-true-even-if-port-is-not-open-port-scan?rq=1" class="question-hyperlink">Socket Connection always returns true even if Port is not open (Port Scan)</a></div>
+                    </div>
+				</div>
+            
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/159203/is-there-a-difference-between-narsil-and-anduril" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there a difference between Narsil and Anduril?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/145807/how-to-generate-primes-of-the-form-8n1" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to generate primes of the form 8n+1?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-salesforce" title="Salesforce Stack Exchange"></div><a href="https://salesforce.stackexchange.com/questions/173938/how-to-change-date-format-depends-on-user-locale" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:459 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to change date format depends on user locale?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/304788/what-makes-smartphones-tilt-sensitive-will-they-retain-this-ability-in-zero-gra" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What makes smartphones tilt-sensitive? Will they retain this ability in zero-gravity conditions?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/332461/why-is-the-newtonian-expression-for-kinetic-energy-called-the-first-order-appr" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is the Newtonian expression for kinetic energy called the "first order" approximation of the relativistic expression?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="https://mathoverflow.net/questions/269507/from-gassmann-sunada-triples-to-isospectral-manifolds" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    From Gassmann-Sunada triples to isospectral manifolds
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/37927/how-much-is-thrust-lose-due-to-bleed-air-system" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How much is thrust lose due to bleed air system?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/89307/is-it-okay-to-call-prof-xx-as-mr-xx" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it okay to call "Prof. XX" as "Mr. XX"?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href="https://politics.stackexchange.com/questions/18790/what-reasons-may-donald-trump-have-had-for-firing-fbi-director-james-comey" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What reasons may Donald Trump have had for firing FBI Director James Comey?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stats" title="Cross Validated"></div><a href="https://stats.stackexchange.com/questions/278755/why-use-gradient-descent-for-linear-regression-when-simple-math-solution-is-ava" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:65 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why use gradient descent for linear regression, when simple math solution is available?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-skeptics" title="Skeptics Stack Exchange"></div><a href="https://skeptics.stackexchange.com/questions/38295/did-wind-power-supply-less-than-half-a-percent-of-global-energy-in-2014" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:212 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did wind power supply less than half a percent of global energy in 2014?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-parenting" title="Parenting Stack Exchange"></div><a href="https://parenting.stackexchange.com/questions/30013/the-teacher-erased-3-pages-of-my-5-year-olds-completed-homework" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:228 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    The teacher erased 3 pages of my 5 year old's completed homework
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/119907/martin-vs-dennis-round-1" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Martin vs Dennis - Round 1
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/80543/could-a-society-use-bullets-as-money" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Could a society use bullets as money?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2276402/limits-of-sequence-in-which-each-term-is-defined-by-the-average-of-preceding-two" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Limits of sequence in which each term is defined by the average of preceding two terms
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-salesforce" title="Salesforce Stack Exchange"></div><a href="https://salesforce.stackexchange.com/questions/173936/how-to-get-the-case-owner-name" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:459 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to get the case owner name?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href="https://politics.stackexchange.com/questions/18751/why-dont-us-presidents-run-in-other-elections-after-their-term-ends" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why don't US presidents run in other elections after their term ends?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href="https://politics.stackexchange.com/questions/18871/how-do-politicians-on-the-left-side-of-the-political-spectrum-reconcile-the-need" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do politicians on the Left side of the political spectrum reconcile the need to protect workers with the support for immigration?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/119718/what-my-dog-really-hears" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What my dog really hears
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/120108/make-a-flag-wave" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Make a flag wave
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="https://gaming.stackexchange.com/questions/308729/how-to-reset-mmr-to-escape-bronze-tier-bottom-1" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to reset MMR to escape Bronze tier (bottom 1%)?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/90789/given-an-ultimatum-threatened-with-dismissal" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Given an ultimatum, threatened with dismissal
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/43916633/tree-set-is-showing-wrong-output" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Tree-Set is showing wrong output
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="https://workplace.stackexchange.com/questions/90692/my-manager-told-me-i-should-feel-comfortable-about-telling-him-if-i-want-to-leav" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    My manager told me I should feel comfortable about telling him if I want to leave the company, should I tell him?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="http://stackoverflow.com/feeds/question/11547082" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/11547082/ivc/de82');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/11547082/ivc/de82" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">lang-java</div></div>
+
+
+        </div>
+    </div><script async="" src="./sockets - Fastest way to scan ports with Java - Stack Overflow_files/clc.min.js"></script>
+    <div id="footer" class="categories" role="contentinfo">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="http://stackoverflow.com/tour">tour</a>
+                    <a href="http://stackoverflow.com/help">help</a>
+                    <a href="https://stackoverflow.blog/?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com/">chat</a>
+                    <a href="https://data.stackexchange.com/">data</a>
+                    <a href="https://stackexchange.com/legal">legal</a>
+                    <a href="https://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="https://www.stackoverflowbusiness.com/advertise">advertising info</a>
+                        <a href="http://stackoverflow.com/jobs/directory/developer-jobs">developer jobs directory</a>
+
+                    <a onclick="StackExchange.switchMobile(&quot;on&quot;)">mobile</a>
+                    <b><a href="http://stackoverflow.com/contact">contact us</a></b>
+                        <b><a href="https://meta.stackoverflow.com/">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tbody><tr>
+            <th colspan="3">
+                Technology
+            </th>
+            <th>
+                Life / Arts
+            </th>
+            <th>
+                Culture / Recreation
+            </th>
+            <th>
+                Science
+            </th>
+            <th>
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com/" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com/" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com/" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com/" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com/" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com/" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com/" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com/" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="http://softwareengineering.stackexchange.com/" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="http://unix.stackexchange.com/" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com/" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com/" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://gis.stackexchange.com/" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com/" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com/" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com/" title="information security professionals">Information Security</a></li>
+                        <li><a href="http://dba.stackexchange.com/" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com/" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com/" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com/" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com/" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="http://salesforce.stackexchange.com/" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="http://expressionengine.stackexchange.com/" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                        <li><a href="http://crypto.stackexchange.com/" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://codereview.stackexchange.com/" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="http://magento.stackexchange.com/" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="http://dsp.stackexchange.com/" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="http://raspberrypi.stackexchange.com/" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="http://codegolf.stackexchange.com/" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com/" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com/" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com/" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="http://movies.stackexchange.com/" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="http://music.stackexchange.com/" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="http://cooking.stackexchange.com/" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com/" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com/" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com/" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com/" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com/" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com/" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com/" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com/" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://ell.stackexchange.com/" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="http://japanese.stackexchange.com/" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="http://gaming.stackexchange.com/" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com/" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com/" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="http://anime.stackexchange.com/" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="http://mechanics.stackexchange.com/" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://mathoverflow.net/" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="http://math.stackexchange.com/" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com/" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com/" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com/" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://chemistry.stackexchange.com/" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="http://biology.stackexchange.com/" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="http://cs.stackexchange.com/" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="http://philosophy.stackexchange.com/" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://meta.stackexchange.com/" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://stackapps.com/" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://area51.stackexchange.com/" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</tbody></table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.5.11.25896
+            </div>
+                </div>
+    </div>
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Stack Overflow works best with JavaScript enabled&lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;&lt;/div&gt;
+    </noscript>
+<script>var z=document.createElement("script");z.type="text/javascript",z.async=!0,z.src="https://static.adzerk.net/ados.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+<script>
+var ados = ados || {};
+ados.run = ados.run || [];
+
+
+ados.run.push(function () {
+    setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+    ados_setKeywords('java,sockets,ip,port-scanning,x-cross-site-serverfault.com');; ados_load();
+});   
+
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|java|sockets|ip|port-scanning|');
+                ga('pageData.set', 'dimension2', '|java|sockets|ip|port-scanning|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+</body></html>
