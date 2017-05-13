@@ -51,7 +51,7 @@ Screenshot der Seite & Gibt dem Nutzer einen Screenshot der Webseite \\\hline
 
 Der webifier Tester verwaltet alle Tests, führt diese aus und berechnet aus den einzelnen Ergebnissen der Tests ein Gesamtergebnis. Alle auszuführenden Tests werden in einer Konfigurationsdatei angegeben und können deshalb dynamisch angepasst werden. Da jeder Test in einem eigenen Prozess läuft wird beim Starten des Testers die Konfigurationsdatei geladen. Anschließend werden die einzelnen Tests ausgeführt und auf ein Ergebnis gewartet. Liegt von allen Tests das Ergebnis vor wird ein Gesamtergebis berechnet. Die Berechnung dieses Ergebnisses wird im Folgenden genauer erklärt.
 
-Das Ergebnis kann entweder unbedenklich (\textit{CLEAN}), verdächtig (\textit{SUSPICIOUS}), bedrohlich (\textit{MALICIOUS}) oder unbekannt (\textit{UNDEFINED}) sein. Für die Berechnung des Endergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt eine Gewichtung, da einige Tests mehr über die Vertrauenswürdigkeit oder Gefahr einer Webseite aussagen als andere. Am meisten fallen der \textit{Virenscan der Webseite} und die \textit{Erkennung von Phishing} ins Gewicht, da dieses die ausschlaggebendsten Tests sind. Am wenigsten gewichtet sind der \textit{Vergleich in verschiedenen Browsern}, weil dies nur ein Indiz ist, da es auch viele Webseiten, wie die von YouTube, Nachrichtensendern, Blogs oder Ähnlichem gibt, welche immer dynamischen Inhalt bereitstellen und die \textit{Prüfung der verlinkten Seiten}, da dies immer vom Datenbestand abhängt. Der \textit{Screenshot der Seite} fällt nicht ins Gewicht, da dies kein Test im eigentlichen Sinne ist, sondern nur eine zusätzliche Information für den Nutzer darstellt. In Abschnitt \ref{par:konzept-testarten} wird die Wahl der Gewichtungen für die einzelnen Tests noch ausführlicher erläutert.
+Das Ergebnis kann entweder unbedenklich (\textit{CLEAN}), verdächtig (\textit{SUSPICIOUS}), bedrohlich (\textit{MALICIOUS}) oder unbekannt (\textit{UNDEFINED}) sein. Für die Berechnung des Endergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt eine Gewichtung, da einige Tests mehr über die Vertrauenswürdigkeit oder Gefahr einer Webseite aussagen als andere. Am meisten fallen der \textit{Virenscan der Webseite} und die \textit{Erkennung von Phishing} ins Gewicht, da dieses die ausschlaggebendsten Tests sind. Am wenigsten gewichtet sind der \textit{Vergleich in verschiedenen Browsern}, weil dies nur ein Indiz ist, da es auch viele Webseiten, wie die von YouTube, Nachrichtensendern, Blogs oder Ähnlichem gibt, welche immer dynamischen Inhalt bereitstellen und die \textit{Prüfung der verlinkten Seiten}, da dies immer vom Datenbestand abhängt. Der \textit{Screenshot der Seite} fällt nicht ins Gewicht, da dies kein Test im eigentlichen Sinne ist, sondern nur eine zusätzliche Information für den Nutzer darstellt. In Abschnitt \ref{sec:konzept-testarten} wird die Wahl der Gewichtungen für die einzelnen Tests noch ausführlicher erläutert.
 
 \begin{table}[H]
 \centering
@@ -100,11 +100,7 @@ Daraus lässt sich für die Werte der Tests aus Tabelle \ref{tbl:test-weights} d
 $0 \leq CLEAN < 0,043402\overline{7} \leq SUSPICIOUS < 0,208\overline{3} \leq MALICIOUS \leq 1$
 \end{center}
 
-\todo{Samuel}
-
-\begin{itemize}
-  \item Ergebnis => Data
-\end{itemize}
+Zusätzlich zu dem berechneten Gesamtergebnis stellt der Tester auch alle Ergebnisse der Einzeltests und deren spezifischen Testinformationen bereit. Außerdem werden alle Ergebnisse zu Persistierung an das Modul webifier Data gesendet, welches in Abschnitt \ref{sec:konzept-data} genauer erläutert wird.
 
 \subsection{webifier Platform}
 
@@ -120,6 +116,7 @@ $0 \leq CLEAN < 0,043402\overline{7} \leq SUSPICIOUS < 0,208\overline{3} \leq MA
 \todo{Daniel}
 
 \subsection{webifier Data}
+\label{sec:konzept-data}
 
 \todo{Samuel}
 
@@ -136,7 +133,7 @@ Webifier Statistics liefert dem Nutzer eine Vielzahl an verschiedenen Graphen, w
 Alle Auswertungen werden dem Nutzer über eine Weboberfläche zugänglich gemacht. Als Einstieg gibt es ein \textit{Dashboard} mit einigen Zahlen und Fakten zu den Aktivitäten auf webifier. Auf die einzelnen Auswertungen wird in der Auswertung genauer eingegangen.
 
 \section{Testarten}
-\label{par:konzept-testarten}
+\label{sec:konzept-testarten}
 
 \subsection{Virenscan der Webseite}
 
