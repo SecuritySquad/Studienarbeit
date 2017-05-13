@@ -34,7 +34,7 @@ Das Starten und Organisisieren der Tests wird von webifier Tester durchgeführt.
 
 Der webifier Tester verwaltet alle Tests, führt diese aus und berechnet aus den einzelnen Ergebnissen der Tests ein Gesamtergebnis. Alle auszuführenden Tests werden in einer Konfigurationsdatei angegeben und können deshalb dynamisch angepasst werden. Da jeder Test in einem eigenen Prozess läuft wird beim Starten des Testers die Konfigurationsdatei geladen. Anschließend werden die einzelnen Tests ausgeführt und auf ein Ergebnis gewartet. Liegt von allen Tests das Ergebnis vor wird ein Gesamtergebis berechnet. Die Berechnung dieses Ergebnisses wird im Folgenden genauer erklärt.
 
-Das Ergebnis kann entweder unbedenklich (\textit{CLEAN}), verdächtig (\textit{SUSPICIOUS}), bedrohlich (\textit{MALICIOUS}) oder unbekannt (\textit{UNDEFINED}) sein. Für die Berechnung des Endergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt, da einige Tests mehr über die Vertrauenswürdigkeit oder Gefahr einer Webseite aussagen als andere. Am meisten fallen der \textit{Virenscan der Webseite} und die \textit{Erkennung von Phishing} ins Gewicht, da dieses die ausschlaggebendsten Tests sind. Am wenigsten gewichtet sind der \textit{Vergleich in verschiedenen Browsern}, weil dies nur ein Indiz ist, da es auch viele Webseiten, wie die von YouTube, Nachrichtensendern, Blogs oder Ähnlichem gibt, welche immer dynamischen Inhalt bereitstellen und die \textit{Prüfung der verlinkten Seiten}, da dies immer vom Datenbestand abhängt. Der \textit{Screenshot der Seite} fällt nicht ins Gewicht, da dies kein Test im eigentlichen Sinne ist, sondern nur eine zusätzliche Information für den Nutzer darstellt. In Abschnitt \ref{par:konzept-testarten} wird die Wahl der Gewichtungen für die einzelnen Tests noch ausführlicher erläutert.
+Das Ergebnis kann entweder unbedenklich (\textit{CLEAN}), verdächtig (\textit{SUSPICIOUS}), bedrohlich (\textit{MALICIOUS}) oder unbekannt (\textit{UNDEFINED}) sein. Für die Berechnung des Endergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt eine Gewichtung, da einige Tests mehr über die Vertrauenswürdigkeit oder Gefahr einer Webseite aussagen als andere. Am meisten fallen der \textit{Virenscan der Webseite} und die \textit{Erkennung von Phishing} ins Gewicht, da dieses die ausschlaggebendsten Tests sind. Am wenigsten gewichtet sind der \textit{Vergleich in verschiedenen Browsern}, weil dies nur ein Indiz ist, da es auch viele Webseiten, wie die von YouTube, Nachrichtensendern, Blogs oder Ähnlichem gibt, welche immer dynamischen Inhalt bereitstellen und die \textit{Prüfung der verlinkten Seiten}, da dies immer vom Datenbestand abhängt. Der \textit{Screenshot der Seite} fällt nicht ins Gewicht, da dies kein Test im eigentlichen Sinne ist, sondern nur eine zusätzliche Information für den Nutzer darstellt. In Abschnitt \ref{par:konzept-testarten} wird die Wahl der Gewichtungen für die einzelnen Tests noch ausführlicher erläutert.
 
 \begin{table}[H]
 \centering
@@ -57,10 +57,35 @@ Screenshot der Seite & 0 & 0\\\hline
 
 Die prozentuale Gewichtung ergibt sich aus $\frac{Testgewichtung}{Summe~der~Gewichungen~aller~Tests}$.
 
+Ein weiterer wichtiger Punkt, der für die Berechung ges Gesamtergebnisses festgelegt wurde ist, dass mindestens 50\% aller Tests (berechnet anhand der prozentualen Gewichtung) ein bekanntes Ergebnis, also \textit{CLEAN}, \textit{SUSPICIOUS} oder \textit{MALICIOUS} haben müssen. Ist der Anteil bekannter Ergebnisse kleiner lässt sich kein zuverlässiges Ergebnis berechnen, da dieses sonst von zu wenigen ausschlaggebenden Faktoren abhängen würde.
+
+Liefern also mehr als die Hälfte der Tests ein bekanntes Ergebnis, so kann daraus nun das Gesamtergebnis berechnet werden. Hierfür wird für jedes Testergebnis ein Wert zwischen 0 und 1 berechnet, welcher anschließend mit der prozentualen Gewichtung des Tests multipliziert wird. Die Werte der einzelnen Testergebnisse ergeben sich wie in Tabelle \ref{tbl:test-values} dargestellt. Ist das Testergebnis \textit{CLEAN} oder \textit{UNDEFINED} ist der Ergebniswert 0 und geht so nicht weiter in die Wertung ein. Ist das Ergebnis \textit{MALICIOUS} wird der Wergebniswert 1. Dadurch Fällt das Gewicht dieses Tests voll in die Wertung. Ist das Ergebnis \textit{SUSPICIOUS} so wird die prozentuale Gewichtung des Tests als Ergebniswert gewählt. So fließt dieser Test mit dem Quadrat der Gewichtung in das Gesamtergebnis ein.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Testergebnis} & \textbf{Ergebniswert}\\\hline
+\textit{CLEAN} & 0\\\hline
+\textit{SUSPICIOUS} & Prozentuale Gewichtung des Tests\\\hline
+\textit{MALICIOUS} & 1\\\hline
+\textit{UNDEFINED} & 0\\\hline
+\end{tabular}
+\caption{Zuordnung Testergebnis zu Ergebniswert}
+\label{tbl:test-values}
+\end{table}
+
+Anschließend werden die Werte aller Tests zu einem Endergebnis aufsummiert. Daraus ergibt sich im Gesamtergebnis ein Minimalwert von 0 und ein Maximalwert von 1. Dieser Wertebereich wird nun wie folgt auf die drei Ergebnisse \textit{CLEAN}, \textit{SUSPICIOUS} und \textit{MALICIOUS} verteilt. Die Tests mit der größten Gewichtung sollen hierbei ausschlaggebend sein. Daraus ergibt sich die prozentuale Gewichtung des Tests mit der größten Gewichtung als Minimalwert für \textit{MALICIOUS} und das Quadrat der prozentualen Gewichtung des Tests mit der größten Gewichtung als Minimalwert für \textit{SUSPICIOUS}.
+
+Daraus lässt sich für die Werte der Tests aus Tabelle \ref{tbl:test-weights} die folgende Werteverteilung der Gesamtergebniswerte ableiten:
+
+\begin{center}
+$0 \leq CLEAN < 0,043402\overline{7} \leq SUSPICIOUS < 0,208\overline{3} \leq MALICIOUS \leq 1$
+\end{center}
+
 \todo{Samuel}
 
 \begin{itemize}
-  \item Berechnung Gesamtergebnis
   \item Ergebnis => Data
 \end{itemize}
 
@@ -143,7 +168,7 @@ Nach dem Speichern aller IPs werden diese klassifiziert. Der Test vergleicht all
 \todo{Samuel}
 
 \begin{itemize}
-  \item Auslesen der relevanten Informationen des Zertifikates der WEbseite
+  \item Auslesen der relevanten Informationen des Zertifikates der Webseite
   \item Validierung des Zertifikates
 \end{itemize}
 
