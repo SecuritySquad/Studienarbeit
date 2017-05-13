@@ -117,12 +117,13 @@ So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit 
 \subsection{webifier Data}
 \label{sec:konzept-data}
 
-\todo{Samuel}
+webifier Data ist die Persistenzkomponente von webifier. webifier Tester nutzt webifier Data um alle Testergebnisse an einem globalen Ort abzulegen, egal wo dieser ausgeführt wird.
 
-\begin{itemize}
-  \item Notwendige Informationen
-  \item Datenmodell
-\end{itemize}
+Ein Testergebnis, welches in dem Datamodul gespeichert wird enthält einmal die eingebene Url und die getestete Url, das Gesamtergebnis, sowohl den Typ (\textit{CLEAN}, \textit{SUSPICIOUS}, \textit{MALICIOUS} oder \textit{UNDEFINED}), als auch den Ergebniswert. Außerdem wird die Testlaufzeit gespeichert. Zusätzlich werden noch weitere Informationen zu den einzelnen Tests gespeichert. Dazu zählen der Name, die Konfigurationsparameter, wie beispielsweise die Gewichtung, das Resultat und die Detailinformationen zu diesem.
+
+Die Komponente stellt auch eine Schnittstelle zum Abfragen der bereits gespeicherten Ergebnisse bereit. Diese wird beispielsweise vom Test \textit{Prüfung aller verlinkten Seiten} verwendet. Die Funktionsweise dieses Tests wird in Abschnitt \ref{sec:konzept-linkchecker} erklärt.
+
+Alle Ergebnisse werden in einer Datenbank abgelegt. Da die zusätzlichen Informationen der einzelnen Tests teilweise sehr unterschiedlich sind, kommt hierfür keine relationale Datenbank in Frage. webifier Data nutzt deshalb zur Speicherung aller Daten die Dokument basierte Datenbank MongoDB. Alle weiteren Informationen hierzu folgen im Umsetzungsteil dieser Arbeit.
 
 \subsection{webifier Statistics}
 Webifier Statistics ist die Statistikoberfläche von webifier. Hier werden alle Daten der analysierten Webseiten aufbereitet und in visueller Form dargestellt. Die Daten stammen aus den Ergebnissen aller Tests, welche von webifier Data abgespeichert wurden.
@@ -134,20 +135,15 @@ Alle Auswertungen werden dem Nutzer über eine Weboberfläche zugänglich gemach
 \section{Testarten}
 \label{sec:konzept-testarten}
 
+In diesem Abschnitt werden nun die einzelnen Tests vorgestellt, mit welchen die zu überprüfende Webseite analysiert wird. Wie bereits erwähnt werden alle dieser Tests vom Tester verwaltet und ausgeführt.
+
 \subsection{Virenscan der Webseite}
 
-\todo{Samuel}
+Der Virenscan der Webseite führt nutzt verschiedene Virenscanner um die Webseite auf Malware zu überprüfen. Um dies zu realisieren wird zunächst die Webseite inklusive aller enthaltenen Dateien und Links heruntergeladen und gespeichert. Anschließend werden die Virenscanner gestartet, welche die heruntergeladenen Dateien überprüfen. Abschließend werden alle Ergebnisse der einzelnen Scans zusammengeführt und daraus ein Endergebnis berechnet.
 
-\begin{itemize}
-  \item Httrack (Umsetzung)
-  \item Download aller Dateien der Webseite
-  \item Scannen der Heruntergeladenen Dateien
-  \begin{itemize}
-    \item Clamav (Umsetzung)
-    \item AVG (Umsetzung)
-    \item CAV (Umsetzung)
-  \end{itemize}
-\end{itemize}
+Für das Endergebnis werden zunächst alle gescannten Dateien klassifiziert. Wird eine Datei von keinem der Virenscanner als Malware eingestuft wird diese als \textit{CLEAN} gekennzeichnet. Klassifiziert nur ein Virenscanner die Datei als Malware, wird diese also \textit{SUSPICIOUS} eingestuft. Halten mehr als ein Virenscanner eine Datei für Malware ist diese \textit{MALICIOUS}. Sind alle Dateien als \textit{CLEAN} eingestuft, so ist auch das Endergeblis dieses Tests \textit{CLEAN}. Sollten ein oder mehrer Dateien \textit{SUSPICIOUS} sein wird auch das Endergebnis \textit{SUSPICIOUS}. Das selbe gilt danach für \textit{MALICIOUS}. Sobald eine Datei \textit{MALICIOUS} ist, ist das Endergbnis ebenfalls \textit{MALICIOUS}.
+
+Zusätzlich zum Endergebnis wird noch die gesamte Liste der gescannten Dateien inklusive der jeweiligen Klassifizierung bereitgestellt und vom Tester weitergegeben.
 
 \subsection{Vergleich in verschiedenen Browsern}
 
@@ -164,6 +160,7 @@ Der Test auf IP Scanning beschäftigt sich mit der Analyse der IP-Anfragen, welc
 Nach dem Speichern aller IPs werden diese klassifiziert. Der Test vergleicht alle Anfragen mit den bekannten Heimnetz-IPs (beispielsweise 192.168.178.*). Anfragen, welche sich nicht auf diese Adressen zurückführen lassen werden herausgefiltert, da diese irrelevant für den Test sind. Anhand der Anzahl der verdächtigen Adressen wird im Abschluss wieder die Seite klassifiziert und das Ergebnis mitsamt den Adressen zurückgeliefert an den Tester.
 
 \subsection{Prüfung aller verlinkten Seiten}
+\label{sec:konzept-linkchecker}
 
 \todo{Daniel}
 
