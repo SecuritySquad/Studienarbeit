@@ -5,8 +5,26 @@
 \todo{Daniel}
 
 \subsection{webifier Tests}
+In diesem Kapitel wird der allgemeine Aufbau, welcher für alle Tests von webifier gilt, erläutert.
 
-\todo{Jani}
+Um die Tests vom Gesamtsystem abzukapseln wird auf Docker gesetzt. Hierbei wird für jeden Test ein eigenes Image geschrieben. Die Tests werden vom Tester dann gestartet. So wird jeder Test in einem eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren sind und sich gegenseitig oder das Gesamtsystem nicht beeinflussen.
+
+Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels JSON-Strings realisiert. Wie in Beispiel (...) zu sehen besteht das JSON aus dem Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Result JSON},
+    label={lst:resultjson}
+}
+\begin{lstlisting}
+  {
+  	"result": "clean" | "suspicious" | "malicious" | "undefined",
+  	"info": {
+  		...
+  	}
+  }
+\end{lstlisting}
+\end{scriptsize}
 
 \subsection{webifier Tester}
 
@@ -25,8 +43,46 @@
 \todo{Samuel}
 
 \subsection{webifier Statistics}
+Webifier Statistics wird in R implementiert. Hierzu werden Flexdashboards\footnote{Siehe http://rmarkdown.rstudio.com/flexdashboard/index.html} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
+\begin{itemize}
+  \item 1. Daten aus der MongoDB laden
+  \item 2. Daten in die benötigte Form transformieren
+  \item 3. Entsprechende API ansteuern für Generierung der Grafik
+\end{itemize}
 
-\todo{Jani}
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Beispiel R-Grafik},
+    label={lst:rgrafik}
+}
+\begin{lstlisting}
+  ### Durchschnittliche Analysezeit
+
+  ```{r}
+  result <- dbGetQueryForKeys(mg1, 'webifierTestResultData',"{}", "{durationInMillis:1}",skip=0,limit=Inf)
+  mean.dur <- mean(result$durationInMillis)/1000
+  mean.dur <- round(mean.dur)
+  tp <- seconds_to_period(mean.dur)
+  valueBox(paste(minute(tp),'min ',second(tp),'s',sep=""), icon="fa-hourglass-half",color="grey")
+  ```
+\end{lstlisting}
+\end{scriptsize}
+
+Im Codebeispiel \ref{lst:rgrafik} ist der Codeablauf für eine Valuebox zu sehen. Dieses Beispiel wurde ausgewählt um den Erstellungsprozess für die Grafiken zu erklären. Dies lässt sich auf alle anderen Grafiken übertragen.
+
+Die Überschriften der Grafiken werden mit \textit{\#\#\#} markiert. Der R-Code befindet sich in Chunks, diese werden speziell markiert um dem Compiler kenntlich zu machen welches der R-Code ist.
+
+Im Beispiel werden zunächst benötigten Daten aus der MongoDB geladen. Da hier eine Valuebox für die Anzeige der durchschnittlichen Analysezeit generiert wird werden nur die Analysezeiten(durationInMillis) benötigt. Diese werden anschließend gemittelt und von Millisekunden in Minuten/Sekunden transformiert. Zur Erstellung der Valuebox muss nun nurnoch der Text, die Farbe und ein passendes Icon ausgewählt werden. Die Generierung und Platzierung übernimmt Flexdashboard. Als Ausgabe wird eine HTML-Datei generiert, welche dann in den Webserver eingebunden wird um sie für die Nutzer zugänglich zu machen.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=5cm]{images/stats/valuebox}
+  \caption{Generierte Valuebox}
+  \label{fig:valuebox}
+\end{figure}
+In Abbildung \ref{fig:valuebox} ist die fertig generierte Valuebox mit Überschrift, Text und Icon in passender Farbe dargestellt.
+
+Für stets aktuelle Grafiken wird das R-Skript für die Statistiken mehrfach täglich neu gebaut um die aktuellen Daten mit einzubeziehen. Von einer \textit{On the fly}-Generierung der Grafiken wurde abgesehen, da dies für den Server zu rechenintensiv wäre.
 
 \section{Tests}
 
