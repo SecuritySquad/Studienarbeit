@@ -26,9 +26,26 @@ Jeder Test wird in einer vom Gesamtsystem abgekapselten Laufzeitumgebung ausgef�
 Ein Test liefert sein Ergebnis an den Tester, welcher dies dann im folgenden weiterverarbeitet.
 Das Starten und Organisisieren der Tests wird von webifier Tester durchgeführt. Den Aufbau und die Funktionsweise des Testers wird im nächsten Abschnitt beschrieben.
 
-\begin{itemize}
-  \item Kurze Vorstellung der einzelnen Tests, genaue Beschreibung dann im Tests Abschnitt\ldots
-\end{itemize}
+Webifier stellt 9 verschiedene Tests um eine Webseite zu überprüfen. Das Konzept der einzelnen Test wird in jeweils eigenständigen Kapiteln erläutert. Hier folgt noch ein Überblick über die einzelnen Tests.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Test} & \textbf{Beschreibung} \\\hline
+Virenscan der Webseite & Testet die Dateien einer Seite auf Viren \\\hline
+Vergleich in verschiedenen Browsern & Test ob sich die Seite bei verschiedenen \\ & Browsern anders verhält \\\hline
+Überprüfung der Port-Nutzung & Überprüft ob die Seite Portscanning betreibt \\\hline
+Überprüfung der IP-Nutzung & Überprüft ob die Seite IPScanning betreibt \\\hline
+Prüfung aller verlinkten Seiten & Testet die Links auf der Webseite gegen die \\ & Datenbank von webifier \\\hline
+Google Safe Browsing & Nutzt die Google-API um die Webseite von \\ & Google testen zu lassen \\\hline
+Überprüfung des SSL-Zertifikats & Überprüft das SSL-Zertifikat der Webseite \\\hline
+Erkennung von Phishing & Testet ob es sich um eine Phishingseite handelt \\\hline
+Screenshot der Seite & Gibt dem Nutzer einen Screenshot der Webseite \\\hline
+\end{tabular}
+\caption{Beschreibung der einzelnen Tests}
+\label{tbl:tests}
+\end{table}
 
 \subsection{webifier Tester}
 
