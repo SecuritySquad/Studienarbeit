@@ -136,9 +136,37 @@ Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter a
 
 \todo{Samuel}
 
+\begin{itemize}
+  \item Auslesen der relevanten Informationen des Zertifikates der Webseite
+  \item Validierung des Zertifikates
+\end{itemize}
+
 \subsection{Erkennung von Phishing}
+\label{sec:umsetzung-phishungdetector}
 
 \todo{Samuel}
+
+\begin{itemize}
+  \item Herausfiltern der Schlagwörter
+  \item Finden möglicher Duplikate der Webseite
+  \begin{itemize}
+    \item Erstes Schlagwort zu Top Level Domains
+    \begin{itemize}
+      \item com
+      \item ru
+      \item net
+      \item org
+      \item de
+    \end{itemize}
+    \item Websuche nach den Schlagwörtern mittels Suchmaschinen
+    \begin{itemize}
+      \item DuckDuckGo
+      \item Ixquick
+      \item Bing
+    \end{itemize}
+  \end{itemize}
+  \item Berechnung Teilergebnisse
+\end{itemize}
 
 \subsection{Screenshot der Seite}
 Der Screenshot der Seite erfolgt über eine von PhantomJS gelieferte Methode um den Seiteninhalt aufzunehmen und als Bilddatei abzuspeichern. PhantomJS wird hierbei genutzt da der Test in einem Docker ohne grafische Benutzeroberfläche läuft und deshalb ein headless Browser nötig ist um die Seite aufzurufen. Nachdem die Seite in einer Bilddatei abgespeichert ist, wird diese als base64-encoded String weitergegeben. Der Test liefert immer das Ergebnis \textit{sauber}, welches aber für den Tester irrelevant ist, da der Screenshot-Test keine Gewichtung im Tester hat. In der Ergebnisinformation wird der base64 encodierte String weitergegeben, welcher dann von der Plattform interpretiert und als Bild für den Nutzer dargestellt wird.

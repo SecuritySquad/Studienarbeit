@@ -175,37 +175,19 @@ Nach dem Speichern aller IPs werden diese klassifiziert. Der Test vergleicht all
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-\todo{Samuel}
+Die Überprüfung des SSL-Zertifikats der Weibseite sucht nach einem vorhandenen Zertifikat und validiert dieses, sofern die Webseite eines nutzt. Hierfür liest es die dafür notwendigen Informationen des  Zertifikats aus und berechnet anschließend ein Testergebnis.
 
-\begin{itemize}
-  \item Auslesen der relevanten Informationen des Zertifikates der Webseite
-  \item Validierung des Zertifikates
-\end{itemize}
+Stellt die Webseite kein Zertifikat zur Verfügung so ist das Testergebnis \textit{SUSPICIOUS}, da es in Zeiten von Let's Encrypt\footnote{https://letsencrypt.org/} jedem möglich ist ein SSL-Zertifikat kostenlos zu erwerben und so die Sicherheit der eigenen Webseite zu erhöhen. Nutzt die Webseite ein valides Zertifikat ist das Ergebnis \textit{CLEAN}. Weist das Tertifikat Fehler auf ist das Ergebnis \textit{MALICIOUS}. Solche Fehler können beispielsweise sein, dass das Zertifikat abgelaufen ist, dass es selbst signiert wurde oder das es für den falschen Host genutzt wird.
 
 \subsection{Erkennung von Phishing}
 
-\todo{Samuel}
+webifier enthält auch einen sehr einfachen Tests zur Erkennung von Phishing. Dieser sucht zuerst nach den Schlagwörtern der gegebenen Webseite. Hierfür zählt er die Häufigkeit aller vorkommenden Wörter die mehr als drei Buchstaben haben. Wörter in Bildbeschreibungen und Überschriften werden doppelt gewichtet, Wörter im Titel der Webseite werden fünffach gewichtet. Haben mehere Wörter die gleiche Gewichtung, so fällt die Länge der Wörter auch noch ins Gewicht und längere Wörter werden bevorzugt. Die vier Wörter, die im Ranking am höchsten stehen werden anschließend als Schüsselwörter gewählt.
 
-\begin{itemize}
-  \item Herausfiltern der Schlagwörter
-  \item Finden möglicher Duplikate der Webseite
-  \begin{itemize}
-    \item Erstes Schlagwort zu Top Level Domains
-    \begin{itemize}
-      \item com
-      \item ru
-      \item net
-      \item org
-      \item de
-    \end{itemize}
-    \item Websuche nach den Schlagwörtern mittels Suchmaschinen
-    \begin{itemize}
-      \item DuckDuckGo
-      \item Ixquick
-      \item Bing
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
+Anschließend werden mit Hilfe öffentlicher Suchmaschinen mögliche Duplikate der Webseite gesucht. Für diese Suche werden die ausgewählten Schlagwörter verwendet. Nun werden die Ergebnisse aller Suchmaschinen zusammengeführt und ebenfalls gewichtet. Je mehr Suchmaschinen einen Link gefunden haben, desto höher steigt dieser Link im Ranking. Als nächstes muss diese Liste der möglichen Duplikate nach Orginalen, welcher der gegebenen Webseite entsprechen gefilterert werden, da es sehr wahrscheinlich ist, dass diese ebenfalls in der Liste der Links enthalten ist. Als letztes wird die Liste noch auf maximal zehn Eintrage gekürtzt.
+
+Nun werden alle gefundenen Links mit der gegebenen Webseite verglichen und für jeden gefundenen Link ein Ergebnis berechnet. Der Vergleich erfolgt auf drei Ebenen: es werden der Inhalt und er der Quelltext der beiden Webseiten, aber auch Screenshots verglichen. Jeder dieser Vergleiche gibt die prozentuale Übereinstimmung der zu vergleichenden Webseiten zurück. Anschließend werden diese drei Ergebnisse zu einem Gesamtergebnis verrechnet. In diese Rechnung fließt das Ergebnis des Screenshotsvergleichs mitt doppeltem Gewicht ein, da dieser Vergleich am aussagekräftigsten ist.
+
+Aufgrund der Komplexität wird die genaue Berechnung des Ergebnisses wird in Abschnitt \ref{sec:umsetzung-phishungdetector} erklärt und hier nun vereinfacht dargestellt. Stimmen die beiden Webseiten zu 80\% überein, so ist das Ergebnis des Links \textit{SUSPICIOUS}, stimmen die beiden Webseiten zu 90\% überein, so ist das Ergebnis \textit{MALICIOUS}. Das Endergebnis des Tests wird abschließend wie folgt berechnet: wurde mindestens ein verdächtiger Link gefunden, so ist das Gesamtergebnis \textit{SUSPICIOUS}, wurde mindestens ein bedrohlicher Link gefunden, so ist das Ergebnis \textit{MALICIOUS}, andernfalls \textit{CLEAN}. Zusätzlich werden noch die gefundenen Schlagwörter, die gefundenen Phishingseiten, derern Vergleichswerte und ein Überlagerungsscreenshot mit der Originalseite für den Tester bereitgestellt.
 
 \subsection{Screenshot der Seite}
 Der Screenshot-Test ist kein Test im eigentlichen Sinne. Er liefert keine Aussage über die Bedrohlichkeit einer Webseite. Deshalb liefert er immer als Ergebnis sauber und bleibt ungewichtet in der Gewichtung im Tester. Trotzdem wurde er mit implementiert um den Nutzern einen Blick auf die Seite zu geben, welche sie von webifier haben scannen lassen. Dies kann besonders interessant sein, da viele Nutzer auch daran interessiert sind wie die Seiten denn aussehen und was dort an Text oder Bilder zu sehen ist. Jedoch sollte keiner der Nutzer, auf eine als bedrohlich markierte Webseite, mit seinem Webbrowser zugreifen. Deshalb wird hier die Möglichkeit gegeben sich gefahrlos einmal die Webseite anzuschauen.
