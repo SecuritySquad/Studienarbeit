@@ -1,11 +1,13 @@
 \chapter{Umsetzung}
 
+In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen Konzept die Umsetzung von webifier beschrieben. Zunächst folgt nun die Erläuterung der Gesamtumsetzung, gefolgt von der Umsetzung der Teilanwendungen. Abschließend wird die Implementierung der einzelnen Tests vorgestellt.
+
 \section{Gesamtanwendung}
 
 \todo{Daniel}
 
 \subsection{webifier Tests}
-In diesem Kapitel wird der allgemeine Aufbau, welcher für alle Tests von webifier gilt, erläutert.
+In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von webifier gilt, erläutert.
 
 Um die Tests vom Gesamtsystem abzukapseln wird auf Docker gesetzt. Hierbei wird für jeden Test ein eigenes Image geschrieben. Die Tests werden vom Tester dann gestartet. So wird jeder Test in einem eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren sind und sich gegenseitig oder das Gesamtsystem nicht beeinflussen.
 
@@ -32,6 +34,8 @@ Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werd
 \end{itemize}
 
 \subsection{webifier Tester}
+
+
 
 \todo{Samuel}
 
