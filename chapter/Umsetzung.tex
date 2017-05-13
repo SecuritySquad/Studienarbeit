@@ -9,7 +9,22 @@ In diesem Kapitel wird der allgemeine Aufbau, welcher für alle Tests von webifi
 
 Um die Tests vom Gesamtsystem abzukapseln wird auf Docker gesetzt. Hierbei wird für jeden Test ein eigenes Image geschrieben. Die Tests werden vom Tester dann gestartet. So wird jeder Test in einem eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren sind und sich gegenseitig oder das Gesamtsystem nicht beeinflussen.
 
-Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels JSON-Strings realisiert. Wie in Beispiel (...) zu sehen besteht das JSON aus der Test-ID, dem Ergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
+Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels JSON-Strings realisiert. Wie in Beispiel (...) zu sehen besteht das JSON aus dem Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Result JSON},
+    label={lst:resultjson}
+}
+\begin{lstlisting}
+  {
+  	"result": "clean" | "suspicious" | "malicious" | "undefined",
+  	"info": {
+  		...
+  	}
+  }
+\end{lstlisting}
+\end{scriptsize}
 
 \subsection{webifier Tester}
 
@@ -28,8 +43,7 @@ Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werd
 \todo{Samuel}
 
 \subsection{webifier Statistics}
-
-\todo{Jani}
+Webifier Statistics wird mittels R implementiert.
 
 \section{Tests}
 
