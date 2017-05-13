@@ -102,14 +102,13 @@ $0 \leq CLEAN < 0,043402\overline{7} \leq SUSPICIOUS < 0,208\overline{3} \leq MA
 
 Zusätzlich zu dem berechneten Gesamtergebnis stellt der Tester auch alle Ergebnisse der Einzeltests und deren spezifischen Testinformationen bereit. Außerdem werden alle Ergebnisse zu Persistierung an das Modul webifier Data gesendet, welches in Abschnitt \ref{sec:konzept-data} genauer erläutert wird.
 
-\subsection{webifier Platform}
+\subsection{webifier Plattform}
 
-\todo{Samuel}
+webifier Plattform ist eine Webanwendung, die auf den Tester aufsetzt und eine \ac{UI} für diesen zu Verfügung stellt. Außerdem bereitet sie die Ergebnisse des Testers grafisch für den Benutzer auf.
 
-\begin{itemize}
-  \item Userschnittstelle
-  \item Warteschlange
-\end{itemize}
+Der Nutzer hat die Möglichkeit auf der ersten Seite von webifier Plattform eine Url einzugeben, welche getestet werden soll. Da die Kapazität jedes Systems beschränkt ist verwaltet die Plattform alle Anfragen zur Webseitenüberprüfung in einer Warteschlange. In einer Konfigurationsdatei kan angegeben werden, wie viele Tests parallel ausgeführt werden sollen. So wird die Warteschlange nach und nach abgearbeit und anschließend werden die Ergebnisse des Testers für den Benutzer visuell aufbereitet. Das bereitgestellte Ergebnis umfasst zum Einen das Gesamtresultat, welches vom Tester berechnet wurde und zu Anderen sowohl die Ergebnisse der einzelen Tests, als auch die Zusätzlichen Informationen, welche von diesen bereitgestellt wurden.
+
+So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit oder die ausgehende Gefahr der überprüften Webseite.
 
 \subsection{webifier Mail}
 
