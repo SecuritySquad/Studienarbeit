@@ -175,7 +175,7 @@ In Listing \ref{lst:portscanner} wird ein Beispielcode für einen, in Java imple
 \begin{scriptsize}
 \lstset{
     style=eclipsejava,
-    caption={Beispiel eines simplen Java PortScanners},
+    caption=[Beispiel eines simplen Java PortScanners]{Beispiel eines simplen Java PortScanners\protect\footnotemark},
     label={lst:portscanner}
 }
 \begin{lstlisting}
@@ -214,7 +214,7 @@ public class Portscanner {
 }
 \end{lstlisting}
 \end{scriptsize}
-\footcite[Vgl.][]{portscanner}
+\footnotetext{\cite{portscanner}}
 
 Es gibt grundsätzlich viele verschiedene Möglichkeiten ein Angriffsziel auf offene Ports zu überprüfen. Die in dem Codebeispiel gezeigte Möglichkeit ist relativ simpel, jedoch effektiv. Jedoch ist es ebenfalls recht einfach einen derartigen Angriff zu blocken, da Schutzprogrammen leicht erkennen können, dass es sich um einen Portscan-Angriff handelt und die entsprechende IP dann für weitere Anfragen blockieren. Um diesen offensichtlichen Angriff zu verschleiern werden oft verschiedene Hosts genutzt. Der Angriff verteilt sich dann auf Anfragen von verschiedenen IP's, was es einem Erkennungsalgorithmus erschwert legitime Anfragen von einem verteilten Portscan zu differenzieren. Je mehr Hosts an einem derartigen Scan beteiligt sind, desto schwieriger wird es den entsprechenden Scan zu erkennen und entsprechende IP's zu blockieren. Zusätzlich spielt noch die Art der Anfrage eine Rolle. Es kann beispielsweise mittels eines Pings ein bestimmter Port angefragt werden. Dies ist aber keine effiziente Methode, da oft Firewalls Pings blockieren.
 
@@ -224,7 +224,7 @@ TCP nutzt für den Verbindungsaufbau den 3-Wege-Handshake. Der Ablauf ist in Abb
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/handshake}
-  \caption{3-Step-Handshake TCP\protect\footnotemark}
+  \caption[3-Step-Handshake TCP]{3-Step-Handshake TCP\protect\footnotemark}
   \label{fig:handshake}
 \end{figure}
 \footnotetext{\cite{handshake}, Abbildung 1}
