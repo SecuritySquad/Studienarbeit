@@ -6,14 +6,52 @@ In diesem Kapitel werden das Gesamtkonzept und die Konzepte der einzelnen Tests 
 
 \todo{Daniel}
 
+\begin{itemize}
+  \item Grafik
+  \item Erklärung der Ergebnistypen
+  \begin{itemize}
+    \item unbedenklich (CLEAN)
+    \item verdächtig (SUSPICIOUS)
+    \item bedrohlich (MALICIOUS)
+    \item unbekannt (UNDEFINED)
+  \end{itemize}
+\end{itemize}
+
 \subsection{webifier Tests}
 
 \todo{Jani}
 webifier Tests ist der Oberbegriff für sämtliche von webifier durchgeführten Tests bei der Analyse einer Webseite. Die Tests sollen alle gleichermaßen aufgebaut werden. Es soll ein einheitliches Format entwickelt werden, sodass das Hinzufügen weiterer Tests keine Probleme darstellt.
 
+\begin{itemize}
+  \item Kurze Vorstellung der einzelnen Tests, genaue Beschreibung dann im Tests Abschnitt\ldots
+\end{itemize}
+
 \subsection{webifier Tester}
 
-Der webifier Tester verwaltet alle Tests, führt diese aus und berechnet aus den einzelnen Ergebnissen der Tests ein Gesamtergebnis.
+Der webifier Tester verwaltet alle Tests, führt diese aus und berechnet aus den einzelnen Ergebnissen der Tests ein Gesamtergebnis. Alle auszuführenden Tests werden in einer Konfigurationsdatei angegeben und können deshalb dynamisch angepasst werden. Da jeder Test in einem eigenen Prozess läuft wird beim Starten des Testers die Konfigurationsdatei geladen. Anschließend werden die einzelnen Tests ausgeführt und auf ein Ergebnis gewartet. Liegt von allen Tests das Ergebnis vor wird ein Gesamtergebis berechnet. Die Berechnung dieses Ergebnisses wird im Folgenden genauer erklärt.
+
+Das Ergebnis kann entweder unbedenklich (\textit{CLEAN}), verdächtig (\textit{SUSPICIOUS}), bedrohlich (\textit{MALICIOUS}) oder unbekannt (\textit{UNDEFINED}) sein. Für die Berechnung des Endergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt, da einige Tests mehr über die Vertrauenswürdigkeit oder Gefahr einer Webseite aussagen als andere. Am meisten fallen der \textit{Virenscan der Webseite} und die \textit{Erkennung von Phishing} ins Gewicht, da dieses die ausschlaggebendsten Tests sind. Am wenigsten gewichtet sind der \textit{Vergleich in verschiedenen Browsern}, weil dies nur ein Indiz ist, da es auch viele Webseiten, wie die von YouTube, Nachrichtensendern, Blogs oder Ähnlichem gibt, welche immer dynamischen Inhalt bereitstellen und die \textit{Prüfung der verlinkten Seiten}, da dies immer vom Datenbestand abhängt. Der \textit{Screenshot der Seite} fällt nicht ins Gewicht, da dies kein Test im eigentlichen Sinne ist, sondern nur eine zusätzliche Information für den Nutzer darstellt. In Abschnitt \ref{par:konzept-testarten} wird die Wahl der Gewichtungen für die einzelnen Tests noch ausführlicher erläutert.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Test} & \textbf{Gewichtung} & \textbf{Prozentuale Gewichtung} \\\hline
+Virenscan der Webseite & 5 & \textasciitilde0,208\\\hline
+Vergleich in verschiedenen Browsern & 1 & \textasciitilde0,042\\\hline
+Überprüfung der Port-Nutzung & 3 & 0,125\\\hline
+Überprüfung der IP-Nutzung & 3 & 0,125\\\hline
+Prüfung aller verlinkten Seiten & 1 & \textasciitilde0,042\\\hline
+Google Safe Browsing & 3 & 0,125\\\hline
+Überprüfung des SSL-Zertifikats & 3 & 0,125\\\hline
+Erkennung von Phishing & 5 & \textasciitilde0,208\\\hline
+Screenshot der Seite & 0 & 0\\\hline
+\end{tabular}
+\caption{Gewichtungen der einzelnen Tests}
+\label{tbl:test-weights}
+\end{table}
+
+Die prozentuale Gewichtung ergibt sich aus $\frac{Testgewichtung}{Summe~der~Gewichungen~aller~Tests}$.
 
 \todo{Samuel}
 
@@ -52,8 +90,9 @@ Webifier Statistics ist für die Datenauswertung zuständig. Das Ziel hierbei is
 Diese Diagramme werden folgend erstellt und getestet ob sinnvolle Erkenntnisse daraus gezogen werden können. Die fertigen Diagramme werden anschließend in das Dashboard eingebunden. Webifier Statistics soll für den Nutzer ein interaktives Dashboard bieten, auf dem er Einblicke über die von webifier gewonnen Daten erhalten kann.
 
 \section{Testarten}
+\label{par:konzept-testarten}
 
-\subsection{Virenscan}
+\subsection{Virenscan der Webseite}
 
 \todo{Samuel}
 
@@ -72,27 +111,28 @@ Diese Diagramme werden folgend erstellt und getestet ob sinnvolle Erkenntnisse d
 
 \todo{Daniel}
 
-\subsection{Test auf Port Scanning}
+\subsection{Überprüfung der Port-Nutzung}
 
 \todo{Jani}
 
-\subsection{Test auf IP Scanning}
+\subsection{Überprüfung der IP-Nutzung}
 
 \todo{Jani}
 
-\subsection{Link Checker}
+\subsection{Prüfung aller verlinkten Seiten}
 
 \todo{Daniel}
 
 \begin{itemize}
   \item herausfiltern aller Links und nachgeladenen Ressourcen
+  \item Schnittstelle in webifier-data
 \end{itemize}
 
 \subsection{Google Safe Browsing}
 
 \todo{Daniel}
 
-\subsection{Überprüfung des Zertifikats}
+\subsection{Überprüfung des SSL-Zertifikats}
 
 \todo{Samuel}
 
@@ -126,6 +166,6 @@ Diese Diagramme werden folgend erstellt und getestet ob sinnvolle Erkenntnisse d
   \end{itemize}
 \end{itemize}
 
-\subsection{Screenshot}
+\subsection{Screenshot der Seite}
 
 \todo{Jani}
