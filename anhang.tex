@@ -314,3 +314,164 @@ private double getTestResultValue(WebifierResultType type, double testWeight) {
 }
 \end{lstlisting}
 \end{scriptsize}
+
+\newpage
+
+\section*{Vollständiger Inhalt push-Aktion - webifier Data}
+\label{app:d}
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Vollständiger Inhalt push-Aktion - webifier Data},
+}
+\begin{lstlisting}
+{
+    "id": "49592ea2-48cf-4620-9c0e-52721a43f435",
+    "enteredUrl": "securitysquad.de",
+    "testedUrl": "https://www.securitysquad.de/",
+    "result": {
+        "resultType": "CLEAN",
+        "resultValue": 0.1111111111111111
+    },
+    "duration": 27335,
+    "testResults": [
+        {
+            "testData": {
+                "name": "VirusScan",
+                "startup": "docker run --net=host --rm -e URL=#URL -e ID=#ID webifier-test-virusscan",
+                "shutdown": null,
+                "enabled": true,
+                "weight": 5,
+                "result_class": "de.securitysquad.webifier.output.result.virusscan.TestVirusScanResultInfo",
+                "startup_timeout_seconds": 600,
+                "shutdown_timeout_seconds": 60
+            },
+            "testId": "49592ea2-48cf-4620-9c0e-52721a43f435_4afb7ceb-0310-4ed4-a4ce-9d64ece0c897",
+            "result": {
+                "result": "CLEAN",
+                "info": {
+                    "scanned_files": 15,
+                    "malicious_files": 0,
+                    "suspicious_files": 0,
+                    "files": [
+                        {
+                            "name": "www.securitysquad.de/index.html",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/js/contact_me.js",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/vendor/bootstrap/js/bootstrap.min.js",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/vendor/jquery/jquery.min.js",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/vendor/font-awesome/css/font-awesome.min.css",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/img/team/jani.jpg",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/img/securitysquad.png",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/img/team/daniel.jpg",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/js/jqBootstrapValidation.js",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/vendor/bootstrap/css/bootstrap.min.css",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/js/freelancer.min.js",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/img/webifier_icon.png",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/css/freelancer.css",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/img/team/samuel.png",
+                            "result": "CLEAN"
+                        },
+                        {
+                            "name": "www.securitysquad.de/css/ticker.css",
+                            "result": "CLEAN"
+                        }
+                    ]
+                }
+            },
+            "duration": 27054
+        },
+        {
+            "testData": {
+                "name": "HeaderInspection",
+                "startup": "docker run --net=host --rm -e URL=#URL -e ID=#ID webifier-test-header-inspection",
+                "shutdown": null,
+                "enabled": true,
+                "weight": 1,
+                "result_class": "de.securitysquad.webifier.output.result.headerinspection.HeaderInspectionResultInfo",
+                "startup_timeout_seconds": 300,
+                "shutdown_timeout_seconds": 60
+            },
+            "testId": "49592ea2-48cf-4620-9c0e-52721a43f435_3fbe94b4-a0a3-4267-9111-1d9a7de70988",
+            "result": {
+                "result": "CLEAN",
+                "info": {
+                    "meanRatio": 1,
+                    "worstRatio": 1,
+                    "browsers": [
+                        "Android 4.3",
+                        "Android 5.1",
+                        "iPhone 6, iOS 8.4",
+                        "iPhone 6, iOS 9.3",
+                        "Windows 10, Chrome 54.0",
+                        "Windows XP, Internet Explorer 6.0",
+                        "Windows XP, Firefox 4.0",
+                        "OS X 10.11, Safari 10.0",
+                        "OS X 10.11, Safari 6.0"
+                    ]
+                }
+            },
+            "duration": 4939
+        },
+        {
+            "testData": {
+                "name": "PortScan",
+                "startup": "docker run --net=host --rm -e URL=#URL -e ID=#ID webifier-test-portscan",
+                "shutdown": null,
+                "enabled": true,
+                "weight": 3,
+                "result_class": "de.securitysquad.webifier.output.result.portscan.TestPortScanResultInfo",
+                "startup_timeout_seconds": 300,
+                "shutdown_timeout_seconds": 60
+            },
+            "testId": "49592ea2-48cf-4620-9c0e-52721a43f435_5a2a9005-593c-458b-94eb-33bc2a4a2533",
+            "result": {
+                "result": "UNDEFINED",
+                "info": {}
+            },
+            "duration": 2133
+        },
+        ...
+    ]
+}
+\end{lstlisting}
+\end{scriptsize}

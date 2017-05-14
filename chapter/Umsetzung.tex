@@ -319,7 +319,170 @@ Wie nun gezeigt bietet die Plattform seh viele interessante Zusatzinformationen 
 \subsection{webifier Data}
 \label{sec:umsetzung-data}
 
+webifier Data stellt eine Schnittstelle zur globalen Datenspeicherung der Testresultate zur Verfügung. Die Komponente setzt ebenfalls auf dem Spring-Framework auf und wurde deshalb in Java implementiert. Außerdem wird die Spring-Bibliothek Spring-Data eingesetzt um Java-Objekte auf Dokumente zu übertragen und in einer MongoDB zu persistieren.
+
+Das Modul bietet eine \ac{REST}-\ac{API} zur externen Nutzung, beispielsweise im webifier Tester oder in der Prüfung aller verlinkten Seiten. Die API stellt die folgenden Aktionen bereit: \lstinline[style=eclipse]{/push}, \lstinline[style=eclipse]{/check} und \lstinline[style=eclipse]{/count}. Mit der Methode \lstinline[style=eclipse]{/push} können Testergebnisse in webifier Data abgelegt werden. Die entsprechende Resource, welche im Inhalt des POST-Requests gesendet werden muss ist in Listing \ref{lst:data-push} dargestellt.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Ausschnitt Inhalt push-Request - webifier Data},
+    label={lst:data-push}
+}
+\begin{lstlisting}
+{
+    "id" : "33e76954-dc94-48a9-a816-99ddeb647887",
+    "enteredUrl" : "securitysquad.de",
+    "testedUrl" : "https://www.securitysquad.de/",
+    "result" : {
+        "resultType" : "CLEAN",
+        "resultValue" : 0
+    }
+    "duration" : 46220,
+    "testResults" : [
+        {
+            "testId" : "33e76954-dc94-48a9-a816-99ddeb647887_07bb1b72-fd9f-4286-ade5-2d71cf47580a",
+            "testData" : {
+                "name" : "VirusScan",
+                "startup" : "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-virusscan",
+                "shutdown" : "docker stop #ID",
+                "enabled" : true,
+                "weight" : 5,
+                "startupTimeoutInSeconds" : 600,
+                "shutdownTimeoutInSeconds" : 30,
+            },
+            "result" : {
+                "result" : "CLEAN",
+                "resultInfo" : {
+                    ...
+                }
+            },
+            "duration" : 31191
+        },
+        ...
+    ]
+}
+\end{lstlisting}
+\end{scriptsize}
+
+Die Methode \lstinline[style=eclipse]{/check} bietet die Möglichkeit webifier Data nach einer oder mehreren Urls zu durchsuchen. Hierfür muss im Inhalt des POST-Requests die in Listing \ref{lst:data-check-request} gezeigte Ressource gesendet werden. Diese enthält eine Liste der zu überprüfenden Links.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Inhalt check-Request - webifier Data},
+    label={lst:data-check-request}
+}
+\begin{lstlisting}
+{
+    "urls": [
+        "https://fonts.googleapis.com/css?family=Montserrat:400,700",
+        "https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic",
+        "https://www.google.com/recaptcha/api.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js",
+        "https://www.gstatic.com/recaptcha/api2/r20170503135251/recaptcha__de.js",
+        "https://fonts.gstatic.com/s/lato/v13/v0SdcGFAl2aezM9Vq_aFTQ.ttf",
+        "https://fonts.gstatic.com/s/lato/v13/DvlFBScY1r-FMtZSYIYoYw.ttf",
+        "https://www.gstatic.com/recaptcha/api2/r20170503135251/fallback__ltr.css",
+        "https://fonts.googleapis.com/css?family=Roboto:400,500",
+        "https://www.gstatic.com/recaptcha/api2/logo_48.png",
+        "https://github.com/SecuritySquad",
+        "https://www.webifier.de/",
+        "https://github.com/SecuritySquad/webifier-platform",
+        "http://djbrown.de/",
+        "https://www.facebook.com/danjoebro",
+        "https://github.com/djbrown",
+        "https://plus.google.com/114056971447496286521",
+        "https://github.com/jockelmore",
+        "https://samuel-philipp.de/",
+        "https://github.com/samuel-p",
+        "https://plus.google.com/u/0/+SamuelPd"
+    ]
+}
+\end{lstlisting}
+\end{scriptsize}
+
+Wie Listing \ref{lst:data-check} zeigt gruppiert webifier Data zunächst alle Links anhand deren Host-Teil und entfernt alle ungültigen Einträge. Anschließend werden alle Resultate für jeden Eintrag der Liste geladen und daraus ein Gesamtergebnis pro Host berechnet. Dieses wird schließlich mit dem Host als schlüssel zur Liste \textit{hostResults} hinzugefügt. Abschließend wird die erzeugte Liste als Ergebnis zurückgegeben und als Antwort zurückgesendet. Diese Antwort ist in Listing \ref{lst:data-check-response} abgebildet.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejava,
+    caption={Verarbeitung check Methode - webifier Data},
+    label={lst:data-check}
+}
+\begin{lstlisting}
+$$@Override$$
+public WebifierCheckTestResultsResponse checkTestResultsRequest(WebifierCheckTestResultsRequest request) {
+    List<String> hosts = request.getUrls().stream().map(url -> {
+        try {
+            return filterHost(url);
+        } catch (MalformedURLException e) {
+            return null;
+        }
+    }).distinct().filter(StringUtils::isNotEmpty).collect(toList());
+    Map<String, WebifierTestResultDetails> hostResults = new HashMap<>();
+    hosts.forEach(host -> {
+        List<WebifierTestResultData> data = #dataPersistenceService#.getTestResultDataByHost(host)
+                .stream().filter(d -> d.getOverallResultType() != WebifierTestResult.##UNDEFINED##).collect(toList());
+        if (data.isEmpty()) {
+            hostResults.put(host, WebifierTestResultDetails.##UNDEFINED##);
+        } else {
+            double resultValue = data.stream().mapToDouble(this::mapDataResultToIndex).average().orElse(1);
+            hostResults.put(host, mapResultValueToResult(resultValue));
+        }
+    });
+    if (hostResults.isEmpty()) {
+        return new WebifierCheckTestResultsResponse(false);
+    }
+    return new WebifierCheckTestResultsResponse(true, hostResults);
+}
+\end{lstlisting}
+\end{scriptsize}
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Inhalt check-Response - webifier Data},
+    label={lst:data-check-response}
+}
+\begin{lstlisting}
+{
+    "success": true,
+    "hosts": {
+        "www.facebook.com": "CLEAN",
+        "fonts.googleapis.com": "UNDEFINED",
+        "plus.google.com": "CLEAN",
+        "fonts.gstatic.com": "UNDEFINED",
+        "cdnjs.cloudflare.com": "UNDEFINED",
+        "github.com": "CLEAN",
+        "djbrown.de": "UNDEFINED",
+        "samuel-philipp.de": "UNDEFINED",
+        "www.google.com": "SUSPICIOUS",
+        "www.gstatic.com": "UNDEFINED",
+        "www.webifier.de": "CLEAN"
+    }
+}
+\end{lstlisting}
+\end{scriptsize}
+
+Die Methode \lstinline[style=eclipse]{/count} liefert einfach nur die aktuelle Gesamtzahl der in webifier Data vorhandenen Testergebnisse. Die Antwort wird in Listing \ref{lst:data-count} dargestellt.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Inhalt count-Response - webifier Data},
+    label={lst:data-count}
+}
+\begin{lstlisting}
+{
+    "size" : 172087
+}
+\end{lstlisting}
+\end{scriptsize}
+
 \todo{Samuel}
+
+\todo{Datenmodell in MongoDB}
 
 \subsection{webifier Statistics}
 \label{sec:umsetzung-statistics}
