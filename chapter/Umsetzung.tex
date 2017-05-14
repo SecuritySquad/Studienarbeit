@@ -465,24 +465,43 @@ public WebifierCheckTestResultsResponse checkTestResultsRequest(WebifierCheckTes
 \end{lstlisting}
 \end{scriptsize}
 
-Die Methode \lstinline[style=eclipse]{/count} liefert einfach nur die aktuelle Gesamtzahl der in webifier Data vorhandenen Testergebnisse. Die Antwort wird in Listing \ref{lst:data-count} dargestellt.
+Die Methode \lstinline[style=eclipse]{/count} liefert einfach die aktuelle Gesamtzahl der in webifier Data vorhandenen Testergebnisse.
+
+Die Testergebnisse werden in der MongoDB auf zwei Dokumente verteilt. Das erste Dokument (\lstinline[style=eclipse]{webifierTestResultData}) enthält alle Gesamtdaten des Resultats, das zweite (\lstinline[style=eclipse]{webifierSingleTestResultData}) umfasst alle Einzelergebnisse des Resultats. Deshalb werden pro Testergebnis ein Dokument in \lstinline[style=eclipse]{webifierTestResultData} und acht in \lstinline[style=eclipse]{webifierSingleTestResultData} gespeichert.
+
+Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{\push} Methode (Listing \ref{lst:data-push}) auf die entspechenden Dokumente gemappt. Listing \ref{lst:data-resultdata} zeigt die transformierten Daten aus \lstinline[style=eclipse]{webifierTestResultData}. Anhang \appref{d} enthält die transformierten Dokumente aller Einzelergebnisse in \lstinline[style=eclipse]{webifierSingleTestResultData}.
 
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Inhalt count-Response - webifier Data},
-    label={lst:data-count}
+    caption={Beispieldokument webifierTestResultData - webifier Data},
+    label={lst:data-resultdata}
 }
 \begin{lstlisting}
 {
-    "size" : 172087
+	"_id" : "d62e8c94-21c9-4d69-9337-186b38f73cce",
+	"_class" : "de.securitysquad.webifier.persistence.domain.WebifierTestResultData",
+	"testerId" : "56821bd8-f652-4b59-b7ec-12faa7cf6cae",
+	"enteredUrl" : "ukauctionline.co.uk",
+	"testedUrl" : "http://ukauctionline.co.uk",
+	"host" : "ukauctionline.co.uk",
+	"overallResultType" : "SUSPICIOUS",
+	"overallResultValue" : 0.057291666666666664,
+	"durationInMillis" : NumberLong(227639),
+	"datetime" : ISODate("2017-03-28T22:32:53.834Z"),
+	"testResults" : [
+		DBRef("webifierSingleTestResultData", "5ecb25e6-457b-41ab-9241-a60f8a484131"),
+		DBRef("webifierSingleTestResultData", "abb70569-64d3-47ae-b3e3-ff8086c8f937"),
+		DBRef("webifierSingleTestResultData", "56dbbcb3-9628-4dd4-bb20-692bd86c5410"),
+		DBRef("webifierSingleTestResultData", "64ae09d4-a79e-4194-b77c-3a7891342567"),
+		DBRef("webifierSingleTestResultData", "05ba8488-4b69-40f9-8a9d-661c09daab65"),
+		DBRef("webifierSingleTestResultData", "e0ce8955-feb7-4f7a-adfb-b7b8116a9d28"),
+		DBRef("webifierSingleTestResultData", "9affd5e9-37eb-4d83-b471-ceab0c19155c"),
+		DBRef("webifierSingleTestResultData", "c2b02bf9-2073-451b-a566-295fe1801e51")
+	]
 }
 \end{lstlisting}
 \end{scriptsize}
-
-\todo{Samuel}
-
-\todo{Datenmodell in MongoDB}
 
 \subsection{webifier Statistics}
 \label{sec:umsetzung-statistics}
