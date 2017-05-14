@@ -101,7 +101,7 @@ The url is clean!
 
 Wie im Konzept bereits erwähnt verwaltet der Tester alle auszuführenden Tests. Um die Tests dynamisch anpassen zu können werden alle notwendigen Parameter in einer Konfigurationsdatei gespeichert. Listing \ref{lst:tester-config} zeigt einen Ausschnitt dieser Datei.
 
-Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann.
+Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann. Bei der Ausführung und beim Beenden der Tests werden die Platzhalter \lstinline[style=eclipse]{#ID} und \lstinline[style=eclipse]{#URL} durch die generierten, bzw. vom Nutzer angegebenen Daten ersetzt.
 
 \begin{scriptsize}
 \lstset{
@@ -174,11 +174,120 @@ private WebifierOverallTestResult calculateOverallResult() {
 
 Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde wird dieses über die von webifier Data bereitgestellte Schnittstelle dort gespeichert. Die Kommunikation mit webifier Data läuft ebenfalls über das \ac{JSON}-Format. Genaueres hierzu folgt in Abschnitt \ref{sec:umsetzung-data}.
 
-\todo{Samuel}
-
 \subsection{webifier Plattform}
 
+\subsubsection{Backend}
+
 \todo{Samuel}
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Konfigurationsdatei webifier Plattform},
+    label={lst:platform-config}
+}
+\begin{lstlisting}
+{
+  "tester": {
+    "command": "java -jar webifier-tester.jar -u #URL -i #ID -o JSON",
+    "timeout": 15,
+    "parallel": 18
+  }
+}
+\end{lstlisting}
+\end{scriptsize}
+
+\subsubsection{Frontend}
+
+\todo{Samuel}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/platform/screenshot-start}
+  \caption{webifier Platform - Startseite}
+  \label{fig:platform-result-start}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/platform/screenshot-reflexonature}
+  \caption{webifier Platform - Ergebnisseite}
+  \label{fig:platform-result-page}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=7.5cm]{images/platform/virusscan-malicious}
+  \caption{webifier Platform - Virenscan der Webseite}
+  \label{fig:platform-result-virusscan}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{%
+\includegraphics[width=0.5\textwidth]{images/platform/header-inspection-clean}%
+\includegraphics[width=0.5\textwidth]{images/platform/header-inspection-suspicious}%
+}%
+\caption{webifier Platform - Vergleich in verschiedenen Browsern}
+\label{fig:platform-result-header-inspection}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{%
+\includegraphics[width=0.5\textwidth]{images/platform/portscan-clean}%
+\includegraphics[width=0.5\textwidth]{images/platform/portscan-malicious}%
+}%
+\caption{webifier Platform - Überprüfung der Port-Nutzung}
+\label{fig:platform-result-portscan}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=7.5cm]{images/platform/ipscan-clean}
+  \caption{webifier Platform - Überprüfung der IP-Nutzung}
+  \label{fig:platform-result-ipscan}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=7.5cm]{images/platform/linkchecker-undefined}
+  \caption{webifier Platform - Prüfung aller verlinkten Seiten}
+  \label{fig:platform-result-linkchecker}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{%
+\includegraphics[width=0.5\textwidth]{images/platform/google-safe-browsing-clean}%
+\includegraphics[width=0.5\textwidth]{images/platform/google-safe-browsing-malicious}%
+}%
+\caption{webifier Platform - Google Safe Browsing}
+\label{fig:platform-result-google-safe-browsing}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{%
+\includegraphics[width=0.5\textwidth]{images/platform/certificatechecker-clean}%
+\includegraphics[width=0.5\textwidth]{images/platform/certificatechecker-malicious}%
+}%
+\caption{webifier Platform - Überprüfung des SSL-Zertifikats}
+\label{fig:platform-result-certificatechecker}
+\end{figure}
+
+
+\begin{figure}[H]
+\centerline{%
+\includegraphics[width=0.5\textwidth]{images/platform/phishing-clean}%
+\includegraphics[width=0.5\textwidth]{images/platform/phishing-malicious}%
+}%
+\caption{webifier Platform - Erkennung von Phishing}
+\label{fig:platform-result-phishingdetector}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/platform/screenshot-clean}
+  \caption{webifier Platform - Screenshot der Seite}
+  \label{fig:platform-result-screenshot}
+\end{figure}
 
 \subsection{webifier Mail}
 
