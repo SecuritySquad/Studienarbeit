@@ -469,7 +469,7 @@ Die Methode \lstinline[style=eclipse]{/count} liefert einfach die aktuelle Gesam
 
 Die Testergebnisse werden in der MongoDB auf zwei Dokumente verteilt. Das erste Dokument (\lstinline[style=eclipse]{webifierTestResultData}) enthält alle Gesamtdaten des Resultats, das zweite (\lstinline[style=eclipse]{webifierSingleTestResultData}) umfasst alle Einzelergebnisse des Resultats. Deshalb werden pro Testergebnis ein Dokument in \lstinline[style=eclipse]{webifierTestResultData} und acht in \lstinline[style=eclipse]{webifierSingleTestResultData} gespeichert.
 
-Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{\push} Methode (Listing \ref{lst:data-push}) auf die entspechenden Dokumente gemappt. Listing \ref{lst:data-resultdata} zeigt die transformierten Daten aus \lstinline[style=eclipse]{webifierTestResultData}. Anhang \appref{d} enthält die transformierten Dokumente aller Einzelergebnisse in \lstinline[style=eclipse]{webifierSingleTestResultData}.
+Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{/push} Methode (Listing \ref{lst:data-push}) auf die entspechenden Dokumente gemappt. Listing \ref{lst:data-resultdata} zeigt die transformierten Daten aus \lstinline[style=eclipse]{webifierTestResultData}. Anhang \appref{d} enthält die transformierten Dokumente aller Einzelergebnisse in \lstinline[style=eclipse]{webifierSingleTestResultData}.
 
 \begin{scriptsize}
 \lstset{
@@ -506,7 +506,7 @@ Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{\push}
 \subsection{webifier Statistics}
 \label{sec:umsetzung-statistics}
 
-Webifier Statistics wird in R implementiert. Hierzu werden Flexdashboards\footnote{Siehe http://rmarkdown.rstudio.com/flexdashboard/index.html} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
+Webifier Statistics wird in R implementiert. Hierzu werden Flexdashboards\footnote{\url{http://rmarkdown.rstudio.com/flexdashboard/index.html}} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
 
 \begin{enumerate}
   \item Daten aus der MongoDB laden
@@ -552,20 +552,15 @@ Für stets aktuelle Grafiken wird das R-Skript für die Statistiken mehrfach tä
 
 \section{Tests}
 
+In diesem Abschnitt werden nun die Implementierungen aller Einzeltests erklärt. Bei allen kam zur Isolierung die Technologier Docker zum Einsatz.
+
 \subsection{Virenscan der Webseite}
 
-\todo{Samuel}
+Der Virenscan der Webseite lädt zunächst alle Ressourcen der Webseite in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten. Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne sie für die dauerhafte Nutzung bereitzuhalten. Des weiteren darf keine Datei im Inhalt verändert werden, da so das Ergebnis verfälscht werden könnte. Um zeit zu spaaren wird zusätzlich auf die protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
 
-\begin{itemize}
-  \item Httrack (Umsetzung)
-  \item Download aller Dateien der Webseite
-  \item Scannen der Heruntergeladenen Dateien
-  \begin{itemize}
-    \item Clamav (Umsetzung)
-    \item AVG (Umsetzung)
-    \item CAV (Umsetzung)
-  \end{itemize}
-\end{itemize}
+Zum Scannen aller gespeicherten Dateien kommen drei Virenscanner zum Einsatz. Es werden die Antivirenprogramme ClamAV\footnote{\url{http://www.clamav.net/}}, AVG\footnote{\url{http://www.avg.com/de-de/homepage}} und Comodo Antivirus\footnote{\url{https://antivirus.comodo.com/}} verwendet. Um auch hier die Antwortzeiten gering zu halten werden die Virenscannner parallel ausgeführt.
+
+Abschließend werden alle Ergebnisse der Antivirenprogramme ausgewertet und daraus das Gesamtergebnis gebildet. Dieses wird inklusive der Liste aller bewertetetn Dateien weitergeleitet.
 
 \subsection{Vergleich in verschiedenen Browsern}
 
@@ -592,12 +587,9 @@ Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter a
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-\todo{Samuel}
+Bei der Überprüfung des SSL-Zertifikats wurde technisch auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
-\begin{itemize}
-  \item Auslesen der relevanten Informationen des Zertifikates der Webseite
-  \item Validierung des Zertifikates
-\end{itemize}
+Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt. Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während dem Test ein unbekannter Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
 
 \subsection{Erkennung von Phishing}
 \label{sec:umsetzung-phishungdetector}
