@@ -101,7 +101,7 @@ The url is clean!
 
 Wie im Konzept bereits erwähnt verwaltet der Tester alle auszuführenden Tests. Um die Tests dynamisch anpassen zu können werden alle notwendigen Parameter in einer Konfigurationsdatei gespeichert. Listing \ref{lst:tester-config} zeigt einen Ausschnitt dieser Datei.
 
-Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann. Bei der Ausführung und beim Beenden der Tests werden die Platzhalter \lstinline[style=eclipse]{#ID} und \lstinline[style=eclipse]{#URL} durch die generierten, bzw. vom Nutzer angegebenen Daten ersetzt.
+Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten in Sekunden. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann. Bei der Ausführung und beim Beenden der Tests werden die Platzhalter \lstinline[style=eclipse]{#ID} und \lstinline[style=eclipse]{#URL} durch die generierten, bzw. vom Nutzer angegebenen Daten ersetzt.
 
 \begin{scriptsize}
 \lstset{
@@ -176,9 +176,9 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
 
 \subsection{webifier Plattform}
 
-\subsubsection{Backend}
+In diesem Abschnitt wird nun die Umsetzung von webifier Plattform berschrieben. Diese Komponente wurde mit Java umgesetzt und basiert auf dem Spring-Framework. Zusätzlich kamen im Frontend die Technologiern \ac{HTML}, \ac{CSS} und JavaScript, sowie die Bibliotheken Bootstrap und jQuery zu Einsatz. Zunächst wird nun das Backend beschrieben, danach wird die Oberfläche der Plattform vorgestellt.
 
-\todo{Samuel}
+webifier Plattform ist eine Webanwendung und bietet eine benutzerfreundliche Öberfläche zur Bedienung von webifier Tester. Um die Plattform für die optimale Nutzung des Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} dargestellte Datei, mit der alle notwendigen Parameter angepasst werden können.
 
 \begin{scriptsize}
 \lstset{
@@ -191,29 +191,35 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
   "tester": {
     "command": "java -jar webifier-tester.jar -u #URL -i #ID -o JSON",
     "timeout": 15,
-    "parallel": 18
+    "parallel": 1
   }
 }
 \end{lstlisting}
 \end{scriptsize}
 
-\subsubsection{Frontend}
+Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers angegeben werden. Standartmäßig sollte der Tester im selben Verzeichnis liegen wie die Plattform. Ist dies nicht der Fall, muss der Pfad der Datei entsprechend geändert werden. Außerdem kann ein Timeout für den Tester angegeben werden. Standardmäßig liegt dieses bei 15 Minuten. Der wahrscheinlich wichtigste Parameter zur optimale Nutzung der vorhandenen Ressourcen ist der letzte Parameter. Mit diesem kann angegeben werden wie viele Tests parallel ausgeführt werden sollen. Per default werden alle Tests sequentiell ausgeführt. Wird die Plattform auf einem leistungsstarken System betrieben kann die anzahl entsprechend der vorhandenen Ressourcen angepasst werden.
 
-\todo{Samuel}
+Die Plattform stellt außerdem eine Möglichkeit zur Massenüberprüfung von Webseiten zur Verfügung. Hierfür kann eine Liste von Urls in form eines Texts oder einer Datei angegeben werden. In diesem Modus ist es allerdings nicht möglich alle Ergebnisse dierekt zu sehen, da der Vorgang je nach größe der Liste mehrere Tage oder Wochen dauern kann. Deshalb ist dieser Modus eher für langfristige Analysen geeignet.
+
+Im Folgenden wird nun noch einmal der Ablauf einer Überprüfung beschrieben und die Oberfläche von webifier Plattform dargestellt. Besucht der Nutzer die Webseite der PLattform sieht er zunächst die in Abbildung \ref{fig:platform-start} gezeigte Startseite. Hier kann der User nun eine beliebige Url in das Eingabefeld tippen und anschließend die Überprüfung starten. Außerdem bietet die Startseite Links zur bereits beschriebenen Batchverarbeitung und zu webifier Statistics. Dieses Modul wird in Abschnitt \ref{sec:umsetzung-statistics} ausführlich dargestellt wird.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-start}
   \caption{webifier Platform - Startseite}
-  \label{fig:platform-result-start}
+  \label{fig:platform-start}
 \end{figure}
+
+Nachdem die Überprüfung einer Webseite gestartet wurde wird der Nutzer auf die in Abbildung \ref{fig:platform-result} abgebildete Seite geleitet, welche sich nach und nach mit den Ergebnissen der einzelnen Tests füllt, sobald diese vorliegen. Sind alle Tests beendet, wird auch das Endresultat angezeigt. Die Ergebnisseite bietet zunächst einen kompakten Überblick über alle ausgeführten Tests und deren Ergebnisse.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-reflexonature}
   \caption{webifier Platform - Ergebnisseite}
-  \label{fig:platform-result-page}
+  \label{fig:platform-result}
 \end{figure}
+
+Möchte der Nutzer noch genauere Informationen zu den Ergebnissen eines Tests, so lassen sich alle Testfelder mit einem Klick darauf ausklappen. Im Folgenden werden nun die Detailansichten der einzelnen Testergebnisse gezeigt und erläutert.
 
 \begin{figure}[H]
   \centering
@@ -221,6 +227,8 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
   \caption{webifier Platform - Virenscan der Webseite}
   \label{fig:platform-result-virusscan}
 \end{figure}
+
+Die Detailansicht des Virenscans, welche in Abbildung \ref{fig:platform-result-virusscan} dargestellt ist, zeigt einmal die Anzahl aller gescannten Dateien, sowie die Anzahlen der gefundenen verdächtigen oder maliziösen Dateien. Außerdem erhält die Ansicht eine genaue Auflistung aller Dateien mit entsprechendem Ergebnis. So lässt sich genau feststellen, welche Dateien welche Bedrohung darstellen.
 
 \begin{figure}[H]
 \centerline{%
@@ -230,6 +238,8 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
 \caption{webifier Platform - Vergleich in verschiedenen Browsern}
 \label{fig:platform-result-header-inspection}
 \end{figure}
+
+Der Vergleich in verschiedenen Browsern zeigt die maximale und die durchschnittliche Abweichung, sowohl als absoluten, als auch als prozentualen Wert. Zusätzlich erhält der Nutzer eine Übersicht uber alle Systeme, welche getestet und miteinander verglichen wurden. Zwei Beispielergebnisse hierfür sind in Abbildung \ref{fig:platform-result-header-inspection} zu sehen.
 
 \begin{figure}[H]
 \centerline{%
@@ -247,12 +257,16 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
   \label{fig:platform-result-ipscan}
 \end{figure}
 
+Abbildung \ref{fig:platform-result-portscan} zeigt die Ergebnisse der Überprüfung der Port-Nutzung, welche im Falle eines verdächtigen oder bedrohlichen Ergebnisses eine Liste mit allen gefundenen Ports enthält. Das Ergebnis der Überprüfung der IP-Nutzung ist gleich aufgebaut und in Abbildung \ref{fig:platform-result-ipscan} abgebildet. Es stellt bei entsprechenden Funden eine Liste aller IP-Adressen bereit.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=7.5cm]{images/platform/linkchecker-undefined}
   \caption{webifier Platform - Prüfung aller verlinkten Seiten}
   \label{fig:platform-result-linkchecker}
 \end{figure}
+
+Das Ergebnis der Prüfung aller verlinkten Seiten enthält eine einfache Liste mit allen gefundenen Links und dem entsprechenden Ergebnis aus webifier Data. Abbildung \ref{fig:platform-result-linkchecker} zeigt eine solche Liste.
 
 \begin{figure}[H]
 \centerline{%
@@ -263,6 +277,8 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
 \label{fig:platform-result-google-safe-browsing}
 \end{figure}
 
+Die Deteilansicht des Google Safe Browsing Ergebnisses ist ähnlich dem der Prüfung aller verlinkten Seiten. Allerdings listet diese nur alle gefundenen Bedrohungen auf und nicht alle geprüften Links. Abbildung \ref{fig:platform-result-google-safe-browsing} enthält zwei Beispielresultate.
+
 \begin{figure}[H]
 \centerline{%
 \includegraphics[width=0.5\textwidth]{images/platform/certificatechecker-clean}%
@@ -272,6 +288,7 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
 \label{fig:platform-result-certificatechecker}
 \end{figure}
 
+Das Ergebnis der Überprüfung des SSL-Zertifikates enthält alle Informationen des Zertifikats, sofern die Webseite eines nutzt. Wie in Abbildung \ref{fig:platform-result-certificatechecker} dargestellt, zeigt die Detailansicht einmal für wen das Zertifikat ausgestellt wurde, aber auch wer es ausgestellt hat. Außerdem wird der Gültigkeitszeitraum des Zertifikats angezeigt und im Fehlerfall der gefundene Fehler.
 
 \begin{figure}[H]
 \centerline{%
@@ -282,12 +299,18 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
 \label{fig:platform-result-phishingdetector}
 \end{figure}
 
+Die Erkennung von Phishing stellt ebenfalls einige Informationen zur Verfügung, wie Abbildung \ref{fig:platform-result-phishingdetector} zeigt. Es werden in jedem Fall die gefundenen Schlagwörter der Webseite angezeigt. Ist das Ergebnis verdächtig oder bedrohlich, so wird die vermeindliche Originalseite verlinkt, die Werte der prozentualen Übereinstimmungen insgesamt und von Inhalt, Quelltext und Aussehen separat aufgelistst und ein Bild der beiden überlagerten Seiten gezeigt. Alle Inhalte, welche sich unterscheiden werden rosa dargestellt. Im Beispiel aus der Abbildung unterscheidet sich demnach nur der Text der Fußzeile.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-clean}
   \caption{webifier Platform - Screenshot der Seite}
   \label{fig:platform-result-screenshot}
 \end{figure}
+
+Der Screnenshot der Seite wird beim ausklappen des Panels einfach angezeigt, so wie es in Abbildung \ref{fig:platform-result-screenshot} dargestellt. Dies gibt dem Nutzer die Möglichkeit sich die Webseite anzusehen, ohne sie selbst zu besuchen.
+
+Wie nun gezeigt bietet die Plattform seh viele interessante Zusatzinformationen zu den Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
 
 \subsection{webifier Mail}
 
@@ -299,6 +322,8 @@ Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wur
 \todo{Samuel}
 
 \subsection{webifier Statistics}
+\label{sec:umsetzung-statistics}
+
 Webifier Statistics wird in R implementiert. Hierzu werden Flexdashboards\footnote{Siehe http://rmarkdown.rstudio.com/flexdashboard/index.html} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
 
 \begin{enumerate}
