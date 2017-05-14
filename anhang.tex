@@ -147,3 +147,170 @@ Dabei steht die Farbe blau für \daniel{Daniel Brown}, grün für \jani{Jan-Eric
 {7.1 Zusammenfassung}
 
 {7.2 Bewertung der Ergebnisse}
+
+\newpage
+
+\section*{TEIL B: Vollständige Konfigurationsdatei webifier Tester}
+\label{app:b}
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption={Vollständige Konfigurationsdatei webifier Tester}
+}
+\begin{lstlisting}
+{
+  "resolver": {
+    "name": "resolver",
+    "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-resolver",
+    "startup_timeout_seconds": 60,
+    "shutdown": "docker stop #ID",
+    "shutdown_timeout_seconds": 30
+  },
+  "tests": [
+    {
+      "name": "VirusScan",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-virusscan",
+      "startup_timeout_seconds": 600,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.virusscan.TestVirusScanResultInfo",
+      "weight": 5,
+      "enabled": true
+    },
+    {
+      "name": "HeaderInspection",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-header-inspection",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.headerinspection.HeaderInspectionResultInfo",
+      "weight": 1,
+      "enabled": true
+    },
+    {
+      "name": "PortScan",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-portscan",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.portscan.TestPortScanResultInfo",
+      "weight": 3,
+      "enabled": true
+    },
+    {
+      "name": "IpScan",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-ipscan",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.ipscan.TestIpScanResultInfo",
+      "weight": 3,
+      "enabled": true
+    },
+    {
+      "name": "Screenshot",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-screenshot",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.screenshot.TestScreenshotResultInfo",
+      "weight": 0,
+      "enabled": true
+    },
+    {
+      "name": "LinkChecker",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-linkchecker",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.linkchecker.TestLinkCheckerResultInfo",
+      "weight": 1,
+      "enabled": true
+    },
+    {
+      "name": "CertificateChecker",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-certificatechecker",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.certificatechecker.TestCertificateCheckerResultInfo",
+      "weight": 3,
+      "enabled": true
+    },
+    {
+      "name": "PhishingDetector",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-phishingdetector",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.phishingdetector.TestPhishingDetectorResultInfo",
+      "weight": 5,
+      "enabled": true
+    },
+    {
+      "name": "GoogleSafeBrowsing",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID -e API_KEY=INSERT_API_KEY webifier-test-google-safe-browsing",
+      "startup_timeout_seconds": 300,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.googlesafebrowsing.TestGoogleSafeBrowsingResultInfo",
+      "weight": 3,
+      "enabled": true
+    }
+  ],
+  "preferences": {
+    "push_result_data": true
+  }
+}
+\end{lstlisting}
+\end{scriptsize}
+
+\newpage
+
+\section*{TEIL C: Vollständige Ergebnisberechnung webifier Tester}
+\label{app:c}
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejava,
+    caption={Vollständige Ergebnisberechnung webifier Tester}
+}
+\begin{lstlisting}
+private WebifierOverallTestResult calculateOverallResult() {
+    int weightSum = #tests#.stream().map(WebifierTest::getData).mapToInt(WebifierTestData::getWeight).sum();
+    int mostWeighted = #tests#.stream().map(WebifierTest::getData).mapToInt(WebifierTestData::getWeight).max().orElse(weightSum / 2);
+    double maliciousMin = (double) mostWeighted / (double) weightSum;
+    double suspiciousMin = Math.pow(maliciousMin, 2);
+
+    int undefinedTestSum = #tests#.stream().filter(test -> test.getResult().getResultType() == WebifierResultType.##UNDEFINED##)
+            .map(WebifierTest::getData).mapToInt(WebifierTestData::getWeight).sum();
+    double undefinedPercentage = (double) undefinedTestSum / (double) weightSum;
+    if (undefinedPercentage > #MAX_UNDEFINED_TEST_PERCENTAGE#) {
+        return new WebifierOverallTestResult(WebifierResultType.##UNDEFINED##);
+    }
+    double result = 0;
+    for (WebifierTest<TestResult> test : tests) {
+        double testWeight = (double) test.getData().getWeight() / (double) weightSum;
+        result += getTestResultValue(test.getResult().getResultType(), testWeight) * testWeight;
+    }
+    if (result >= maliciousMin) {
+        return new WebifierOverallTestResult(WebifierResultType.##MALICIOUS##, result);
+    }
+    if (result >= suspiciousMin) {
+        return new WebifierOverallTestResult(WebifierResultType.##SUSPICIOUS##, result);
+    }
+    return new WebifierOverallTestResult(WebifierResultType.##CLEAN##, result);
+}
+
+private double getTestResultValue(WebifierResultType type, double testWeight) {
+    if (type == WebifierResultType.##MALICIOUS##) {
+        return 1;
+    }
+    if (type == WebifierResultType.##SUSPICIOUS##) {
+        return testWeight;
+    }
+    return 0;
+}
+\end{lstlisting}
+\end{scriptsize}

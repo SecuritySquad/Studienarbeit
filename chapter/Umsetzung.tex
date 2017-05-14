@@ -11,7 +11,7 @@ In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von webi
 
 Um die Tests vom Gesamtsystem abzukapseln wird auf Docker gesetzt. Hierbei wird für jeden Test ein eigenes Image geschrieben. Die Tests werden vom Tester dann gestartet. So wird jeder Test in einem eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren sind und sich gegenseitig oder das Gesamtsystem nicht beeinflussen.
 
-Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels JSON-Strings realisiert. Wie in Beispiel (...) zu sehen besteht das JSON aus dem Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
+Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels \ac{JSON}-Strings realisiert. Wie in Beispiel (...) zu sehen besteht das \ac{JSON} aus dem Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
 
 \begin{scriptsize}
 \lstset{
@@ -35,7 +35,144 @@ Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werd
 
 \subsection{webifier Tester}
 
+Der webifier Tester wurde als Anwendung für das \ac{CLI} in Java implementiert. Der Tester kann mit Hilfer verschiedener Parameter in seinem Verhalten gesteuert werden. Die Option \lstinline[style=eclipse]{-h} gibt beispielsweise die in Listing \ref{lst:tester-help} dargestellte Hilfe aus.
 
+\begin{scriptsize}
+\lstset{
+    style=eclipse,
+    caption={Hilfe webifier Tester},
+    label={lst:tester-help}
+}
+\begin{lstlisting}
+usage: java -jar webifier-tester.jar
+ -h,--help              Print this help screen.
+ -i,--id <ID>           Set the id for this test
+ -o,--output <FORMAT>   Set the format of the output. Valid formats are
+                        JSON and XML.
+ -u,--url <URL>         The url that should be tested.
+\end{lstlisting}
+\end{scriptsize}
+
+Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende Url angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test. Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgebaformat spezifiziert werden. Dies ist vorallem für die automatisierte Testausführung, beispielsweise mit webifier Plattform relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben werden alle Events (Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird kein Format spezifiziert so werden die Ergebnisse wie in Listing \ref{lst:tester-result} dargestellt ausgegeben.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipse,
+    caption={Standardausgabe webifier Tester},
+    label={lst:tester-result}
+}
+\begin{lstlisting}
+$ java -jar webifier-tester.jar -u securitysquad.de
+Resolver started for url securitysquad.de
+Resolver finished! Result:
+The resolved url is 'https://www.securitysquad.de/' and it is reachable.
+Start Tester for url https://www.securitysquad.de/
+Test 'VirusScan' started!
+Test 'PhishingDetector' started!
+Test 'CertificateChecker' started!
+Test 'Screenshot' started!
+Test 'IpScan' started!
+Test 'GoogleSafeBrowsing' started!
+Test 'LinkChecker' started!
+Test 'PortScan' started!
+Test 'HeaderInspection' started!
+Test 'CertificateChecker' finished! Result:
+The given url is clean!
+Test 'HeaderInspection' finished! Result:
+The given url is clean!
+Test 'Screenshot' finished! Result:
+The given url is clean!
+Test 'GoogleSafeBrowsing' finished! Result:
+The given url is clean!
+Test 'LinkChecker' finished! Result:
+The test result is undefined. Maybe the test returned an error!
+Test 'IpScan' finished! Result:
+The given url is clean!
+Test 'PortScan' finished! Result:
+The given url is clean!
+Test 'PhishingDetector' finished! Result:
+The given url is clean!
+Test 'VirusScan' finished! Result:
+The given url is clean!
+Tester finished for url https://www.securitysquad.de/
+The url is clean!
+\end{lstlisting}
+\end{scriptsize}
+
+Wie im Konzept bereits erwähnt verwaltet der Tester alle auszuführenden Tests. Um die Tests dynamisch anpassen zu können werden alle notwendigen Parameter in einer Konfigurationsdatei gespeichert. Listing \ref{lst:tester-config} zeigt einen Ausschnitt dieser Datei.
+
+Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption=[Ausschnitt Konfigurationsdatei webifier Tester]{Ausschnitt Konfigurationsdatei webifier Tester\protect\footnotemark},
+    label={lst:tester-config}
+}
+\begin{lstlisting}
+{
+  "resolver": {
+    "name": "resolver",
+    "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-resolver",
+    "startup_timeout_seconds": 60,
+    "shutdown": "docker stop #ID",
+    "shutdown_timeout_seconds": 30
+  },
+  "tests": [
+    {
+      "name": "VirusScan",
+      "startup": "docker run --rm --name #ID -e URL=#URL -e ID=#ID webifier-test-virusscan",
+      "startup_timeout_seconds": 600,
+      "shutdown": "docker stop #ID",
+      "shutdown_timeout_seconds": 30,
+      "result_class": "de.securitysquad.webifier.output.result.virusscan.TestVirusScanResultInfo",
+      "weight": 5,
+      "enabled": true
+    }
+    ...
+  ],
+  "preferences": {
+    "push_result_data": true
+  }
+}
+\end{lstlisting}
+\end{scriptsize}
+\footnotetext{Der vollständige Inhalt der Konfigurationsdatei befindet sich in Anhang \appref{b}.}
+
+Am Ende der Datei lässt sich noch die Einstellung festlegen, ob das Endergebnis an webifier Data gesendet werden soll oder nicht. Am Anfang der Datei lässt sich der so genannte \textit{Resolver} konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt erreichbar ist und löst wenn nötig Weiterleitungen der Url auf und gibt das Ergebnis an den Tester zurück.
+
+Ist die angegebene Url erreichbar wird die vom \textit{Resolver} aufgelöste Url verwendet und alle anderen Tests damit gestartet. Nun wartet der Tester bis alle Ergebnisse der Tests verfügbar sind oder die Angegebenen Timeouts erreicht sind. Im Falle eines Timeouts erhält der Test das Ergebnis \textit{UNDEFINED}. Abschließend wird das Gesamtergebnis für die angegebene Url wie bereits in Abschnitt \ref{sec:konzept-tester} beschrieben berechnet. Listing \ref{lst:tester-tesult-calculation} zeigt einen Ausschnitt der Implementierung der Ergebnisberechnung.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejava,
+    caption=[Ausschnitt Ergebnisberechnung webifier Tester]{Ausschnitt Ergebnisberechnung webifier Tester\protect\footnotemark},
+    label={lst:tester-config}
+}
+\begin{lstlisting}
+private WebifierOverallTestResult calculateOverallResult() {
+    ...
+    if (undefinedPercentage > #MAX_UNDEFINED_TEST_PERCENTAGE#) {
+        return new WebifierOverallTestResult(WebifierResultType.##UNDEFINED##);
+    }
+    double result = 0;
+    for (WebifierTest<TestResult> test : tests) {
+        double testWeight = (double) test.getData().getWeight() / (double) weightSum;
+        result += getTestResultValue(test.getResult().getResultType(), testWeight) * testWeight;
+    }
+    if (result >= maliciousMin) {
+        return new WebifierOverallTestResult(WebifierResultType.##MALICIOUS##, result);
+    }
+    if (result >= suspiciousMin) {
+        return new WebifierOverallTestResult(WebifierResultType.##SUSPICIOUS##, result);
+    }
+    return new WebifierOverallTestResult(WebifierResultType.##CLEAN##, result);
+}
+\end{lstlisting}
+\end{scriptsize}
+\footnotetext{Der vollständige Inhalt der Ergebnisberechnung befindet sich in Anhang \appref{c}.}
+
+Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde wird dieses über die von webifier Data bereitgestellte Schnittstelle dort gespeichert. Die Kommunikation mit webifier Data läuft ebenfalls über das \ac{JSON}-Format. Genaueres hierzu folgt in Abschnitt \ref{sec:umsetzung-data}.
 
 \todo{Samuel}
 
@@ -48,6 +185,7 @@ Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werd
 \todo{Daniel}
 
 \subsection{webifier Data}
+\label{sec:umsetzung-data}
 
 \todo{Samuel}
 
