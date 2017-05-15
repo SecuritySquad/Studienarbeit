@@ -206,18 +206,20 @@ Im Folgenden wird nun noch einmal der Ablauf einer Überprüfung beschrieben und
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-start}
-  \caption{webifier Platform - Startseite}
+  \caption[webifier Platform - Startseite]{webifier Platform - Startseite\protect\footnotemark}
   \label{fig:platform-start}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{d}.}
 
 Nachdem die Überprüfung einer Webseite gestartet wurde wird der Nutzer auf die in Abbildung \ref{fig:platform-result} abgebildete Seite geleitet, welche sich nach und nach mit den Ergebnissen der einzelnen Tests füllt, sobald diese vorliegen. Sind alle Tests beendet, wird auch das Endresultat angezeigt. Die Ergebnisseite bietet zunächst einen kompakten Überblick über alle ausgeführten Tests und deren Ergebnisse.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-reflexonature}
-  \caption{webifier Platform - Ergebnisseite}
+  \caption[webifier Platform - Ergebnisseite]{webifier Platform - Ergebnisseite\protect\footnotemark}
   \label{fig:platform-result}
 \end{figure}
+\footnotetext{Diese und weitere Ergebnisseiten befinden sich in besserer Qualität in Anhang \appref{d}.}
 
 Möchte der Nutzer noch genauere Informationen zu den Ergebnissen eines Tests, so lassen sich alle Testfelder mit einem Klick darauf ausklappen. Im Folgenden werden nun die Detailansichten der einzelnen Testergebnisse gezeigt und erläutert.
 
@@ -469,7 +471,7 @@ Die Methode \lstinline[style=eclipse]{/count} liefert einfach die aktuelle Gesam
 
 Die Testergebnisse werden in der MongoDB auf zwei Dokumente verteilt. Das erste Dokument (\lstinline[style=eclipse]{webifierTestResultData}) enthält alle Gesamtdaten des Resultats, das zweite (\lstinline[style=eclipse]{webifierSingleTestResultData}) umfasst alle Einzelergebnisse des Resultats. Deshalb werden pro Testergebnis ein Dokument in \lstinline[style=eclipse]{webifierTestResultData} und acht in \lstinline[style=eclipse]{webifierSingleTestResultData} gespeichert.
 
-Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{/push} Methode (Listing \ref{lst:data-push}) auf die entspechenden Dokumente gemappt. Listing \ref{lst:data-resultdata} zeigt die transformierten Daten aus \lstinline[style=eclipse]{webifierTestResultData}. Anhang \appref{d} enthält die transformierten Dokumente aller Einzelergebnisse in \lstinline[style=eclipse]{webifierSingleTestResultData}.
+Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{/push} Methode (Listing \ref{lst:data-push}) auf die entspechenden Dokumente gemappt. Listing \ref{lst:data-resultdata} zeigt die transformierten Daten aus \lstinline[style=eclipse]{webifierTestResultData}. Anhang \appref{e} enthält die transformierten Dokumente aller Einzelergebnisse in \lstinline[style=eclipse]{webifierSingleTestResultData}.
 
 \begin{scriptsize}
 \lstset{
