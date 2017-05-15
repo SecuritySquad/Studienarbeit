@@ -4,15 +4,15 @@ In diesem Kapitel werden die Grundlagen, welche für das weitere Verständnis de
 
 \section{Frontend Technologien und Frameworks}
 
-Dieser Abschnitt behandelt diejenigen Technologien, die die Interaktion des Benutzers visualisieren. Da es sich bei webifier um eine Webanwendung handelt, sind dies ausschließlich Webtechnologien, welche von grafischen Browsern unterstützt werden.
+Dieser Abschnitt behandelt diejenigen Technologien, die die grafische Darstellung von Webinhalten und Interaktionen der Benutzers in seinem Browser ermöglichen. Da es sich bei webifier um eine Webanwendung handelt, sind dies ausschließlich Webtechnologien, welche von grafischen Browsern unterstützt werden.
 
 Die grundlegende Informationssprache des \ac{WWW} heißt \ac{HTML}. Sie wurde ursprünglich entwickelt um wissenschaftliche Dokumente semantisch zu beschreiben (engl. 'to mark up').
 Heute wird sie jedoch in weitaus größerem Umfang genutzt.\footcite[Vgl.][]{html5Spec}
 \ac{HTML}-Dateien bestehen aus zwei Arten von Informationen: Textdaten und Markupinformationen.
 Erstere sind verantwortlich für den textuellen Inhalt der Webseite. Dazu zählen alle abgebildeten Texte wie sie auch in Überschriften, Abschnitten, Menüs, usw. stehen. Sie sind die Informationen, die Betrachter der Webseite direkt über das grafische Browserfenster lesen kann.
-Markupinformationen hingegen definieren den Aufbau und die Semantik der Inhalte. Diese sind für den normalen Betrachter nicht unbedingt sichtbar. Hierbei handelt es sich um sogenannte \textit{Tags}, die im Quellcode in spitzen Klammern stehen und aus einer Menge von bestimmten Werten stammen. Tags treten immer in Paaren auf, wobei der zweite Tag (Endtag) zusätzlich einen Backslash zwischen aufgehender spitzer Klammer und Tagnamen hat (s. z.B. \autoref{lst:Beispiel.html} Zeile 5, 10, 11).
-Innerhalb dieser beiden Tags können wiederum neue Tags (Zeile ), aber auch einfache Textdaten stehen (s. Zeilen 4, 7, 8, 9).
-Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelementen entsteht. Zu den wichtigsten Tags zählt der \lstinline{<html>}-Tag. Er ist der äußerste Wurzeltag, der alle anderen Tags umschließt. Der \lstinline{<head>}- und \lstinline{<body>}-Tag stehen beide eine Ebene tiefer und beinhalten Metadaten für das gesamte Dokument bzw. den Seiteninhalt.\footcite[Vgl.][57]{webTechnologies}
+Markupinformationen hingegen definieren den Aufbau und die Semantik der Inhalte. Diese sind für den normalen Betrachter nicht unbedingt sichtbar. Hierbei handelt es sich um sogenannte \textit{Tags}, die im Quellcode in spitzen Klammern stehen und aus einer Menge von bestimmten Werten stammen. Tags treten immer in Paaren auf, wobei der zweite Tag (Endtag) zusätzlich einen Backslash zwischen aufgehender spitzer Klammer und Tagnamen hat (s.  \autoref{lst:Beispiel.html} Zeile 5).
+Innerhalb dieser beiden Tags können wiederum neue Tags, aber auch einfache Textdaten stehen (s. Zeile 4).
+Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelementen entsteht. Zu den wichtigsten Tags zählt der \lstinline[style=eclipse]{<html>}-Tag. Er ist der äußerste Wurzeltag, der alle anderen Tags umschließt. Der \lstinline[style=eclipse]{<head>}- und \lstinline[style=eclipse]{<body>}-Tag stehen beide eine Ebene tiefer und beinhalten Metadaten für das gesamte Dokument bzw. den Seiteninhalt.\footcite[Vgl.][57]{webTechnologies}
 
 \begin{scriptsize}
 \lstset{
@@ -35,17 +35,76 @@ Diese Verschachtelung führt dazu, dass meist ein komplexer Baum von Tagelemente
 \end{lstlisting}
 \end{scriptsize}
 
-\todo[color=cyan]{Daniel schreiben: \ac{CSS}}
+Um den in \ac{HTML} definierten Inhalt optisch ansprechend zu gestalten verwenden Webseiten \ac{CSS}.
+\ac{CSS} ist eine deklarative Sprache, mit der sich alle Optik-relevanten Eigenschaften von \ac{HTML}-Elementen definieren lassen, die dann vom Browser entsprechend angezeigt werden.
+Die einfachste Möglichkeit ist es, die gewünschten Änderungen direkt über das \lstinline[style=eclipse]{style}-Attribut des jeweiligen Elements anzugeben.
+Dazu wird die zu ändernde Eigenschaft angegeben, gefolgt von einem Doppelpunkt und dem neuen Eigschaftswert.
+Alle Anweisungen sind durch ein Semikolon zu trennen.
+Um die gleichen Änderungen auf mehrere Elemente anzuwenden, sollten diese Anweisungen in einem globalen Stylesheet zu einem Regelset gebündelt werden.
+Stylesheets können direkt im \ac{HTML} in ein Style-Element als Textwert angegeben (s. \autoref{lst:Beispiel.css} Zeilen 5 - 9), oder über ein Link-Element zu einer \ac{CSS}-Datei nachgeladen werden.
+In beiden Fällen ist es notwendig anzugeben, auf welche Elemente diese Regeln angewandt werden sollen.
+Dies geschieht über den \ac{CSS}-Selektor.
+Er wird vom Browser interpretiert und kann verschiedene Einschränkungen auf die Menge der betroffenen Elemente machen.
+Häufige Kriterien der Selektoren sind Elementnamen, IDs und Klassennamen.
+Elementnamen werden unformatiert angegeben. IDs werden durch eine vorangestellte Raute und Klassennamen durch einen vorangestellten Punkt markiert (s. \autoref{lst:Beispiel.css} Zeile 7ff).
+Mehrere Selektoren werden durch Kommas getrennt.
+Weiterhin können Kindschaftsverhältnisse, Pseudoklassen und Nachbarschaften in Selektoren verwendet werden um komplexere Regelwerke zu definieren.
+\footcite[Vgl.][125\psq]{webTechnologies}
+
+\begin{scriptsize}
+\lstset{
+	style=eclipsehtml,
+	caption={Beispiel.css},
+	label={lst:Beispiel.css}
+}
+\begin{lstlisting}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testseite</title>
+	<style>
+	body { background-color: grey }
+	#datum { text-decoration: underline }
+	.abschnitt { font-size: 20px }
+	</style>
+</head>
+<body>
+	<h1 style="color: red">Überschrift</h1>
+	<span id="datum">08.07.2017</span>
+	<p class="abschnitt">Abschnitt 1</p>
+	<p class="abschnitt">Abschnitt 2</p>
+</body>
+</html>
+\end{lstlisting}
+\end{scriptsize}
 
 \label{par:javascript}
-\todo[color=cyan]{Daniel schreiben: JavaScript}
-\todo[color=cyan]{Daniel schreiben: jQuery}
+JavaScript ist die Sprache, die den Inhalt von Webseiten lokal interaktiv macht.
+Sie ist eine leichtgewichtige, objektorientierte und dynamisch schwach typisierte Skriptsprache, die von Browsern interpretiert wird.
+Ihre Syntax erinnert stark an C und C++.
+Ähnlich wie bei \ac{CSS} gibt es die Möglichkeit JavaScript direkt im \ac{HTML}-Dokument zu schreiben.
+Dies geschieht über das \lstinline[style=eclipse]{<script>}-Element.
+Der auszuführende Code wird direkt als Textwert angegeben.
+Soll hingegen eine externe JavaScript-Datei eingebunden werden, so wird sie über das \lstinline[style=eclipse]{src}-Attribut referenziert.
+\footcite[Vgl.][198]{webTechnologies}
+Die Hauptaufgaben, die in JavaScript erledigt werden sind die Reaktion von Usereingaben durch Events, Modifikation des Webseiteninhalts und die asynchrone Kommunikation mit dem Webserver.
+
+Um diese Aufgaben für mehrere Browser einheitlich und pragmatisch zu lösen, wurde das Framework \textit{jQuery} entwickelt.
+\footcite[Vgl.][]{jqueryHomepage}
+Die Einstiegspunkt von \textit{jQuery} ist die \lstinline[style=eclipse]{\$}-Funktion.
+Wird sie mit einem Textparameter aufgerufen, so interpretiert sie ihn als \ac{CSS}-Selektor und liefert alle passenden \ac{HTML}-Elemente zurück.
+Durch die Struktur der \textit{jQuery}-\ac{API} können auf dieser Ergebnismenge direkt neue Funktionen aufgerufen werden, die intern auf jedes Element einzeln angewandt werden.
+Dieses Verhalten findet sich in vielen weiteren Funktionen von \textit{jQuery} wieder und erlaubt lange Ketten von Funktionsaufrufen in einer einzigen Anweisung.
+\footcite[Vgl.][3\pqs]{jqueryReference}
+
+
 \todo[color=cyan]{Daniel schreiben: Bootstrap}
 
 \section{Backend Technologien und Frameworks}
 
 In diesem Abschnitt werden nun alle Technologien und Frameworks vorgestellt welche in den Backends der einzelnen Teilanwendungen zum Einsatz kamen.
 
+\label{par:java}
 Wohl am häufigsten kam die Programmiersprache Java zum Einsatz. Java ist eine universal einsetzbare, nebenläufige, klassenbarierte und objektorientierte Programmiersprache. Sie wurde möglichst einfach gestaltet um von vielen Entwicklern genutzt zu werden. In ihrer Syntax ähnelt sie den Programmiersprachen C und C++. Außerdem ist sie stark und statisch typisiert. Vorallem aber zeichnet sich Java durch seine plattformunabhängigkeit aus. Diese wird dadurch umgesetzt, dass Java-Quellcode in plattformunabhängigen Byte-Code kompiliert wird, welcher von einer \ac{JVM} ausgeführt wird. Java ist eine Hochsprache, die mit Hilfe des so genannten \enquote{Garbage Collectors} eine automatische Speicherverwaltung bereitstellt. \footcite[Vgl.][1]{javaspecification}
 
 In einigen Teilprojekten wurde das auf Java basierende \textit{Spring}-Framework verwendet. \textit{Spring} stellt eine vereinfachte Möglichkeit auf den Zugriff auf viele \ac{API} der Standard-Version zur Verfügung. Ein weiterer wesentlicher Bestandteil des \textit{Spring}-Frameworks ist die \textit{Dependency Injection}. Hierbei suchen sich Objekte ihre Referenzen nicht selbst, sondern bekommen diese Anhand einer Konfiguration injiziert. Dadurch sind sie eigenständig und können in verschiedenen Umgebungen eingesetzt werden. Des weiteren bringt \textit{Spring} eine Unterstützung für aspektorientierte Programmierung mit, wodurch mit verschiedenen Abstraktionsschichten einzelne Module abgekapselt werden können. \footcite[Vgl.][2]{spring3}
@@ -80,7 +139,7 @@ In diesem Kapitel werden diejenigen Technologien und Frameworks erläutert, die 
 Python ist eine Programmiersprache, die einen schnellen Projektstart ermöglicht und ist auf Integration von verschiedenen Systemen spezialisiert.
 Die Sprache wird von der Python Software Foundation nach Open Source Standards entwickelt.
 Die aktuellste Version ist Python 3.6.1, wobei bei der Implementierung der Tests keine einheitliche Version verwendet wird\todo{diesen Nebensatz in Retrospektive, als Punkt zur Verbesserung?}.
-Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, das es wie bei JavaScript\ref{par:javascript} erst zur Laufzeit zu einer Typenprüfung kommt.
+Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, dass es wie bei \ref[par:javascript]{JavaScript} erst zur Laufzeit zu einer Typenprüfung kommt.
 Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Klammern in Java) gekennzeichnet, sondern definieren sich an der Einrückungstiefe.
 \footcite{pythonHomepage}
 %Deshalb verwenden sechs von neun Tests Python.
