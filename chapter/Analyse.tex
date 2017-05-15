@@ -22,9 +22,10 @@ Die Grafik visualisiert die Aktivität von webifier über den gesamten, von webi
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/dashboard}
-  \caption{Webifier Statistics Dashboard}
+  \caption{Webifier Statistics Dashboard\protect\footnotemark}
   \label{fig:dashboard}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 An der Oberkante ist eine Navigationsleiste zu finden. Diese wird auf allen Teilseiten angezeigt. Der Nutzer kann hier zwischen den einzelnen Seiten wechseln, hinter dem Reiter \textit{Einzelauswertungen} befindet sich ein Dropdown-Menü zur Auswahl des jeweiligen Testes für den der Nutzer die Statistiken betrachten möchte. In den nachfolgenden Kapiteln wird auf diese Auswertungen genauer eingegangen.
 
@@ -37,38 +38,42 @@ Die erste Statistik(Abbildung \ref{fig:tlderkennungen}) visualisiert die Anzahl 
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/tlderkennungen}
-  \caption{Erkennungen anhand Top-Level-Domains}
+  \caption{Erkennungen anhand Top-Level-Domains\protect\footnotemark}
   \label{fig:tlderkennungen}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 Das, in Abbildung \ref{fig:tldverteilung} dargestellte, Tortdendiagramm zeigt die Verteilung der getesteten Ergebnisse anhand der \ac{TLD} auf. Auch hier bilden die Top-Level Domains .com (blau - 57.1\%) und .de (orange - 12.5\%) den größten Anteil. Dies bestätigt den Inhalt der vorherigen Grafik, dass diese \ac{TLD},auch für maliziöse Zwecke, sehr verbreitet sind. Sie werden gefolgt von ebenfalls bekannten Adressen wie .net oder .uk.
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/tldverteilung}
-  \caption{Verteilung der getesteten Top-Level-Domains}
+  \caption{Verteilung der getesteten Top-Level-Domains\protect\footnotemark}
   \label{fig:tldverteilung}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 Die Abbildung \ref{fig:tldprozentual} befasst sich ebenfalls mit den Top-Level Domains. Hier wird die prozentuale Verteilung der Ergebnisse unbedenklich(grün),verdächtig(gelb) und bedrohlich(rot) aufgezeigt. Hier fällt auf, dass die bedrohlichsten \ac{TLD}s eher unbekannte sind, wie beispielsweise .pictet oder .sa. Diese beiden kommen auf jeweils 100\% bedrohliche Ergebnisse. Das bedeutet, dass jede Seite mit dieser \ac{TLD} von webifier als bedrohlich erkannt wurde. Die .com-Domain liegt hier im Mittelfeld mit knappen 80\% sauberen Webseiten. Weiterhin ist zu sehen, dass die deutsche \ac{TLD}(.de) in der Liste nicht auftaucht. Dies ist darauf zurückzuführen, dass für diese Auswertung alle Top-Level-Domains mit 100\% sauberen Webseiten vernachlässigt wurden. Wie aus Abbildung \ref{fig:tlderkennungen} bekannt, wurden aber auch hier bedrohliche Seiten gefunden. Diese sind prozentual gesehen jedoch ein so geringer Anteil, dass sie durch Rundung vernachlässigt wurden.
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/tldprozentual}
-  \caption{prozentuale Erkennungen anhand Top-Level-Domains}
+  \caption{prozentuale Erkennungen anhand Top-Level-Domains\protect\footnotemark}
   \label{fig:tldprozentual}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 Aus den 3 Grafiken zur Verteilung bezogen auf die Top-Level Domains kann erkannt werden, dass bestimmte, eher unbekannte, Top-Level Domains öfter für bedrohliche Zwecke verwendet werden. Jedoch werden auch die bekannten (bspw. .com und .de) Adressen genutzt. Dies lässt sich erklären, dass viele Nutzer im \ac{WWW} bei Webseiten, die auf .de oder .com enden unvorsichtig werden und sich sicher fühlen, da ihnen die \ac{TLD} bekannt ist.
 
 In Abbildung \ref{fig:weltkarte} wird eine Weltkarte dargestellt, welche sich anhand des Risikofaktors der Länder verfärbt. Der Risikofaktor berechnet sich aus dem durchschnittlichen Ergebniswert aller Ergebnisse des Landes und dies wird mit 100 multipliziert um den prozentualen Wert zu erhalten. Hierbei werden die \ac{TLD} den Ländern zugeordnet. Domains wie .com, welche nicht auf ein bestimmtes Land zurückgeführt werden können, werden in dieser Auswertung vernachlässigt. Länder, für die es keine Zuordnung gab bleiben unausgefüllt.
 
-Es ist zu schnell zu Erkennen, dass die Top-Level Domains für Saudi Arabien(.sau) und Libyen(.lby) den größten Risikofaktor haben. Ein Problem bei dieser Darstellung ist, dass nur die Top-Level Domain der Internetadresse entscheidend ist für die Zuordnung. Für eine genauere Zuordnung müsste man die Lokation anhand der IP-Adresse herausfinden und diese dann den Ländern zuordnen. Denn eine .sau-Domain bedeutet nicht zwangsläufig, dass der Betreiber der Webseite auch in dem jeweiligen Land ansässig ist. Oft wird die Webseite von einem anderen Standort aus betrieben. Einige Betreiber nutzen eine bestimmte Top-Level Domain auch wegen dem Namen. Des Weiteren könnten mit einer Adressierung über IP-Adresse auch jene \ac{TLD} mit einbezogen werden, welche keinem Land zugeordnet sind.
+Es ist zu schnell zu Erkennen, dass die Top-Level Domains für Saudi Arabien(.sa) und Libyen(.ly) den größten Risikofaktor haben. Ein Problem bei dieser Darstellung ist, dass nur die Top-Level Domain der Internetadresse entscheidend ist für die Zuordnung. Für eine genauere Zuordnung müsste man die Lokation anhand der IP-Adresse herausfinden und diese dann den Ländern zuordnen. Denn eine .sa-Domain bedeutet nicht zwangsläufig, dass der Betreiber der Webseite auch in dem jeweiligen Land ansässig ist. Oft wird die Webseite von einem anderen Standort aus betrieben. Einige Betreiber nutzen eine bestimmte Top-Level Domain auch wegen dem Namen. Des Weiteren könnten mit einer Adressierung über IP-Adresse auch jene \ac{TLD} mit einbezogen werden, welche keinem Land zugeordnet sind.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/weltkarte}
-  \caption{Bedrohliche Funde visualisiert anhand einer Weltkarte}
+  \caption{Bedrohliche Funde visualisiert anhand einer Weltkarte\protect\footnotemark}
   \label{fig:weltkarte}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 Im folgenden Balkendiagramm (siehe Abbildung \ref{fig:ergebnisverteilung}) wird die Verteilung der Ergebnisse der einzelnen Tests dargestellt. Für jeden Test werden bis zu 4 Balken für die jeweiligen Ergebnistypen dargestellt.
 
@@ -76,9 +81,10 @@ Hier fällt auf, dass der IP-Scan-Test und der Virusscan-Test nahezu nur saubere
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/ergebnisverteilung}
-  \caption{Testergebnisverteilung}
+  \caption{Testergebnisverteilung\protect\footnotemark}
   \label{fig:ergebnisverteilung}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 Die nächste Grafik (siehe Abbildung \ref{fig:testzusammenhaenge}) visualisiert die Zusammenhänge der Tests. Es wird aufgezeigt, welche Tests häufig gemeinsam mit anderen Tests das Ergebnis bedrohlich zur gleichen Webseite liefern. Die Größe der einzelnen Punkte wird über die Anzahl der involvierten Tests bestimmt. Die Anzahl sagt aus wie oft diese Tests die gleiche Seite als bedrohlich klassifiziert haben.
 
@@ -87,53 +93,41 @@ Es ist festzustellen, dass am häufigsten die Tests HeaderInspection und PortSca
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/testzusammenhaenge}
-  \caption{Visualisierung der Testzusammenhänge}
+  \caption{Visualisierung der Testzusammenhänge\protect\footnotemark}
   \label{fig:testzusammenhaenge}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 Die Tabelle in Abbildung \ref{fig:top10} gehört nichtmehr direkt zu den Gesamtauswertungen. Sie ist unter einem eigenen Reiter angesiedelt und dient dazu dem Nutzer zu zeigen, welche Seiten den größten Ergebniswert hatten.
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/top10}
-  \caption{Top 10: Die bedrohlichsten Webseiten}
+  \caption{Top 10: Die bedrohlichsten Webseiten\protect\footnotemark}
   \label{fig:top10}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 
 \section{Einzelauswertungen}
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/headerinspection}
-  \caption{Einzelauswertung: Vergleich in verschiedenen Browsern}
+  \caption{Einzelauswertung: Vergleich in verschiedenen Browsern\protect\footnotemark}
   \label{fig:headerinspection}
 \end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=15cm]{images/stats/portscan}
-  \caption{Einzelauswertung: Überprüfung der Port-Nutzung}
-  \label{fig:virenscan}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=15cm]{images/stats/virusscan}
-  \caption{Einzelauswertung: Virenscan der Webseite}
-  \label{fig:virusscan}
-\end{figure}
-
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 \todo{Jani}
 
 
 \subsection{Virenscan der Webseite}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=5cm]{images/stats/diavirenscan}
-  \caption{Virenscan der Webseite - Testergebnisverteilung}
-  \label{fig:diavirenscan}
+  \includegraphics[width=15cm]{images/stats/virusscan}
+  \caption{Einzelauswertung: Virenscan der Webseite\protect\footnotemark}
+  \label{fig:virusscan}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 \todo{Samuel}
 
 \subsection{Vergleich in verschiedenen Browsern}
@@ -148,10 +142,11 @@ Die Tabelle in Abbildung \ref{fig:top10} gehört nichtmehr direkt zu den Gesamta
 \subsection{Überprüfung der Port-Nutzung}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=5cm]{images/stats/diaportscan}
-  \caption{Überprüfung der Port-Nutzung - Testergebnisverteilung}
-  \label{fig:diaportscan}
+  \includegraphics[width=15cm]{images/stats/portscan}
+  \caption{Einzelauswertung: Überprüfung der Port-Nutzung\protect\footnotemark}
+  \label{fig:portscan}
 \end{figure}
+\footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 \todo{Jani}
 
 \subsection{Überprüfung der IP-Nutzung}
@@ -200,3 +195,10 @@ Die Tabelle in Abbildung \ref{fig:top10} gehört nichtmehr direkt zu den Gesamta
 \todo{Samuel}
 
 \section{Bewertung der Ergebnisse}
+
+-SSL wenig valide zertifikate
+-Kein IP Scanning
+-Jedoch Portscan gefunden
+-Wenig Russland TLD
+-Afrika Südostasien viele verdächtige Webseiten
+https://de.statista.com/statistik/daten/studie/70561/umfrage/domains-weltweit/
