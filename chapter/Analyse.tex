@@ -1,16 +1,12 @@
 \chapter{Analyse}
 
-\begin{itemize}
-  \item Daten
-  \begin{itemize}
-    \item Welche Listen wurden verwendet?
-    \item Woher kommen die?
-  \end{itemize}
-\end{itemize}
+In diesem Kapitel wird der Verlauf der Analyse und deren Ergebnisse dargestellt. Für die Analyse wurden mehrere freie Domainlisten aus dem Internet verwendet. Alle verwendeten Listen lassen sich in drei Kategorien gruppieren.
 
-\todo{Samuel}
+Die erste Kategorie ist \enquote{Top Webseiten}. Diese enthält Listen, welche die meistgenutzen Webseiten, Internetdienste und Plattformen aufführen. Da das Ziel der Analyse aber das Finden von möglichst vielen bedroholichen Seiten war wurde aus dieser Kategorie nur eine Domainliste eingesetzt. Diese stammt von Pofex\footnote{\url{http://www.pofex.com/}}. Diese Kategorie umfasste 1.000 Domains. Die zweite Kategorie umfasst frei bereitgestellte Blacklists, welche beispielsweise in Firewalls oder Netzwertfiltern genutzt werden. Hier wurden Blacklists von den drei Anbietern SquidGuard\footnote{\url{http://www.squidguard.org/}}, Shalla Secure Services\footnote{\url{http://www.shallalist.de/}} und URL.Blacklist.com\footnote{\url{http://www.urlblacklist.com/}} verwendet. Diese Kategorie umfasste knapp sieben Millionen Domains. Die letzte Kategorie enthält als gefährlich gekennzeichnete Webseiten (\enquote{Dangerous Lists}). Diese Listen stammen von OpenPhish\footnote{\url{https://openphish.com/}}, Malware Domain List\footnote{\url{http://www.malwaredomainlist.com/}} und DNS-BH – Malware Domain Blocklist\footnote{\url{http://www.malwaredomains.com/}}. Diese Kategorie umfasst mehrere Tausend Domains.
 
-Nachdem die Seiten von webifier überprüft und in der Datenbank abgelegt worden sind werden sie von webifier-statistics für die Auswertung genutzt. Hier wird eine interaktive Weboberfläche erzeugt. Abbildung \ref{fig:dashboard} zeigt den Einstiegspunkt auf die Webseite. Hier sind Zahlen über die Anzahl der getesteten Seiten pro Tag und insgesamt aufgelistet. Diese werden anhand des Ergebnisses gruppiert. Zusätzlich findet sich hier noch die durchschnittliche Analysezeit für eine Webseite. Darunter ist eine Beschreibung was webifier-statistics ist.
+Die Listen der Kategorien \enquote{Top Webseiten} und \enquote{Dangerous Lists} wurden vollständig von webifier überprüft. Die Listen aus der Kategorie \enquote{Blacklists} wurden zufällig ausgewählt und stellen Aufgrund des Umfangs den größten Anteil der geprüften Domains dar.
+
+Nachdem die Domains von webifier überprüft und die Ergebnisse in der Datenbank abgelegt worden sind werden sie von webifier-statistics für die Auswertung genutzt. Hier wird eine interaktive Weboberfläche erzeugt. Abbildung \ref{fig:dashboard} zeigt den Einstiegspunkt auf die Webseite. Hier sind Zahlen über die Anzahl der getesteten Seiten pro Tag und insgesamt aufgelistet. Diese werden anhand des Ergebnisses gruppiert. Zusätzlich findet sich hier noch die durchschnittliche Analysezeit für eine Webseite. Darunter ist eine Beschreibung was webifier-statistics ist.
 
 Die Grafik visualisiert die Aktivität von webifier über den gesamten, von webifier-data, gespeicherten Zeitraum. Die Schwankungen in der Analyseaktivität sind zum einen auf 2 Serverausfälle zurückzuführen. Des Weiteren gibt es Abweichungen, da die Analysezeit abhängig von der Größe und Komplexität der Webseite ist. So wurden an Tagen mit weniger Aktivität komplexere Webseiten getestet.
 \begin{figure}[H]
