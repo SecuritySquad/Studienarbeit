@@ -558,7 +558,7 @@ In diesem Abschnitt werden nun die Implementierungen aller Einzeltests erklärt.
 
 \subsection{Virenscan der Webseite}
 
-Der Virenscan der Webseite lädt zunächst alle Ressourcen der Webseite in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten. Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne sie für die dauerhafte Nutzung bereitzuhalten. Des weiteren darf keine Datei im Inhalt verändert werden, da so das Ergebnis verfälscht werden könnte. Um zeit zu spaaren wird zusätzlich auf die protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
+Der Virenscan der Webseite wurde in Python umgesetzt und lädt zunächst alle Ressourcen der Webseite in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten. Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne sie für die dauerhafte Nutzung bereitzuhalten. Des weiteren darf keine Datei im Inhalt verändert werden, da so das Ergebnis verfälscht werden könnte. Um zeit zu spaaren wird zusätzlich auf die protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
 
 Zum Scannen aller gespeicherten Dateien kommen drei Virenscanner zum Einsatz. Es werden die Antivirenprogramme ClamAV\footnote{\url{http://www.clamav.net/}}, AVG\footnote{\url{http://www.avg.com/de-de/homepage}} und Comodo Antivirus\footnote{\url{https://antivirus.comodo.com/}} verwendet. Um auch hier die Antwortzeiten gering zu halten werden die Virenscannner parallel ausgeführt.
 
@@ -589,27 +589,24 @@ Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter a
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-Bei der Überprüfung des SSL-Zertifikats wurde technisch auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
+Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python und in Docker umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
 Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt. Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während dem Test ein unbekannter Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
 
 \subsection{Erkennung von Phishing}
 \label{sec:umsetzung-phishungdetector}
 
+Die Erkennung von Phishing kann sehr komplex und umfassend werden. Deshalb wurde der Phishing Detector für diese Arbeit sehr einfach gehalten und beschränkt sich auf eine Grundlagenuntersuchung. Der Test umfasst \todo{x}X Teilschritte, welche nun genauer erläutert werden.
+
+Im ersten Schritt wird die gegebene Webseite mit Hilfe von PhantomJS aufgerufen und ausgewertet. Diese Auswertung umfasst die gefundenen Schlüsselwörter der Seite, welche im nächsten Schritt zum Finden möglicher Duplikate benötigt werden. Außerdem wird ein Screenshot von der Webseite gespeichert, der Quelltext ausgelesen und auf die zum Inhalt gehörenden Wörter reduziert. Zusätzlich wird untersucht, ob die Seite Passworteingabefelder enthält. All diese Informationen gibt PhantomJS an das Python-Skript zurück.
+
+Wenn mindestens ein Schlüsselwort gefunden wurde folgt nun der nächste Schritt. Wurde kein Schlüsselwort gefunden, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Der zweite Schritt ist das Finden von Links für mögliche Duplikate der zu überprüfenden Seite. Hierfür wird einmal das erste Schlüsselwort verwendet um eine mögliche Domain daraus zu bilden. Für die Domainbildung werden die 5 meist genutzten Domainendungen\footnote{\url{https://w3techs.com/technologies/overview/top_level_domain/all}} (.com, .ru, .net, .org und .de) eingesetzt. Außerdem werden alle gefundenen Schlagwörter genutzt um in verschiedene Suchmaschinen danach zu suchen und so Links zu möglichen Dupplikaten zu finden.
+
 \todo{Samuel}
 
 \begin{itemize}
-  \item Herausfiltern der Schlagwörter
   \item Finden möglicher Duplikate der Webseite
   \begin{itemize}
-    \item Erstes Schlagwort zu Top Level Domains
-    \begin{itemize}
-      \item com
-      \item ru
-      \item net
-      \item org
-      \item de
-    \end{itemize}
     \item Websuche nach den Schlagwörtern mittels Suchmaschinen
     \begin{itemize}
       \item DuckDuckGo
