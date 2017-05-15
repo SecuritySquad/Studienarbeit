@@ -51,7 +51,7 @@ Da webifier auf die Analyse von maliziösen Seiten ausgelegt ist gibt es bei den
 Jeder Test wird in einer vom Gesamtsystem abgekapselten Laufzeitumgebung ausgeführt. Aus einem Test heraus darf nicht auf das System zugegriffen werden, da die Tests gegebenenfalls mit Schadcode befallen werden können durch das Erforschen von maliziösen Seiten. Es soll vermieden werden, dass sich Schadcode oder Viren von den Tests auf den Server verbreiten. Nach Durchlauf und Übermittelung des Ergebnisses löscht der Test sich selbst und alle Laufzeitdaten. Als Ergebnis werden keinerlei Dateien versendet, es beschränkt sich auf eine Weitergabe des Ergebnisses in Form einer Zeichenkette. Damit soll vermieden werden, dass sich eventuell mit Viren befallene Dateien weiter auf dem System ausbreiten können.
 
 Ein Test liefert sein Ergebnis an den Tester, welcher dies dann im folgenden weiterverarbeitet.
-Das Starten und Organisisieren der Tests wird von webifier Tester durchgeführt. Den Aufbau und die Funktionsweise des Testers wird im nächsten Abschnitt beschrieben.
+Das Starten und Organisisieren der Tests wird von webifier Tester durchgeführt. Den Aufbau und die Funktionsweise des Testers wird im nächsten Abschnitt beschrieben. Zum Starten eines Tests werden zwei Startparameter mitgegeben. Zum Einen wird die ID zur Identifikation mitgegeben und zum anderen die vollständig aufgelöste URL der zu testenden Seite.
 
 Webifier stellt 9 verschiedene Tests um eine Webseite zu überprüfen. Das Konzept der einzelnen Test wird in jeweils eigenständigen Kapiteln erläutert. Hier folgt noch ein Überblick über die einzelnen Tests.
 
@@ -209,7 +209,7 @@ Nach dem Speichern aller IPs werden diese klassifiziert. Der Test vergleicht all
 
 Die Überprüfung des SSL-Zertifikats der Weibseite sucht nach einem vorhandenen Zertifikat und validiert dieses, sofern die Webseite eines nutzt. Hierfür liest es die dafür notwendigen Informationen des  Zertifikats aus und berechnet anschließend ein Testergebnis.
 
-Stellt die Webseite kein Zertifikat zur Verfügung so ist das Testergebnis \textit{SUSPICIOUS}, da es in Zeiten von Let's Encrypt\footnote{https://letsencrypt.org/} jedem möglich ist ein SSL-Zertifikat kostenlos zu erwerben und so die Sicherheit der eigenen Webseite zu erhöhen. Nutzt die Webseite ein valides Zertifikat ist das Ergebnis \textit{CLEAN}. Weist das Tertifikat Fehler auf ist das Ergebnis \textit{MALICIOUS}. Solche Fehler können beispielsweise sein, dass das Zertifikat abgelaufen ist, dass es selbst signiert wurde oder das es für den falschen Host genutzt wird.
+Stellt die Webseite kein Zertifikat zur Verfügung so ist das Testergebnis \textit{SUSPICIOUS}, da es in Zeiten von Let's Encrypt\footnote{\url{https://letsencrypt.org/}} jedem möglich ist ein SSL-Zertifikat kostenlos zu erwerben und so die Sicherheit der eigenen Webseite zu erhöhen. Nutzt die Webseite ein valides Zertifikat ist das Ergebnis \textit{CLEAN}. Weist das Tertifikat Fehler auf ist das Ergebnis \textit{MALICIOUS}. Solche Fehler können beispielsweise sein, dass das Zertifikat abgelaufen ist, dass es selbst signiert wurde oder das es für den falschen Host genutzt wird.
 
 \subsection{Erkennung von Phishing}
 
