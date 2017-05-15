@@ -4,18 +4,45 @@ In diesem Kapitel werden das Gesamtkonzept und die Konzepte der einzelnen Tests 
 
 \section{Gesamtkonzept}
 
-\todo{Daniel}
+\todo{welche Grafik?}
+\textit{webifier} ist in viele Unterkomponenten aufgeteilt.
+Dies hat den Zweck, bestehende Programme und zukünftige Erweiterungen möglichst getrennt voneinander entwickeln zu können und einzelne Features ab- oder zuzuschalten.
+Grundsätzlich werden in der Anwendung vom Nutzer angegebene URLs auf verschiedene Sicherheitsaspekte untersucht.
+Jeder dieser Tests gibt ein eigenes Ergebnis sowie weitere Informationen aus.
+Diese Ergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an den Nutzer zurückgeliefert.
+Alle Ergebnisse werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet:
+\begin{description}
+	\centering
+    \item[unbedenklich (\texttt{CLEAN})] Die Webseite verhält sich harmlos und ist ungefährlich.
+    \item[verdächtig (\texttt{SUSPICIOUS})] Die Webseite verhält sich bedenklich und ist suspekt.
+    \item[bedrohlich (\texttt{MALICIOUS})] Die Webseite verhält sich kritisch und ist gefährlich.
+	\item[unbekannt (\texttt{UNDEFINED})] Der Test konnte aus technischen oder zeitlichen Gründen nicht vollendet werden.
+\end{description}
 
-\begin{itemize}
-  \item Grafik
-  \item Erklärung der Ergebnistypen
-  \begin{itemize}
-    \item unbedenklich (CLEAN)
-    \item verdächtig (SUSPICIOUS)
-    \item bedrohlich (MALICIOUS)
-    \item unbekannt (UNDEFINED)
-  \end{itemize}
-\end{itemize}
+\begin{figure}[H]
+	\includegraphics[width=0.24\textwidth]{images/webifier-clean}
+	\includegraphics[width=0.24\textwidth]{images/webifier-suspicious}
+	\includegraphics[width=0.24\textwidth]{images/webifier-malicious}
+	\includegraphics[width=0.24\textwidth]{images/webifier-undefined}
+	\label{fig:resultIcons}
+	\caption{Icons für die jeweiligen Testergebnistypen}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{minipage}{0.2\textwidth}
+		\includegraphics[width=\linewidth]{images/webifier-clean}
+		\caption{Icon für den Ergebnistyp \texttt{CLEAN}}
+	\end{minipage}\hfill
+	\begin{minipage}{0.2\textwidth}
+		\includegraphics[]{images/webifier-suspicious}
+	\end{minipage}
+	\begin{minipage}{0.2\textwidth}
+		\includegraphics[]{images/webifier-malicious}
+	\end{minipage}
+	\begin{minipage}{0.2\textwidth}
+		\includegraphics[]{images/webifier-undefined}
+	\end{minipage}
+\end{figure}
 
 \subsection{webifier Tests}
 Webifier Tests ist der Oberbegriff für sämtliche von webifier durchgeführten Tests bei der Analyse einer Webseite. Wie bei der gesamten Anwendung wird auch bei den Tests viel Wert auf Modularität gelegt. Jeder Test bildet ein eigenständiges Bauteil, welches nach belieben integriert oder entfernt werden kann ohne Effekte auf die Lauffähigkeit der Gesamtanwendung.
@@ -113,7 +140,11 @@ So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit 
 
 \subsection{webifier Mail}
 
-\todo{Daniel}
+Diese Komponente ist ein Zusatzfeature, mit dem verdächtige Mails über den webifier Tester überprüft werden können.
+Nutzer müssen dazu lediglich ihre empfangene Mail an die Adresse \href{mailto:check@webifier.de}{check@webifier.de} weiterleiten.
+Im Email-Server werden dann alle in der Mail enthaltenen Links an den Tester weitergeleitet.
+Ist die Prüfung vollendet wird eine Antwortmail mit den Ergebnissen an den Nutzer zurückgeschickt.
+
 
 \subsection{webifier Data}
 \label{sec:konzept-data}

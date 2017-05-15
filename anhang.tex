@@ -116,9 +116,9 @@ Dabei steht die Farbe blau für \daniel{Daniel Brown}, grün für \jani{Jan-Eric
 
 {4.2 Tests}
 
-\samuel{3.2.1 Virenscan}
+\samuel{4.2.1 Virenscan}
 
-\daniel{3.2.2 Vergleich in verschiedenen Browsern}
+\daniel{4.2.2 Vergleich in verschiedenen Browsern}
 
 \jani{4.2.3 Test auf Port Scanning}
 
@@ -136,17 +136,33 @@ Dabei steht die Farbe blau für \daniel{Daniel Brown}, grün für \jani{Jan-Eric
 
 {5 Analyse}
 
-{6 Ausblick}
+\samuel{Einfuehrung in Analyse}
 
-{6.1 Weitere Tests}
+\jani{5.1 Gesamtauswertungen}
 
-{6.2 Weitere Module}
+{5.2 Einzelauswertungen}
 
-{7 Fazit}
+\samuel{5.2.1 Virenscan}
 
-{7.1 Zusammenfassung}
+\daniel{5.2.2 Vergleich in verschiedenen Browsern}
 
-{7.2 Bewertung der Ergebnisse}
+\jani{5.2.3 Test auf Port Scanning}
+
+\jani{5.2.4 Test auf IP Scanning}
+
+\daniel{5.2.5 Link Checker}
+
+\daniel{5.2.6 Google Safe Browsing}
+
+\samuel{5.2.7 \"Uberpr\"ufung des Zertifikats}
+
+\samuel{5.2.8 Erkennung von Phishing}
+
+\jani{5.3 Bewertung der Ergebnisse}
+
+\samuel{6 Ausblick}
+
+\daniel{7 Fazit}
 
 \newpage
 
@@ -700,3 +716,82 @@ private double getTestResultValue(WebifierResultType type, double testWeight) {
 
 \end{lstlisting}
 \end{scriptsize}
+
+\begin{landscape}
+
+\section*{TEIL F: webifier Statistics - Screenshots}
+\label{app:f}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/dashboard}
+  \caption{Webifier Statistics Dashboard}
+  \label{fig:dashboard}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/tldverteilung}
+  \caption{Verteilung der getesteten Top-Level-Domains}
+  \label{fig:tldverteilung}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/tldprozentual}
+  \caption{prozentuale Erkennungen anhand Top-Level-Domains}
+  \label{fig:tldprozentual}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/weltkarte}
+  \caption{Bedrohliche Funde visualisiert anhand einer Weltkarte}
+  \label{fig:weltkarte}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/ergebnisverteilung}
+  \caption{Testergebnisverteilung}
+  \label{fig:ergebnisverteilung}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/testzusammenhaenge}
+  \caption{Visualisierung der Testzusammenhänge}
+  \label{fig:testzusammenhaenge}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/top10}
+  \caption{Top 10: Die bedrohlichsten Webseiten}
+  \label{fig:top10}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/headerinspection}
+  \caption{Einzelauswertung: Vergleich in verschiedenen Browsern}
+  \label{fig:headerinspection}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/virusscan}
+  \caption{Einzelauswertung: Virenscan der Webseite}
+  \label{fig:virusscan}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textheight]{images/stats/portscan}
+  \caption{Einzelauswertung: Überprüfung der Port-Nutzung}
+  \label{fig:portscan}
+\end{figure}
+
+\end{landscape}
