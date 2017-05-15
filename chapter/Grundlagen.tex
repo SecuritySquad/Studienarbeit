@@ -89,16 +89,36 @@ Soll hingegen eine externe JavaScript-Datei eingebunden werden, so wird sie übe
 \footcite[Vgl.][198]{webTechnologies}
 Die Hauptaufgaben, die in JavaScript erledigt werden sind die Reaktion von Usereingaben durch Events, Modifikation des Webseiteninhalts und die asynchrone Kommunikation mit dem Webserver.
 
-Um diese Aufgaben für mehrere Browser einheitlich und pragmatisch zu lösen, wurde das Framework \textit{jQuery} entwickelt.
+\label{par:jquery}
+Um diese Aufgaben für mehrere Browser einheitlich und pragmatisch zu lösen, wurde die  Bibliothek \textit{jQuery} entwickelt.
 \footcite[Vgl.][]{jqueryHomepage}
-Die Einstiegspunkt von \textit{jQuery} ist die \lstinline[style=eclipse]{\$}-Funktion.
-Wird sie mit einem Textparameter aufgerufen, so interpretiert sie ihn als \ac{CSS}-Selektor und liefert alle passenden \ac{HTML}-Elemente zurück.
-Durch die Struktur der \textit{jQuery}-\ac{API} können auf dieser Ergebnismenge direkt neue Funktionen aufgerufen werden, die intern auf jedes Element einzeln angewandt werden.
-Dieses Verhalten findet sich in vielen weiteren Funktionen von \textit{jQuery} wieder und erlaubt lange Ketten von Funktionsaufrufen in einer einzigen Anweisung.
-\footcite[Vgl.][3\pqs]{jqueryReference}
+Die Einstiegspunkt von \textit{jQuery} ist die \lstinline[style=eclipse]{$}-Funktion.
+Wird sie mit einem \ac{CSS}-Selektorstring als Parameter aufgerufen, so interpretiert sie ihn und liefert alle passenden \ac{HTML}-Elemente als Menge von \textit{jQuery}-Objekten zurück.
+Durch die Struktur der \textit{jQuery}-\ac{API} können auf dieser Ergebnismenge direkt neue Funktionen aufgerufen werden, die intern auf jedes Objekt einzeln angewandt werden.
+Dieses Verhalten findet sich in vielen weiteren Funktionen von \textit{jQuery} wieder und erlaubt viele verkettete Funktionsaufrufe in einer einzigen Anweisung.
+Weiterhin vereinfacht \textit{jQuery} die Erstellung von Elementen.
+Ruft man die \lstinline[style=eclipse]{$}-Funktion mit einem \ac{HTML}-Tagstring auf (z.B. \lstinline[style=eclipse]{$("<div>")}), so wird dadurch ein \textit{jQuery}-Objekt erstellt, das das entsprechende Element repräsentiert.
+Dieses Objelt kann nun weiter durch Funktionen modifiziert werden, indem ihm Attributwerte gesetzt werden und Routinen für Interaktionsereignisse definiert werden.
+Beim Einfügen des Elements in das Dokument, kann wieder die \lstinline[style=eclipse]{$}-Funktion verwendet werden um den Vaterknoten zu bestimmen und ihm das generierte Element anzuhängen.
+Die Schlichtheit, die Verkettungsmöglichkeit und das Prinzip der Mengenoperationen von \textit{jQuery} spart Entwicklern Platz und macht zusammengehörige Anweisungen besser lesbar.
+\footcite[Vgl.][3\psqq]{jqueryReference}
+Aus diesen Gründen setzen viele Webentwickler auf diese Bibliothek.
+In den neuen Versionen von JavaScript werden diese Features allerdings auch teilweise implementiert, sodass sich der Mehrwert etwas verringert und kritischer überlegt werden sollte, ob die Nachteile der Abhängigkeit gegenüber dem Mehrwert klein genug sind.
 
-
-\todo[color=cyan]{Daniel schreiben: Bootstrap}
+Da die Webanwendung \textit{webifier} sich an unerfahrene Internetnutzer wendet liegt ein großer Schwerpunkt auf einer professionellen \ac{UI}, einer optimalen Usability und auf einer User Experience, die dem Nutzer ein Gefühl von Sicherheit gibt.
+Um diese nichtfunktionalen Anforderungen an die Oberfläche einheitlich und korrekt umzusetzen verwendet die Webanwendung das \ac{UI}-Framework \textit{Bootstrap}.
+\textit{Bootstrap}.
+Das Framework wurde 2010 von einem Designer und einem Entwickler der Social Media Plattform Twitter erschaffen.
+\footcite[Vgl.][1]{bootstrap}
+Damals wurde es als ein interner Styleguide zur Standardisierung von Oberflächen verwendet.
+Heute ist es ein sehr bekanntes Open Source Projekt und eines der führenden Webframeworks in ebendiesem Bereich.
+\textit{Bootstrap} liefert neben den grundlegenden \ac{CSS}-Regeln für Standardelemente auch ein Strukturierungssystem mit, das es Entwicklern ermöglicht ihre Webseiten für alle möglichen Endgeräte mit verschiedenen Auflösungen zu optimieren.
+Dieses Prinzip nennt sich \textit{Responsive Design} und lässt sich in \textit{Bootstrap} durch \ac{CSS}-Regeln an seine eigenen Anforderungen anpassen.
+\footcite[Vgl.][7\psq]{bootstrap}
+Im Kern wird \textit{Bootstrap} so verwendet, dass die zu vereinheitlichenden Elemente mit Framework-spezifischen Klassennamen versehen werden.
+\footcite[Vgl.][4]{bootstrap}
+Zusätzlich zu der Einheitlichen \ac{UI} und dem Repsonsive Design können mit dem Framework auch häufig gebrauchte Interaktionsmuster durch \ac{HTML}-Code angegeben werden.
+Dazu muss dann das JavaScript-Paket mit als Ressource angegeben werden, wobei diese wiederum eine Kompatible Version von \hyperref[par:jquery]{jQuery} voraussetzt.
 
 \section{Backend Technologien und Frameworks}
 
@@ -135,16 +155,27 @@ Das Testen von potenziell gefährlichen Webseiten soll natürlich nicht direkt a
 
 In diesem Kapitel werden diejenigen Technologien und Frameworks erläutert, die zur Umsetzung der Sicherheitstests verwendet werden.
 
-\todo[color=cyan]{Daniel schreiben: Python}
-Python ist eine Programmiersprache, die einen schnellen Projektstart ermöglicht und ist auf Integration von verschiedenen Systemen spezialisiert.
+\textit{Python} ist eine Programmiersprache, die einen schnellen Projektstart ermöglicht und ist auf Integration von verschiedenen Systemen spezialisiert.
 Die Sprache wird von der Python Software Foundation nach Open Source Standards entwickelt.
 Die aktuellste Version ist Python 3.6.1, wobei bei der Implementierung der Tests keine einheitliche Version verwendet wird\todo{diesen Nebensatz in Retrospektive, als Punkt zur Verbesserung?}.
-Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, dass es wie bei \ref[par:javascript]{JavaScript} erst zur Laufzeit zu einer Typenprüfung kommt.
+Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, dass es wie bei \hyperref[par:javascript]{JavaScript} erst zur Laufzeit zu einer Typenprüfung kommt.
 Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Klammern in Java) gekennzeichnet, sondern definieren sich an der Einrückungstiefe.
-\footcite{pythonHomepage}
-%Deshalb verwenden sechs von neun Tests Python.
+\footcite[Vgl.][]{pythonHomepage}
+Da Python ein bekanntes Open Soure Projekt ist, beteiligen sich viele Programmierer an der Entwicklung von Zusatzprogrammen, sogenannten \textit{Packages}.
+Es gibt mittlerweile bereits über 100.000 Pakete\footcite[Vgl.][]{pypi}, die alle frei verfügbar sind und über einen einheitlichen Prozess in Projekte eingebunden werden können.
+Aus diesen Flexibilitätsgründen und wird für die Testlogik in \textit{webifier} überwiegend Python verwendet.
 
-\todo[color=cyan]{Daniel schreiben: Phantom JS}
+Es gibt verschiedene Möglichkeiten Nutzerverhalten im Browser zu simulieren.
+\textit{PhantomJS} ist eine davon.
+Dabei handelt es sich um eine Automatisierungssoftware, die auf der Browser Engine \textit{WebKit} der Firma Apple basiert.
+\textit{PhantomJS} ist ein Headless Browser, was bedeutet, dass es keine grafische Oberfläche besitzt.
+Es wird über ein JavaScript gesteuert und über eine ausführbare Datei aufgerufen.
+Weitere Hauptfeatures sind: Bildschirmaufnahmen, Nutzersimulation und Netzwerküberwachung.
+\footcite[Vgl.][]{phantomjs}
+Die Technologie wird in \textit{webifier} hauptsächlich verwendet, um selbst erstellten JavaScript in die zu untersuchenden Webseiten einzubetten und erst danach den Code der Webseite auszuführen.
+In PhantomJS gilt es zwischen dem Steuerungsskript und dem in die Webseite eingebetteten Code zu unterscheiden.
+In ersterem wird die Webseite konfiguriert und die Testlogik ausgeführt.
+In der Testlogik können wiederum Anweisungen an die Webseite geschickt werden, die mit dem Rest des Steuerungsskripts nichts zu tun haben. Sie haben einen eigenen Geltungsbereich, nämlich den in der Browser Engine.
 
 Um Webseiten mit allen ihren Ressourcen herunterzuladen wurde die freie Software \textit{HTTrack} verwendet. Mit \textit{HTTrack} können Webseiten in einem lokalen Verzeichnis gespeichert werden. Hierfür erzeugt das Programm rekursiv alle notwendigen Verzeichnisse und läd anschließend alle Ressourcen, wie \ac{HTML}-, \ac{CSS}- und JavaScript-Dateien, als auch Bilder und andere Dateien herunter. Außerdem ist es möglich automatisiert alle \ac{HTML}-Links entsprechend zu modifizieren. Abschließend bietet HTTrack umfassende Konfigurationsoptionen um es für den optimalen Gebrauch anpassen zu können.\footcite[Vgl.][]{httrack}
 
