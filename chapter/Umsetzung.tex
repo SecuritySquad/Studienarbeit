@@ -141,7 +141,7 @@ Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausfüh
 
 Am Ende der Datei lässt sich noch die Einstellung festlegen, ob das Endergebnis an webifier Data gesendet werden soll oder nicht. Am Anfang der Datei lässt sich der so genannte \textit{Resolver} konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt erreichbar ist und löst wenn nötig Weiterleitungen der Url auf und gibt das Ergebnis an den Tester zurück.
 
-Ist die angegebene Url erreichbar wird die vom \textit{Resolver} aufgelöste Url verwendet und alle anderen Tests damit gestartet. Nun wartet der Tester bis alle Ergebnisse der Tests verfügbar sind oder die Angegebenen Timeouts erreicht sind. Im Falle eines Timeouts erhält der Test das Ergebnis \textit{UNDEFINED}. Abschließend wird das Gesamtergebnis für die angegebene Url wie bereits in Abschnitt \ref{sec:konzept-tester} beschrieben berechnet. Listing \ref{lst:tester-tesult-calculation} zeigt einen Ausschnitt der Implementierung der Ergebnisberechnung.
+Ist die angegebene Url erreichbar wird die vom \textit{Resolver} aufgelöste Url verwendet und alle anderen Tests damit gestartet. Nun wartet der Tester bis alle Ergebnisse der Tests verfügbar sind oder die Angegebenen Timeouts erreicht sind. Im Falle eines Timeouts erhält der Test das Ergebnis \textit{UNDEFINED}. Abschließend wird das Gesamtergebnis für die angegebene Url wie bereits in Abschnitt \ref{sec:konzept-tester} beschrieben berechnet. Listing \ref{lst:tester-testresult-calculation} zeigt einen Ausschnitt der Implementierung der Ergebnisberechnung.
 
 \begin{scriptsize}
 \lstset{
@@ -566,7 +566,66 @@ Abschließend werden alle Ergebnisse der Antivirenprogramme ausgewertet und dara
 
 \subsection{Vergleich in verschiedenen Browsern}
 
-\todo{Daniel}
+Dieser Test wird durch zwei Schritte ermöglicht.
+Zunächst werden für eine Liste von Browserkonfigurationen deren \ac{HTTP}-Header ermittelt, danach werden Requests mit diesen Headern an die zu testende \ac{URL} geschickt und die Antworten untereinander verglichen.
+Damit nicht bei jedem Testdurchlauf alle Header neu eingeholt werden müssen, werden sie in einer Datei abgespeichert.
+
+Zur Umsetzung dieses Tests wurde zunächst ein Python-Skript geschrieben, welches über einen Cloud-Service die Werte für das \ac{HTTP}-Headerfeld \textit{User Agent} abspeichert.
+Zuerst werden alle gewünschten Browserkonfigurationen über eine \ac{JSON}-Datei eingelesen (s. Zeile 31).
+Diese Datei enthält eine Liste von Browserobjekten, die die Konfigurationen im Attribut 
+Ein Element dieser Liste ist beispielhaft in \autoref{lst:browsers.json} zu sehen, wobei das \lstinline{"headers"}-Attribut vor Programmablauf noch nicht gesetzt ist.
+
+\begin{scriptsize}
+\lstset{
+	style=eclipsejavascript,
+	caption={Beispiel für Browserkonfiguration und gespeicherte Header},
+	label={lst:browsers.json}
+}
+\begin{lstlisting}
+[{"configuration": {
+    "platform": "Windows XP",
+    "browserName": "internet explorer",
+    "version": "6.0",
+    "name": "Windows XP, Internet Explorer 6.0"
+  },
+  "headers": {
+    "Host": "www.reliply.org",
+    "Request Method": "GET",
+    "User Agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.432)",
+    "Accept Encoding": "gzip, deflate",
+    "Accept Language": "en-us",
+    "HTTP Connection": "keep-alive"
+}}]
+\end{lstlisting}
+\end{scriptsize}
+
+Danach werden für jeder dieser Konfigurationen die entsprechenden Header ermittelt.
+Dazu wird eine Verbindung mittels \ac{SSH} zum Service \textit{Sauce Labs} aufgebaut.
+Dabei wird auch ein ferngesteuerter Browser mit der Konfiguration des lokalen Browserobjekts initialisiert.
+Das Browserobjekt ist wie ein Headless Browser über das Modul \textit{WebDriver} steuerbar.
+Im nächsten Schritt wird der Browser dann angewiesen auf die Webseite \url{http://www.reliply.org/tools/requestheaders.php} zu gehen.
+Auf dieser Seite werden alle \ac{HTTP}-Headerfelder und deren Werte in einer Tabelle aufgelistet.
+Ein Beispiel dafür ist in \autoref{fig:reliply} zu sehen.
+Diese Tabelle beinhaltet in der ersten Spalte den Headernamen und in der zweiten den Wert.
+Diese beiden Daten werden in jeder Zeile der Tabelle 
+Der Brower greift auf diese beiden Daten in jeder Zeile der Tabelle zu und speichert diese im Browserobjekt.
+Es werden alle Header bis auf den \lstinline{Host}-Header abgespeichert, da dieser lediglich der Domain des Zielserver entspricht.
+Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird die Liste der Browserobjekte in die Datei \lstinline{browser.json} abgespeichert.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/reliply.png}
+	\caption{Tabelle der \ac{HTTP}-Header auf \url{reliply.org}}
+	\label{fig:reliply}
+\end{figure}
+
+Ursprünglich basierte die Berechnung der Abweichungen auf Prozentwerten.
+Während der Implementierung ist aufgefallen, dass die prozentualen Abweichungen der Antworten keine zuverlässige Auskunft über einen möglichen Angriff auf den Nutzer geben können.
+Aus diesem Grund wird die Ergebniskalkulation nun auf absoluten Abweichungswerten ausgeführt.
+Dabei wird jede Browserantwort jeweils einmal mit jeder anderen verglichen und der niedrigste absolute Übereinstimmungswert, 
+überprüft werden, ob der schlechteste Wert unter einer bestimmten Grenze liegt, da er sonst statistisch untergehen würde.
+\todo{fertig schreiben}
+
 
 \subsection{Überprüfung der Port-Nutzung}
 Bei diesem Test wird überprüft ob die Seite versucht einen Portscan auf dem Computer des Anwenders zu betreiben. Hierfür werden 3 Techniken eingesetzt. Die wichtigsten Aufgaben werden von PhantomJS und Bro erledigt.
@@ -581,7 +640,8 @@ Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter a
 
 \subsection{Prüfung aller verlinkten Seiten}
 
-\todo{Daniel}
+Dies wird über das Framework \textit{PhantomJS} bewerkstelligt, das in \autoref{par:phantomjs} vorgestellt wurde.
+Dazu werden -Requests \ac{REST}-\ac{API}
 
 \subsection{Google Safe Browsing}
 

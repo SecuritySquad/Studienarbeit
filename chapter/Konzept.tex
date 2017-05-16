@@ -4,45 +4,62 @@ In diesem Kapitel werden das Gesamtkonzept und die Konzepte der einzelnen Tests 
 
 \section{Gesamtkonzept}
 
-\todo{welche Grafik?}
 \textit{webifier} ist in viele Unterkomponenten aufgeteilt.
 Dies hat den Zweck, bestehende Programme und zukünftige Erweiterungen möglichst getrennt voneinander entwickeln zu können und einzelne Features ab- oder zuzuschalten.
+
 Grundsätzlich werden in der Anwendung vom Nutzer angegebene URLs auf verschiedene Sicherheitsaspekte untersucht.
+Die Aufnahme der URLs erfolgt über eine Webseite, die von der Plattform ausgeliefert wird.
+Über sie kommt die Nutzeranfrage in das System und wird an den Tester weitergeleitet.
+Der Tester ist die Komponente, die die Ausführung der einzelnen Tests startet, überwacht und koordiniert.
+Wichtig dabei ist, dass alle Tests abgeschottet vom Rest des Systems laufen, da auf ihnen Schadhafte Webseiten aufgerufen werden.
 Jeder dieser Tests gibt ein eigenes Ergebnis sowie weitere Informationen aus.
 Diese Ergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an den Nutzer zurückgeliefert.
-Alle Ergebnisse werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet:
-\begin{description}
+Dies ist der Standard Use Case von webifier.
+
+\begin{figure}[H]
 	\centering
-    \item[unbedenklich (\texttt{CLEAN})] Die Webseite verhält sich harmlos und ist ungefährlich.
-    \item[verdächtig (\texttt{SUSPICIOUS})] Die Webseite verhält sich bedenklich und ist suspekt.
-    \item[bedrohlich (\texttt{MALICIOUS})] Die Webseite verhält sich kritisch und ist gefährlich.
-	\item[unbekannt (\texttt{UNDEFINED})] Der Test konnte aus technischen oder zeitlichen Gründen nicht vollendet werden.
+	\includegraphics[width=\textwidth]{images/anwendung-konzept}
+	\caption{Konzeptarchitektur der Gesamtanwendung}
+	\label{fig:anwendung-konzept}
+\end{figure}
+
+Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet:
+\begin{description}
+    \item[unbedenklich] \hfill \texttt{CLEAN}) \\
+    Die Webseite verhält sich harmlos und ist ungefährlich.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.2]{images/webifier-clean}
+		\caption{Icon für den Testergebnistyp \textit{CLEAN}}
+	\end{figure}
+
+	\item[verdächtig] \hfill \texttt{SUSPICIOUS})] \\
+	Die Webseite verhält sich bedenklich und ist suspekt.
+	Diese Seite sollte gemieden werden.
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[scale=0.2]{images/webifier-suspicious}
+    	\caption{Icon für den Testergebnistyp \textit{SUSICIOUS}}
+    \end{figure}
+
+    \item[bedrohlich] \hfill \texttt{MALICIOUS}) \\
+    Die Webseite verhält sich kritisch und ist gefährlich.
+    Sie sollte unter keinen Umständen aufgerufen werden.
+    \begin{figure}[H]
+    	\centering
+    	\includegraphics[scale=0.2]{images/webifier-malicious}
+    	\caption{Icon für den Testergebnistyp \textit{MALICIOUS}}
+    \end{figure}
+    
+	\item[unbekannt] \hfill \texttt{UNDEFINED})] \\
+	Der Test konnte aus technischen oder zeitlichen Gründen nicht vollendet werden.
+	Es kann keine Aussage über die Bös- oder Gutartigkeit der Seite gemacht werden.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.2]{images/webifier-undefined}
+		\caption{Icon für den Testergebnistyp \textit{UNDEFINED}}
+	\end{figure}
 \end{description}
-
-\begin{figure}[H]
-	\includegraphics[width=0.24\textwidth]{images/webifier-clean}
-	\includegraphics[width=0.24\textwidth]{images/webifier-suspicious}
-	\includegraphics[width=0.24\textwidth]{images/webifier-malicious}
-	\includegraphics[width=0.24\textwidth]{images/webifier-undefined}
-	\label{fig:resultIcons}
-	\caption{Icons für die jeweiligen Testergebnistypen}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{minipage}{0.2\textwidth}
-		\includegraphics[width=\linewidth]{images/webifier-clean}
-		\caption{Icon für den Ergebnistyp \texttt{CLEAN}}
-	\end{minipage}\hfill
-	\begin{minipage}{0.2\textwidth}
-		\includegraphics[]{images/webifier-suspicious}
-	\end{minipage}
-	\begin{minipage}{0.2\textwidth}
-		\includegraphics[]{images/webifier-malicious}
-	\end{minipage}
-	\begin{minipage}{0.2\textwidth}
-		\includegraphics[]{images/webifier-undefined}
-	\end{minipage}
-\end{figure}
 
 \subsection{webifier Tests}
 Webifier Tests ist der Oberbegriff für sämtliche von webifier durchgeführten Tests bei der Analyse einer Webseite. Wie bei der gesamten Anwendung wird auch bei den Tests viel Wert auf Modularität gelegt. Jeder Test bildet ein eigenständiges Bauteil, welches nach belieben integriert oder entfernt werden kann ohne Effekte auf die Lauffähigkeit der Gesamtanwendung.
@@ -142,16 +159,16 @@ So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit 
 
 Diese Komponente ist ein Zusatzfeature, mit dem verdächtige Mails über den webifier Tester überprüft werden können.
 Nutzer müssen dazu lediglich ihre empfangene Mail an die Adresse \href{mailto:check@webifier.de}{check@webifier.de} weiterleiten.
-Im Email-Server werden dann alle in der Mail enthaltenen Links an den Tester weitergeleitet.
+Im Email-Server werden dann bis zu fünf in der Mail enthaltene Links an den Tester weitergeleitet.
 Ist die Prüfung vollendet wird eine Antwortmail mit den Ergebnissen an den Nutzer zurückgeschickt.
 
 
 \subsection{webifier Data}
 \label{sec:konzept-data}
 
-webifier Data ist die Persistenzkomponente von webifier. webifier Tester nutzt webifier Data um alle Testergebnisse an einem globalen Ort abzulegen, egal wo dieser ausgeführt wird.
+webifier Data ist die Persistenzkomponente von webifier. webifier Tester nutzt webifier Data um alle Testergebnisse an einem globalen\todo{zentralen?} Ort abzulegen, egal wo dieser ausgeführt wird.
 
-Ein Testergebnis, welches in dem Datamodul gespeichert wird enthält einmal die eingebene Url und die getestete Url, das Gesamtergebnis, sowohl den Typ (\textit{CLEAN}, \textit{SUSPICIOUS}, \textit{MALICIOUS} oder \textit{UNDEFINED}), als auch den Ergebniswert. Außerdem wird die Testlaufzeit gespeichert. Zusätzlich werden noch weitere Informationen zu den einzelnen Tests gespeichert. Dazu zählen der Name, die Konfigurationsparameter, wie beispielsweise die Gewichtung, das Resultat und die Detailinformationen zu diesem.
+Ein Testergebnis, welches in dem Datamodul gespeichert wird enthält einmal die eingegebene Url und die getestete Url, das Gesamtergebnis, sowohl den Typ (\textit{CLEAN}, \textit{SUSPICIOUS}, \textit{MALICIOUS} oder \textit{UNDEFINED}), als auch den Ergebniswert. Außerdem wird die Testlaufzeit gespeichert. Zusätzlich werden noch weitere Informationen zu den einzelnen Tests gespeichert. Dazu zählen der Name, die Konfigurationsparameter, wie beispielsweise die Gewichtung, das Resultat und die Detailinformationen zu diesem.
 
 Die Komponente stellt auch eine Schnittstelle zum Abfragen der bereits gespeicherten Ergebnisse bereit. Diese wird beispielsweise vom Test \textit{Prüfung aller verlinkten Seiten} verwendet. Die Funktionsweise dieses Tests wird in Abschnitt \ref{sec:konzept-linkchecker} erklärt.
 
@@ -179,7 +196,11 @@ Zusätzlich zum Endergebnis wird noch die gesamte Liste der gescannten Dateien i
 
 \subsection{Vergleich in verschiedenen Browsern}
 
-\todo{Daniel}
+In \autoref{sec:user-agent-sniffing} wurde bereits das Thema \textit{User Agent Sniffing} behandelt.
+Dieser Test soll genau dieses Problem aufgreifen.
+Es sollen \ac{HTTP}-Anfragen von verschiedene Browsertypen mit entsprechenden User Agents an den Webserver der Zielseite geschickt werden.
+Danach werden die Antworten untereinander auf Unterschiede untersucht. Dabei entstehen Kennwerte für die Übereinstimmung der Antworten, die miteinander verrechnet werden müssen.
+Dieser berechnete Wert für die Durchschnittsübereinstimmung muss schließlich anhand von passenden Schwellwerten die richtige Ergebnisklasse eingeteilt werden.
 
 \subsection{Überprüfung der Port-Nutzung}
 Der Test auf Port Scanning analysiert die Nutzung der Ports einer Webseite. Hierfür wird die Webseite automatisch vom Test geöffnet und dessen JavaScript ausgeführt. Parallel dazu muss die Netzwerkaktivität überwacht werden. Es werden alle eingehenden Anfragen auf das Testsystem zunächst geloggt. Da das Testsystem abgekapselt vom restlichen System ist, ist es irrelevant von welcher IP-Adresse die Anfragen kommen. Alle Anfragen lassen sich auf die aufgerufene Seite zurückführen, da restliche Netzwerkaktivität abgeschaltet ist. Dies ist wichtig, da es durchaus möglich ist das die Webseite nicht selbst einen Portscan-Angriff startet sondern beispielsweise über einen Drittrechner oder ein Botnetz gescannt wird. Zudem könnten die Ports auch lokal auf dem Client über JavaScript gescannt werden. Deshalb werden lediglich die angefragten Ports im Log gespeichert.
@@ -194,16 +215,29 @@ Nach dem Speichern aller IPs werden diese klassifiziert. Der Test vergleicht all
 \subsection{Prüfung aller verlinkten Seiten}
 \label{sec:konzept-linkchecker}
 
-\todo{Daniel}
-
-\begin{itemize}
-  \item herausfiltern aller Links und nachgeladenen Ressourcen
-  \item Schnittstelle in webifier-data
-\end{itemize}
+Dieser Test sucht innerhalb des Quellcodes der Anwendung nach Hyperlinks und referenzierten Ressourcen.
+Für alle gefundenen Hosts wird dann prüft, ob bereits Einträge dazu in der Datenbank unter webifier Data vorhanden sind.
+Gibt es einen Eintrag, der \textit{SUSPICIOUS} ist, dann ist das ganze Endergebnis \textit{SUSPICIOUS}.
+Falls jedoch mehr als 34\% der Hosts \textit{UNDEFINED} sind, dann ist auch das Gesamtergebnis \textit{UNDEFINED}.
+Sobald ein Eintrag \textit{MALICIOUS} ist, so ist auch das Gesamtergebnis \textit{MALICIOUS}.
+Ansonsten liefert der Test \textit{CLEAN} zurück.
 
 \subsection{Google Safe Browsing}
 
-\todo{Daniel}
+\begin{quote}
+	Safe Browsing is a Google service that lets client applications check URLs against Google's constantly updated lists of unsafe web resources.\footcite[Vgl.][]{googleSafeBrowsing}
+\end{quote}
+
+Dieser Cloud-Service erlaubt es der Anwendung also eine weitaus größere Datenbank als ihre eigene anzuzapfen.
+Der Service unterscheidet zwischen vier Bededrohungstypen: Malwareseiten, Sozialmanipulationsseiten, ungewollte Software und potenziell schadhafte Webanwendungen.
+Weitere Vorteile sind die Autorität des Unternehmens und die einfach zu bewerkstelligende Integration des Services.
+Leider können die Einträge aus der Datenbank des Services nicht exportiert werden, sondern können nur gegen Listen von Links gecheckt werden.
+In diesem Test werden wie bei der Prüfung der verlinkten Seiten alle Links zu Webseiten und Resourcen zusammengetragen.
+Diese werden dann aber nicht an webifier Data, sondern an den Google Safe Browsing Dienst weitergeleitet.
+Sobald ein Treffer aus dem Service zurückgemeldet wird, ist das Ergebnis \textit{SUSPICIOUS}.
+Falls sich mehr als 40\% der Links in der Datenbank befinden, so wird die Webseite als \textit{MALICIOUS} eingestuft.
+Ist die zu testende Webseite selbst ein Match, so ist das Ergebnis ebenfalls \textit{MALICIOUS}.
+Wird kein Eintrag gefunden, dann zählt die Seite als \textit{CLEAN}.
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
