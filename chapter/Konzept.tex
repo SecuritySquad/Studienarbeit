@@ -7,23 +7,29 @@ In diesem Kapitel werden das Gesamtkonzept und die Konzepte der einzelnen Tests 
 \textit{webifier} ist in viele Unterkomponenten aufgeteilt.
 Dies hat den Zweck, bestehende Programme und zukünftige Erweiterungen möglichst getrennt voneinander entwickeln zu können und einzelne Features ab- oder zuzuschalten.
 
-Grundsätzlich werden in der Anwendung vom Nutzer angegebene URLs auf verschiedene Sicherheitsaspekte untersucht.
-Die Aufnahme der URLs erfolgt über eine Webseite, die von der Plattform ausgeliefert wird.
-Über sie kommt die Nutzeranfrage in das System und wird an den Tester weitergeleitet.
-Der Tester ist die Komponente, die die Ausführung der einzelnen Tests startet, überwacht und koordiniert.
+\todo{Bild einfügen}
+
+Grundsätzlich wird webifier benutzt, um Webseiten auf verschiedene Sicherheitsaspekte zu untersuchen.
+Abbildung \ref{fig:anwendung-konzept} zeigt den groben Plan der Anwendung.
+Die Aufnahme der URLs erfolgt über eine Webseite, die von der Plattform an den Browser des Nutzers ausgeliefert wird.
+Die Platform leitet die \ac{URL} aus der Nutzeranfrage an dann an den Tester weiter.
+Der Tester ist die Komponente, die die \ac{URL} auf Korrektheit überprüft und ggf. Weiterleitungen auflöst.
+Entsteht dabei ein Fehler, so wird dieser an die Platform porpagiert und schließlich im Browser angezeigt.
+Wurde die Auflösung der \ac{URL} erfolgreich ausgeführt, werden die Sicherheitstests gestartet.
+
+Eine weitere Möglichkeit, webifier zu verwenden, ist über Emailverkehr.
+Hat der Nutzer eine Spam-verdächtige Email in seinem Postfach, so kann er diese an ein bestimmtes Postfach von webifier weiterleiten.
+Dort werden Links  aus der Mail zusammengetragen und an den Tester weitergeleitet.
+
+Im Tester wird die Ausführung der einzelnen Tests gestartet, überwacht und koordiniert.
 Wichtig dabei ist, dass alle Tests abgeschottet vom Rest des Systems laufen, da auf ihnen Schadhafte Webseiten aufgerufen werden.
 Jeder dieser Tests gibt ein eigenes Ergebnis sowie weitere Informationen aus.
-Diese Ergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an den Nutzer zurückgeliefert.
-Dies ist der Standard Use Case von webifier.
+Diese Ergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an die webifier Platform bzw. an webifier Mail weitergeleitet.
+Schließlich wird das Ergebnis dem Nutzer über den Browser bzw. über eine Antwortmail präsentiert.
+Dabei ist der Weg über die Plaform der Standard Use Case von webifier.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{images/anwendung-konzept}
-	\caption{Konzeptarchitektur der Gesamtanwendung}
-	\label{fig:anwendung-konzept}
-\end{figure}
+Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet: \textit{CLEAN}, \textit{SUSPICIOUS}, \textit{MALICIOUS} und \textit{UNDEFINED}.
 
-Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet:
 \begin{description}
     \item[unbedenklich] \hfill \texttt{CLEAN} \\
     Die Webseite verhält sich harmlos und ist ungefährlich.
@@ -50,7 +56,7 @@ Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausge
     	\includegraphics[scale=0.2]{images/webifier-malicious}
     	\caption{Icon für den Testergebnistyp \textit{MALICIOUS}}
     \end{figure}
-    
+
 	\item[unbekannt] \hfill \texttt{UNDEFINED} \\
 	Der Test konnte aus technischen oder zeitlichen Gründen nicht vollendet werden.
 	Es kann keine Aussage über die Bös- oder Gutartigkeit der Seite gemacht werden.
@@ -59,7 +65,7 @@ Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausge
 		\includegraphics[scale=0.2]{images/webifier-undefined}
 		\caption{Icon für den Testergebnistyp \textit{UNDEFINED}}
 	\end{figure}
-\end{description}
+\end{description} 
 
 \subsection{webifier Tests}
 Webifier Tests ist der Oberbegriff für sämtliche von webifier durchgeführten Tests bei der Analyse einer Webseite. Wie bei der gesamten Anwendung wird auch bei den Tests viel Wert auf Modularität gelegt. Jeder Test bildet ein eigenständiges Bauteil, welches nach belieben integriert oder entfernt werden kann ohne Effekte auf die Lauffähigkeit der Gesamtanwendung.

@@ -2,13 +2,13 @@
 
 \RequireBibliographyStyle{authoryear}
 
-% TODO fix because of newer latex version
-%\DeclareNameFormat{sortname}{
-%	\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
-%	\usebibmacro{name:andothers}
-%}
+\DeclareNameFormat{sortname}{
+	\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
+	\usebibmacro{name:andothers}
+}
 
-\DeclareFieldFormat{title}{#1}
+\DeclareFieldFormat{journaltitle}{#1 Nr.}
+\DeclareFieldFormat[article,book,online,misc]{title}{#1}
 \DeclareFieldFormat{url}{\url{#1}}
 \DeclareFieldFormat{urldate}{\addcomma\space\bibstring{urlseen}\space#1}
 
