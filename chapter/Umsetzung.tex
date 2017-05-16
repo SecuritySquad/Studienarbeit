@@ -570,7 +570,7 @@ Dieser Test wird durch zwei Schritte ermöglicht.
 Zunächst werden für eine Liste von Browserkonfigurationen deren \ac{HTTP}-Header ermittelt, danach werden Requests mit diesen Headern an die zu testende \ac{URL} geschickt und die Antworten untereinander verglichen.
 Damit nicht bei jedem Testdurchlauf alle Header neu eingeholt werden müssen, werden sie in einer Datei abgespeichert.
 
-Zur Umsetzung dieses Tests wurde zunächst ein Python-Skript geschrieben, welches über einen Cloud-Service die Werte für das \ac{HTTP}-Headerfeld \textit{User Agent} abspeichert.
+Zur Umsetzung dieses Tests wurde zunächst das Python-Skript \lstinline{collect.py} geschrieben, welches über einen Cloud-Service die Werte für das \ac{HTTP}-Headerfeld \textit{User Agent} abspeichert.
 Zuerst werden alle gewünschten Browserkonfigurationen über eine \ac{JSON}-Datei eingelesen (s. Zeile 31).
 Diese Datei enthält eine Liste von Browserobjekten, die die Konfigurationen im Attribut 
 Ein Element dieser Liste ist beispielhaft in \autoref{lst:browsers.json} zu sehen, wobei das \lstinline{"headers"}-Attribut vor Programmablauf noch nicht gesetzt ist.
@@ -619,13 +619,26 @@ Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird d
 	\label{fig:reliply}
 \end{figure}
 
+Bei der Testausführung wird dann das Python-Skript \lstinline{check.py} aufgerufen.
+Darin wird zunächst die Liste der Browserobjekte aus der Datei geladen.
+Danach wird über das Packet \textit{requests} für jeden Browser ein \ac{HTTP}-Request an die zu testende Seite geschickt.
+Die Antwort wird wiederum im Browserlement gespeichert, sodass es für die folgenden Vergleiche zur Verfügung steht.
+
+Es werden alle Browser jeweils genau einmal mit allen anderen Browsern verglichen.
+Das bedeutet, dass das erste Element mit allen weiteren $n-1$ Elementen verglichen werden muss. Das zweite mit den letzten $n-2$ usw.
+Das Vorletzte muss dann nur noch mit dem letzten Element verglichen werden, was vom informatischen Aufwand her abschätzbar ist durch den Aufwand der Gau"sschen Summenformel ($\frac{n^2+n}{2}$).
+Dieser Algorithmus hat also eine Komplexität von $\mathcal{O}(n^2)$ und kann damit zum Engpass werden, falls es zu viele Browser geben sollte.
+
 Ursprünglich basierte die Berechnung der Abweichungen auf Prozentwerten.
 Während der Implementierung ist aufgefallen, dass die prozentualen Abweichungen der Antworten keine zuverlässige Auskunft über einen möglichen Angriff auf den Nutzer geben können.
 Aus diesem Grund wird die Ergebniskalkulation nun auf absoluten Abweichungswerten ausgeführt.
-Dabei wird jede Browserantwort jeweils einmal mit jeder anderen verglichen und der niedrigste absolute Übereinstimmungswert, 
-überprüft werden, ob der schlechteste Wert unter einer bestimmten Grenze liegt, da er sonst statistisch untergehen würde.
-\todo{fertig schreiben}
-
+Jede Browserantwort wird jeweils einmal mit jeder anderen verglichen und der niedrigste absolute Übereinstimmungswert als \lstinline{worst\_diff} gespeichert.
+Es wird der schlechteste Übereinstimmungswert für die Ergebnisberechnung gewählt, da er bei einer Durchschnitts- oder Medianberechnung  statistisch untergehen würde und somit gezielte Angriffe gegen eine Browsergruppe nicht regstriert werden würden.
+Zur Berechnung dieses Wertes werden zunächst die übereinstimmenden Blöcke der beiden Antworten durch das \textit{statistics}-Paket von Python ermittelt.
+Durch diese wird die gesamte Übereinstimmungslänge berechnet, die dann von der Gesamtlänge der größeren Antwort abgezogen wird.
+Zur Ergebnisberechnung wird schließlich überprüft, ob der schlechteste Wert unter einer bestimmten Grenze liegt.
+Liegt der Wert über 500, dann ist das Ergebnis \textit{MALICIOUS}.
+Liegt der Wert zwischen 500 und 50, so ist das Ergebnis \textit{SUSPICIOUS}, ansonsten ist es \textit{CLEAN}.
 
 \subsection{Überprüfung der Port-Nutzung}
 Bei diesem Test wird überprüft ob die Seite versucht einen Portscan auf dem Computer des Anwenders zu betreiben. Hierfür werden 3 Techniken eingesetzt. Die wichtigsten Aufgaben werden von PhantomJS und Bro erledigt.
@@ -640,16 +653,28 @@ Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter a
 
 \subsection{Prüfung aller verlinkten Seiten}
 
-Dies wird über das Framework \textit{PhantomJS} bewerkstelligt, das in \autoref{par:phantomjs} vorgestellt wurde.
-Dazu werden -Requests \ac{REST}-\ac{API}
+Einstiegspunkt ist das Python-Skript \lstinline{check.py}.
+Ihm wird die zu testende Webeitenurl mitgeliefert.
+Daraufhin wird ein Unterprozess gestartet, in dem \textit{PhantomJS}(s. \autoref{par:phantomjs}) mit dem Steuerungsskript \lstinline{check.js} ausgeführt wird.
+Dieses bewerkstelligt das Sammeln der Links, indem zum einen ein Handler auf das \textit{PhantomJS}-spezifische \textit{ResourceRequested}-Event geschaltet werden.
+Zum anderen, wird ein JavaScript Code in die Webseite eingebettet, der alle Anchor-Elemente (\lstinline{<a></a>}) findet.
+Das JavaScript Programm gibt schussendlich alle gefundenen Links auf der Konsole aus, wobei zusätzlich auch die Adresse der zu testenden Webseite mit ausgegeben wird.
+
+Zurück im Python-Skript werden die Links über einen POST-Request an die \ac{REST}-\ac{API} von \textit{webifier Data} gesendet.
+Dort werden aus allen Web-Links die Hostnamen extrahiert und jeweils in der Datenbank geschaut, ob ein Eintrag dazu vorhanden ist.
+Das Antwortobjekt beinhaltet im Attribut \lstinline[style=eclipse]{hosts} die Liste der überprüften Hostnamen und deren Wert in der Datenbank.
+Über diese Liste wird iteriert und die Häufigkeiten der vier Ergebnistypen hochgezählt.
+Dabei werden auch jeweils der Hostname und der Datenbankwert in ein Informationsobjekt gespeichert.
+Die Ergebnisberechnung findet analog zu \autoref{sec:konzept-linkchecker} mit mehreren statt.
+Dieses Ergebnis wird zusammen mit einer Liste der Informationsobjekte an den Tester zurückgeliefert.
 
 \subsection{Google Safe Browsing}
 
-\todo{Daniel}
+
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python und in Docker umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
+Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python und in \todo{werden nicht alle Tests von Docker unterstützt? }Docker umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
 Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt. Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während dem Test ein unbekannter Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
 
