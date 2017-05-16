@@ -615,7 +615,7 @@ Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird d
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{images/reliply.png}
-	\caption{Tabelle der \ac{HTTP}-Header auf \url{reliply.org}}
+	\caption{Tabelle der HTTP-Header auf reliply.org}
 	\label{fig:reliply}
 \end{figure}
 
@@ -683,7 +683,7 @@ Die Ausgabe des Tests beinhaltet neben dem Ergebnis die Liste der matches.
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python und in \todo{werden nicht alle Tests von Docker unterstützt? }Docker umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
+Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
 Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt. Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während dem Test ein unbekannter Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
 

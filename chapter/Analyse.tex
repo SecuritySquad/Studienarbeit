@@ -98,7 +98,9 @@ Die Tabelle in Abbildung \ref{fig:analyse-top10} gehört nichtmehr direkt zu den
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 \section{Einzelauswertungen}
+In den folgenden Abschnitten werden die Ergebnisse der einzelnen Tests beschrieben und diese bewertet. Abbildung \ref{fig:analyse-headerinspection} zeigt ein Beispiel für eine Seite der Einzelauswertungen eines Testes. Diese Seite ist für die meisten Tests identisch. Deshalb werden im folgenden nur die Kuchendiagramme gezeigt. Für die Überprüfung der Port-Nutzung und dem Virenscan der Webseite sind weitere Kennzahlen vorhanden, welche im jeweiligen Kapitel erläutert werden.
 
+In den Einzelauswertungen sind Kennzahlen zur Anzahl der getesteten Seiten und zur durchschnittlichen Analysezeit. Darunter befindet sich ein Kuchendiagramm, welches die prozentuale Verteilung der Testergebnisse visualisiert.
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/headerinspection}
@@ -106,8 +108,6 @@ Die Tabelle in Abbildung \ref{fig:analyse-top10} gehört nichtmehr direkt zu den
   \label{fig:analyse-headerinspection}
 \end{figure}
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
-\todo{Jani}
-
 
 \subsection{Virenscan der Webseite}
 \begin{figure}[H]
@@ -130,6 +130,7 @@ Wie das Kreisdiagram in Abbildung \ref{fig:analyse-virusscan} zeigt enthielten n
 \todo{Daniel}
 
 \subsection{Überprüfung der Port-Nutzung}
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=15cm]{images/stats/portscan}
@@ -137,16 +138,21 @@ Wie das Kreisdiagram in Abbildung \ref{fig:analyse-virusscan} zeigt enthielten n
   \label{fig:analyse-portscan}
 \end{figure}
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
-\todo{Jani}
+
+Abbildung \ref{analyse-portscan} zeigt die Ergebnisse des Testes zur Überprüfung der Portnutzung. Hier ist festzustellen, dass Portscanning ein eher wenig genutztes Mittel ist, da 87.3\% der Webseiten unbedenklich sind. Zudem läuft der Test mit gerade einmal 0.111\% unbekannten Ergebnissen sehr stabil, denn das Ergebnis unbekannt kann hier nur entstehen indem der Test abstürzt.
+
+Neben der Ergebnisverteilung gibt es hier noch ein weiteres Kuchendiagramm zur Visualisierung der abgefragten Ports. Hier werden alle Ports anhand der Häufigkeit ihrer Abfrage aufgelistet. Hier ist erkennbar, dass Port 22, mit 66.8\%, der am häufigsten abgefragte Port ist. Da dies der für SSH standardisierte Port ist, kann dies ein Indiz sein, dass Webseiten versuchen sich über SSH Zugriff verschaffen wollen.
 
 \subsection{Überprüfung der IP-Nutzung}
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=5cm]{images/stats/diaipscan}
   \caption{Überprüfung der IP-Nutzung - Testergebnisverteilung}
   \label{fig:analyse-diaipscan}
 \end{figure}
-\todo{Jani}
+
+Der Test zur Überprüfung der IP-Nutzung hat keinerlei bedrohliche oder verdächtige Webseiten erkannt(siehe Abbildung \ref{fig:analyse-diaipscan}). Wie auch der Test zu Überprüfung der Port-Nutzung läuft dieser Test sehr stabil mit 0.129\% unbekannten Ergebnissen. Da beide Tests fast identisch implementiert sind wird ein Fehler in der Umsetzung ausgeschlossen.
 
 \subsection{Prüfung aller verlinkten Seiten}
 \begin{figure}[H]
@@ -187,17 +193,17 @@ Sehr positiv an diesem Test ist wohl, dass kaum fehlerhafte Zertifikate gefunden
 Etwa 6\% der überprüften Seiten wurden als Phishingseiten eingestuft. Absolut betrachtet wurden ca. 10.000 Phishingseiten von webifier gefunden. Allerdings sollten diese Werte aufgrund der Einfachheit des mit Vorsicht betrachtet werden, da deshalb auch einige Webseiten fehlerhaft klassifiziert wurden. Wichtig zu beachten ist außerdem das viele Phishingseiten nur wenige Minuten oder Stunden existieren, weshalb der Erkennungszeitraum auch entsprechend gering ist.
 
 \section{Bewertung der Ergebnisse}
+Zur Bewertung der Ergebnisse müssen alle Tests betrachtet werden. Verwunderlich ist hierbei, die geringe Anzahl an gefundener Viren. In den Grundlagen wurde analysiert, dass die Verbreitung von Malware in Deutschland stark zugenommen hat(siehe Abbildung \ref{fig:malware}), jedoch die Ergebnisse von webifier auf eine geringe Malware-Verbreitung schließen lassen. Dies kann beweisen, dass Malware sich nicht durch maliziöse Webseiten verbreitet. Ein weiterer Grund für dieses Ergebnis ist, dass eventuelle versteckte Downloads auf den entsprechenden Seiten nicht mit analysiert wurden.
 
--SSL wenig valide zertifikate
+Des Weiteren ist überraschend, dass knapp 84\% der getesteten Webseiten kein Zertifikat nutzen, ob wohl dies heutzutage ohne finanziellen Aufwand erhältlich ist.
 
--Kein IP Scanning
+In der Verteilung der getesteten Top-Level Domains lassen sich Unterschiede bezüglich der weltweiten
+Anzahl an genutzten Top-Level
+Domains\footnote{\url{https://w3techs.com/technologies/overview/top_level_domain/all}} erkennen. Der
+hauptsächliche Unterschied liegt in der Nutzung der russischen Domain. Diese liegt weltweit auf Platz 2 der am häufigsten genutzten Domainendungen. In den von webifier getesteten Seiten taucht diese Endung allerdings sehr selten auf. Die .com-Domain ist in der Analyse von webifier ähnlich stark vertreten wie in der weltweiten Verteilung.
 
--Jedoch Portscan gefunden
+Zur Bewertung der Ergebnisse müsste noch die Güte der genutzten Blacklists überprüft werden. Da dies nicht einfach ist würde eine größer angelegte Suche mit weiteren Webseiten die Ergebnisse aussagekräftiger machen. Im hier beschränkten Zeitraum von 1 Monat zur Analyse konnten bisher nur knapp 170.000 Webseiten analysiert werden. Dies stellt nur einen kleinen Bruchteil der im World Wide Web verfügbaren Webseiten dar. Eine länger angelegte Suche würde die Ergebnisse aussagekräftiger machen.
 
--Wenig Russland TLD
+Bei Betrachtung der Tests zur Überprüfung der Port- \& IP-Nutzung ist festzustellen, dass die Verbreitung dieser Angriffstypen eher gering ausfällt. Dies ist nicht verwunderlich, da diese Art von Angriffstypen meist für gezielte Angriffe genutzt werden. Der Angreifer hat meist ein bestimmtes Ziel im Auge und versucht mittels IP- \& Port-Scanning Schwachstellen im System des Opfers zu finden, über welche dann ein Hacker-Angriff gestartet werden kann. Die Nutzung dieser Scans auf Webseiten um sämtliche Nutzer auszuspähen ist daher wie erwartet gering.
 
--Afrika Südostasien viele verdächtige Webseiten
-
-\url{https://de.statista.com/statistik/daten/studie/70561/umfrage/domains-weltweit/}
-
-\url{https://w3techs.com/technologies/overview/top_level_domain/all}
+Zur Bewertung der Ergebnisse lässt sich abschließend sagen, dass die Anzahl an gefundenen Bedrohungen geringer als erwartet ist, dies sich aber auch auf die begrenzte Analysezeit zurückführen lässt. Im folgenden Kapitel wird auf die Zukunft von webifier eingegangen, wie die Plattform erweitert und verbessert werden kann um weitere Auswertungen zu starten.

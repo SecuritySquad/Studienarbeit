@@ -25,7 +25,7 @@ Dies ist der Standard Use Case von webifier.
 
 Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet:
 \begin{description}
-    \item[unbedenklich] \hfill \texttt{CLEAN}) \\
+    \item[unbedenklich] \hfill \texttt{CLEAN} \\
     Die Webseite verhält sich harmlos und ist ungefährlich.
 	\begin{figure}[H]
 		\centering
@@ -33,7 +33,7 @@ Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausge
 		\caption{Icon für den Testergebnistyp \textit{CLEAN}}
 	\end{figure}
 
-	\item[verdächtig] \hfill \texttt{SUSPICIOUS})] \\
+	\item[verdächtig] \hfill \texttt{SUSPICIOUS} \\
 	Die Webseite verhält sich bedenklich und ist suspekt.
 	Diese Seite sollte gemieden werden.
     \begin{figure}[H]
@@ -42,7 +42,7 @@ Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausge
     	\caption{Icon für den Testergebnistyp \textit{SUSICIOUS}}
     \end{figure}
 
-    \item[bedrohlich] \hfill \texttt{MALICIOUS}) \\
+    \item[bedrohlich] \hfill \texttt{MALICIOUS} \\
     Die Webseite verhält sich kritisch und ist gefährlich.
     Sie sollte unter keinen Umständen aufgerufen werden.
     \begin{figure}[H]
@@ -51,7 +51,7 @@ Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausge
     	\caption{Icon für den Testergebnistyp \textit{MALICIOUS}}
     \end{figure}
     
-	\item[unbekannt] \hfill \texttt{UNDEFINED})] \\
+	\item[unbekannt] \hfill \texttt{UNDEFINED} \\
 	Der Test konnte aus technischen oder zeitlichen Gründen nicht vollendet werden.
 	Es kann keine Aussage über die Bös- oder Gutartigkeit der Seite gemacht werden.
 	\begin{figure}[H]
@@ -164,7 +164,7 @@ Ist die Prüfung vollendet wird eine Antwortmail mit den Ergebnissen an den Nutz
 \subsection{webifier Data}
 \label{sec:konzept-data}
 
-webifier Data ist die Persistenzkomponente von webifier. webifier Tester nutzt webifier Data um alle Testergebnisse an einem globalen\todo{zentralen?} Ort abzulegen, egal wo dieser ausgeführt wird.
+webifier Data ist die Persistenzkomponente von webifier. webifier Tester nutzt webifier Data um alle Testergebnisse an einem zentralen Ort abzulegen, egal wo dieser ausgeführt wird.
 
 Ein Testergebnis, welches in dem Datamodul gespeichert wird enthält einmal die eingegebene Url und die getestete Url, das Gesamtergebnis, sowohl den Typ (\textit{CLEAN}, \textit{SUSPICIOUS}, \textit{MALICIOUS} oder \textit{UNDEFINED}), als auch den Ergebniswert. Außerdem wird die Testlaufzeit gespeichert. Zusätzlich werden noch weitere Informationen zu den einzelnen Tests gespeichert. Dazu zählen der Name, die Konfigurationsparameter, wie beispielsweise die Gewichtung, das Resultat und die Detailinformationen zu diesem.
 
