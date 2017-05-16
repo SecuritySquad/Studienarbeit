@@ -558,7 +558,7 @@ In diesem Abschnitt werden nun die Implementierungen aller Einzeltests erklärt.
 
 \subsection{Virenscan der Webseite}
 
-Der Virenscan der Webseite lädt zunächst alle Ressourcen der Webseite in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten. Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne sie für die dauerhafte Nutzung bereitzuhalten. Des weiteren darf keine Datei im Inhalt verändert werden, da so das Ergebnis verfälscht werden könnte. Um zeit zu spaaren wird zusätzlich auf die protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
+Der Virenscan der Webseite wurde in Python umgesetzt und lädt zunächst alle Ressourcen der Webseite in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten. Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne sie für die dauerhafte Nutzung bereitzuhalten. Des weiteren darf keine Datei im Inhalt verändert werden, da so das Ergebnis verfälscht werden könnte. Um zeit zu spaaren wird zusätzlich auf die protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
 
 Zum Scannen aller gespeicherten Dateien kommen drei Virenscanner zum Einsatz. Es werden die Antivirenprogramme ClamAV\footnote{\url{http://www.clamav.net/}}, AVG\footnote{\url{http://www.avg.com/de-de/homepage}} und Comodo Antivirus\footnote{\url{https://antivirus.comodo.com/}} verwendet. Um auch hier die Antwortzeiten gering zu halten werden die Virenscannner parallel ausgeführt.
 
@@ -649,36 +649,68 @@ Dazu werden -Requests \ac{REST}-\ac{API}
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-Bei der Überprüfung des SSL-Zertifikats wurde technisch auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
+Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python und in Docker umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
 Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt. Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während dem Test ein unbekannter Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
 
 \subsection{Erkennung von Phishing}
 \label{sec:umsetzung-phishungdetector}
 
-\todo{Samuel}
+Die Erkennung von Phishing kann sehr komplex und umfassend werden. Deshalb wurde der Phishing Detector für diese Arbeit sehr einfach gehalten und beschränkt sich auf eine Grundlagenuntersuchung. Der Test umfasst sieben Teilschritte, welche nun genauer erläutert werden.
 
-\begin{itemize}
-  \item Herausfiltern der Schlagwörter
-  \item Finden möglicher Duplikate der Webseite
-  \begin{itemize}
-    \item Erstes Schlagwort zu Top Level Domains
-    \begin{itemize}
-      \item com
-      \item ru
-      \item net
-      \item org
-      \item de
-    \end{itemize}
-    \item Websuche nach den Schlagwörtern mittels Suchmaschinen
-    \begin{itemize}
-      \item DuckDuckGo
-      \item Ixquick
-      \item Bing
-    \end{itemize}
-  \end{itemize}
-  \item Berechnung Teilergebnisse
-\end{itemize}
+Im ersten Schritt wird die gegebene Webseite mit Hilfe von PhantomJS aufgerufen und ausgewertet. Diese Auswertung umfasst die gefundenen Schlüsselwörter der Seite, welche im nächsten Schritt zum Finden möglicher Originale benötigt werden. Außerdem wird ein Screenshot von der Webseite gespeichert, der Quelltext ausgelesen und auf die zum Inhalt gehörenden Wörter reduziert. Zusätzlich wird untersucht, ob die Seite Passworteingabefelder enthält. All diese Informationen gibt PhantomJS an das Python-Skript zurück.
+
+Wenn mindestens ein Schlüsselwort gefunden wurde folgt nun der nächste Schritt. Wurde kein Schlüsselwort gefunden, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Der zweite Schritt ist das Finden von Links für mögliche Originale der zu überprüfenden Seite. Hierfür wird einmal das erste Schlüsselwort verwendet um eine mögliche Domain daraus zu bilden. Für die Domainbildung werden die 5 meist genutzten Domainendungen\footnote{\url{https://w3techs.com/technologies/overview/top_level_domain/all}} (.com, .ru, .net, .org und .de) eingesetzt. Außerdem werden alle gefundenen Schlagwörter genutzt um in verschiedene Suchmaschinen danach zu suchen und so Links zu möglichen Dupplikaten zu finden. Zur Suche werden die drei Suchmaschinen DuckDuckGo\footnote{\url{https://duckduckgo.com/}}, Ixquick\footnote{\url{https://www.ixquick.com/}} und Bing\footnote{\url{https://www.bing.com/}} verwendet. Von jeder Suchmaschine werden die ersten zehn Eintrage weiterverarbeitet und in einer Gesamtliste mit den erzegten Domains zusammengeführt. Links die in mehreren Suchmaschinen aufgelistet werden steigen im Ranking auf. Am Ende dieses Schrittes wird die Liste auf 25 Eintrage reduziert.
+
+Im nächsten Schritt müssen nun die Originalseiten herausgefiltert und aus der Liste der möglichen Originale entfernt werden, da viele Webseiten, beispielsweise die von Google unter vielen unterschiedlichen Domains erreichbar ist. Um dies zu erreichen wurden mehrere Methoden angewandt. Als erstes werden alle Links aufgelöst, um tatsächlich den Link der zu vergleichenden Seite zu nutzen. Ist der Link nicht erreichbar, oder führt er ins Nichts, so wird er aussortiert. Anschließend wird die Url auf die registrierte \ac{TLD} reduziert und mit der der gegebenen Seite verglichen. Beispielsweise wird \lstinline[style=eclipse]{https://abc.example.com/xyz} auf \lstinline[style=eclipse]{example.com} minimiert. Sind beide gleich, so wird der Link verworfen. So werden Unterseiten und Subdomains der gegeben Seite aussortiert. Als nächstes wird die IP-Adresse der Domain aufgelöst und mit der der zu prüfenden Seite verglichen. Sind diese identisch wird auch dieser Link aus der Liste entfernt. Als letztes werden die Zertifikatinformation der Links ausgelesen, sofern ein SSL-Zertifikat verfügbar ist. Anschließend werden die \textit{Subject}-Informationen des Zertifikates mit denen der gegebenen Seite verglichen. Sind diese gleich, so scheidet auch dieser Link aus. Nun wird die Liste der übrig gebliebenen Links noch auf zehn Links reduziert, welche nun im nächsten Schritt aufgerufen werden.
+
+Der vierte Schritt ist das abrufen der Links der möglichen Originalwebseiten. Wie im ersten Schritt für die gegebene Seite werden nun für alle Links der Quelltextausgelesen, daraus der Inhalt extrahiert und ein Screenshot angefertigt. Alle hierbei gewonnenen Informationen werden im folgenden Schritt für den Vergleich benötigt.
+
+Nun folgt der eigentliche Schritt des Vergleichens der möglichen Originale mit der zu validierenden Webseite. Der Vergleich erfolgt in den drei Bereichen Quelltext, Inhalt und Aussehen. Zum Quelltext- und Inhaltsvergleich werden Funktionen (\textit{difflib.SequenceMatcher(\ldots).quick\_ratio()}) der Python-Standardbibliothek verwendet. Für den Vergleich der Screenshots wurde auf die freie Bibliothek Resemble.js zurückgegriffen. Diese liefert für den Vergleich von zwei Bildern die prozentuale Übereinstimmung und erzeugt einen Differenzbild. All diese Daten wurden den Links zugeordnet und im nächsten Schritt zur Ergebnisberechnung verwendet.
+
+Im vorletzten Schritt werden nun alle Links klassifiziert. Wie Listing \ref{lst:phishingdetector-result} werden zunächst werden die Schwellwerte der einzelnen Ergebnisklassen festgelegt. Diese sind davon abhängig, ob Passworteingabefelder auf der Seite vorhanden sind und ob die Seite ein SSL-Zertifikat nutzt. Besitzt die Seite mindestens ein Passwortfeld und nutzt kein Zertifikat, so werden die Schwellwerte um 0.05 reduziert. Anschließend wird die Durchschnittsübereinstimmung der beiden Seiten berechnet. In diese Rechnung fließt das Ergebnis des Screenshotvergleichs mit doppeltem Gewicht ein, da dieses am Aussagekräftigsten ist. Letztendlich werden die Links mit Hilfe der Schwellwerte und der berechneten Werte der Übereinstimmung klassifiziert. Hierfür gibt es einmal einen Mindestschwellwert für die Durchschnittsübereinstimmung, ab dem ein Ergebnis greift und Schwellwerte für die einzelnen Bereiche, in denen verglichen wurde. Die Bedingungen in den Zeilen 20 und 25 in Listing \ref{lst:phishingdetector-result} zeigen die Fälle, in denen ein Link \textit{SUSPICIOUS} oder \textit{MALICIOUS} ist.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsepython,
+    caption={Ergebnisberechnung der Erkennung von Phishing},
+    label={lst:phishingdetector-result}
+}
+\begin{lstlisting}
+def calculate_result(website, response):
+    ratio_subtract = 0
+    if website['password_field'] and not website['certificate']:
+        ratio_subtract = 0.05
+
+    suspicious_min = 0.82 - ratio_subtract
+    suspicious_min_with_other = 0.77 - ratio_subtract
+    suspicious_screenshot_min = 0.91 - ratio_subtract
+    suspicious_html_min = 0.93 - ratio_subtract
+    suspicious_content_min = 0.95 - ratio_subtract
+
+    malicious_min = 0.9 - ratio_subtract
+    malicious_min_with_other = 0.85 - ratio_subtract
+    malicious_screenshot_min = 0.96 - ratio_subtract
+    malicious_html_min = 0.97 - ratio_subtract
+    malicious_content_min = 0.98 - ratio_subtract
+
+    ratio = (response["screenshot_ratio"] * 2 + response["html_ratio"] + response["content_ratio"]) / 4
+    result = "CLEAN"
+    if ratio > suspicious_min or (ratio > suspicious_min_with_other
+            and (response["screenshot_ratio"] > suspicious_screenshot_min
+                or response["html_ratio"] > suspicious_html_min
+                or response["content_ratio"] > suspicious_content_min)):
+        result = "SUSPICIOUS"
+    if ratio > malicious_min or (ratio > malicious_min_with_other
+            and (response["screenshot_ratio"] > malicious_screenshot_min
+                or response["html_ratio"] > malicious_html_min
+                or response["content_ratio"] > malicious_content_min)):
+        result = "MALICIOUS"
+    return ratio, result
+\end{lstlisting}
+\end{scriptsize}
+
+Der letzte Schritt berechnet abschließend das Endergebnis des Tests. Ist mindestens ein Link \textit{SUSPICIOUS} oder \textit{MALICIOUS}, so ist auch das Endergebnis entsprechend \textit{SUSPICIOUS} oder \textit{MALICIOUS}. Andernfalls ist das Gesamtergebnis des Tests \textit{CLEAN}.
 
 \subsection{Screenshot der Seite}
 Der Screenshot der Seite erfolgt über eine von PhantomJS gelieferte Methode um den Seiteninhalt aufzunehmen und als Bilddatei abzuspeichern. PhantomJS wird hierbei genutzt da der Test in einem Docker ohne grafische Benutzeroberfläche läuft und deshalb ein headless Browser nötig ist um die Seite aufzurufen. Nachdem die Seite in einer Bilddatei abgespeichert ist, wird diese als base64-encoded String weitergegeben. Der Test liefert immer das Ergebnis \textit{sauber}, welches aber für den Tester irrelevant ist, da der Screenshot-Test keine Gewichtung im Tester hat. In der Ergebnisinformation wird der base64 encodierte String weitergegeben, welcher dann von der Plattform interpretiert und als Bild für den Nutzer dargestellt wird.
