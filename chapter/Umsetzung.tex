@@ -670,7 +670,16 @@ Dieses Ergebnis wird zusammen mit einer Liste der Informationsobjekte an den Tes
 
 \subsection{Google Safe Browsing}
 
+Wie bei der Prüfung aller verlinkten Seiten hat der Google Safe Browsing Test ein Python-Skript für die Logik und ein PhantomJS-Skript für das Herausfiltern der Links.
+Da beide Tests das gleiche PhantomJS-Skript verwenden, wird an dieser Stelle auf den ersten Absatz des letzten Unterabschnitts verwiesen.
 
+Anders hingegen, als beim vorherigen Test, werden die Links nicht an \textit{webifier Data}, sondern an den externen Cloud-Service von Google geschickt.
+Zuvor muss jedoch die Anfrage konfiguriert werden.
+Dabei werden unter anderem die gewünschten Ergebnistypen (hier: alle vier, s. \autoref{par:konzep-gsb-types}), bedrohte Systeme (hier: \lstinline{ANY_PLATFORM}) und letzendlich die \acs{URL} angegeben werden.
+Findet der Service zu den Links keine Einträge in seiner Datenbank, so gibt er keine liste von matches aus.
+In diesem Fall ist das Ergebnis \textit{CLEAN}.
+Der Rest der ERgebnisberechnung findet wie im Konzept beschrieben statt.
+Die Ausgabe des Tests beinhaltet neben dem Ergebnis die Liste der matches.
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
