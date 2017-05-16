@@ -181,16 +181,24 @@ Um Webseiten mit allen ihren Ressourcen herunterzuladen wurde die freie Software
 
 Für die Analyse und den Vergleich von Bildern wurde auf die freie JavaScript-Bibliothek Resemble.js zurückgegriffen. Mit Resemble können jegliche Arten von Bildanalyse und Bildvergleich genutzt werden. Urspünglich wurde es für eine Bibliothek von Phanton JS entwickelt, kann aber inzwischen vielseitig eingesetzt werden. Resemble bietet einige Einstellungsmöglichkeiten um Bilder analysieren und miteinander vergleichen zu können. Als Resultat liefert es bei der Bildanalyse Helligkeits- und Farbwerte des Bildes. Beim Bildvergleich bekommt man den prozentualen Unterschied der beiden Bilder, sowie einige zusatzinformationen. Außerdem ist es möglich mit Resemble.js ein Differenzbild mit der Hervorhebung der Unterschiede zweier Bilder zu erzeugen.\footcite[Vgl.][]{resemblejs}
 
-Zu einer umfassenden Analyse gehört selbstverständlich auch die Analyse des Netzwerktraffics. Dazu wird ein entsprechendes Tool genutzt. Webifier nutzt für diesen Zweck den \textit{Bro Network Security Monitor}. Bro ist ein Unix-basiertes \ac{NIDS}.\footcite[Vgl.][199]{bro} Zudem ermöglicht Bro dem Nutzer den Netzwerktraffic zu loggen und mittels eigener Skriptsprache zu filtern. \footcite{bro2} Die Logging-Möglichkeiten werden für die Analyse des Traffics genutzt um mögliche verdächtige Abfragen zu erkennen.
+Zu einer umfassenden Analyse gehört selbstverständlich auch die Analyse des Netzwerktraffics. Dazu wird ein entsprechendes Tool genutzt. Webifier nutzt für diesen Zweck den \textit{Bro Network Security Monitor}. Bro ist ein Unix-basiertes \ac{NIDS}.\footcite[Vgl.][199]{bro} Zudem ermöglicht Bro dem Nutzer den Netzwerktraffic zu loggen und mittels eigener Skriptsprache zu filtern. \footcite[Vgl.][]{bro2} Die Logging-Möglichkeiten werden für die Analyse des Traffics genutzt um mögliche verdächtige Abfragen zu erkennen.
 
 
 \section{Angriffstypen}
 
+Nach Schätzungen des DIW Wochenberichts entstehen in Deutschland jährlich Schäden in Höhe von insgesamt 3,4 Milliarden Euro.\footcite[Vgl.][301]{cybercrime} Hochrechnungen zufolge enstehen diese Schäden aus jährlich 14,7 Millionen Fällen von Internetkriminalität. Diese können in die vier Kategorien Schadsoftware, Waren- und Dienstleisungsbetrug, Identitätsdiebstal und Phishing gruppiert werden.\footcite[Vgl.][297]{cybercrime}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/kategorien-cybercrime}
+  \caption[Bedeutung der einzelnen Kategorien von Internetkriminalität]{Bedeutung der einzelnen Kategorien von Internetkriminalität\protect\footnotemark}
+  \label{fig:categories-cybercrime}
+\end{figure}
+\footnotetext{Siehe \cite{cybercrime}, S. 297 Abbildung 1}
+
+Wie Abbildung \ref{fig:categories-cybercrime} zeigt die Bedeutung dieser Kategorien. Unter allen Fällen von Internetkriminalität sind demnach 63 \% Delikte mit Schadsoftware, 16\% sind Betrüge im Waren- und Dienstleistungsbereich, 14\% machen Identitätsdiebstäle aus und 7\%kommen von Phishingseiten.
 
 In den folgenden Abschnitten werden nun einige übliche Angriffstypen von Webseiten auf den Nutzer vorgestellt und eine mögliche Überprüfung in webifier dargestellt.
-
-\todo{Samuel: Noch allgemeiner auf das Thema eingehen\ldots}
 
 \subsection{Malware}
 
@@ -210,7 +218,7 @@ Wie Abbildung \ref{fig:malware} zeigt nimmt die Verbreitung von Malware in Deuts
   \caption[Malware Verbreitung in Deutschland]{Malware Verbreitung in Deutschland\protect\footnotemark}
   \label{fig:malware}
 \end{figure}
-\footnotetext{\cite{avtest}, Abbildung 1}
+\footnotetext{Siehe \cite{avtest}, Abbildung 1}
 
 Interessant ist allerdings dass in Abbildung \ref{fig:malware-new} ein deutlicher Rückgang in der Verreitung von neuer Malware zu erkennen ist. Daraus lässt sich schließen, dass deshalb die bereits in Umlauf gebrachte Schadware nach wie vor ausreicht um dem großteil der Nutzer zu schaden.
 
@@ -220,7 +228,7 @@ Interessant ist allerdings dass in Abbildung \ref{fig:malware-new} ein deutliche
   \caption[Verbreitung neuer Malware in Deutschland]{Verbreitung neuer Malware in Deutschland\protect\footnotemark}
   \label{fig:malware-new}
 \end{figure}
-\footnotetext{\cite{avtest}, Abbildung 2}
+\footnotetext{Siehe \cite{avtest}, Abbildung 2}
 
 Die Verbreitung von Malware beginnt größtenteils über Webseiten und E-Mails.\footcite[Vgl.][97]{netzwerkDatensicherheit} Deshalb ist es notwendig mit webifier Webseiten auf Malware zu prüfen.
 
@@ -319,7 +327,7 @@ TCP nutzt für den Verbindungsaufbau den 3-Wege-Handshake. Der Ablauf ist in Abb
   \caption[3-Step-Handshake TCP]{3-Step-Handshake TCP\protect\footnotemark}
   \label{fig:handshake}
 \end{figure}
-\footnotetext{\cite{handshake}, Abbildung 1}
+\footnotetext{Siehe \cite{handshake}, Abbildung 1}
 
 Für einen SYN-Scan versucht nun der Scanner TCP-Verbindungen mit den zu scannenden Ports aufzubauen. Er sendet also SYN-Anfragen an diese. Anhand der Antwort kann der Scanner den Status des Ports erkennen. Antwortet das Angriffsziel mit einem SYN/ACK so ist der Port offen. Ist die Antwort ein Reset-Flag(RST), kann der Port als geschlossen markiert werden. Komplizierter wird es, wenn keine Antwort kommt. Dies kann mehrere Gründe haben. Zum Einen ist es möglich, dass das Angriffsziel keine Verbindung hat. Deshalb sollte vor dem Scan überprüft werden ob der Rechner erreichbar ist. Ein weiterer Grund könnte eine Firewall sein, die Anfragen blockiert. Um dies Herauszufinden wird das SYN-Packet wiederholt gesendet falls keine Antwort erhalten wird. Ist ein Server erreichbar, aber es folgt keine Antwort auf einen SYN kann der Port als gefiltert markiert werden, was aussagt, dass eine Firewall die Verbindungen blockiert.\footcite[Vgl.][33]{port2}
 
@@ -375,7 +383,7 @@ PayPal-Konto an und klicken Sie auf den Hilfe-Link im Menü.
 PayPal E-Mail ID PP321
 \end{lstlisting}
 \end{scriptsize}
-\footnotetext{\cite{phishing}, S. 11 Abbildung 1.4, Übersetzung Samuel Philipp}
+\footnotetext{Zitat \cite{phishing}, S. 11 Abbildung 1.4, Übersetzung Samuel Philipp}
 
 Die in Listing \ref{lst:phishing-mail} dargestellte E-Mail täuscht dem Kontoinhaber vor, dass eine Fremde Person auf das Konto zugegriffen hat und animiert ihn so dazu dem vermeindlich sichern Link zu folgen um seine Identität zu verifizieren um seinen Account zu schützen. Nebenbei sei noch erwähnt, dass der Link in der E-Mail natürlich nicht auf die orginale PayPal-Webseite verweist, sondern auf die Phishing-Seite des Angreifers. Der Hinweiß \enquote{Schützen Sie Ihr Passwort} verleiht der E-Mail noch ein authentischeres Aussehen und würde der Nutzer dem Rat folgen wäre dieser Phishing-Angriff wirkungslos. Viele Nutzer nehmen diesen Rat auch wahr, nutzen aber trotzdem den bereitgestellten Link aus der E-Mail, da diese ja offensichtlich von PayPal stammt und deshalb vertrauenswürdig ist.\footcite[Vgl.][10]{phishing}
 
