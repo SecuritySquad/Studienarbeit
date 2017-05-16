@@ -127,7 +127,14 @@ Wie das Kreisdiagram in Abbildung \ref{fig:analyse-virusscan} zeigt enthielten n
   \caption{Vergleich in verschiedenen Browsern - Testergebnisverteilung}
   \label{fig:analyse-diaheaderinspection}
 \end{figure}
-\todo{Daniel}
+
+Im \textit{Vergeleich in verschiedenen Browsern} wurde die größte Quote an bösartigen Webseiten erreicht.
+Laut Abbildung \ref{fig:analyse-diaheaderinspection} wurden durch diesen Test 6,93\% der
+Webseiten als \textit{MALICIOUS} eingestuft. Das Kriterium für dieses Ergebnis ist eine maximale Abweichung von 500 Zeichen zwischen den
+erhaltenen Antworten der diversen Browser. In diese Größenordnung ist zu groß für Zeitangaben oder andere Unterschiede, die durch den
+Zeitpunkt des Aufrufs entstehen können. Leider kann durch die bloße Angabe der
+Zeichenunterschiedslänge keine qualitative Aussage über den Hintergrund dieser Verschiedenheit gemacht werden. Besser wäre es, wenn man die unterschiedlichsten
+Antworten auf JavaScript und Links zu anderen Webressourcen untersuchen würde.
 
 \subsection{Überprüfung der Port-Nutzung}
 
@@ -163,7 +170,13 @@ Der Test zur Überprüfung der IP-Nutzung hat keinerlei bedrohliche oder verdäc
   \caption{Prüfung aller verlinkten Seiten - Testergebnisverteilung}
   \label{fig:analyse-dialinkchecker}
 \end{figure}
-\todo{Daniel}
+
+Während der Analysephase wurden vom Test \textit{Prüfung aller verlinkten Seiten} ganze 91,8\% der
+Seiten als \textit{UNDEFINED} klassifiziert (Abbildung \ref{fig:analyse-dialinkchecker}).
+Dieses Ergebnis ist nicht allzu überraschend, da in diesem, Test gegen die systeminterne Datenbank getestet wird.
+Diese war zu Beginn der Analysephase noch komplett leer, sodass \textbf{alle} Tests \textit{UNDEFINED} ergaben.
+Im laufe der Analyse wurde die Datenbank voller, was man an den 7,97\% sauberen und immerhin
+0,225\% maliziösen Einträgen erkennen kann.
 
 \subsection{Google Safe Browsing}
 \begin{figure}[H]
@@ -172,7 +185,12 @@ Der Test zur Überprüfung der IP-Nutzung hat keinerlei bedrohliche oder verdäc
   \caption{Google Safe Browsing - Testergebnisverteilung}
   \label{fig:analyse-diagoogle}
 \end{figure}
-\todo{Daniel}
+
+Wie in Abbildung \ref{fig:analyse-diagoogle} zu sehen ist, wurden lediglich 1,58\% der
+getesteten Seiten als \textit{MALICIOUS} und ganze 96,7\% als \textit{CLEAN} eingestuft.
+Leider kann nicht davon ausgegangen werden, dass alle Seiten im \textit{CLEAN}-Bereich tatsächlich unbedenklich sind.
+Denn es ist sehr wahrscheinlich, dass Google viele der getesteten Seiten noch nicht in ihrer Datenbank abgespeichert hat.
+Besser wäre es, wenn der Google Safe Browsing Service eine Art \textit{CLEAN}-Ergebnis für bekannte, nichtmaliziöse Webseiten ausgeben würde, statt einfach kein Ergebnis zurückzuliefern. 
 
 \subsection{Überprüfung des SSL-Zertifikats}
 \begin{figure}[H]
@@ -182,7 +200,8 @@ Der Test zur Überprüfung der IP-Nutzung hat keinerlei bedrohliche oder verdäc
   \label{fig:analyse-diacertificate}
 \end{figure}
 
-Sehr positiv an diesem Test ist wohl, dass kaum fehlerhafte Zertifikate gefunden wurden, wie Abbilding \ref{fig:analyse-diacertificate} zeigt. Beunruhigend ist hingegend das fast 84\% aller getesteten Webseiten überhaupt kein Zertifikat verwenden. Zumal der Erwerb eines Zertifikates auch finanziell keine Probleme mehr darstellt, da es wie an anderer Stelle bereits erwähnt Vergabestellen gibt, welche kostenlose Zertifikate ausstellen.
+Sehr positiv an diesem Test ist wohl, dass kaum fehlerhafte Zertifikate gefunden wurden, wie
+Abbildung \ref{fig:analyse-diacertificate} zeigt. Beunruhigend ist hingegend das fast 84\% aller getesteten Webseiten überhaupt kein Zertifikat verwenden. Zumal der Erwerb eines Zertifikates auch finanziell keine Probleme mehr darstellt, da es wie an anderer Stelle bereits erwähnt Vergabestellen gibt, welche kostenlose Zertifikate ausstellen.
 
 \subsection{Erkennung von Phishing}
 \begin{figure}[H]
