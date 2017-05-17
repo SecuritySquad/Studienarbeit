@@ -57,10 +57,9 @@ abgerufen werden können.
 Dieser Use Case wird in \autoref{fig:anwendung-umsetzung} in der Mitte gezeigt.
 
 \begin{figure}[H]
-	\todo{Bild so einfügen, dass nicht zu viel leerer Platz auf der Vorder- und Folgeseite entsteht - oder feinfach "[H]" löschen}
 	\centering
 	\includegraphics[width=\textwidth]{images/anwendung-umsetzung}
-	\caption{Konzeptarchitektur der Gesamtanwendung}
+	\caption{Umgesetzte Architektur der Gesamtanwendung}
 	\label{fig:anwendung-umsetzung}
 \end{figure}
 
@@ -413,11 +412,10 @@ Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und 
 Wurden die Tests durchlaufen, werden die Ergebnisse zu \ac{HTML} gerendert, eine Mail mit ebendiesen Ergebnissen erstellt und an den Nutzer geschickt.
 \autoref{fig:mail-result} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
 
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{images/mail-result.png}
-	\caption{webifier Mail - Screenshot einer Antwort}
+	\includegraphics[width=15cm]{images/mail-result.png}
+	\caption{webifier Mail - Screenshot der Ergebnismail}
 	\label{fig:mail-result}
 \end{figure}
 
@@ -715,12 +713,12 @@ Der Brower greift auf diese beiden Daten in jeder Zeile der Tabelle zu und speic
 Es werden alle Header bis auf den \lstinline{Host}-Header abgespeichert, da dieser lediglich der Domain des Zielserver entspricht.
 Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird die Liste der Browserobjekte in die Datei \lstinline{browser.json} abgespeichert.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{images/reliply.png}
-	\caption{Tabelle der HTTP-Header auf reliply.org}
-	\label{fig:reliply}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%%	\includegraphics[width=\textwidth]{images/reliply.png}
+%	\caption{Tabelle der HTTP-Header auf reliply.org}
+%	\label{fig:reliply}
+%\end{figure}
 
 Bei der Testausführung wird dann das Python-Skript \lstinline{check.py} aufgerufen.
 Darin wird zunächst die Liste der Browserobjekte aus der Datei geladen.

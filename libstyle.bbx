@@ -3,7 +3,8 @@
 \RequireBibliographyStyle{authoryear}
 
 \DeclareNameFormat{sortname}{
-	\usebibmacro{name:last-first}{#1}{#4}{#5}{#7}%
+    \nameparts{#1}
+	\usebibmacro{name:last-first}{\namepartfamily}{\namepartgiveni}{\namepartprefix}{\namepartsuffix}%
 	\usebibmacro{name:andothers}
 }
 
