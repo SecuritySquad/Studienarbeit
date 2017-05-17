@@ -30,12 +30,10 @@ Hat der Nutzer eine Spam-verdächtige E-Mail in seinem Postfach, so kann er dies
 Dort werden Links  aus der Mail zusammengetragen und an den Tester weitergeleitet.
 
 Im Tester wird die Ausführung der einzelnen Tests gestartet, überwacht und koordiniert.
-Wichtig dabei ist, dass alle Tests abgeschottet vom Rest des Systems laufen, da auf ihnen Schadhafte Webseiten aufgerufen werden.
-Es können beliebig viele Tests im Tester hinzugefügt werden, indem sie in der Konfiguration spezifiziert werden.
-Jeder dieser Tests gibt ein eigenes Ergebnis sowie weitere Informationen aus.
-Diese Einzeltestergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an die webifier Platform bzw. an webifier Mail weitergeleitet.
-Schließlich wird das Ergebnis dem Nutzer über den Browser bzw. über eine Antwortmail präsentiert.
-Dabei ist der Weg über die Plaform der Standard Use Case von webifier.
+Wichtig dabei ist, dass alle Tests abgeschottet vom Rest des Systems laufen, da auf ihnen schadhafte Webseiten aufgerufen werden.
+Es können beliebig viele Tests im Tester hinzugefügt werden, indem sie in der Konfiguration angegeben werden.
+Jeder dieser Tests gibt ein eigenes Ergebnis, sowie weitere Informationen zurück.
+Diese Ergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests ausgegebe.
 
 Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausgerechnet, wobei die Anwendung zwischen vier Ergebnistypen unterscheidet: \textit{CLEAN}, \textit{SUSPICIOUS}, \textit{MALICIOUS} und \textit{UNDEFINED}.
 
@@ -75,6 +73,12 @@ Alle Ergebnisse der Tests werden anhand von Schwellwerten und Gewichtungen ausge
 		\caption{Icon für den Testergebnistyp \textit{UNDEFINED}}
 	\end{figure}
 \end{description} 
+
+Das berechnete Gesamtergebnis des Testers wird an die webifier Platform bzw. an webifier
+Mail weitergeleitet. Schließlich wird das Ergebnis dem Nutzer über den Browser bzw. über eine
+Antwortmail präsentiert. Zusätzlich werden alle Ergebnisse des Testers an webifier Data geschickt
+und dort in einer Datenbank persistiert. Diese Daten werden von webifier Statistics für Analysen und
+Auswertungen genutzt
 
 \subsection{webifier Tests}
 Webifier Tests ist der Oberbegriff für sämtliche von webifier durchgeführten Tests bei der Analyse einer Webseite. Wie bei der gesamten Anwendung wird auch bei den Tests viel Wert auf Modularität gelegt. Jeder Test bildet ein eigenständiges Bauteil, welches nach belieben integriert oder entfernt werden kann ohne Effekte auf die Lauffähigkeit der Gesamtanwendung.
@@ -173,7 +177,7 @@ So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit 
 \subsection{webifier Mail}
 Diese Komponente ist ein Zusatzfeature, mit dem verdächtige Mails über den webifier Tester überprüft werden können.
 Nutzer müssen dazu lediglich ihre empfangene Mail an die Adresse \href{mailto:check@webifier.de}{check@webifier.de} weiterleiten.
-Im Mail-Server werden dann bis zu fünf in der Mail enthaltene Links an den Tester weitergeleitet.
+Im Email-Server werden dann bis zu fünf in der Mail enthaltene Links an den Tester weitergeleitet.
 Ist die Prüfung vollendet wird eine Antwortmail mit den Ergebnissen an den Nutzer zurückgeschickt.
 
 \subsection{webifier Data}
