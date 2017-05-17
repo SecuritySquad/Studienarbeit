@@ -207,7 +207,7 @@ Ist die angegebene Url erreichbar wird die vom \textit{Resolver} aufgelöste Url
 \lstset{
     style=eclipsejava,
     caption=[Ausschnitt Ergebnisberechnung webifier Tester]{Ausschnitt Ergebnisberechnung webifier Tester\protect\footnotemark},
-    label={lst:tester-config}
+    label={lst:tester-testresult-calculation}
 }
 \begin{lstlisting}
 private WebifierOverallTestResult calculateOverallResult() {
@@ -713,12 +713,12 @@ Der Brower greift auf diese beiden Daten in jeder Zeile der Tabelle zu und speic
 Es werden alle Header bis auf den \lstinline{Host}-Header abgespeichert, da dieser lediglich der Domain des Zielserver entspricht.
 Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird die Liste der Browserobjekte in die Datei \lstinline{browser.json} abgespeichert.
 
-%\begin{figure}[H]
-%	\centering
-%%	\includegraphics[width=\textwidth]{images/reliply.png}
-%	\caption{Tabelle der HTTP-Header auf reliply.org}
-%	\label{fig:reliply}
-%\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/reliply.png}
+	\caption{Tabelle der HTTP-Header auf reliply.org}
+	\label{fig:reliply}
+\end{figure}
 
 Bei der Testausführung wird dann das Python-Skript \lstinline{check.py} aufgerufen.
 Darin wird zunächst die Liste der Browserobjekte aus der Datei geladen.
