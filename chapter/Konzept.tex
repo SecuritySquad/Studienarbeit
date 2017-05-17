@@ -6,25 +6,34 @@ In diesem Kapitel werden das Gesamtkonzept und die Konzepte der einzelnen Tests 
 
 \textit{webifier} ist in viele Unterkomponenten aufgeteilt.
 Dies hat den Zweck, bestehende Programme und zukünftige Erweiterungen möglichst getrennt voneinander entwickeln zu können und einzelne Features ab- oder zuzuschalten.
+In diesem Abschnitt wird zuerst die Entwurfsarchitektur der Gesamtanwendung erklärt.
+Dabei wird hauptsächlich auf den Zweck der Komponenten für die Anwendung und auf deren Zusammenspiel eingegangen.
 
-\todo{Bild einfügen}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/anwendung-konzept}
+	\caption{Konzeptarchitektur der Gesamtanwendung}
+	\label{fig:anwendung-konzept}
+\end{figure}
 
 Grundsätzlich wird webifier benutzt, um Webseiten auf verschiedene Sicherheitsaspekte zu untersuchen.
 Abbildung \ref{fig:anwendung-konzept} zeigt den groben Plan der Anwendung.
+Es zeigt den konzeptionellen Zusammenhang zwischen den Komponenten, wobei die Datenbank und der Mail Server nicht als eigene Komponenten entwickelt wurden und deshalb keine eigenen Unterabschnitte erhalten.
 Die Aufnahme der URLs erfolgt über eine Webseite, die von der Plattform an den Browser des Nutzers ausgeliefert wird.
 Die Platform leitet die \ac{URL} aus der Nutzeranfrage an dann an den Tester weiter.
 Der Tester ist die Komponente, die die \ac{URL} auf Korrektheit überprüft und ggf. Weiterleitungen auflöst.
 Entsteht dabei ein Fehler, so wird dieser an die Platform porpagiert und schließlich im Browser angezeigt.
 Wurde die Auflösung der \ac{URL} erfolgreich ausgeführt, werden die Sicherheitstests gestartet.
 
-Eine weitere Möglichkeit, webifier zu verwenden, ist über Emailverkehr.
-Hat der Nutzer eine Spam-verdächtige Email in seinem Postfach, so kann er diese an ein bestimmtes Postfach von webifier weiterleiten.
+Eine weitere Möglichkeit, webifier zu verwenden, ist über Mailverkehr.
+Hat der Nutzer eine Spam-verdächtige E-Mail in seinem Postfach, so kann er diese an ein bestimmtes Postfach von webifier weiterleiten.
 Dort werden Links  aus der Mail zusammengetragen und an den Tester weitergeleitet.
 
 Im Tester wird die Ausführung der einzelnen Tests gestartet, überwacht und koordiniert.
 Wichtig dabei ist, dass alle Tests abgeschottet vom Rest des Systems laufen, da auf ihnen Schadhafte Webseiten aufgerufen werden.
+Es können beliebig viele Tests im Tester hinzugefügt werden, indem sie in der Konfiguration spezifiziert werden.
 Jeder dieser Tests gibt ein eigenes Ergebnis sowie weitere Informationen aus.
-Diese Ergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an die webifier Platform bzw. an webifier Mail weitergeleitet.
+Diese Einzeltestergebnisse werden dann miteinander verrechnet und es wird eine Gesamteinschätzung zusammen mit allen relevanten Informationen der einzelnen Tests an die webifier Platform bzw. an webifier Mail weitergeleitet.
 Schließlich wird das Ergebnis dem Nutzer über den Browser bzw. über eine Antwortmail präsentiert.
 Dabei ist der Weg über die Plaform der Standard Use Case von webifier.
 
@@ -164,7 +173,7 @@ So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit 
 \subsection{webifier Mail}
 Diese Komponente ist ein Zusatzfeature, mit dem verdächtige Mails über den webifier Tester überprüft werden können.
 Nutzer müssen dazu lediglich ihre empfangene Mail an die Adresse \href{mailto:check@webifier.de}{check@webifier.de} weiterleiten.
-Im Email-Server werden dann bis zu fünf in der Mail enthaltene Links an den Tester weitergeleitet.
+Im Mail-Server werden dann bis zu fünf in der Mail enthaltene Links an den Tester weitergeleitet.
 Ist die Prüfung vollendet wird eine Antwortmail mit den Ergebnissen an den Nutzer zurückgeschickt.
 
 \subsection{webifier Data}

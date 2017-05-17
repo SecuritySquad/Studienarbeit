@@ -4,7 +4,65 @@ In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen
 
 \section{Gesamtanwendung}
 
-\todo{Daniel}
+Dieser Abschnitt beschreibt wie die Anwendung Implementiert ist und welche Technologien wie eingesetzt wurden.
+Zunächst findet ein grober Umriss über die Gesamtarchitektur statt, der vor allem die Zusammenhänge und Abhängigkeiten zwischen den einzelnen Komponenten darlegt.
+In den Nachfolgenden Unterabschnitten wird die Umsetzung der einzelnen getrennten Komponenten für sich erklärt.
+
+\autoref{fig:anwendung-umsetzung} zeigt alle umgesetzten Komponenten mit ihrer jeweils wichtigsten Technologie.
+Zusätzlich sind zwischen zusammenspielenden Komponenten die jeweils verwendeten Kommunikationstechnologien (hauptsächlich Protokolle) angegeben.
+
+Der Standard Use Case beginnt, wenn der Nutzer eine verdächtige \ac{URL} findet und diese prüfen möchte.
+Dazu öffnet er mit seinem Browser die Adresse von \textit{webifier}: \url{www.webifier.de}.
+Daraufhin schickt der Browser eine \ac{HTTP}-GET Anforderung an \textit{webifier Platform}, den Webserver der Anwendung.
+Dort wird die Anfrage angenommen und durch das Spring Web Framework verarbeitet.
+Dabei wird ein neuer \textit{Testser}-Prozess mit der zu prüfenden \ac{URL} über \ac{CLI} gestartet.
+\autoref{fig:anwendung-umsetzung} zeigt dies im rechten unteren Bereich.
+
+Ein weiterer Use Case ist die Prüfung von verdächtigen E-Mails.
+Empfängt der Nutzer eine Spam-verdächtige E-Mail, so kann er diese auch über \textit{webifier} prüfen lassen.
+Dazu leitet er die E-Mail über sein E-Mail-Programm an die Adresse \hyperref{mailto:check@webifier.de}{check@webifier.de} weiter.
+Der Client schickt die E-Mail dann über \ac{SMTP} zum Mail-Server des Nutzers, der diese dann wieder über \ac{SMTP} an den Mail-Server von \textit{webifier} übermittelt.
+Sobald eine Mail an diesem Server ankommt, wird diese über \ac{IMAP} an das E-Mail-Verwaltungsmodul \textit{webifier Mail} weitergegeben.
+Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acp{URL} zur Prüfung an \textit{webifier Tester} weiter.
+Dazu wird wie bei der \textit{webifier Platform} pro \ac{URL} ein Prüfdurchlauf beim Tester über \ac{CLI} angefordert.
+Dieser Vorgang ist in \autoref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
+
+Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung der Sicherheitstests zuständig ist.
+Es ist deshalb in der Grafik zwischen den Tests und dem Rest des System abgebildet.
+Der Aufruf des Testers erfolgt über \ac{CLI}, wobei er als Parameter die zu überprüfende \ac{URL} erwartet.
+Im ersten Schritt wird die \ac{URL} validiert und ggf. über etwaige \ac{HTTP}-Weiterleitungen aufgelöst.
+Entsteht dabei ein Fehler, so gibt der Tester ihn an seinen Aufrufer zurück und beendet sich.
+
+War die Vorprüfung erfolgreich, so werden alle ihm bekannten Tests über \ac{CLI} mit der \ac{URL} als Parameter gestartet.
+Alle Tests laufen in einem \textit{Docker}-Container, um die Systemsicherheit zu gewährleisten.
+Sobald ein Test fertig ist gibt er sein Ergebnis und die Zusatzinformationen über die Standardausgabe aus.
+Der Tester nimmt dies zur Kenntnis und propagiert dieses Teilergebnis an den Aufrufer weiter.
+Sobald alle Tests ihr Ergebnis über zurückgemeldet haben, berechnet der \textit{Tester} das Endergebnis und liefert dieses an seinen Aufrufer zurück.
+
+Ist der Aufrufer die \textit{webifier Platform}, so wird das Ergebnis jedes fertigen Einzeltests per direkt an den Browser des Nutzers geschickt.
+So werden nach und nach alle Ergebnisse angezeigt, bis schließlich das Gesamtergebnis präsentiert wird.
+Liefert der Tester einen Fehler, so wird dieser ebenfalls an den Nutzer weitergeleitet.
+Wenn der Tester durch \textit{webifier Mail} gestartet wurde, dann wartet das Modul, bis die Ergebnisse aller \acp{URL} feststehen und sendet dann eine E-Mail mit allen Ergebnissen an den Nutzer zurück.
+Dies geschieht wie entgegengesetzt zum weg der Anfrage über \ac{IMAP} und \ac{SMTP}.
+
+Zusätzlich zur Standardausgabe der Ergebnisse an den jeweiligen Aufrufer, schreibt der \textit{webifier Tester} seine Ergebnisse in die zentrale Persistenzkomponente \textit{webifier Data}.
+Diese lässt sich über eine \ac{REST}-Schnittstelle ansprechen.
+Über diese Schnittstelle speist der Tester seine Ergebnisse in die \textit{mongoDB}-Datenbank.
+
+Das Modul \textit{webifier Statistics} ist zuständig für alle Auswertungen, die auf den Ergebnissen der Anwendung gemacht werden.
+Diese Analysen werden mit \textit{R} spezifiziert.
+Die Komponente greift direkt auf die Datenbank zu und führt regelmäßig Analyseprozesse durch.
+Dabei entstehen \ac{HTML}-Berichte, die von Interessenten unter \url{statistics.webifier.de}
+abgerufen werden können.
+Dieser Use Case wird in \autoref{fig:anwendung-umsetzung} in der Mitte gezeigt.
+
+\begin{figure}[H]
+	\todo{Bild so einfügen, dass nicht zu viel leerer Platz auf der Vorder- und Folgeseite entsteht - oder feinfach "[H]" löschen}
+	\centering
+	\includegraphics[width=\textwidth]{images/anwendung-umsetzung}
+	\caption{Konzeptarchitektur der Gesamtanwendung}
+	\label{fig:anwendung-umsetzung}
+\end{figure}
 
 \subsection{webifier Tests}
 In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von webifier gilt, erläutert.
@@ -319,7 +377,43 @@ Wie nun gezeigt bietet die Plattform seh viele interessante Zusatzinformationen 
 
 \subsection{webifier Mail}
 
-\todo{Daniel}
+\textit{webifier Mail} ist eine Java-Anwendung, die eingehende E-Mails auf Links untersucht und für sie durch den Tester prüfen lässt.
+Ein wichtiger Aspekt der Anwendung ist das extrahieren der Links.
+Diese Aufgabe übernimmt die Klasse \lstinline{UrlsFromMessageExtractor}, deren Kernmethode \lstinline{getUrls(String)}\ in \autoref{lst:mail-url-extract} gezeigt wird.
+Die Methode erwartet als Parameter den zu durchsuchenden Text.
+Innerhalb der Methode wird ein \lstinline{Matcher}-Objekt initialisiert (s. Zeilen 7f), mit dem der Text iterativ durchkämmt wird (s. Zeilen 9f).
+Der reguläre Ausdruck, der bei der Erstellung verwendet wird ist eine komplexe, aber genaue Repräsentation des \ac{URL}-Formats ist.
+Während der iterativen Suche werden zusätzlich \ac{URL}-Duplikate ausgesondert (s. Zeile 11), sodass am Ende eine Liste von allen unterschiedlichen Links zurückgegeben werden kann (s. Zeile 14).
+
+\begin{scriptsize}
+	\lstset{
+		style=eclipsejava,
+		caption={URL-Extraktion getUrls Methode - webifier Mail},
+		label={lst:mail-url-extract}
+	}
+\begin{lstlisting}
+...
+public class UrlsFromMessageExtractor {
+	...
+	private List<String> ##getUrls##(String content) throws ... {
+		List<String> urls = new ArrayList<>();
+		Pattern pattern = Pattern.compile(
+				##"https?://()"##);
+		while (matcher.find()) {
+			String url = matcher.group();
+			if (!urls.contains(url))
+				urls.add(url);
+		}
+	}	
+}
+\end{lstlisting}
+\end{scriptsize}
+
+Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und Ergebnisformatierung.
+Wurden die Tests durchlaufen, werden die Ergebnisse zu \ac{HTML} gerendert, eine Mail mit ebendiesen Ergebnissen erstellt und an den Nutzer geschickt.
+\autoref{fig:mail-screenshot} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
+
+\todo{Screenshot einfügen}
 
 \subsection{webifier Data}
 \label{sec:umsetzung-data}
@@ -678,7 +772,7 @@ Da beide Tests das gleiche PhantomJS-Skript verwenden, wird an dieser Stelle auf
 
 Anders hingegen, als beim vorherigen Test, werden die Links nicht an \textit{webifier Data}, sondern an den externen Cloud-Service von Google geschickt.
 Zuvor muss jedoch die Anfrage konfiguriert werden.
-Dabei werden unter anderem die gewünschten Ergebnistypen (hier: alle vier, s. \autoref{par:konzep-gsb-types}), bedrohte Systeme (hier: \lstinline{ANY_PLATFORM}) und letzendlich die \acs{URL} angegeben werden.
+Dabei werden unter anderem die gewünschten Ergebnistypen (hier: alle vier, s. \autoref{par:konzep-gsb-types}), bedrohte Systeme (hier: \lstinline{ANY_PLATFORM}) und letzendlich die \acp{URL} angegeben werden.
 Findet der Service zu den Links keine Einträge in seiner Datenbank, so gibt er keine liste von matches aus.
 In diesem Fall ist das Ergebnis \textit{CLEAN}.
 Der Rest der ERgebnisberechnung findet wie im Konzept beschrieben statt.
