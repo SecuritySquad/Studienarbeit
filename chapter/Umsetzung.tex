@@ -398,7 +398,7 @@ public class UrlsFromMessageExtractor {
 	private List<String> ##getUrls##(String content) throws ... {
 		List<String> urls = new ArrayList<>();
 		Pattern pattern = Pattern.compile(
-				##"https?://()"##);
+				##"https?://([\\w+?.\\w+])+([a-zA-Z0-9~!@#$%\\^&amp;*()_\\-=+\\\\/?.:;',]*)?"##);
 		while (matcher.find()) {
 			String url = matcher.group();
 			if (!urls.contains(url))
@@ -411,9 +411,15 @@ public class UrlsFromMessageExtractor {
 
 Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und Ergebnisformatierung.
 Wurden die Tests durchlaufen, werden die Ergebnisse zu \ac{HTML} gerendert, eine Mail mit ebendiesen Ergebnissen erstellt und an den Nutzer geschickt.
-\autoref{fig:mail-screenshot} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
+\autoref{fig:mail-result} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
 
-\todo{Screenshot einfügen}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{images/mail-result.png}
+	\caption{webifier Mail - Screenshot einer Antwort}
+	\label{fig:mail-result}
+\end{figure}
 
 \subsection{webifier Data}
 \label{sec:umsetzung-data}
