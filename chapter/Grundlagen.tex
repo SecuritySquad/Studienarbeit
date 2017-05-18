@@ -187,6 +187,8 @@ Zu einer umfassenden Analyse gehört selbstverständlich auch die Analyse des Ne
 
 \section{Angriffstypen}
 
+Rechner und deren Nutzer werden häufig durch Angriffe aus dem Internet gefährdet. Beispielsweise durch Sicherheitslücken der Browser, durch die dieser zum Absturz gebracht werden kann. Häufig brechen Angreifer in Webserver ein um dort schadhaften Code zu verbreiten oder stellen diesen auf eigenen Webseiten bereit. Besuchen Nutzer solche Webseiten wird der Code des Angreifers vom Browser interpretiert und kann dadurch den Rechner des Nutzers oder auch das gesamte lokale Netzwerk, auch hinter einer Firewall angreifen.\footcite[Vgl.][1\psqq]{clientSideAttacks}
+
 Nach Schätzungen des DIW Wochenberichts entstehen in Deutschland jährlich Schäden in Höhe von insgesamt 3,4 Milliarden Euro.\footcite[Vgl.][301]{cybercrime} Hochrechnungen zufolge enstehen diese Schäden aus jährlich 14,7 Millionen Fällen von Internetkriminalität. Diese können in die vier Kategorien Schadsoftware, Waren- und Dienstleisungsbetrug, Identitätsdiebstal und Phishing gruppiert werden.\footcite[Vgl.][297]{cybercrime}
 
 \begin{figure}[H]
@@ -316,7 +318,7 @@ public class Portscanner {
 }
 \end{lstlisting}
 \end{scriptsize}
-\footnotetext{\cite{portscanner}}
+\footnotetext{Zitat \cite{portscanner}}
 
 Es gibt grundsätzlich viele verschiedene Möglichkeiten ein Angriffsziel auf offene Ports zu überprüfen. Die in dem Codebeispiel gezeigte Möglichkeit ist relativ simpel, jedoch effektiv. Jedoch ist es ebenfalls recht einfach einen derartigen Angriff zu blocken, da Schutzprogrammen leicht erkennen können, dass es sich um einen Portscan-Angriff handelt und die entsprechende IP dann für weitere Anfragen blockieren. Um diesen offensichtlichen Angriff zu verschleiern werden oft verschiedene Hosts genutzt. Der Angriff verteilt sich dann auf Anfragen von verschiedenen IP's, was es einem Erkennungsalgorithmus erschwert legitime Anfragen von einem verteilten Portscan zu differenzieren. Je mehr Hosts an einem derartigen Scan beteiligt sind, desto schwieriger wird es den entsprechenden Scan zu erkennen und entsprechende IP's zu blockieren. Zusätzlich spielt noch die Art der Anfrage eine Rolle. Es kann beispielsweise mittels eines Pings ein bestimmter Port angefragt werden. Dies ist aber keine effiziente Methode, da oft Firewalls Pings blockieren.
 
