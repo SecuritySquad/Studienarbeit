@@ -376,13 +376,7 @@ Wie nun gezeigt bietet die Plattform seh viele interessante Zusatzinformationen 
 
 \subsection{webifier Mail}
 
-\textit{webifier Mail} ist eine Java-Anwendung, die eingehende E-Mails auf Links untersucht und für sie durch den Tester prüfen lässt.
-Ein wichtiger Aspekt der Anwendung ist das extrahieren der Links.
-Diese Aufgabe übernimmt die Klasse \lstinline{UrlsFromMessageExtractor}, deren Kernmethode \lstinline{getUrls(String)}\ in \autoref{lst:mail-url-extract} gezeigt wird.
-Die Methode erwartet als Parameter den zu durchsuchenden Text.
-Innerhalb der Methode wird ein \lstinline{Matcher}-Objekt initialisiert (s. Zeilen 7f), mit dem der Text iterativ durchkämmt wird (s. Zeilen 9f).
-Der reguläre Ausdruck, der bei der Erstellung verwendet wird ist eine komplexe, aber genaue Repräsentation des \ac{URL}-Formats ist.
-Während der iterativen Suche werden zusätzlich \ac{URL}-Duplikate ausgesondert (s. Zeile 11), sodass am Ende eine Liste von allen unterschiedlichen Links zurückgegeben werden kann (s. Zeile 14).
+\textit{webifier Mail} ist eine Java-Anwendung, die eingehende E-Mails auf Links untersucht und für sie durch den Tester prüfen lässt. Ein wichtiger Aspekt der Anwendung ist das extrahieren der Links. Diese Aufgabe übernimmt die Klasse \lstinline{UrlsFromMessageExtractor}, deren Kernmethode \lstinline{getUrls(String)}\ in \autoref{lst:mail-url-extract} gezeigt wird. Die Methode erwartet als Parameter den zu durchsuchenden Text. Innerhalb der Methode wird ein \lstinline{Matcher}-Objekt initialisiert (s. Zeilen 7f), mit dem der Text iterativ durchkämmt wird (s. Zeilen 9f). Der reguläre Ausdruck, der bei der Erstellung verwendet wird ist eine komplexe, aber genaue Repräsentation des \ac{URL}-Formats ist. Während der iterativen Suche werden zusätzlich \ac{URL}-Duplikate ausgesondert (s. Zeile 11), sodass am Ende eine Liste von allen unterschiedlichen Links zurückgegeben werden kann (s. Zeile 14).
 
 \begin{scriptsize}
 	\lstset{
@@ -391,9 +385,7 @@ Während der iterativen Suche werden zusätzlich \ac{URL}-Duplikate ausgesondert
 		label={lst:mail-url-extract}
 	}
 \begin{lstlisting}
-...
 public class UrlsFromMessageExtractor {
-	...
 	private List<String> ##getUrls##(String content) throws ... {
 		List<String> urls = new ArrayList<>();
 		Pattern pattern = Pattern.compile(
@@ -408,9 +400,7 @@ public class UrlsFromMessageExtractor {
 \end{lstlisting}
 \end{scriptsize}
 
-Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und Ergebnisformatierung.
-Wurden die Tests durchlaufen, werden die Ergebnisse zu \ac{HTML} gerendert, eine Mail mit ebendiesen Ergebnissen erstellt und an den Nutzer geschickt.
-\autoref{fig:mail-result} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
+Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und Ergebnisformatierung. Wurden die Tests durchlaufen, werden die Ergebnisse zu \ac{HTML} gerendert, eine Mail mit ebendiesen Ergebnissen erstellt und an den Nutzer geschickt. \autoref{fig:mail-result} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
 
 \begin{figure}[H]
 	\centering
