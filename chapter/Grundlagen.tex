@@ -325,7 +325,7 @@ Im Folgenden wird einer der bekanntesten Scantypen, der SYN-Scan, erläutert. F�
 TCP nutzt für den Verbindungsaufbau den 3-Wege-Handshake. Der Ablauf ist in Abbildung \ref{fig:handshake} dargestellt. Zuerst sendet der Client einen \textit{SYN} an den Server. Dieser wird dann vom Server empfangen und er sendet einen \textit{ACK} als Antwort und gleichzeitig einen eigenen \textit{SYN} zurück an den Client. Zum Schluss sendet der Client noch einen \textit{ACK} zum Server als Antwort auf dessen \textit{SYN}. Die Verbindung ist danach aufgebaut und es können Daten übermittelt werden.\footcite[Vgl.][32]{port2}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=15cm]{images/handshake}
+  \includegraphics[width=10cm]{images/handshake}
   \caption[3-Step-Handshake TCP]{3-Step-Handshake TCP\protect\footnotemark}
   \label{fig:handshake}
 \end{figure}
@@ -333,7 +333,48 @@ TCP nutzt für den Verbindungsaufbau den 3-Wege-Handshake. Der Ablauf ist in Abb
 
 Für einen SYN-Scan versucht nun der Scanner TCP-Verbindungen mit den zu scannenden Ports aufzubauen. Er sendet also SYN-Anfragen an diese. Anhand der Antwort kann der Scanner den Status des Ports erkennen. Antwortet das Angriffsziel mit einem SYN/ACK so ist der Port offen. Ist die Antwort ein Reset-Flag(RST), kann der Port als geschlossen markiert werden. Komplizierter wird es, wenn keine Antwort kommt. Dies kann mehrere Gründe haben. Zum Einen ist es möglich, dass das Angriffsziel keine Verbindung hat. Deshalb sollte vor dem Scan überprüft werden ob der Rechner erreichbar ist. Ein weiterer Grund könnte eine Firewall sein, die Anfragen blockiert. Um dies Herauszufinden wird das SYN-Packet wiederholt gesendet falls keine Antwort erhalten wird. Ist ein Server erreichbar, aber es folgt keine Antwort auf einen SYN kann der Port als gefiltert markiert werden, was aussagt, dass eine Firewall die Verbindungen blockiert.\footcite[Vgl.][33]{port2}
 
-Um als Webseite die eigenen Nutzer zu scannen muss der Portscan-Code beispielsweise mittels JavaScript in die Seite eingebunden werden. Hier gibt es verschiedene Arten den Code möglichst unauffällig zu platzieren. Beispielsweise kann dieser in Image-Tags versteckt werden, welche dann beim Laden der Seite aufgeruft werden.
+Um als Webseite die eigenen Nutzer zu scannen muss der Portscan-Code beispielsweise mittels JavaScript in die Seite eingebunden werden. Hier gibt es verschiedene Arten den Code möglichst unauffällig zu platzieren. Eine Möglichkeit wird in Listing \ref{lst:javascriptscanner} gezeigt. Hier wird Portscanning betrieben indem versucht wird von der entsprechenden IP und dem Port eine img-Datei nachzuladen. Je nach Ergebnis wird dann entschieden ob der Port offen oder geschlossen ist. Bei erfolgreichem Laden oder einer Fehlermeldung bedeutet es, dass der Port offen ist, da er reagiert. Läuft der Request in einen Timeout wird der Port als geschlossen angesehen.
+
+Für die Funktion müssen Host-Adresse, der zu scannende Port und ein Timeout-Wert übergeben werden. Zunächst wird nun ein neues Image-Objekt erstellt(Zeile 2). Es wird definiert, dass bei einem Fehler als Rückgabewert oder einem erfolgreichen Laden der Port als offen markiert wird(Zeile 4-9). Bei bestimmten Ports muss noch das Protokoll entsprechend geändert werden. Beispielsweise muss für Port 443 das HTTPS-Protokoll verwendet werden(Zeile 16). Als Standardprotokoll ist HTTP definiert(Zeile 17). Das Protokoll, die Host-Adresse und der Port bilden zusammen den Pfad für das Image-Objekt. Je nach Protokoll muss noch ein eine jpg-Ressource angegeben werden(Zeile 17). Als Name der jpg-Datei wird hier die ID verwendet. Dieser Name ist jedoch irrelevant. Zum Schluss wird noch bei einem Timeout der Port als geschlossen markiert(Zeile 20-24). Mithilfe der Function scan() wird der Portscan gestartet. Das Beispiel-Listing bildet nur einen Teil des Portscans ab, zur besseren Übersichtlichkeit wurden initialisierung von Host und Port-Bereich sowie die Ergebnisausgabe nicht dargestellt.
+
+\begin{scriptsize}
+\lstset{
+    style=eclipsejavascript,
+    caption=[Beispiel eines simplen Java PortScanners in JavaScript]{Beispiel eines simplen Java PortScanners in JavaScript},
+    label={lst:javascriptscanner}
+}
+\begin{lstlisting}
+function scan(){
+   var  req = new pingrequest( f.host.value,p,t);
+   req.dorequest();
+}
+this.dorequest = function() {
+   var img = new Image();
+
+   img.onerror = function () {
+      if (!img) return;
+      img = undefined;
+      callback( host, port, 'up',id);
+   };
+   img.onload = img.onerror;
+
+   switch(port){
+      case 21:  src = 'ftp://' + this.id() + '@' + host + '/'; break;//ftp
+      case 25:  src = 'mailto://' + this.getid() + '@' + host ; break;//smtp **
+      case 70:  src = 'gopher://' + host + '/'; break;//gopher
+      case 119: src = 'news://' + host + '/'; break;//nntp **
+      case 443: src = 'https://' + host + '/' + this.getid() + '.jpg';
+      default:  src = 'http://' + host + ':' + port + '/' + this.getid() + '.jpg';// getid is here to prevent cache seekings;
+   }
+   img.src = src;
+   setTimeout(function () {
+      if (!img) return;
+      img = undefined;
+      callback( host, port, 'down',id);
+   }, timeout);
+};
+\end{lstlisting}
+\end{scriptsize}
 
 Zusätzlich zum Portscan gibt es noch den IP-Scan. Ein IP-Scan funktioniert grundsätzlich ähnlich zum Portscan. Hier wird jedoch nicht versucht die möglichen Angriffspunkte eines Rechners aufzudecken, sondern das Netzwerk auszuspähen. Da JavaScript clientseitig ausgeführt wird versuchen Angreifer häufig über die bekannten \textit{Heimnetz-IPs}(beispielsweise. 192.168.178.*) das Netzwerk zu analysieren. Es werden die IP-Bereiche abgesucht nach anderen Rechner, die sich in dem Netzwerk befinden. So kann ein Angreifer Erkenntnisse über das komplette Netzwerk seines Ziels erlangen um so einen erfolgreicheren Angriff zu starten.
 
