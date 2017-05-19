@@ -1,58 +1,22 @@
 \chapter{Umsetzung}
 
-In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen Konzept die
-Umsetzung von \textit{webifier} beschrieben. Zunächst folgt nun die Erläuterung der Gesamtumsetzung,
-gefolgt von der Umsetzung der Teilanwendungen. Abschließend wird die Implementierung der einzelnen Tests vorgestellt.
+In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen Konzept dieUmsetzung von \textit{webifier} beschrieben. Zunächst folgt nun die Erläuterung der Gesamtumsetzung,gefolgt von der Umsetzung der Teilanwendungen. Abschließend wird die Implementierung der einzelnen Tests vorgestellt.
 
 \section{Gesamtsystem}
 
-Dieser Abschnitt beschreibt wie \textit{webifier} implementiert ist und welche Technologien
-eingesetzt wurden.
-Zunächst wird die Gesamtarchitektur grob umrissen, wobei vor allem die Zusammenhänge
-und Abhängigkeiten zwischen den einzelnen Komponenten darlegt werden.
+Dieser Abschnitt beschreibt wie \textit{webifier} implementiert ist und welche Technologieneingesetzt wurden.Zunächst wird die Gesamtarchitektur grob umrissen, wobei vor allem die Zusammenhängeund Abhängigkeiten zwischen den einzelnen Komponenten darlegt werden.
 
-Abbildung \ref{fig:anwendung-umsetzung} zeigt alle Komponenten von \textit{webifier} und ihre
-wichtigste Technologie.
-Zusätzlich sind die, zwischen den Komponenten, verwendeten
-Kommunikationstechnologien dargestellt.
+Abbildung \ref{fig:anwendung-umsetzung} zeigt alle Komponenten von \textit{webifier} und ihrewichtigste Technologie.Zusätzlich sind die, zwischen den Komponenten, verwendetenKommunikationstechnologien dargestellt.
 
-Der Standard Use Case beginnt, wenn der Nutzer eine verdächtige \acs{URL} findet und diese prüfen
-möchte. Dies geschieht beispielsweise über \textit{webifier Plattform}.
-In der Plattform wird die Anfrage angenommen und mit Hilfe des Spring-Frameworks verarbeitet.
-Dabei wird ein neuer Tester-Prozess mit der zu prüfenden \acs{URL} über das \ac{CLI} gestartet.
-Abbildung \ref{fig:anwendung-umsetzung} zeigt dies im rechten unteren Bereich.
+Der Standard Use Case beginnt, wenn der Nutzer eine verdächtige \acs{URL} findet und diese prüfenmöchte. Dies geschieht beispielsweise über \textit{webifier Plattform}.In der Plattform wird die Anfrage angenommen und mit Hilfe des Spring-Frameworks verarbeitet.Dabei wird ein neuer Tester-Prozess mit der zu prüfenden \acs{URL} über das \ac{CLI} gestartet.Abbildung \ref{fig:anwendung-umsetzung} zeigt dies im rechten unteren Bereich.
 
-Ein weiterer Use Case ist die Prüfung von verdächtigen E-Mails.
-Empfängt der Nutzer eine verdächtige E-Mail, so kann er diese über \textit{webifier Mail} prüfen
-lassen.
-Dazu leitet er die E-Mail an \textit{webifier Mail} weiter.
-Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acsp{URL} zur Prüfung an
-\textit{webifier Tester} weiter.
-Dazu wird wie bei der \textit{webifier Plattform} pro \acs{URL} ein Prüfdurchlauf beim Tester über
-\ac{CLI} angefordert.
-Dieser Vorgang ist in Abbildung \ref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
+Ein weiterer Use Case ist die Prüfung von verdächtigen E-Mails.Empfängt der Nutzer eine verdächtige E-Mail, so kann er diese über \textit{webifier Mail} prüfenlassen.Dazu leitet er die E-Mail an \textit{webifier Mail} weiter.Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acsp{URL} zur Prüfung an\textit{webifier Tester} weiter.Dazu wird wie bei der \textit{webifier Plattform} pro \acs{URL} ein Prüfdurchlauf beim Tester über\ac{CLI} angefordert.Dieser Vorgang ist in Abbildung \ref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
 
-Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung der
-Sicherheitstests zuständig ist.
-Es ist deshalb in der Grafik zwischen den Tests und den übrigen Komponenten des System abgebildet.
-Der Aufruf des Testers erfolgt über \ac{CLI}, wobei er als Parameter die zu überprüfende \acs{URL} erwartet.
-Im ersten Schritt wird die \acs{URL} validiert und ggf. über etwaige \acs{HTTP}-Weiterleitungen
-aufgelöst.
-Entsteht dabei ein Fehler, so gibt der Tester diesen an seinen Aufrufer zurück und beendet sich.
+Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung derSicherheitstests zuständig ist.Es ist deshalb in der Grafik zwischen den Tests und den übrigen Komponenten des System abgebildet.Der Aufruf des Testers erfolgt über \ac{CLI}, wobei er als Parameter die zu überprüfende \acs{URL} erwartet.Im ersten Schritt wird die \acs{URL} validiert und ggf. über etwaige \acs{HTTP}-Weiterleitungenaufgelöst.Entsteht dabei ein Fehler, so gibt der Tester diesen an seinen Aufrufer zurück und beendet sich.
 
-War die Vorprüfung erfolgreich, so werden alle ihm bekannten Tests über \ac{CLI} mit der \acs{URL} als Parameter gestartet.
-Alle Tests laufen in isolierten Docker-Containern, um die Systemsicherheit zu
-gewährleisten.
-Sobald ein Test erfolgreich beenet wurde gibt er sein Ergebnis und die Zusatzinformationen
-zurück.
-Der Tester nimmt dies an und propagiert dieses Teilergebnis an den Aufrufer weiter.
-Sobald alle Tests ihr Ergebnis zurückgemeldet haben, berechnet der Tester das
-Endergebnis und gibt es ebenfalls zurück.
+War die Vorprüfung erfolgreich, so werden alle ihm bekannten Tests über \ac{CLI} mit der \acs{URL} als Parameter gestartet.Alle Tests laufen in isolierten Docker-Containern, um die Systemsicherheit zugewährleisten.Sobald ein Test erfolgreich beenet wurde gibt er sein Ergebnis und die Zusatzinformationenzurück.Der Tester nimmt dies an und propagiert dieses Teilergebnis an den Aufrufer weiter.Sobald alle Tests ihr Ergebnis zurückgemeldet haben, berechnet der Tester dasEndergebnis und gibt es ebenfalls zurück.
 
-Ist der Aufrufer die \textit{webifier Plattform}, so wird das Ergebnis jedes fertigen Einzeltests
-direkt an den Browser des Nutzers geschickt.
-So werden nach und nach alle Ergebnisse angezeigt, bis schließlich das Gesamtergebnis präsentiert
-wird.
+Ist der Aufrufer die \textit{webifier Plattform}, so wird das Ergebnis jedes fertigen Einzeltestsdirekt an den Browser des Nutzers geschickt.So werden nach und nach alle Ergebnisse angezeigt, bis schließlich das Gesamtergebnis präsentiertwird.
 Liefert der Tester einen Fehler, so wird dieser ebenfalls an den Nutzer weitergeleitet.
 Wenn der Tester durch \textit{webifier Mail} gestartet wurde, dann wartet das Modul, bis die
 Ergebnisse aller \acsp{URL} feststehen und sendet anschließend eine E-Mail mit allen Ergebnissen an
@@ -461,21 +425,11 @@ Der Screnenshot der Seite wird beim ausklappen des Panels einfach angezeigt, so 
   \label{fig:platform-result-screenshot}
 \end{figure}
 
-Wie nun gezeigt bietet die Plattform sehr viele interessante Zusatzinformationen zu den
-Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
+Wie nun gezeigt bietet die Plattform sehr viele interessante Zusatzinformationen zu den Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
 
 \subsection{webifier Mail}
 
-Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail}
-ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit
-einem E-Mail-Client, welcher via \acs{IMAP} seine Mails abfragt. Die engehenden Nachrichten werden
-auf Links hinuntersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle
-Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet
-\textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT:
-Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner
-Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In
-dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der
-Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
+Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail} ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit einem E-Mail-Client, welcher via \acs{IMAP} seine Mails abfragt. Die engehenden Nachrichten werden auf Links hinuntersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet \textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT: Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
 
 \begin{figure}[H]
 	\centering
@@ -484,8 +438,7 @@ Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
 	\label{fig:mail-start}
 \end{figure}
 
-Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \textit{webifier
-Mail} angekommen sind wird eine Ergebnismail generiert und an den Nutzer zurückgeschickt. Eine
+Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \textit{webifier Mail} angekommen sind wird eine Ergebnismail generiert und an den Nutzer zurückgeschickt. Eine
 solche ist in Abbildung \ref{fig:mail-result} zu sehen. Das Gesamtergebis sowie alle Teilergebnisse
 werden farblich entsprechend des Ergebnisses gekennzeichnet um dem Nutzer dadurch die
 Vertrauenswürdigkeit der Webseite deutlich zu machen. Häufig werden externe Ressourcen wie Bilder
@@ -981,7 +934,7 @@ unterschiedlichen Domains erreichbar sind. Um dies zu erreichen wurden mehrere M
 Als erstes werden alle Links aufgelöst, um tatsächlich den Link der zu vergleichenden Seite zu
 nutzen. Ist der Link nicht erreichbar, oder führt er ins Nichts, so wird er aussortiert.
 Anschließend wird die \acs{URL} auf die registrierte \ac{TLD} reduziert und mit der der gegebenen
-Seite verglichen. Beispielsweise wird \lstinline[style=eclipse]{https://abc.example.com/xyz} auf \lstinline[style=eclipse]{example.com} minimiert. Sind beide gleich, so wird der Link verworfen. So werden Unterseiten und Subdomains der gegeben Seite aussortiert. Als nächstes wird die IP-Adresse der Domain aufgelöst und mit der der zu prüfenden Seite verglichen. Sind diese identisch wird auch dieser Link aus der Liste entfernt. Als letztes werden die Zertifikatinformation der Links ausgelesen, sofern ein SSL-Zertifikat verfügbar ist. Anschließend werden die \textit{Subject}-Informationen des Zertifikates mit denen der gegebenen Seite verglichen. Sind diese gleich, so scheidet auch dieser Link aus. Nun wird die Liste der übrig gebliebenen Links noch auf zehn Links reduziert, welche nun im nächsten Schritt aufgerufen werden.
+Seite verglichen. Beispielsweise wird \lstinline[style=eclipse]{https://abc.example.com/xyz} auf \lstinline[style=eclipse]{example.com} minimiert. Sind beide gleich, so wird der Link verworfen. So werden Unterseiten und Subdomains der gegeben Seite aussortiert. Als nächstes wird die IP-Adresse der Domain aufgelöst und mit der der zu prüfenden Seite verglichen. Sind diese identisch wird auch dieser Link aus der Liste entfernt. Als letztes werden die Zertifikatinformation der Links ausgelesen, sofern ein \acs{SSL}-Zertifikat verfügbar ist. Anschließend werden die \textit{Subject}-Informationen des Zertifikates mit denen der gegebenen Seite verglichen. Sind diese gleich, so scheidet auch dieser Link aus. Nun wird die Liste der übrig gebliebenen Links noch auf zehn Links reduziert, welche nun im nächsten Schritt aufgerufen werden.
 
 Der vierte Schritt ist das Abrufen der Links der möglichen Originalwebseiten. Wie im ersten Schritt
 für die gegebene Seite werden nun für alle verbliebenen Links der Quelltext ausgelesen, daraus
@@ -990,7 +943,7 @@ im folgenden Schritt für den Vergleich benötigt.
 
 Nun folgt der eigentliche Schritt des Vergleichens der möglichen Originale mit der zu validierenden Webseite. Der Vergleich erfolgt in den drei Bereichen Quelltext, Inhalt und Aussehen. Zum Quelltext- und Inhaltsvergleich werden Funktionen (\textit{difflib.SequenceMatcher(\ldots).quick\_ratio()}) der Python-Standardbibliothek verwendet. Für den Vergleich der Screenshots wurde auf die freie Bibliothek Resemble.js zurückgegriffen. Diese liefert für den Vergleich von zwei Bildern die prozentuale Übereinstimmung und erzeugt einen Differenzbild. All diese Daten wurden den Links zugeordnet und im nächsten Schritt zur Ergebnisberechnung verwendet.
 
-Im vorletzten Schritt werden nun alle Links klassifiziert. Wie Listing \ref{lst:phishingdetector-result} werden zunächst werden die Schwellwerte der einzelnen Ergebnisklassen festgelegt. Diese sind davon abhängig, ob Passworteingabefelder auf der Seite vorhanden sind und ob die Seite ein SSL-Zertifikat nutzt. Besitzt die Seite mindestens ein Passwortfeld und nutzt kein Zertifikat, so werden die Schwellwerte um 0.05 reduziert. Anschließend wird die Durchschnittsübereinstimmung der beiden Seiten berechnet. In diese Rechnung fließt das Ergebnis des Screenshotvergleichs mit doppeltem Gewicht ein, da dieses am Aussagekräftigsten ist. Letztendlich werden die Links mit Hilfe der Schwellwerte und der berechneten Werte der Übereinstimmung klassifiziert. Hierfür gibt es einmal einen Mindestschwellwert für die Durchschnittsübereinstimmung, ab dem ein Ergebnis greift und Schwellwerte für die einzelnen Bereiche, in denen verglichen wurde. Die Bedingungen in den Zeilen 20 und 25 in Listing \ref{lst:phishingdetector-result} zeigen die Fälle, in denen ein Link \textit{SUSPICIOUS} oder \textit{MALICIOUS} ist.
+Im vorletzten Schritt werden nun alle Links klassifiziert. Wie Listing \ref{lst:phishingdetector-result} werden zunächst werden die Schwellwerte der einzelnen Ergebnisklassen festgelegt. Diese sind davon abhängig, ob Passworteingabefelder auf der Seite vorhanden sind und ob die Seite ein \acs{SSL}-Zertifikat nutzt. Besitzt die Seite mindestens ein Passwortfeld und nutzt kein Zertifikat, so werden die Schwellwerte um 0.05 reduziert. Anschließend wird die Durchschnittsübereinstimmung der beiden Seiten berechnet. In diese Rechnung fließt das Ergebnis des Screenshotvergleichs mit doppeltem Gewicht ein, da dieses am Aussagekräftigsten ist. Letztendlich werden die Links mit Hilfe der Schwellwerte und der berechneten Werte der Übereinstimmung klassifiziert. Hierfür gibt es einmal einen Mindestschwellwert für die Durchschnittsübereinstimmung, ab dem ein Ergebnis greift und Schwellwerte für die einzelnen Bereiche, in denen verglichen wurde. Die Bedingungen in den Zeilen 20 und 25 in Listing \ref{lst:phishingdetector-result} zeigen die Fälle, in denen ein Link \textit{SUSPICIOUS} oder \textit{MALICIOUS} ist.
 
 \begin{scriptsize}
 \lstset{
@@ -1035,4 +988,4 @@ def calculate_result(website, response):
 Der letzte Schritt berechnet abschließend das Endergebnis des Tests. Ist mindestens ein Link \textit{SUSPICIOUS} oder \textit{MALICIOUS}, so ist auch das Endergebnis entsprechend \textit{SUSPICIOUS} oder \textit{MALICIOUS}. Andernfalls ist das Gesamtergebnis des Tests \textit{CLEAN}.
 
 \subsection{Screenshot der Seite}
-Der Screenshot der Seite erfolgt über eine von PhantomJS gelieferte Methode um den Seiteninhalt aufzunehmen und als Bilddatei abzuspeichern. PhantomJS wird hierbei genutzt da der Test in einem Docker ohne grafische Benutzeroberfläche läuft und deshalb ein headless Browser nötig ist um die Seite aufzurufen. Nachdem die Seite in einer Bilddatei abgespeichert ist, wird diese als base64-encoded String weitergegeben. Der Test liefert immer das Ergebnis \textit{sauber}, welches aber für den Tester irrelevant ist, da der Screenshot-Test keine Gewichtung im Tester hat. In der Ergebnisinformation wird der base64 encodierte String weitergegeben, welcher dann von der Plattform interpretiert und als Bild für den Nutzer dargestellt wird.
+Der Screenshot der Seite erfolgt über eine von PhantomJS gelieferte Methode um den Seiteninhalt aufzunehmen und als Bilddatei abzuspeichern. PhantomJS wird hierbei genutzt da der Test in einem Docker-Container ohne grafische Benutzeroberfläche läuft und deshalb ein headless Browser nötig ist um die Seite aufzurufen. Nachdem die Seite in einer Bilddatei abgespeichert ist, wird diese als base64-encoded String weitergegeben. Der Test liefert immer das Ergebnis \textit{unbedenklich}, welches aber für den Tester irrelevant ist, da der Screenshot-Test keine Gewichtung im Tester hat. In der Ergebnisinformation wird der base64 encodierte String weitergegeben, welcher dann von der Plattform interpretiert und als Bild für den Nutzer dargestellt wird.
