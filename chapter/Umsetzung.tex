@@ -30,41 +30,51 @@ Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acsp{
 \textit{webifier Tester} weiter.
 Dazu wird wie bei der \textit{webifier Plattform} pro \acs{URL} ein Prüfdurchlauf beim Tester über
 \ac{CLI} angefordert.
-Dieser Vorgang ist in \autoref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
+Dieser Vorgang ist in Abbildung \ref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
 
-Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung der Sicherheitstests zuständig ist.
-Es ist deshalb in der Grafik zwischen den Tests und dem Rest des System abgebildet.
-Der Aufruf des Testers erfolgt über \ac{CLI}, wobei er als Parameter die zu überprüfende \ac{URL} erwartet.
-Im ersten Schritt wird die \ac{URL} validiert und ggf. über etwaige \ac{HTTP}-Weiterleitungen aufgelöst.
-Entsteht dabei ein Fehler, so gibt der Tester ihn an seinen Aufrufer zurück und beendet sich.
+Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung der
+Sicherheitstests zuständig ist.
+Es ist deshalb in der Grafik zwischen den Tests und den übrigen Komponenten des System abgebildet.
+Der Aufruf des Testers erfolgt über \ac{CLI}, wobei er als Parameter die zu überprüfende \acs{URL} erwartet.
+Im ersten Schritt wird die \acs{URL} validiert und ggf. über etwaige \acs{HTTP}-Weiterleitungen
+aufgelöst.
+Entsteht dabei ein Fehler, so gibt der Tester diesen an seinen Aufrufer zurück und beendet sich.
 
-War die Vorprüfung erfolgreich, so werden alle ihm bekannten Tests über \ac{CLI} mit der \ac{URL} als Parameter gestartet.
-Alle Tests laufen in einem \textit{Docker}-Container, um die Systemsicherheit zu gewährleisten.
-Sobald ein Test fertig ist gibt er sein Ergebnis und die Zusatzinformationen über die Standardausgabe aus.
-Der Tester nimmt dies zur Kenntnis und propagiert dieses Teilergebnis an den Aufrufer weiter.
-Sobald alle Tests ihr Ergebnis über zurückgemeldet haben, berechnet der \textit{Tester} das Endergebnis und liefert dieses an seinen Aufrufer zurück.
+War die Vorprüfung erfolgreich, so werden alle ihm bekannten Tests über \ac{CLI} mit der \acs{URL} als Parameter gestartet.
+Alle Tests laufen in isolierten Docker-Containern, um die Systemsicherheit zu
+gewährleisten.
+Sobald ein Test erfolgreich beenet wurde gibt er sein Ergebnis und die Zusatzinformationen
+zurück.
+Der Tester nimmt dies an und propagiert dieses Teilergebnis an den Aufrufer weiter.
+Sobald alle Tests ihr Ergebnis zurückgemeldet haben, berechnet der Tester das
+Endergebnis und gibt es ebenfalls zurück.
 
-Ist der Aufrufer die \textit{webifier Plattform}, so wird das Ergebnis jedes fertigen Einzeltests per direkt an den Browser des Nutzers geschickt.
-So werden nach und nach alle Ergebnisse angezeigt, bis schließlich das Gesamtergebnis präsentiert wird.
+Ist der Aufrufer die \textit{webifier Plattform}, so wird das Ergebnis jedes fertigen Einzeltests
+direkt an den Browser des Nutzers geschickt.
+So werden nach und nach alle Ergebnisse angezeigt, bis schließlich das Gesamtergebnis präsentiert
+wird.
 Liefert der Tester einen Fehler, so wird dieser ebenfalls an den Nutzer weitergeleitet.
-Wenn der Tester durch \textit{webifier Mail} gestartet wurde, dann wartet das Modul, bis die Ergebnisse aller \acp{URL} feststehen und sendet dann eine E-Mail mit allen Ergebnissen an den Nutzer zurück.
-Dies geschieht wie entgegengesetzt zum weg der Anfrage über \ac{IMAP} und \ac{SMTP}.
+Wenn der Tester durch \textit{webifier Mail} gestartet wurde, dann wartet das Modul, bis die
+Ergebnisse aller \acsp{URL} feststehen und sendet anschließend eine E-Mail mit allen Ergebnissen an
+den Nutzer zurück.
 
-Zusätzlich zur Standardausgabe der Ergebnisse an den jeweiligen Aufrufer, schreibt der \textit{webifier Tester} seine Ergebnisse in die zentrale Persistenzkomponente \textit{webifier Data}.
+Zusätzlich zur Standardausgabe der Ergebnisse, sendet der
+Tester seine Ergebnisse an \textit{webifier Data}.
 Diese lässt sich über eine \ac{REST}-Schnittstelle ansprechen.
-Über diese Schnittstelle speist der Tester seine Ergebnisse in die \textit{mongoDB}-Datenbank.
+\textit{webifier Tester} speichert alle Ergebnisdaten in einer \textit{MongoDB}.
 
-Das Modul \textit{webifier Statistics} ist zuständig für alle Auswertungen, die auf den Ergebnissen der Anwendung gemacht werden.
+Das Modul \textit{webifier Statistics} ist zuständig für alle Auswertungen, die mit den Ergebnissen
+der Anwendung gemacht werden.
 Diese Analysen werden mit \textit{R} spezifiziert.
-Die Komponente greift direkt auf die Datenbank zu und führt regelmäßig Analyseprozesse durch.
-Dabei entstehen \ac{HTML}-Berichte, die von Interessenten unter \url{statistics.webifier.de}
-abgerufen werden können.
-Dieser Use Case wird in \autoref{fig:anwendung-umsetzung} in der Mitte gezeigt.
+Die Komponente greift hierfür auf die Datenbank zu und führt regelmäßig Analyseprozesse
+durch.
+Dabei entstehen \ac{HTML}-Berichte, die als Webseite abgerufen werden können.
+Dieser Use Case wird in Abbildung \ref{fig:anwendung-umsetzung} in der Mitte gezeigt.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{images/anwendung-umsetzung}
-	\caption{Umgesetzte Architektur der Gesamtanwendung}
+	\caption{Umgesetzte Architektur des Gesamtsystems}
 	\label{fig:anwendung-umsetzung}
 \end{figure}
 
@@ -74,12 +84,17 @@ In den nachfolgenden Abschnitten wird die Umsetzung der einzelnen Komponenten de
 In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von \textit{webifier} gilt,
 erläutert.
 
-Um die Tests vom Gesamtsystem abzukapseln wird auf Docker gesetzt. Hierbei wird für jeden Test ein eigenes Image geschrieben. Die Tests werden vom Tester dann gestartet. So wird jeder Test in einem eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren sind und sich gegenseitig oder das Gesamtsystem nicht beeinflussen.
+Um die Tests vom Gesamtsystem abzukapseln wird Docker eingesetzt. Hierbei wird für jeden Test ein
+eigenes Image erstellt. Die Tests werden dann vom Tester gestartet. So wird jeder Test in einem
+eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren
+sind und sich weder gegenseitig, noch das Gesamtsystem beeinflussen.
 
 Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den
 jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels
 \ac{JSON}-Strings realisiert. Wie in Listing \ref{lst:resultjson} zu sehen besteht das \ac{JSON} aus dem
-Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
+Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hier können für jeden
+Test weitergehende Informationen übermittelt werden. Für den Test auf Portscanning wird
+beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
 
 \begin{scriptsize}
 \lstset{
@@ -97,14 +112,14 @@ Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hie
 \end{lstlisting}
 \end{scriptsize}
 
-\begin{itemize}
-  \item Beschreiben der Startparameter URL und ID
-\end{itemize}
+\todo{Beschreiben der Startparameter URL und ID}
 
 \subsection{webifier Tester}
 
-Der \textit{webifier Tester} wurde als Anwendung für das \ac{CLI} in Java implementiert. Der Tester
-kann mit Hilfer verschiedener Parameter in seinem Verhalten gesteuert werden. Die Option \lstinline[style=eclipse]{-h} gibt beispielsweise die in Listing \ref{lst:tester-help} dargestellte Hilfe aus.
+Der \textit{webifier Tester} wurde als Anwendung für \ac{CLI} in Java implementiert. Der Tester
+kann mit Hilfe verschiedener Parameter in seinem Verhalten gesteuert werden. Die Option
+\lstinline[style=eclipse]{-h} gibt beispielsweise die in Listing \ref{lst:tester-help} dargestellte
+Hilfe aus.
 
 \begin{scriptsize}
 \lstset{
@@ -122,7 +137,17 @@ usage: java -jar webifier-tester.jar
 \end{lstlisting}
 \end{scriptsize}
 
-Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende Url angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test. Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgebaformat spezifiziert werden. Dies ist vorallem für die automatisierte Testausführung, beispielsweise mit \textit{webifier Plattform} relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben werden alle Events (Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird kein Format spezifiziert so werden die Ergebnisse wie in Listing \ref{lst:tester-result} dargestellt ausgegeben.
+Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende
+\acs{URL} angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben
+werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test.
+Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgebaformat spezifiziert werden. Dies ist
+vorallem für die automatisierte Testausführung, beispielsweise mit \textit{webifier Plattform}
+relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben
+werden alle Events (beispielsweise Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird
+kein Format spezifiziert so werden die Ergebnisse wie in Listing \ref{lst:tester-result}
+dargestellt ausgegeben.
+
+\newpage
 
 \begin{scriptsize}
 \lstset{
@@ -172,6 +197,8 @@ Wie im Konzept bereits erwähnt verwaltet der Tester alle auszuführenden Tests.
 
 Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten in Sekunden. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann. Bei der Ausführung und beim Beenden der Tests werden die Platzhalter \lstinline[style=eclipse]{#ID} und \lstinline[style=eclipse]{#URL} durch die generierten, bzw. vom Nutzer angegebenen Daten ersetzt.
 
+\newpage
+
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
@@ -210,9 +237,19 @@ Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausfüh
 
 Am Ende der Datei lässt sich noch die Einstellung festlegen, ob das Endergebnis an \textit{webifier
 Data} gesendet werden soll oder nicht. Am Anfang der Datei lässt sich der so genannte
-\textit{Resolver} konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt erreichbar ist und löst wenn nötig Weiterleitungen der Url auf und gibt das Ergebnis an den Tester zurück.
+Resolver konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt
+erreichbar ist und löst wenn nötig Weiterleitungen der \acs{URL} auf und gibt das Ergebnis an den
+Tester zurück.
 
-Ist die angegebene Url erreichbar wird die vom \textit{Resolver} aufgelöste Url verwendet und alle anderen Tests damit gestartet. Nun wartet der Tester bis alle Ergebnisse der Tests verfügbar sind oder die Angegebenen Timeouts erreicht sind. Im Falle eines Timeouts erhält der Test das Ergebnis \textit{UNDEFINED}. Abschließend wird das Gesamtergebnis für die angegebene Url wie bereits in Abschnitt \ref{sec:konzept-tester} beschrieben berechnet. Listing \ref{lst:tester-testresult-calculation} zeigt einen Ausschnitt der Implementierung der Ergebnisberechnung.
+Ist die angegebene Url erreichbar wird die vom Resolver aufgelöste \acs{URL} verwendet und alle
+anderen Tests damit gestartet. Nun wartet der Tester bis alle Ergebnisse der Tests verfügbar sind
+oder die angegebenen Timeouts erreicht sind. Im Falle eines Timeouts erhält der Test das Ergebnis
+\textit{UNDEFINED}. Abschließend wird das Gesamtergebnis für die angegebene \acs{URL} wie bereits in
+Abschnitt \ref{sec:konzept-tester} beschrieben berechnet. Listing
+\ref{lst:tester-testresult-calculation} zeigt einen Ausschnitt der Implementierung der
+Ergebnisberechnung.
+
+\newpage
 
 \begin{scriptsize}
 \lstset{
@@ -245,8 +282,8 @@ private WebifierOverallTestResult calculateOverallResult() {
 
 Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde wird dieses über
 die von \textit{webifier Data} bereitgestellte Schnittstelle dort gespeichert. Die Kommunikation mit
-\textit{webifier Data} läuft ebenfalls über das \ac{JSON}-Format. Genaueres hierzu folgt in
-Abschnitt \ref{sec:umsetzung-data}.
+\textit{webifier Data} läuft über \ac{REST}, ebenfalls über das \ac{JSON}-Format. Genaueres hierzu
+folgt in Abschnitt \ref{sec:umsetzung-data}.
 
 \subsection{webifier Plattform}
 
@@ -256,6 +293,8 @@ Komponente wurde mit Java umgesetzt und basiert auf dem Spring-Framework. Zusät
 \textit{webifier Plattform} ist eine Webanwendung und bietet eine benutzerfreundliche Öberfläche zur
 Bedienung von \textit{webifier Tester}. Um die \textit{Plattform} für die optimale Nutzung des
 Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} dargestellte Datei, mit der alle notwendigen Parameter angepasst werden können.
+
+\newpage
 
 \begin{scriptsize}
 \lstset{
@@ -279,10 +318,11 @@ Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers
 Die Plattform stellt außerdem eine Möglichkeit zur Massenüberprüfung von Webseiten zur Verfügung. Hierfür kann eine Liste von Urls in form eines Texts oder einer Datei angegeben werden. In diesem Modus ist es allerdings nicht möglich alle Ergebnisse dierekt zu sehen, da der Vorgang je nach größe der Liste mehrere Tage oder Wochen dauern kann. Deshalb ist dieser Modus eher für langfristige Analysen geeignet.
 
 Im Folgenden wird nun noch einmal der Ablauf einer Überprüfung beschrieben und die Oberfläche von
-\textit{webifier Plattform} dargestellt. Besucht der Nutzer die Webseite der PLattform sieht er
+\textit{webifier Plattform} dargestellt. Besucht der Nutzer die Webseite der Plattform sieht er
 zunächst die in Abbildung \ref{fig:platform-start} gezeigte Startseite. Hier kann der User nun eine
-beliebige Url in das Eingabefeld tippen und anschließend die Überprüfung starten. Außerdem bietet
-die Startseite Links zur bereits beschriebenen Batchverarbeitung und zu \textit{webifier Statistics}. Dieses Modul wird in Abschnitt \ref{sec:umsetzung-statistics} ausführlich dargestellt wird.
+beliebige \acs{URL} in das Eingabefeld tippen und anschließend die Überprüfung starten. Außerdem bietet
+die Startseite Links zur bereits beschriebenen Batchverarbeitung und zu \textit{webifier
+Statistics}. Dieses Modul wird in Abschnitt \ref{sec:umsetzung-statistics} ausführlich dargestellt.
 
 \begin{figure}[H]
   \centering
@@ -306,6 +346,12 @@ Nachdem die Überprüfung einer Webseite gestartet wurde wird der Nutzer auf die
 
 Möchte der Nutzer noch genauere Informationen zu den Ergebnissen eines Tests, so lassen sich alle Testfelder mit einem Klick darauf ausklappen. Im Folgenden werden nun die Detailansichten der einzelnen Testergebnisse gezeigt und erläutert.
 
+Die Detailansicht des \textit{Virenscans der Webseite}, welche in Abbildung
+\ref{fig:platform-result-virusscan} dargestellt ist, zeigt einmal die Anzahl aller gescannten
+Dateien, sowie die Anzahlen der gefundenen verdächtigen oder maliziösen Dateien. Außerdem erhält
+die Ansicht eine genaue Auflistung aller Dateien mit entsprechendem Ergebnis. So lässt sich genau
+feststellen, welche Dateien welche Bedrohung darstellen.
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=7.5cm]{images/platform/virusscan-malicious}
@@ -313,7 +359,10 @@ Möchte der Nutzer noch genauere Informationen zu den Ergebnissen eines Tests, s
   \label{fig:platform-result-virusscan}
 \end{figure}
 
-Die Detailansicht des Virenscans, welche in Abbildung \ref{fig:platform-result-virusscan} dargestellt ist, zeigt einmal die Anzahl aller gescannten Dateien, sowie die Anzahlen der gefundenen verdächtigen oder maliziösen Dateien. Außerdem erhält die Ansicht eine genaue Auflistung aller Dateien mit entsprechendem Ergebnis. So lässt sich genau feststellen, welche Dateien welche Bedrohung darstellen.
+Der \textit{Vergleich in verschiedenen Browsern} zeigt die maximale und die durchschnittliche
+Abweichung, sowohl als absoluten, als auch als prozentualen Wert. Zusätzlich erhält der Nutzer eine
+Übersicht über alle Systeme, welche getestet und miteinander verglichen wurden. Zwei
+Beispielergebnisse hierfür sind in Abbildung \ref{fig:platform-result-header-inspection} zu sehen.
 
 \begin{figure}[H]
 \centerline{%
@@ -324,7 +373,11 @@ Die Detailansicht des Virenscans, welche in Abbildung \ref{fig:platform-result-v
 \label{fig:platform-result-header-inspection}
 \end{figure}
 
-Der Vergleich in verschiedenen Browsern zeigt die maximale und die durchschnittliche Abweichung, sowohl als absoluten, als auch als prozentualen Wert. Zusätzlich erhält der Nutzer eine Übersicht uber alle Systeme, welche getestet und miteinander verglichen wurden. Zwei Beispielergebnisse hierfür sind in Abbildung \ref{fig:platform-result-header-inspection} zu sehen.
+Abbildung \ref{fig:platform-result-portscan} zeigt die Ergebnisse der \textit{Überprüfung der
+Port-Nutzung}, welche im Falle eines verdächtigen oder bedrohlichen Ergebnisses eine Liste mit allen
+gefundenen Ports enthält. Das Ergebnis der \textit{Überprüfung der IP-Nutzung} ist gleich aufgebaut
+und ebenfalls in Abbildung \ref{fig:platform-result-portscan} abgebildet. Es stellt bei
+entsprechenden Funden eine Liste aller IP-Adressen bereit.
 
 \begin{figure}[H]
 \centerline{%
@@ -335,18 +388,9 @@ Der Vergleich in verschiedenen Browsern zeigt die maximale und die durchschnittl
 \label{fig:platform-result-portscan}
 \end{figure}
 
-Abbildung \ref{fig:platform-result-portscan} zeigt die Ergebnisse der Überprüfung der Port-Nutzung, welche im Falle eines verdächtigen oder bedrohlichen Ergebnisses eine Liste mit allen gefundenen Ports enthält. Das Ergebnis der Überprüfung der IP-Nutzung ist gleich aufgebaut und ebenfalls in Abbildung \ref{fig:platform-result-portscan} abgebildet. Es stellt bei entsprechenden Funden eine Liste aller IP-Adressen bereit.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=7.5cm]{images/platform/linkchecker-undefined}
-  \caption{\textit{webifier Plattform} - Prüfung aller verlinkten Seiten}
-  \label{fig:platform-result-linkchecker}
-\end{figure}
-
-Das Ergebnis der Prüfung aller verlinkten Seiten enthält eine einfache Liste mit allen gefundenen
-Links und dem entsprechenden Ergebnis aus \textit{webifier Data}. Abbildung
-\ref{fig:platform-result-linkchecker} zeigt eine solche Liste.
+Die Deteilansicht des \textit{Google Safe Browsing} Ergebnisses ist ähnlich dem der Prüfung aller
+verlinkten Seiten. Allerdings listet diese nur alle gefundenen Bedrohungen auf und nicht alle
+geprüften Links. Abbildung \ref{fig:platform-result-google-safe-browsing} enthält zwei Beispielresultate.
 
 \begin{figure}[H]
 \centerline{%
@@ -357,7 +401,26 @@ Links und dem entsprechenden Ergebnis aus \textit{webifier Data}. Abbildung
 \label{fig:platform-result-google-safe-browsing}
 \end{figure}
 
-Die Deteilansicht des Google Safe Browsing Ergebnisses ist ähnlich dem der Prüfung aller verlinkten Seiten. Allerdings listet diese nur alle gefundenen Bedrohungen auf und nicht alle geprüften Links. Abbildung \ref{fig:platform-result-google-safe-browsing} enthält zwei Beispielresultate.
+\newpage
+
+Das Ergebnis der \textit{Prüfung aller verlinkten Seiten} enthält eine einfache Liste mit allen
+gefundenen Links und dem entsprechenden Ergebnis aus \textit{webifier Data}. Abbildung
+\ref{fig:platform-result-linkchecker} zeigt eine solche Liste.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=7.5cm]{images/platform/linkchecker-undefined}
+  \caption{\textit{webifier Plattform} - Prüfung aller verlinkten Seiten}
+  \label{fig:platform-result-linkchecker}
+\end{figure}
+
+\newpage
+
+Das Ergebnis der \textit{Überprüfung des SSL-Zertifikates} enthält alle Informationen des
+Zertifikats, sofern die Webseite eines nutzt. Wie in Abbildung
+\ref{fig:platform-result-certificatechecker} dargestellt, zeigt die Detailansicht einmal für wen
+das Zertifikat ausgestellt wurde, aber auch wer es ausgestellt hat. Außerdem wird der
+Gültigkeitszeitraum des Zertifikats angezeigt und im Fehlerfall der gefundene Fehler.
 
 \begin{figure}[H]
 \centerline{%
@@ -368,7 +431,15 @@ Die Deteilansicht des Google Safe Browsing Ergebnisses ist ähnlich dem der Prü
 \label{fig:platform-result-certificatechecker}
 \end{figure}
 
-Das Ergebnis der Überprüfung des SSL-Zertifikates enthält alle Informationen des Zertifikats, sofern die Webseite eines nutzt. Wie in Abbildung \ref{fig:platform-result-certificatechecker} dargestellt, zeigt die Detailansicht einmal für wen das Zertifikat ausgestellt wurde, aber auch wer es ausgestellt hat. Außerdem wird der Gültigkeitszeitraum des Zertifikats angezeigt und im Fehlerfall der gefundene Fehler.
+\newpage
+
+Die Erkennung von Phishing stellt ebenfalls einige Informationen zur Verfügung, wie Abbildung
+\ref{fig:platform-result-phishingdetector} zeigt. Es werden in jedem Fall die gefundenen
+Schlagwörter der Webseite angezeigt. Ist das Ergebnis verdächtig oder bedrohlich, so wird die
+vermeindliche Originalseite verlinkt, die Werte der prozentualen Übereinstimmungen insgesamt und
+von Inhalt, Quelltext und Aussehen separat aufgelistst und ein Bild der beiden überlagerten Seiten
+gezeigt. Alle Inhalte, welche sich unterscheiden werden rosa dargestellt. Im Beispiel aus der
+Abbildung unterscheidet sich demnach nur der Text der Fußzeile.
 
 \begin{figure}[H]
 \centerline{%
@@ -379,7 +450,9 @@ Das Ergebnis der Überprüfung des SSL-Zertifikates enthält alle Informationen 
 \label{fig:platform-result-phishingdetector}
 \end{figure}
 
-Die Erkennung von Phishing stellt ebenfalls einige Informationen zur Verfügung, wie Abbildung \ref{fig:platform-result-phishingdetector} zeigt. Es werden in jedem Fall die gefundenen Schlagwörter der Webseite angezeigt. Ist das Ergebnis verdächtig oder bedrohlich, so wird die vermeindliche Originalseite verlinkt, die Werte der prozentualen Übereinstimmungen insgesamt und von Inhalt, Quelltext und Aussehen separat aufgelistst und ein Bild der beiden überlagerten Seiten gezeigt. Alle Inhalte, welche sich unterscheiden werden rosa dargestellt. Im Beispiel aus der Abbildung unterscheidet sich demnach nur der Text der Fußzeile.
+\newpage
+
+Der Screnenshot der Seite wird beim ausklappen des Panels einfach angezeigt, so wie es in Abbildung \ref{fig:platform-result-screenshot} dargestellt. Dies gibt dem Nutzer die Möglichkeit sich die Webseite anzusehen, ohne sie selbst zu besuchen.
 
 \begin{figure}[H]
   \centering
@@ -388,13 +461,21 @@ Die Erkennung von Phishing stellt ebenfalls einige Informationen zur Verfügung,
   \label{fig:platform-result-screenshot}
 \end{figure}
 
-Der Screnenshot der Seite wird beim ausklappen des Panels einfach angezeigt, so wie es in Abbildung \ref{fig:platform-result-screenshot} dargestellt. Dies gibt dem Nutzer die Möglichkeit sich die Webseite anzusehen, ohne sie selbst zu besuchen.
-
-Wie nun gezeigt bietet die Plattform seh viele interessante Zusatzinformationen zu den Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
+Wie nun gezeigt bietet die Plattform sehr viele interessante Zusatzinformationen zu den
+Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
 
 \subsection{webifier Mail}
 
-Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail} ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit einem E-Mail-Client, welcher via IMAP seine Mails abfragt. Die engehenden Nachrichten werden auf Links hinuntersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet \textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT: Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
+Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail}
+ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit
+einem E-Mail-Client, welcher via \acs{IMAP} seine Mails abfragt. Die engehenden Nachrichten werden
+auf Links hinuntersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle
+Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet
+\textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT:
+Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner
+Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In
+dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der
+Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
 
 \begin{figure}[H]
 	\centering
@@ -403,7 +484,16 @@ Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{web
 	\label{fig:mail-start}
 \end{figure}
 
-Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \textit{webifier Mail} angekommen sind wird eine Ergebnismail generiert und an den Nutzer zurückgeschickt. Eine solche ist in Abbildung \ref{fig:mail-result} zu sehen. Das Gesamtergebis sowie alle Teilergebnisse werden farblich entsprechend des Ergebnisses gekennzeichnet um dem Nutzer dadurch die Vertrauenswürdigkeit der Webseite deutlich zu machen. Häufig werden externe Ressourcen wie Bilder nicht von den E-Mailprogrammen nachgeladen, wesshalb dadurch auch eine Kennzeichnung der Ergebnisse gewährleistet ist. Außerdem wird in dem Betreff der Antwortmail das Endergebnis aller Links der original E-Mail als Prefix verwendet um dem Nutzer vor dem eigentlichen Lesen der Auswertung schonmal eine Rückmeldung geben Zu können. Im Beispiel von Abbildung \ref{fig:mail-result} würde der Betreff \lstinline[style=eclipse]{BEDROHLICH: Nachrichtenbetreff} sein.
+Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \textit{webifier
+Mail} angekommen sind wird eine Ergebnismail generiert und an den Nutzer zurückgeschickt. Eine
+solche ist in Abbildung \ref{fig:mail-result} zu sehen. Das Gesamtergebis sowie alle Teilergebnisse
+werden farblich entsprechend des Ergebnisses gekennzeichnet um dem Nutzer dadurch die
+Vertrauenswürdigkeit der Webseite deutlich zu machen. Häufig werden externe Ressourcen wie Bilder
+nicht von den E-Mailprogrammen nachgeladen, wesshalb dadurch auch eine Kennzeichnung der Ergebnisse
+gewährleistet ist. Außerdem wird in dem Betreff der Antwortmail das Endergebnis aller Links der
+original E-Mail als Prefix verwendet um dem Nutzer vor dem eigentlichen Lesen der Auswertung
+schonmal eine Rückmeldung geben zu können. Im Beispiel von Abbildung \ref{fig:mail-result} würde
+der Betreff \lstinline[style=eclipse]{BEDROHLICH: Nachrichtenbetreff} sein.
 
 \begin{figure}[H]
 	\centering
@@ -412,7 +502,8 @@ Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \
 	\label{fig:mail-result}
 \end{figure}
 
-Die Konfigursation von \textit{webifier Mail} ist identisch mit der der Plattform, weshalb diese hier nicht noch einmal erklärt wird.
+Die Konfiguration von \textit{webifier Mail} ist identisch mit der der Plattform, weshalb diese
+hier nicht noch einmal erklärt wird.
 
 \subsection{webifier Data}
 \label{sec:umsetzung-data}
@@ -421,7 +512,8 @@ Die Konfigursation von \textit{webifier Mail} ist identisch mit der der Plattfor
 Verfügung. Die Komponente setzt ebenfalls auf dem Spring-Framework auf und wurde deshalb in Java implementiert. Außerdem wird die Spring-Bibliothek Spring-Data eingesetzt um Java-Objekte auf Dokumente zu übertragen und in einer MongoDB zu persistieren.
 
 Das Modul bietet eine \ac{REST}-\ac{API} zur externen Nutzung, beispielsweise im \textit{webifier
-Tester} oder in der Prüfung aller verlinkten Seiten. Die API stellt die folgenden Aktionen bereit:
+Tester} oder in der \textit{Prüfung aller verlinkten Seiten}. Die API stellt die folgenden Aktionen
+bereit:
 \lstinline[style=eclipse]{/push}, \lstinline[style=eclipse]{/check} und
 \lstinline[style=eclipse]{/count}. Mit der Methode \lstinline[style=eclipse]{/push} können
 Testergebnisse in \textit{webifier Data} abgelegt werden. Die entsprechende Resource, welche im Inhalt des POST-Requests gesendet werden muss ist in Listing \ref{lst:data-push} dargestellt.
@@ -471,6 +563,8 @@ Testergebnisse in \textit{webifier Data} abgelegt werden. Die entsprechende Reso
 Die Methode \lstinline[style=eclipse]{/check} bietet die Möglichkeit \textit{webifier Data} nach
 einer oder mehreren Urls zu durchsuchen. Hierfür muss im Inhalt des POST-Requests die in Listing \ref{lst:data-check-request} gezeigte Ressource gesendet werden. Diese enthält eine Liste der zu überprüfenden Links.
 
+\newpage
+
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
@@ -507,7 +601,12 @@ einer oder mehreren Urls zu durchsuchen. Hierfür muss im Inhalt des POST-Reques
 \end{scriptsize}
 
 Wie Listing \ref{lst:data-check} zeigt gruppiert \textit{webifier Data} zunächst alle Links anhand
-deren Host-Teil und entfernt alle ungültigen Einträge. Anschließend werden alle Resultate für jeden Eintrag der Liste geladen und daraus ein Gesamtergebnis pro Host berechnet. Dieses wird schließlich mit dem Host als schlüssel zur Liste \textit{hostResults} hinzugefügt. Abschließend wird die erzeugte Liste als Ergebnis zurückgegeben und als Antwort zurückgesendet. Diese Antwort ist in Listing \ref{lst:data-check-response} abgebildet.
+deren Host-Teil und entfernt alle ungültigen Einträge. Anschließend werden alle Resultate für jeden
+Eintrag der Liste geladen und daraus ein Gesamtergebnis pro Host berechnet. Dieses wird schließlich
+mit dem Host als Schlüssel zur Liste \textit{hostResults} hinzugefügt. Abschließend wird die
+erzeugte Liste als Ergebnis zurückgegeben und als Antwort zurückgesendet. Diese Antwort ist in Listing \ref{lst:data-check-response} abgebildet.
+
+\newpage
 
 \begin{scriptsize}
 \lstset{
@@ -613,7 +712,9 @@ Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{/push}
 \label{sec:umsetzung-statistics}
 
 \textit{webifier Statistics} wird in R implementiert. Hierzu werden
-Flexdashboards\footnote{\url{http://rmarkdown.rstudio.com/flexdashboard/index.html}} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
+Flexdashboards\footnote{\url{http://rmarkdown.rstudio.com/flexdashboard/index.html}} verwendet. Zur
+Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly,
+zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
 
 \begin{enumerate}
   \item Daten aus der MongoDB laden
@@ -640,11 +741,18 @@ Flexdashboards\footnote{\url{http://rmarkdown.rstudio.com/flexdashboard/index.ht
 \end{lstlisting}
 \end{scriptsize}
 
-Im Codebeispiel \ref{lst:rgrafik} ist der Codeablauf für eine Valuebox zu sehen. Dieses Beispiel wurde ausgewählt um den Erstellungsprozess für die Grafiken zu erklären. Dies lässt sich auf alle anderen Grafiken übertragen.
+In Listing \ref{lst:rgrafik} ist der Codeablauf für eine Valuebox zu sehen. Dieses Beispiel
+wurde ausgewählt um den Erstellungsprozess für die Grafiken zu erklären. Dies lässt sich auf alle anderen Grafiken übertragen.
 
 Die Überschriften der Grafiken werden mit \textit{\#\#\#} markiert. Der R-Code befindet sich in Chunks, diese werden speziell markiert um dem Compiler kenntlich zu machen welches der R-Code ist.
 
-Im Beispiel werden zunächst benötigten Daten aus der MongoDB geladen. Da hier eine Valuebox für die Anzeige der durchschnittlichen Analysezeit generiert wird werden nur die Analysezeiten(durationInMillis) benötigt. Diese werden anschließend gemittelt und von Millisekunden in Minuten/Sekunden transformiert. Zur Erstellung der Valuebox muss nun nurnoch der Text, die Farbe und ein passendes Icon ausgewählt werden. Die Generierung und Platzierung übernimmt Flexdashboard. Als Ausgabe wird eine HTML-Datei generiert, welche dann in den Webserver eingebunden wird um sie für die Nutzer zugänglich zu machen.
+Im Beispiel werden zunächst benötigten Daten aus der MongoDB geladen. Da hier eine Valuebox für die
+Anzeige der durchschnittlichen Analysezeit generiert wird werden nur die
+Analysezeiten (\lstinline[style=eclipse]{durationInMillis}) benötigt. Diese werden anschließend
+gemittelt und von Millisekunden in Minuten / Sekunden transformiert. Zur Erstellung der Valuebox
+muss nun nurnoch der Text, die Farbe und ein passendes Icon ausgewählt werden. Die Generierung und
+Platzierung übernimmt Flexdashboard. Als Ausgabe wird eine \ac{HTML}-Datei generiert, welche
+anschließend für die Nutzer zugänglich gemacht werden.
 
 \begin{figure}[H]
   \centering
@@ -659,11 +767,20 @@ Für stets aktuelle Grafiken wird das R-Skript für die Statistiken mehrfach tä
 
 \section{Tests}
 
-In diesem Abschnitt werden nun die Implementierungen aller Einzeltests erklärt. Bei allen kam zur Isolierung die Technologier Docker zum Einsatz.
+In diesem Abschnitt werden nun die Implementierungen aller Einzeltests erklärt. Bei allen kam zur
+Isolierung die Technologie Docker zum Einsatz.
 
 \subsection{Virenscan der Webseite}
 
-Der Virenscan der Webseite wurde in Python umgesetzt und lädt zunächst alle Ressourcen der Webseite in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten. Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne sie für die dauerhafte Nutzung bereitzuhalten. Des weiteren darf keine Datei im Inhalt verändert werden, da so das Ergebnis verfälscht werden könnte. Um zeit zu spaaren wird zusätzlich auf die protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
+Der Virenscan der Webseite wurde in Python umgesetzt und lädt zunächst alle Ressourcen der Webseite
+in ein lokales Verzeichnis herunter. Hierbei kommt die Software HTTrack zum Einsatz. HTTtrack wird
+für diesen Zweck speziell konfiguriert, um die Antwortzeiten so gering wie möglich zu halten.
+Zunächst wird der Downloadmodus so gewählt, dass einfach nur alle Dateien gespeichert werden, ohne
+sie für die dauerhafte Nutzung bereitzuhalten. Des Weiteren darf keine Datei im Inhalt verändert
+werden, da so das Ergebnis verfälscht werden könnte. Um Zeit zu sparen wird zusätzlich auf die
+Protokollierung verzichtet. Außerdem sollen die \lstinline[style=eclipse]{robots.txt} Dateien
+ignoriert werden, da damit Malware auch vor Suchmaschinen versteckt werden kann. Schießlich wird
+HTTrack eine maximale Laufzeit zum Download aller Dateien von drei Minuten gewährt.
 
 Zum Scannen aller gespeicherten Dateien kommen drei Virenscanner zum Einsatz. Es werden die Antivirenprogramme ClamAV\footnote{\url{http://www.clamav.net/}}, AVG\footnote{\url{http://www.avg.com/de-de/homepage}} und Comodo Antivirus\footnote{\url{https://antivirus.comodo.com/}} verwendet. Um auch hier die Antwortzeiten gering zu halten werden die Virenscannner parallel ausgeführt.
 
@@ -672,13 +789,17 @@ Abschließend werden alle Ergebnisse der Antivirenprogramme ausgewertet und dara
 \subsection{Vergleich in verschiedenen Browsern}
 
 Dieser Test wird durch zwei Schritte ermöglicht.
-Zunächst werden für eine Liste von Browserkonfigurationen deren \ac{HTTP}-Header ermittelt, danach werden Requests mit diesen Headern an die zu testende \ac{URL} geschickt und die Antworten untereinander verglichen.
+Zunächst werden für eine Liste von Browserkonfigurationen deren \acs{HTTP}-Header ermittelt, danach werden Requests mit diesen Headern an die zu testende \acs{URL} geschickt und die Antworten untereinander verglichen.
 Damit nicht bei jedem Testdurchlauf alle Header neu eingeholt werden müssen, werden sie in einer Datei abgespeichert.
 
-Zur Umsetzung dieses Tests wurde zunächst das Python-Skript \lstinline{collect.py} geschrieben, welches über einen Cloud-Service die Werte für das \ac{HTTP}-Headerfeld \textit{User Agent} abspeichert.
-Zuerst werden alle gewünschten Browserkonfigurationen über eine \ac{JSON}-Datei eingelesen (s. Zeile 31).
+Zur Umsetzung dieses Tests wurde zunächst das Python-Skript \lstinline[style=eclipse]{collect.py} geschrieben, welches über einen Cloud-Service die Werte für das \acs{HTTP}-Headerfeld \textit{User Agent} abspeichert.
+Zuerst werden alle gewünschten Browserkonfigurationen über eine \ac{JSON}-Datei eingelesen (siehe
+Zeile 31).
 Diese Datei enthält eine Liste von Browserobjekten, die die Konfigurationen im Attribut 
-Ein Element dieser Liste ist beispielhaft in \autoref{lst:browsers.json} zu sehen, wobei das \lstinline{"headers"}-Attribut vor Programmablauf noch nicht gesetzt ist.
+Ein Element dieser Liste ist beispielhaft in Listing \ref{lst:browsers.json} zu sehen, wobei das
+\lstinline[style=eclipse]{"headers"}-Attribut vor Programmablauf noch nicht gesetzt ist.
+
+\newpage
 
 \begin{scriptsize}
 \lstset{
@@ -704,18 +825,19 @@ Ein Element dieser Liste ist beispielhaft in \autoref{lst:browsers.json} zu sehe
 \end{lstlisting}
 \end{scriptsize}
 
-Danach werden für jeder dieser Konfigurationen die entsprechenden Header ermittelt.
+Danach werden für alle Konfigurationen die entsprechenden Header ermittelt.
 Dazu wird eine Verbindung mittels \ac{SSH} zum Service \textit{Sauce Labs} aufgebaut.
 Dabei wird auch ein ferngesteuerter Browser mit der Konfiguration des lokalen Browserobjekts initialisiert.
 Das Browserobjekt ist wie ein Headless Browser über das Modul \textit{WebDriver} steuerbar.
 Im nächsten Schritt wird der Browser dann angewiesen auf die Webseite \url{http://www.reliply.org/tools/requestheaders.php} zu gehen.
-Auf dieser Seite werden alle \ac{HTTP}-Headerfelder und deren Werte in einer Tabelle aufgelistet.
-Ein Beispiel dafür ist in \autoref{fig:reliply} zu sehen.
+Auf dieser Seite werden alle \acs{HTTP}-Headerfelder und deren Werte in einer Tabelle aufgelistet.
+Ein Beispiel dafür ist in Abbildung \ref{fig:reliply} zu sehen.
 Diese Tabelle beinhaltet in der ersten Spalte den Headernamen und in der zweiten den Wert.
-Diese beiden Daten werden in jeder Zeile der Tabelle 
 Der Brower greift auf diese beiden Daten in jeder Zeile der Tabelle zu und speichert diese im Browserobjekt.
-Es werden alle Header bis auf den \lstinline{Host}-Header abgespeichert, da dieser lediglich der Domain des Zielserver entspricht.
-Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird die Liste der Browserobjekte in die Datei \lstinline{browser.json} abgespeichert.
+Es werden alle Header bis auf den \lstinline[style=eclipse]{Host}-Header abgespeichert, da dieser lediglich der
+Domain des Zielserver entspricht.
+Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird die Liste der
+Browserobjekte in die Datei \lstinline[style=eclipse]{browser.json} abgespeichert.
 
 \begin{figure}[H]
 	\centering
@@ -724,20 +846,25 @@ Nachdem alle Header zu den Browserkonfigurationen heruntergeladen wurden, wird d
 	\label{fig:reliply}
 \end{figure}
 
-Bei der Testausführung wird dann das Python-Skript \lstinline{check.py} aufgerufen.
+Bei der Testausführung wird dann das Python-Skript \lstinline[style=eclipse]{check.py} aufgerufen.
 Darin wird zunächst die Liste der Browserobjekte aus der Datei geladen.
-Danach wird über das Packet \textit{requests} für jeden Browser ein \ac{HTTP}-Request an die zu testende Seite geschickt.
-Die Antwort wird wiederum im Browserlement gespeichert, sodass es für die folgenden Vergleiche zur Verfügung steht.
+Danach wird über das Packet \textit{requests} für jeden Browser ein \acs{HTTP}-Request an die zu
+testende Seite geschickt.
+Die Antwort wird wiederum im Browserlement gespeichert, sodass es für die folgenden Vergleiche zur
+Verfügung steht.
 
 Es werden alle Browser jeweils genau einmal mit allen anderen Browsern verglichen.
 Das bedeutet, dass das erste Element mit allen weiteren $n-1$ Elementen verglichen werden muss. Das zweite mit den letzten $n-2$ usw.
-Das Vorletzte muss dann nur noch mit dem letzten Element verglichen werden, was vom informatischen Aufwand her abschätzbar ist durch den Aufwand der Gau"sschen Summenformel ($\frac{n^2+n}{2}$).
+Das Vorletzte muss dann nur noch mit dem letzten Element verglichen werden, was vom Aufwand her
+durch die Gau"sschen Summenformel ($\frac{n^2+n}{2}$) abschätzbar ist.
 Dieser Algorithmus hat also eine Komplexität von $\mathcal{O}(n^2)$ und kann damit zum Engpass werden, falls es zu viele Browser geben sollte.
 
 Ursprünglich basierte die Berechnung der Abweichungen auf Prozentwerten.
-Während der Implementierung ist aufgefallen, dass die prozentualen Abweichungen der Antworten keine zuverlässige Auskunft über einen möglichen Angriff auf den Nutzer geben können.
+Während der Implementierung ist aufgefallen, dass die prozentualen Abweichungen der Antworten keine
+zuverlässige Auskunft über einen möglichen Angriff auf den Nutzer geben können.
 Aus diesem Grund wird die Ergebniskalkulation nun auf absoluten Abweichungswerten ausgeführt.
-Jede Browserantwort wird jeweils einmal mit jeder anderen verglichen und der niedrigste absolute Übereinstimmungswert als \lstinline{worst\_diff} gespeichert.
+Jede Browserantwort wird jeweils einmal mit jeder anderen verglichen und der niedrigste absolute
+Übereinstimmungswert als \lstinline[style=eclipse]{worst_diff} gespeichert.
 Es wird der schlechteste Übereinstimmungswert für die Ergebnisberechnung gewählt, da er bei einer Durchschnitts- oder Medianberechnung  statistisch untergehen würde und somit gezielte Angriffe gegen eine Browsergruppe nicht regstriert werden würden.
 Zur Berechnung dieses Wertes werden zunächst die übereinstimmenden Blöcke der beiden Antworten durch das \textit{statistics}-Paket von Python ermittelt.
 Durch diese wird die gesamte Übereinstimmungslänge berechnet, die dann von der Gesamtlänge der größeren Antwort abgezogen wird.
@@ -746,39 +873,68 @@ Liegt der Wert über 500, dann ist das Ergebnis \textit{MALICIOUS}.
 Liegt der Wert zwischen 500 und 50, so ist das Ergebnis \textit{SUSPICIOUS}, ansonsten ist es \textit{CLEAN}.
 
 \subsection{Überprüfung der Port-Nutzung}
-Bei diesem Test wird überprüft ob die Seite versucht einen Portscan auf dem Computer des Anwenders zu betreiben. Hierfür werden 3 Techniken eingesetzt. Die wichtigsten Aufgaben werden von PhantomJS und Bro erledigt.
-Bro ist ein Netzwerkmonitoringtool und wird hier genutzt um den Traffic welcher zwischen Webseite und Client entsteht zu protokollieren und in einer Logdatei abzuspeichern. PhantomJS ist ein \textit{headless Browser}, welcher genutzt wird um die Webseite aufzurufen und dessen Javascript auszuführen. Das ganze funktioniert hier ohne grafische Oberfläche.
+Bei diesem Test wird überprüft ob die Seite versucht einen Portscan auf dem Computer des Anwenders
+zu betreiben. Hierfür werden 3 Techniken eingesetzt. Die wichtigsten Aufgaben werden von PhantomJS
+und Bro erledigt.
+Bro wird hier genutzt um den Traffic welcher zwischen Webseite
+und Client entsteht zu protokollieren und in einer Logdatei abzuspeichern. PhantomJS wird genutzt
+um die Webseite aufzurufen und dessen Javascript auszuführen. Das ganze funktioniert hier ohne
+grafische Oberfläche.
 
 Der Ablauf des Tests sieht wie folgt aus: Zunächst wird Bro intialisiert und es werden Filter
-angelegt um lediglich die Ports, der eingehenden Anfragen, mitzuloggen und in der Logdatei
+angelegt um lediglich die Ports der eingehenden Anfragen zu protokollieren und in der Logdatei
 abzuspeichern. Ist Bro vollständig initialisiert und einsatzbereit startet PhantomJS mit dem
-Aufrufen der Seite und Ausführen des JavaScript-Codes. Währenddessen speichert Bro alle
+Aufrufen der Seite und dem Ausführen des JavaScript-Codes. Währenddessen speichert Bro alle
 Netzwerkaktivitäten. Sobald der Durchlauf von PhantomJS abgeschlossen ist wird mittels Python die
 Validierung des Ergebnisses gestartet. Hier werden die angefragten Ports aus der Logdatei geladen
 und klassifiziert. Die Ports 80 und 443 werden verworfen, da diese die \acs{HTTP} und \acs{SSL}
-Ports sind und somit als harmlos klassifiziert werden können. Die weiteren Ports werden in einer Liste an riskanten Ports gespeichert. Die Anzahl an Ports in dieser Liste bestimmt nun das Ergebnis des Testes. Wurden keine verdächtigen Portanfragen gefunden wird das Ergebnis \textit{unbedenklich} übermittelt. Bei 1 oder 2 Ports in der Liste gibt der Test \textit{verdächtig} als Ergebnis zurück. Sollte die Anzahl größer gleich 3 sein wird die Seite von diesem Test als \textit{bedrohlich} eingestuft. Zusätzlich zum Ergebnis wird die Liste der riskanten Ports in der Ergebnisinformation weitergeleitet.
+Ports sind und somit als harmlos klassifiziert werden können. Die weiteren Ports werden in einer
+Liste an riskanten Ports gespeichert. Die Anzahl an Ports in dieser Liste bestimmt nun das Ergebnis
+des Testes. Wurden keine verdächtigen Portanfragen gefunden wird das Ergebnis \textit{unbedenklich}
+übermittelt. Bei ein oder zwei Ports in der Liste gibt der Test \textit{verdächtig} als Ergebnis
+zurück.
+Sollte die Anzahl größer gleich drei sein wird die Seite von diesem Test als \textit{bedrohlich}
+eingestuft. Zusätzlich zum Ergebnis wird die Liste der riskanten Ports in der Ergebnisinformation
+weitergeleitet.
 
 \subsection{Überprüfung der IP-Nutzung}
-Der Test auf verdächtige IP-Anfragen ist bis auf 2 Änderungen identisch zu vorherigem Test auf Portscanning. Deshalb werden in diesem Kapitel nur die Unterschiede beleuchtet.
+Der Test auf verdächtige IP-Anfragen ist bis auf 2 Änderungen identisch zu vorherigem Test auf
+Portscanning. Deshalb werden in diesem Abschnitt nur die Unterschiede beleuchtet.
 
-Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter angewendet um die IPs, der ausgehenden Anfragen, zu loggen. Hier müssen die ausgehenden Anfragen betrachtet werden, da bei dieser Art von Angriff versucht wird mittels clientseitig ausgeführtem JavaScript das Netzwerk des Anwenders auszuspähen. Den Aufruf der Seite übernimmt auch hier PhantomJS. Bei der darauf folgenden Validierung werden die IPs auf bekannte Heimnetzadressbereiche wie beispielsweise 192.168.178.* oder 192.168.2.* gemappt. Auch hier werden verdächtige IPs in einer Liste gespeichert. Die Anzahl der Elemente in dieser Liste bestimmt das Ergebnis des Testes. Hierbei sind die Schwellwerte identisch mit denen des Portscanning-Tests, also bei 0 Abfragen wird \textit{sauber} zurückgegeben, bei 1-2 wird \textit{verdächtig} zurückgegeben und bei >3 wird die Seite als \textit{bedrohlich} eingestuft. Zusätzlich zum Ergebnis wird die Liste der riskanten IPs in der Ergebnisinformation weitergeleitet.
+Der erste Unterschied liegt in der Initialisierung von Bro. Hier werden Filter angewendet um die
+IPs, der ausgehenden Anfragen, zu loggen. Hier müssen die ausgehenden Anfragen betrachtet werden,
+da bei dieser Art von Angriff versucht wird mittels clientseitig ausgeführtem JavaScript das
+Netzwerk des Anwenders auszuspähen. Den Aufruf der Seite übernimmt auch hier PhantomJS. Bei der
+darauf folgenden Validierung werden die IPs auf bekannte Heimnetzadressbereiche wie beispielsweise
+192.168.178.* oder 192.168.2.* gemappt. Auch hier werden verdächtige IPs in einer Liste
+gespeichert. Die Anzahl der Elemente in dieser Liste bestimmt das Ergebnis des Testes. Hierbei sind
+die Schwellwerte identisch mit denen des Portscanning-Tests, also bei null Abfragen wird
+\textit{unbedenklich} zurückgegeben, bei ein bis zwei wird \textit{verdächtig} zurückgegeben und bei
+mehr als drei wird die Seite als \textit{bedrohlich} eingestuft. Zusätzlich zum Ergebnis wird die
+Liste der riskanten IPs in der Ergebnisinformation weitergeleitet.
 
 \subsection{Prüfung aller verlinkten Seiten}
 
-Einstiegspunkt ist das Python-Skript \lstinline{check.py}.
-Ihm wird die zu testende Webeitenurl mitgeliefert.
-Daraufhin wird ein Unterprozess gestartet, in dem \textit{PhantomJS}(s. \autoref{par:phantomjs}) mit dem Steuerungsskript \lstinline{check.js} ausgeführt wird.
-Dieses bewerkstelligt das Sammeln der Links, indem zum einen ein Handler auf das \textit{PhantomJS}-spezifische \textit{ResourceRequested}-Event geschaltet werden.
-Zum anderen, wird ein JavaScript Code in die Webseite eingebettet, der alle Anchor-Elemente (\lstinline{<a></a>}) findet.
+Einstiegspunkt ist das Python-Skript \lstinline[style=eclipse]{check.py}.
+Ihm wird die zu testende \acs{URL} der Webeite mitgeliefert.
+Daraufhin wird ein Unterprozess gestartet, in dem PhantomJS mit dem
+Steuerungsskript \lstinline[style=eclipse]{check.js} ausgeführt wird.
+Dieses bewerkstelligt das Sammeln der Links, indem zum einen ein Handler auf das
+PhantomJS-spezifische \textit{ResourceRequested}-Event geschaltet werden.
+Zum anderen, wird ein JavaScript Code in die Webseite eingebettet, der alle Link-Elemente findet.
 Das JavaScript Programm gibt schussendlich alle gefundenen Links auf der Konsole aus, wobei zusätzlich auch die Adresse der zu testenden Webseite mit ausgegeben wird.
 
-Zurück im Python-Skript werden die Links über einen POST-Request an die \ac{REST}-\ac{API} von \textit{webifier Data} gesendet.
-Dort werden aus allen Web-Links die Hostnamen extrahiert und jeweils in der Datenbank geschaut, ob ein Eintrag dazu vorhanden ist.
-Das Antwortobjekt beinhaltet im Attribut \lstinline[style=eclipse]{hosts} die Liste der überprüften Hostnamen und deren Wert in der Datenbank.
+Zurück im Python-Skript werden die Links über einen POST-Request an die \ac{REST}-\ac{API} von
+\textit{webifier Data} gesendet.
+Dort werden aus allen Web-Links die Hostnamen extrahiert und jeweils in der Datenbank geschaut, ob
+ein Eintrag dazu vorhanden ist.
+Das Antwortobjekt beinhaltet im Attribut \lstinline[style=eclipse]{hosts} die Liste der überprüften
+Hostnamen und deren Wert in der Datenbank.
 Über diese Liste wird iteriert und die Häufigkeiten der vier Ergebnistypen hochgezählt.
 Dabei werden auch jeweils der Hostname und der Datenbankwert in ein Informationsobjekt gespeichert.
-Die Ergebnisberechnung findet analog zu \autoref{sec:konzept-linkchecker} mit mehreren statt.
-Dieses Ergebnis wird zusammen mit einer Liste der Informationsobjekte an den Tester zurückgeliefert.
+Die Ergebnisberechnung findet analog zu \textit{Prüfung aller verlinkten Seiten} statt.
+Dieses Ergebnis wird zusammen mit einer Liste der Informationsobjekte an den Tester
+zurückgeliefert.
 
 \subsection{Google Safe Browsing}
 
