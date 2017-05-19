@@ -4,30 +4,32 @@ In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen
 Umsetzung von \textit{webifier} beschrieben. Zunächst folgt nun die Erläuterung der Gesamtumsetzung,
 gefolgt von der Umsetzung der Teilanwendungen. Abschließend wird die Implementierung der einzelnen Tests vorgestellt.
 
-\section{Gesamtanwendung}
+\section{Gesamtsystem}
 
-Dieser Abschnitt beschreibt wie die Anwendung Implementiert ist und welche Technologien wie eingesetzt wurden.
-Zunächst findet ein grober Umriss über die Gesamtarchitektur statt, der vor allem die Zusammenhänge und Abhängigkeiten zwischen den einzelnen Komponenten darlegt.
-In den Nachfolgenden Unterabschnitten wird die Umsetzung der einzelnen getrennten Komponenten für sich erklärt.
+Dieser Abschnitt beschreibt wie \textit{webifier} implementiert ist und welche Technologien
+eingesetzt wurden.
+Zunächst wird die Gesamtarchitektur grob umrissen, wobei vor allem die Zusammenhänge
+und Abhängigkeiten zwischen den einzelnen Komponenten darlegt werden.
 
-\autoref{fig:anwendung-umsetzung} zeigt alle umgesetzten Komponenten mit ihrer jeweils wichtigsten Technologie.
-Zusätzlich sind zwischen zusammenspielenden Komponenten die jeweils verwendeten Kommunikationstechnologien (hauptsächlich Protokolle) angegeben.
+Abbildung \ref{fig:anwendung-umsetzung} zeigt alle Komponenten von \textit{webifier} und ihre
+wichtigste Technologie.
+Zusätzlich sind die, zwischen den Komponenten, verwendeten
+Kommunikationstechnologien dargestellt.
 
-Der Standard Use Case beginnt, wenn der Nutzer eine verdächtige \ac{URL} findet und diese prüfen möchte.
-Dazu öffnet er mit seinem Browser die Adresse von \textit{webifier}: \url{www.webifier.de}.
-Daraufhin schickt der Browser eine \ac{HTTP}-GET Anforderung an \textit{webifier Plattform}, den
-Webserver der Anwendung.
-Dort wird die Anfrage angenommen und durch das Spring Web Framework verarbeitet.
-Dabei wird ein neuer \textit{Tester}-Prozess mit der zu prüfenden \ac{URL} über \ac{CLI} gestartet.
-\autoref{fig:anwendung-umsetzung} zeigt dies im rechten unteren Bereich.
+Der Standard Use Case beginnt, wenn der Nutzer eine verdächtige \acs{URL} findet und diese prüfen
+möchte. Dies geschieht beispielsweise über \textit{webifier Plattform}.
+In der Plattform wird die Anfrage angenommen und mit Hilfe des Spring-Frameworks verarbeitet.
+Dabei wird ein neuer Tester-Prozess mit der zu prüfenden \acs{URL} über das \ac{CLI} gestartet.
+Abbildung \ref{fig:anwendung-umsetzung} zeigt dies im rechten unteren Bereich.
 
 Ein weiterer Use Case ist die Prüfung von verdächtigen E-Mails.
-Empfängt der Nutzer eine Spam-verdächtige E-Mail, so kann er diese auch über \textit{webifier} prüfen lassen.
-Dazu leitet er die E-Mail über sein E-Mail-Programm an die Adresse \hyperref{mailto:check@webifier.de}{check@webifier.de} weiter.
-Der Client schickt die E-Mail dann über \ac{SMTP} zum Mail-Server des Nutzers, der diese dann wieder über \ac{SMTP} an den Mail-Server von \textit{webifier} übermittelt.
-Sobald eine Mail an diesem Server ankommt, wird diese über \ac{IMAP} an das E-Mail-Verwaltungsmodul \textit{webifier Mail} weitergegeben.
-Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acp{URL} zur Prüfung an \textit{webifier Tester} weiter.
-Dazu wird wie bei der \textit{webifier Plattform} pro \ac{URL} ein Prüfdurchlauf beim Tester über \ac{CLI} angefordert.
+Empfängt der Nutzer eine verdächtige E-Mail, so kann er diese über \textit{webifier Mail} prüfen
+lassen.
+Dazu leitet er die E-Mail an \textit{webifier Mail} weiter.
+Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acsp{URL} zur Prüfung an
+\textit{webifier Tester} weiter.
+Dazu wird wie bei der \textit{webifier Plattform} pro \acs{URL} ein Prüfdurchlauf beim Tester über
+\ac{CLI} angefordert.
 Dieser Vorgang ist in \autoref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
 
 Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung der Sicherheitstests zuständig ist.
@@ -65,6 +67,8 @@ Dieser Use Case wird in \autoref{fig:anwendung-umsetzung} in der Mitte gezeigt.
 	\caption{Umgesetzte Architektur der Gesamtanwendung}
 	\label{fig:anwendung-umsetzung}
 \end{figure}
+
+In den nachfolgenden Abschnitten wird die Umsetzung der einzelnen Komponenten detailiert erklärt.
 
 \subsection{webifier Tests}
 In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von \textit{webifier} gilt,
@@ -745,7 +749,14 @@ Liegt der Wert zwischen 500 und 50, so ist das Ergebnis \textit{SUSPICIOUS}, ans
 Bei diesem Test wird überprüft ob die Seite versucht einen Portscan auf dem Computer des Anwenders zu betreiben. Hierfür werden 3 Techniken eingesetzt. Die wichtigsten Aufgaben werden von PhantomJS und Bro erledigt.
 Bro ist ein Netzwerkmonitoringtool und wird hier genutzt um den Traffic welcher zwischen Webseite und Client entsteht zu protokollieren und in einer Logdatei abzuspeichern. PhantomJS ist ein \textit{headless Browser}, welcher genutzt wird um die Webseite aufzurufen und dessen Javascript auszuführen. Das ganze funktioniert hier ohne grafische Oberfläche.
 
-Der Ablauf des Tests sieht wie folgt aus: Zunächst wird Bro intialisiert und es werden Filter angelegt um lediglich die Ports, der eingehenden Anfragen, mitzuloggen und in der Logdatei abzuspeichern. Ist Bro vollständig initialisiert und einsatzbereit startet PhantomJS mit dem Aufrufen der Seite und Ausführen des JavaScript-Codes. Währenddessen speichert Bro alle Netzwerkaktivitäten. Sobald der Durchlauf von PhantomJS abgeschlossen ist wird mittels Python die Validierung des Ergebnisses gestartet. Hier werden die angefragten Ports aus der Logdatei geladen und klassifiziert. Die Ports 80 und 443 werden verworfen, da diese die HTTP und SSL Ports sind und somit als harmlos klassifiziert werden können. Die weiteren Ports werden in einer Liste an riskanten Ports gespeichert. Die Anzahl an Ports in dieser Liste bestimmt nun das Ergebnis des Testes. Wurden keine verdächtigen Portanfragen gefunden wird das Ergebnis \textit{unbedenklich} übermittelt. Bei 1 oder 2 Ports in der Liste gibt der Test \textit{verdächtig} als Ergebnis zurück. Sollte die Anzahl größer gleich 3 sein wird die Seite von diesem Test als \textit{bedrohlich} eingestuft. Zusätzlich zum Ergebnis wird die Liste der riskanten Ports in der Ergebnisinformation weitergeleitet.
+Der Ablauf des Tests sieht wie folgt aus: Zunächst wird Bro intialisiert und es werden Filter
+angelegt um lediglich die Ports, der eingehenden Anfragen, mitzuloggen und in der Logdatei
+abzuspeichern. Ist Bro vollständig initialisiert und einsatzbereit startet PhantomJS mit dem
+Aufrufen der Seite und Ausführen des JavaScript-Codes. Währenddessen speichert Bro alle
+Netzwerkaktivitäten. Sobald der Durchlauf von PhantomJS abgeschlossen ist wird mittels Python die
+Validierung des Ergebnisses gestartet. Hier werden die angefragten Ports aus der Logdatei geladen
+und klassifiziert. Die Ports 80 und 443 werden verworfen, da diese die \acs{HTTP} und \acs{SSL}
+Ports sind und somit als harmlos klassifiziert werden können. Die weiteren Ports werden in einer Liste an riskanten Ports gespeichert. Die Anzahl an Ports in dieser Liste bestimmt nun das Ergebnis des Testes. Wurden keine verdächtigen Portanfragen gefunden wird das Ergebnis \textit{unbedenklich} übermittelt. Bei 1 oder 2 Ports in der Liste gibt der Test \textit{verdächtig} als Ergebnis zurück. Sollte die Anzahl größer gleich 3 sein wird die Seite von diesem Test als \textit{bedrohlich} eingestuft. Zusätzlich zum Ergebnis wird die Liste der riskanten Ports in der Ergebnisinformation weitergeleitet.
 
 \subsection{Überprüfung der IP-Nutzung}
 Der Test auf verdächtige IP-Anfragen ist bis auf 2 Änderungen identisch zu vorherigem Test auf Portscanning. Deshalb werden in diesem Kapitel nur die Unterschiede beleuchtet.
