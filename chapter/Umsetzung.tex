@@ -1,6 +1,8 @@
 \chapter{Umsetzung}
 
-In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen Konzept die Umsetzung von webifier beschrieben. Zunächst folgt nun die Erläuterung der Gesamtumsetzung, gefolgt von der Umsetzung der Teilanwendungen. Abschließend wird die Implementierung der einzelnen Tests vorgestellt.
+In diesem Kapitel wird nun aufbauend auf dem im vorherigen Kapitel beschriebenen Konzept die
+Umsetzung von \textit{webifier} beschrieben. Zunächst folgt nun die Erläuterung der Gesamtumsetzung,
+gefolgt von der Umsetzung der Teilanwendungen. Abschließend wird die Implementierung der einzelnen Tests vorgestellt.
 
 \section{Gesamtanwendung}
 
@@ -13,9 +15,10 @@ Zusätzlich sind zwischen zusammenspielenden Komponenten die jeweils verwendeten
 
 Der Standard Use Case beginnt, wenn der Nutzer eine verdächtige \ac{URL} findet und diese prüfen möchte.
 Dazu öffnet er mit seinem Browser die Adresse von \textit{webifier}: \url{www.webifier.de}.
-Daraufhin schickt der Browser eine \ac{HTTP}-GET Anforderung an \textit{webifier Platform}, den Webserver der Anwendung.
+Daraufhin schickt der Browser eine \ac{HTTP}-GET Anforderung an \textit{webifier Plattform}, den
+Webserver der Anwendung.
 Dort wird die Anfrage angenommen und durch das Spring Web Framework verarbeitet.
-Dabei wird ein neuer \textit{Testser}-Prozess mit der zu prüfenden \ac{URL} über \ac{CLI} gestartet.
+Dabei wird ein neuer \textit{Tester}-Prozess mit der zu prüfenden \ac{URL} über \ac{CLI} gestartet.
 \autoref{fig:anwendung-umsetzung} zeigt dies im rechten unteren Bereich.
 
 Ein weiterer Use Case ist die Prüfung von verdächtigen E-Mails.
@@ -24,7 +27,7 @@ Dazu leitet er die E-Mail über sein E-Mail-Programm an die Adresse \hyperref{ma
 Der Client schickt die E-Mail dann über \ac{SMTP} zum Mail-Server des Nutzers, der diese dann wieder über \ac{SMTP} an den Mail-Server von \textit{webifier} übermittelt.
 Sobald eine Mail an diesem Server ankommt, wird diese über \ac{IMAP} an das E-Mail-Verwaltungsmodul \textit{webifier Mail} weitergegeben.
 Diese Komponente durchsucht die E-Mail nach Links und reicht bis zu fünf \acp{URL} zur Prüfung an \textit{webifier Tester} weiter.
-Dazu wird wie bei der \textit{webifier Platform} pro \ac{URL} ein Prüfdurchlauf beim Tester über \ac{CLI} angefordert.
+Dazu wird wie bei der \textit{webifier Plattform} pro \ac{URL} ein Prüfdurchlauf beim Tester über \ac{CLI} angefordert.
 Dieser Vorgang ist in \autoref{fig:anwendung-umsetzung} auf der linken Seite zusehen.
 
 Der \textit{webifier Tester} ist ein eigenständiges Java-Programm, das für die Durchführung der Sicherheitstests zuständig ist.
@@ -39,7 +42,7 @@ Sobald ein Test fertig ist gibt er sein Ergebnis und die Zusatzinformationen üb
 Der Tester nimmt dies zur Kenntnis und propagiert dieses Teilergebnis an den Aufrufer weiter.
 Sobald alle Tests ihr Ergebnis über zurückgemeldet haben, berechnet der \textit{Tester} das Endergebnis und liefert dieses an seinen Aufrufer zurück.
 
-Ist der Aufrufer die \textit{webifier Platform}, so wird das Ergebnis jedes fertigen Einzeltests per direkt an den Browser des Nutzers geschickt.
+Ist der Aufrufer die \textit{webifier Plattform}, so wird das Ergebnis jedes fertigen Einzeltests per direkt an den Browser des Nutzers geschickt.
 So werden nach und nach alle Ergebnisse angezeigt, bis schließlich das Gesamtergebnis präsentiert wird.
 Liefert der Tester einen Fehler, so wird dieser ebenfalls an den Nutzer weitergeleitet.
 Wenn der Tester durch \textit{webifier Mail} gestartet wurde, dann wartet das Modul, bis die Ergebnisse aller \acp{URL} feststehen und sendet dann eine E-Mail mit allen Ergebnissen an den Nutzer zurück.
@@ -64,7 +67,8 @@ Dieser Use Case wird in \autoref{fig:anwendung-umsetzung} in der Mitte gezeigt.
 \end{figure}
 
 \subsection{webifier Tests}
-In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von webifier gilt, erläutert.
+In diesem Abschnitt wird der allgemeine Aufbau, welcher für alle Tests von \textit{webifier} gilt,
+erläutert.
 
 Um die Tests vom Gesamtsystem abzukapseln wird auf Docker gesetzt. Hierbei wird für jeden Test ein eigenes Image geschrieben. Die Tests werden vom Tester dann gestartet. So wird jeder Test in einem eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren sind und sich gegenseitig oder das Gesamtsystem nicht beeinflussen.
 
@@ -95,12 +99,13 @@ Testergebnis und einer ResultInfo. Die ResultInfo varriert von Test zu Test. Hie
 
 \subsection{webifier Tester}
 
-Der webifier Tester wurde als Anwendung für das \ac{CLI} in Java implementiert. Der Tester kann mit Hilfer verschiedener Parameter in seinem Verhalten gesteuert werden. Die Option \lstinline[style=eclipse]{-h} gibt beispielsweise die in Listing \ref{lst:tester-help} dargestellte Hilfe aus.
+Der \textit{webifier Tester} wurde als Anwendung für das \ac{CLI} in Java implementiert. Der Tester
+kann mit Hilfer verschiedener Parameter in seinem Verhalten gesteuert werden. Die Option \lstinline[style=eclipse]{-h} gibt beispielsweise die in Listing \ref{lst:tester-help} dargestellte Hilfe aus.
 
 \begin{scriptsize}
 \lstset{
     style=eclipse,
-    caption={Hilfe webifier Tester},
+    caption={\textit{webifier Tester} - Hilfe},
     label={lst:tester-help}
 }
 \begin{lstlisting}
@@ -113,12 +118,12 @@ usage: java -jar webifier-tester.jar
 \end{lstlisting}
 \end{scriptsize}
 
-Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende Url angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test. Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgebaformat spezifiziert werden. Dies ist vorallem für die automatisierte Testausführung, beispielsweise mit webifier Plattform relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben werden alle Events (Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird kein Format spezifiziert so werden die Ergebnisse wie in Listing \ref{lst:tester-result} dargestellt ausgegeben.
+Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende Url angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test. Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgebaformat spezifiziert werden. Dies ist vorallem für die automatisierte Testausführung, beispielsweise mit \textit{webifier Plattform} relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben werden alle Events (Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird kein Format spezifiziert so werden die Ergebnisse wie in Listing \ref{lst:tester-result} dargestellt ausgegeben.
 
 \begin{scriptsize}
 \lstset{
     style=eclipse,
-    caption={Standardausgabe webifier Tester},
+    caption={\textit{webifier Tester} - Standardausgabe},
     label={lst:tester-result}
 }
 \begin{lstlisting}
@@ -166,8 +171,8 @@ Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausfüh
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption=[Ausschnitt Konfigurationsdatei webifier Tester]{Ausschnitt Konfigurationsdatei webifier Tester\protect\footnotemark},
-    label={lst:tester-config}
+    caption=[\textit{webifier Tester} - Ausschnitt Konfigurationsdatei]{\textit{webifier Tester} -
+    Ausschnitt Konfigurationsdatei\protect\footnotemark}, label={lst:tester-config}
 }
 \begin{lstlisting}
 {
@@ -199,15 +204,17 @@ Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausfüh
 \end{scriptsize}
 \footnotetext{Der vollständige Inhalt der Konfigurationsdatei befindet sich in Anhang \appref{b}.}
 
-Am Ende der Datei lässt sich noch die Einstellung festlegen, ob das Endergebnis an webifier Data gesendet werden soll oder nicht. Am Anfang der Datei lässt sich der so genannte \textit{Resolver} konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt erreichbar ist und löst wenn nötig Weiterleitungen der Url auf und gibt das Ergebnis an den Tester zurück.
+Am Ende der Datei lässt sich noch die Einstellung festlegen, ob das Endergebnis an \textit{webifier
+Data} gesendet werden soll oder nicht. Am Anfang der Datei lässt sich der so genannte
+\textit{Resolver} konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt erreichbar ist und löst wenn nötig Weiterleitungen der Url auf und gibt das Ergebnis an den Tester zurück.
 
 Ist die angegebene Url erreichbar wird die vom \textit{Resolver} aufgelöste Url verwendet und alle anderen Tests damit gestartet. Nun wartet der Tester bis alle Ergebnisse der Tests verfügbar sind oder die Angegebenen Timeouts erreicht sind. Im Falle eines Timeouts erhält der Test das Ergebnis \textit{UNDEFINED}. Abschließend wird das Gesamtergebnis für die angegebene Url wie bereits in Abschnitt \ref{sec:konzept-tester} beschrieben berechnet. Listing \ref{lst:tester-testresult-calculation} zeigt einen Ausschnitt der Implementierung der Ergebnisberechnung.
 
 \begin{scriptsize}
 \lstset{
     style=eclipsejava,
-    caption=[Ausschnitt Ergebnisberechnung webifier Tester]{Ausschnitt Ergebnisberechnung webifier Tester\protect\footnotemark},
-    label={lst:tester-testresult-calculation}
+    caption=[\textit{webifier Tester} - Ausschnitt Ergebnisberechnung]{\textit{webifier Tester} -
+    Ausschnitt Ergebnisberechnung\protect\footnotemark}, label={lst:tester-testresult-calculation}
 }
 \begin{lstlisting}
 private WebifierOverallTestResult calculateOverallResult() {
@@ -232,18 +239,24 @@ private WebifierOverallTestResult calculateOverallResult() {
 \end{scriptsize}
 \footnotetext{Der vollständige Inhalt der Ergebnisberechnung befindet sich in Anhang \appref{c}.}
 
-Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde wird dieses über die von webifier Data bereitgestellte Schnittstelle dort gespeichert. Die Kommunikation mit webifier Data läuft ebenfalls über das \ac{JSON}-Format. Genaueres hierzu folgt in Abschnitt \ref{sec:umsetzung-data}.
+Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde wird dieses über
+die von \textit{webifier Data} bereitgestellte Schnittstelle dort gespeichert. Die Kommunikation mit
+\textit{webifier Data} läuft ebenfalls über das \ac{JSON}-Format. Genaueres hierzu folgt in
+Abschnitt \ref{sec:umsetzung-data}.
 
 \subsection{webifier Plattform}
 
-In diesem Abschnitt wird nun die Umsetzung von webifier Plattform berschrieben. Diese Komponente wurde mit Java umgesetzt und basiert auf dem Spring-Framework. Zusätzlich kamen im Frontend die Technologiern \ac{HTML}, \ac{CSS} und JavaScript, sowie die Bibliotheken Bootstrap und jQuery zu Einsatz. Zunächst wird nun das Backend beschrieben, danach wird die Oberfläche der Plattform vorgestellt.
+In diesem Abschnitt wird nun die Umsetzung von \textit{webifier Plattform} berschrieben. Diese
+Komponente wurde mit Java umgesetzt und basiert auf dem Spring-Framework. Zusätzlich kamen im Frontend die Technologiern \ac{HTML}, \ac{CSS} und JavaScript, sowie die Bibliotheken Bootstrap und jQuery zu Einsatz. Zunächst wird nun das Backend beschrieben, danach wird die Oberfläche der Plattform vorgestellt.
 
-webifier Plattform ist eine Webanwendung und bietet eine benutzerfreundliche Öberfläche zur Bedienung von webifier Tester. Um die Plattform für die optimale Nutzung des Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} dargestellte Datei, mit der alle notwendigen Parameter angepasst werden können.
+\textit{webifier Plattform} ist eine Webanwendung und bietet eine benutzerfreundliche Öberfläche zur
+Bedienung von \textit{webifier Tester}. Um die \textit{Plattform} für die optimale Nutzung des
+Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} dargestellte Datei, mit der alle notwendigen Parameter angepasst werden können.
 
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Konfigurationsdatei webifier Plattform},
+    caption={\textit{webifier Plattform} - Konfigurationsdatei},
     label={lst:platform-config}
 }
 \begin{lstlisting}
@@ -261,12 +274,17 @@ Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers
 
 Die Plattform stellt außerdem eine Möglichkeit zur Massenüberprüfung von Webseiten zur Verfügung. Hierfür kann eine Liste von Urls in form eines Texts oder einer Datei angegeben werden. In diesem Modus ist es allerdings nicht möglich alle Ergebnisse dierekt zu sehen, da der Vorgang je nach größe der Liste mehrere Tage oder Wochen dauern kann. Deshalb ist dieser Modus eher für langfristige Analysen geeignet.
 
-Im Folgenden wird nun noch einmal der Ablauf einer Überprüfung beschrieben und die Oberfläche von webifier Plattform dargestellt. Besucht der Nutzer die Webseite der PLattform sieht er zunächst die in Abbildung \ref{fig:platform-start} gezeigte Startseite. Hier kann der User nun eine beliebige Url in das Eingabefeld tippen und anschließend die Überprüfung starten. Außerdem bietet die Startseite Links zur bereits beschriebenen Batchverarbeitung und zu webifier Statistics. Dieses Modul wird in Abschnitt \ref{sec:umsetzung-statistics} ausführlich dargestellt wird.
+Im Folgenden wird nun noch einmal der Ablauf einer Überprüfung beschrieben und die Oberfläche von
+\textit{webifier Plattform} dargestellt. Besucht der Nutzer die Webseite der PLattform sieht er
+zunächst die in Abbildung \ref{fig:platform-start} gezeigte Startseite. Hier kann der User nun eine
+beliebige Url in das Eingabefeld tippen und anschließend die Überprüfung starten. Außerdem bietet
+die Startseite Links zur bereits beschriebenen Batchverarbeitung und zu \textit{webifier Statistics}. Dieses Modul wird in Abschnitt \ref{sec:umsetzung-statistics} ausführlich dargestellt wird.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-start}
-  \caption[webifier Platform - Startseite]{webifier Platform - Startseite\protect\footnotemark}
+  \caption[\textit{webifier Plattform} - Startseite]{\textit{webifier Plattform} -
+  Startseite\protect\footnotemark}
   \label{fig:platform-start}
 \end{figure}
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{d}.}
@@ -276,7 +294,8 @@ Nachdem die Überprüfung einer Webseite gestartet wurde wird der Nutzer auf die
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-reflexonature}
-  \caption[webifier Platform - Ergebnisseite]{webifier Platform - Ergebnisseite\protect\footnotemark}
+  \caption[\textit{webifier Plattform} - Ergebnisseite]{\textit{webifier Plattform} -
+  Ergebnisseite\protect\footnotemark}
   \label{fig:platform-result}
 \end{figure}
 \footnotetext{Diese und weitere Ergebnisseiten befinden sich in besserer Qualität in Anhang \appref{d}.}
@@ -286,7 +305,7 @@ Möchte der Nutzer noch genauere Informationen zu den Ergebnissen eines Tests, s
 \begin{figure}[H]
   \centering
   \includegraphics[width=7.5cm]{images/platform/virusscan-malicious}
-  \caption{webifier Platform - Virenscan der Webseite}
+  \caption{\textit{webifier Plattform} - Virenscan der Webseite}
   \label{fig:platform-result-virusscan}
 \end{figure}
 
@@ -297,7 +316,7 @@ Die Detailansicht des Virenscans, welche in Abbildung \ref{fig:platform-result-v
 \includegraphics[width=0.5\textwidth]{images/platform/header-inspection-clean}%
 \includegraphics[width=0.5\textwidth]{images/platform/header-inspection-suspicious}%
 }%
-\caption{webifier Platform - Vergleich in verschiedenen Browsern}
+\caption{\textit{webifier Plattform} - Vergleich in verschiedenen Browsern}
 \label{fig:platform-result-header-inspection}
 \end{figure}
 
@@ -308,7 +327,7 @@ Der Vergleich in verschiedenen Browsern zeigt die maximale und die durchschnittl
 \includegraphics[width=0.5\textwidth]{images/platform/portscan-malicious}%
 \includegraphics[width=0.5\textwidth]{images/platform/ipscan-clean}%
 }%
-\caption{webifier Platform - Überprüfung der IP- und Port-Nutzung}
+\caption{\textit{webifier Plattform} - Überprüfung der IP- und Port-Nutzung}
 \label{fig:platform-result-portscan}
 \end{figure}
 
@@ -317,18 +336,20 @@ Abbildung \ref{fig:platform-result-portscan} zeigt die Ergebnisse der Überprüf
 \begin{figure}[H]
   \centering
   \includegraphics[width=7.5cm]{images/platform/linkchecker-undefined}
-  \caption{webifier Platform - Prüfung aller verlinkten Seiten}
+  \caption{\textit{webifier Plattform} - Prüfung aller verlinkten Seiten}
   \label{fig:platform-result-linkchecker}
 \end{figure}
 
-Das Ergebnis der Prüfung aller verlinkten Seiten enthält eine einfache Liste mit allen gefundenen Links und dem entsprechenden Ergebnis aus webifier Data. Abbildung \ref{fig:platform-result-linkchecker} zeigt eine solche Liste.
+Das Ergebnis der Prüfung aller verlinkten Seiten enthält eine einfache Liste mit allen gefundenen
+Links und dem entsprechenden Ergebnis aus \textit{webifier Data}. Abbildung
+\ref{fig:platform-result-linkchecker} zeigt eine solche Liste.
 
 \begin{figure}[H]
 \centerline{%
 \includegraphics[width=0.5\textwidth]{images/platform/google-safe-browsing-clean}%
 \includegraphics[width=0.5\textwidth]{images/platform/google-safe-browsing-malicious}%
 }%
-\caption{webifier Platform - Google Safe Browsing}
+\caption{\textit{webifier Plattform} - Google Safe Browsing}
 \label{fig:platform-result-google-safe-browsing}
 \end{figure}
 
@@ -339,7 +360,7 @@ Die Deteilansicht des Google Safe Browsing Ergebnisses ist ähnlich dem der Prü
 \includegraphics[width=0.5\textwidth]{images/platform/certificatechecker-clean}%
 \includegraphics[width=0.5\textwidth]{images/platform/certificatechecker-malicious}%
 }%
-\caption{webifier Platform - Überprüfung des SSL-Zertifikats}
+\caption{\textit{webifier Plattform} - Überprüfung des SSL-Zertifikats}
 \label{fig:platform-result-certificatechecker}
 \end{figure}
 
@@ -350,7 +371,7 @@ Das Ergebnis der Überprüfung des SSL-Zertifikates enthält alle Informationen 
 \includegraphics[width=0.5\textwidth]{images/platform/phishing-clean}%
 \includegraphics[width=0.5\textwidth]{images/platform/phishing-malicious}%
 }%
-\caption{webifier Platform - Erkennung von Phishing}
+\caption{\textit{webifier Plattform} - Erkennung von Phishing}
 \label{fig:platform-result-phishingdetector}
 \end{figure}
 
@@ -359,7 +380,7 @@ Die Erkennung von Phishing stellt ebenfalls einige Informationen zur Verfügung,
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{images/platform/screenshot-clean}
-  \caption{webifier Platform - Screenshot der Seite}
+  \caption{\textit{webifier Plattform} - Screenshot der Seite}
   \label{fig:platform-result-screenshot}
 \end{figure}
 
@@ -374,7 +395,7 @@ Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{web
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=10cm]{images/mail-start.png}
-	\caption{webifier Mail - Screenshot der Startmail}
+	\caption{\textit{webifier Mail} - Screenshot der Startmail}
 	\label{fig:mail-start}
 \end{figure}
 
@@ -383,7 +404,7 @@ Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=15cm]{images/mail-result.png}
-	\caption{webifier Mail - Screenshot der Ergebnismail}
+	\caption{\textit{webifier Mail} - Screenshot der Ergebnismail}
 	\label{fig:mail-result}
 \end{figure}
 
@@ -392,14 +413,19 @@ Die Konfigursation von \textit{webifier Mail} ist identisch mit der der Plattfor
 \subsection{webifier Data}
 \label{sec:umsetzung-data}
 
-webifier Data stellt eine Schnittstelle zur globalen Datenspeicherung der Testresultate zur Verfügung. Die Komponente setzt ebenfalls auf dem Spring-Framework auf und wurde deshalb in Java implementiert. Außerdem wird die Spring-Bibliothek Spring-Data eingesetzt um Java-Objekte auf Dokumente zu übertragen und in einer MongoDB zu persistieren.
+\textit{webifier Data} stellt eine Schnittstelle zur globalen Datenspeicherung der Testresultate zur
+Verfügung. Die Komponente setzt ebenfalls auf dem Spring-Framework auf und wurde deshalb in Java implementiert. Außerdem wird die Spring-Bibliothek Spring-Data eingesetzt um Java-Objekte auf Dokumente zu übertragen und in einer MongoDB zu persistieren.
 
-Das Modul bietet eine \ac{REST}-\ac{API} zur externen Nutzung, beispielsweise im webifier Tester oder in der Prüfung aller verlinkten Seiten. Die API stellt die folgenden Aktionen bereit: \lstinline[style=eclipse]{/push}, \lstinline[style=eclipse]{/check} und \lstinline[style=eclipse]{/count}. Mit der Methode \lstinline[style=eclipse]{/push} können Testergebnisse in webifier Data abgelegt werden. Die entsprechende Resource, welche im Inhalt des POST-Requests gesendet werden muss ist in Listing \ref{lst:data-push} dargestellt.
+Das Modul bietet eine \ac{REST}-\ac{API} zur externen Nutzung, beispielsweise im \textit{webifier
+Tester} oder in der Prüfung aller verlinkten Seiten. Die API stellt die folgenden Aktionen bereit:
+\lstinline[style=eclipse]{/push}, \lstinline[style=eclipse]{/check} und
+\lstinline[style=eclipse]{/count}. Mit der Methode \lstinline[style=eclipse]{/push} können
+Testergebnisse in \textit{webifier Data} abgelegt werden. Die entsprechende Resource, welche im Inhalt des POST-Requests gesendet werden muss ist in Listing \ref{lst:data-push} dargestellt.
 
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Ausschnitt Inhalt push-Request - webifier Data},
+    caption={\textit{webifier Data} - Ausschnitt Inhalt push-Request},
     label={lst:data-push}
 }
 \begin{lstlisting}
@@ -438,12 +464,13 @@ Das Modul bietet eine \ac{REST}-\ac{API} zur externen Nutzung, beispielsweise im
 \end{lstlisting}
 \end{scriptsize}
 
-Die Methode \lstinline[style=eclipse]{/check} bietet die Möglichkeit webifier Data nach einer oder mehreren Urls zu durchsuchen. Hierfür muss im Inhalt des POST-Requests die in Listing \ref{lst:data-check-request} gezeigte Ressource gesendet werden. Diese enthält eine Liste der zu überprüfenden Links.
+Die Methode \lstinline[style=eclipse]{/check} bietet die Möglichkeit \textit{webifier Data} nach
+einer oder mehreren Urls zu durchsuchen. Hierfür muss im Inhalt des POST-Requests die in Listing \ref{lst:data-check-request} gezeigte Ressource gesendet werden. Diese enthält eine Liste der zu überprüfenden Links.
 
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Inhalt check-Request - webifier Data},
+    caption={\textit{webifier Data} - Inhalt check-Request},
     label={lst:data-check-request}
 }
 \begin{lstlisting}
@@ -475,12 +502,13 @@ Die Methode \lstinline[style=eclipse]{/check} bietet die Möglichkeit webifier D
 \end{lstlisting}
 \end{scriptsize}
 
-Wie Listing \ref{lst:data-check} zeigt gruppiert webifier Data zunächst alle Links anhand deren Host-Teil und entfernt alle ungültigen Einträge. Anschließend werden alle Resultate für jeden Eintrag der Liste geladen und daraus ein Gesamtergebnis pro Host berechnet. Dieses wird schließlich mit dem Host als schlüssel zur Liste \textit{hostResults} hinzugefügt. Abschließend wird die erzeugte Liste als Ergebnis zurückgegeben und als Antwort zurückgesendet. Diese Antwort ist in Listing \ref{lst:data-check-response} abgebildet.
+Wie Listing \ref{lst:data-check} zeigt gruppiert \textit{webifier Data} zunächst alle Links anhand
+deren Host-Teil und entfernt alle ungültigen Einträge. Anschließend werden alle Resultate für jeden Eintrag der Liste geladen und daraus ein Gesamtergebnis pro Host berechnet. Dieses wird schließlich mit dem Host als schlüssel zur Liste \textit{hostResults} hinzugefügt. Abschließend wird die erzeugte Liste als Ergebnis zurückgegeben und als Antwort zurückgesendet. Diese Antwort ist in Listing \ref{lst:data-check-response} abgebildet.
 
 \begin{scriptsize}
 \lstset{
     style=eclipsejava,
-    caption={Verarbeitung check Methode - webifier Data},
+    caption={\textit{webifier Data} - Verarbeitung check Methode},
     label={lst:data-check}
 }
 \begin{lstlisting}
@@ -515,7 +543,7 @@ public WebifierCheckTestResultsResponse checkTestResultsRequest(WebifierCheckTes
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Inhalt check-Response - webifier Data},
+    caption={\textit{webifier Data} - Inhalt check-Response},
     label={lst:data-check-response}
 }
 \begin{lstlisting}
@@ -538,7 +566,8 @@ public WebifierCheckTestResultsResponse checkTestResultsRequest(WebifierCheckTes
 \end{lstlisting}
 \end{scriptsize}
 
-Die Methode \lstinline[style=eclipse]{/count} liefert einfach die aktuelle Gesamtzahl der in webifier Data vorhandenen Testergebnisse.
+Die Methode \lstinline[style=eclipse]{/count} liefert einfach die aktuelle Gesamtzahl der in
+\textit{webifier Data} vorhandenen Testergebnisse.
 
 Die Testergebnisse werden in der MongoDB auf zwei Dokumente verteilt. Das erste Dokument (\lstinline[style=eclipse]{webifierTestResultData}) enthält alle Gesamtdaten des Resultats, das zweite (\lstinline[style=eclipse]{webifierSingleTestResultData}) umfasst alle Einzelergebnisse des Resultats. Deshalb werden pro Testergebnis ein Dokument in \lstinline[style=eclipse]{webifierTestResultData} und acht in \lstinline[style=eclipse]{webifierSingleTestResultData} gespeichert.
 
@@ -547,7 +576,7 @@ Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{/push}
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Beispieldokument webifierTestResultData - webifier Data},
+    caption={\textit{webifier Data} - Beispieldokument webifierTestResultData},
     label={lst:data-resultdata}
 }
 \begin{lstlisting}
@@ -579,7 +608,8 @@ Zur Persistierung werden alle Informationen der \lstinline[style=eclipse]{/push}
 \subsection{webifier Statistics}
 \label{sec:umsetzung-statistics}
 
-Webifier Statistics wird in R implementiert. Hierzu werden Flexdashboards\footnote{\url{http://rmarkdown.rstudio.com/flexdashboard/index.html}} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
+\textit{webifier Statistics} wird in R implementiert. Hierzu werden
+Flexdashboards\footnote{\url{http://rmarkdown.rstudio.com/flexdashboard/index.html}} verwendet. Zur Generierung der Grafiken wurde auf verschiedene Librarys, wie beispielsweise Plot.ly, zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimieren. Die Anordnung der Grafiken wird über ein bestimmtes Layout definiert. Jede Grafik wird prinzipiell in 3 Schritten erstellt:
 
 \begin{enumerate}
   \item Daten aus der MongoDB laden
@@ -590,7 +620,7 @@ Webifier Statistics wird in R implementiert. Hierzu werden Flexdashboards\footno
 \begin{scriptsize}
 \lstset{
     style=eclipsejavascript,
-    caption={Beispiel R-Grafik},
+    caption={\textit{webifier Statistics} - Beispiel R-Grafik},
     label={lst:rgrafik}
 }
 \begin{lstlisting}
