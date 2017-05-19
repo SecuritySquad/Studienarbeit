@@ -938,22 +938,33 @@ zurückgeliefert.
 
 \subsection{Google Safe Browsing}
 
-Wie bei der Prüfung aller verlinkten Seiten hat der Google Safe Browsing Test ein Python-Skript für die Logik und ein PhantomJS-Skript für das Herausfiltern der Links.
-Da beide Tests das gleiche PhantomJS-Skript verwenden, wird an dieser Stelle auf den ersten Absatz des letzten Unterabschnitts verwiesen.
+Wie bei der Prüfung aller verlinkten Seiten hat der Google Safe Browsing Test ein Python-Skript für
+die Logik und nutzt PhantomJS zum Herausfiltern der Links.
+Die Extraktion funktioniert wie bei der \textit{Prüfung aller verlinkten Seiten}, die im
+vorausgegangenen Abschnitt beschrieben wurde.
 
-Anders hingegen, als beim vorherigen Test, werden die Links nicht an \textit{webifier Data}, sondern an den externen Cloud-Service von Google geschickt.
+Anders hingegen, als beim vorherigen Test, werden die Links nicht an \textit{webifier Data},
+sondern an den externen Cloud-Service von Google geschickt.
 Zuvor muss jedoch die Anfrage konfiguriert werden.
-Dabei werden unter anderem die gewünschten Ergebnistypen (hier: alle vier, s. \autoref{par:konzep-gsb-types}), bedrohte Systeme (hier: \lstinline{ANY_PLATFORM}) und letzendlich die \acp{URL} angegeben werden.
-Findet der Service zu den Links keine Einträge in seiner Datenbank, so gibt er keine liste von matches aus.
+Dabei werden unter anderem die gewünschten Ergebnistypen, zu prüfende bedrohte Systeme (
+\lstinline[style=eclipse]{ANY_PLATFORM}) und letzendlich die \acsp{URL} angegeben.
+Findet der Service zu den Links keine Einträge in seiner Datenbank, so gibt er eine leere Liste von
+Matches aus.
 In diesem Fall ist das Ergebnis \textit{CLEAN}.
-Der Rest der ERgebnisberechnung findet wie im Konzept beschrieben statt.
-Die Ausgabe des Tests beinhaltet neben dem Ergebnis die Liste der matches.
+Abschließend wird anhand des erhaltenen Ergebnisses das Endergebnis berechnet. Die Ausgabe des Tests
+beinhaltet neben dem Ergebnis die Liste der Matches.
 
 \subsection{Überprüfung des SSL-Zertifikats}
 
-Der Test zur Überprüfung des SSL-Zertifikates wurde mit Python umgesetzt. Technisch wurde zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
+Der Test zur \textit{Überprüfung des SSL-Zertifikates} wurde mit Python umgesetzt. Technisch wurde
+zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
-Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt. Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während dem Test ein unbekannter Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
+Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt.
+Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein
+gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein
+fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während des
+Tests ein Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich
+zum Ergebnis werden alle ausgelesenen Informationen des Zertifikats an den Tester zurückgegeben.
 
 \subsection{Erkennung von Phishing}
 \label{sec:umsetzung-phishungdetector}
@@ -964,9 +975,18 @@ Im ersten Schritt wird die gegebene Webseite mit Hilfe von PhantomJS aufgerufen 
 
 Wenn mindestens ein Schlüsselwort gefunden wurde folgt nun der nächste Schritt. Wurde kein Schlüsselwort gefunden, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Der zweite Schritt ist das Finden von Links für mögliche Originale der zu überprüfenden Seite. Hierfür wird einmal das erste Schlüsselwort verwendet um eine mögliche Domain daraus zu bilden. Für die Domainbildung werden die 5 meist genutzten Domainendungen\footnote{\url{https://w3techs.com/technologies/overview/top_level_domain/all}} (.com, .ru, .net, .org und .de) eingesetzt. Außerdem werden alle gefundenen Schlagwörter genutzt um in verschiedene Suchmaschinen danach zu suchen und so Links zu möglichen Dupplikaten zu finden. Zur Suche werden die drei Suchmaschinen DuckDuckGo\footnote{\url{https://duckduckgo.com/}}, Ixquick\footnote{\url{https://www.ixquick.com/}} und Bing\footnote{\url{https://www.bing.com/}} verwendet. Von jeder Suchmaschine werden die ersten zehn Eintrage weiterverarbeitet und in einer Gesamtliste mit den erzegten Domains zusammengeführt. Links die in mehreren Suchmaschinen aufgelistet werden steigen im Ranking auf. Am Ende dieses Schrittes wird die Liste auf 25 Eintrage reduziert.
 
-Im nächsten Schritt müssen nun die Originalseiten herausgefiltert und aus der Liste der möglichen Originale entfernt werden, da viele Webseiten, beispielsweise die von Google unter vielen unterschiedlichen Domains erreichbar ist. Um dies zu erreichen wurden mehrere Methoden angewandt. Als erstes werden alle Links aufgelöst, um tatsächlich den Link der zu vergleichenden Seite zu nutzen. Ist der Link nicht erreichbar, oder führt er ins Nichts, so wird er aussortiert. Anschließend wird die Url auf die registrierte \ac{TLD} reduziert und mit der der gegebenen Seite verglichen. Beispielsweise wird \lstinline[style=eclipse]{https://abc.example.com/xyz} auf \lstinline[style=eclipse]{example.com} minimiert. Sind beide gleich, so wird der Link verworfen. So werden Unterseiten und Subdomains der gegeben Seite aussortiert. Als nächstes wird die IP-Adresse der Domain aufgelöst und mit der der zu prüfenden Seite verglichen. Sind diese identisch wird auch dieser Link aus der Liste entfernt. Als letztes werden die Zertifikatinformation der Links ausgelesen, sofern ein SSL-Zertifikat verfügbar ist. Anschließend werden die \textit{Subject}-Informationen des Zertifikates mit denen der gegebenen Seite verglichen. Sind diese gleich, so scheidet auch dieser Link aus. Nun wird die Liste der übrig gebliebenen Links noch auf zehn Links reduziert, welche nun im nächsten Schritt aufgerufen werden.
+Im nächsten Schritt müssen nun die Originalseiten herausgefiltert und aus der Liste der möglichen
+Originale entfernt werden, da viele Webseiten, beispielsweise die von Google unter vielen
+unterschiedlichen Domains erreichbar sind. Um dies zu erreichen wurden mehrere Methoden angewandt.
+Als erstes werden alle Links aufgelöst, um tatsächlich den Link der zu vergleichenden Seite zu
+nutzen. Ist der Link nicht erreichbar, oder führt er ins Nichts, so wird er aussortiert.
+Anschließend wird die \acs{URL} auf die registrierte \ac{TLD} reduziert und mit der der gegebenen
+Seite verglichen. Beispielsweise wird \lstinline[style=eclipse]{https://abc.example.com/xyz} auf \lstinline[style=eclipse]{example.com} minimiert. Sind beide gleich, so wird der Link verworfen. So werden Unterseiten und Subdomains der gegeben Seite aussortiert. Als nächstes wird die IP-Adresse der Domain aufgelöst und mit der der zu prüfenden Seite verglichen. Sind diese identisch wird auch dieser Link aus der Liste entfernt. Als letztes werden die Zertifikatinformation der Links ausgelesen, sofern ein SSL-Zertifikat verfügbar ist. Anschließend werden die \textit{Subject}-Informationen des Zertifikates mit denen der gegebenen Seite verglichen. Sind diese gleich, so scheidet auch dieser Link aus. Nun wird die Liste der übrig gebliebenen Links noch auf zehn Links reduziert, welche nun im nächsten Schritt aufgerufen werden.
 
-Der vierte Schritt ist das abrufen der Links der möglichen Originalwebseiten. Wie im ersten Schritt für die gegebene Seite werden nun für alle Links der Quelltextausgelesen, daraus der Inhalt extrahiert und ein Screenshot angefertigt. Alle hierbei gewonnenen Informationen werden im folgenden Schritt für den Vergleich benötigt.
+Der vierte Schritt ist das Abrufen der Links der möglichen Originalwebseiten. Wie im ersten Schritt
+für die gegebene Seite werden nun für alle verbliebenen Links der Quelltext ausgelesen, daraus
+der Inhalt extrahiert und ein Screenshot angefertigt. Alle hierbei gewonnenen Informationen werden
+im folgenden Schritt für den Vergleich benötigt.
 
 Nun folgt der eigentliche Schritt des Vergleichens der möglichen Originale mit der zu validierenden Webseite. Der Vergleich erfolgt in den drei Bereichen Quelltext, Inhalt und Aussehen. Zum Quelltext- und Inhaltsvergleich werden Funktionen (\textit{difflib.SequenceMatcher(\ldots).quick\_ratio()}) der Python-Standardbibliothek verwendet. Für den Vergleich der Screenshots wurde auf die freie Bibliothek Resemble.js zurückgegriffen. Diese liefert für den Vergleich von zwei Bildern die prozentuale Übereinstimmung und erzeugt einen Differenzbild. All diese Daten wurden den Links zugeordnet und im nächsten Schritt zur Ergebnisberechnung verwendet.
 
