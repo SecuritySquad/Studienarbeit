@@ -376,31 +376,16 @@ Wie nun gezeigt bietet die Plattform seh viele interessante Zusatzinformationen 
 
 \subsection{webifier Mail}
 
-\textit{webifier Mail} ist eine Java-Anwendung, die eingehende E-Mails auf Links untersucht und für sie durch den Tester prüfen lässt. Ein wichtiger Aspekt der Anwendung ist das extrahieren der Links. Diese Aufgabe übernimmt die Klasse \lstinline{UrlsFromMessageExtractor}, deren Kernmethode \lstinline{getUrls(String)}\ in \autoref{lst:mail-url-extract} gezeigt wird. Die Methode erwartet als Parameter den zu durchsuchenden Text. Innerhalb der Methode wird ein \lstinline{Matcher}-Objekt initialisiert (s. Zeilen 7f), mit dem der Text iterativ durchkämmt wird (s. Zeilen 9f). Der reguläre Ausdruck, der bei der Erstellung verwendet wird ist eine komplexe, aber genaue Repräsentation des \ac{URL}-Formats ist. Während der iterativen Suche werden zusätzlich \ac{URL}-Duplikate ausgesondert (s. Zeile 11), sodass am Ende eine Liste von allen unterschiedlichen Links zurückgegeben werden kann (s. Zeile 14).
+Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail} ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit einem E-Mail-Client, welcher via IMAP seine Mails abfragt. Die engehenden Nachrichten werden auf Links hinuntersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet \textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT: Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
 
-\begin{scriptsize}
-	\lstset{
-		style=eclipsejava,
-		caption={URL-Extraktion getUrls Methode - webifier Mail},
-		label={lst:mail-url-extract}
-	}
-\begin{lstlisting}
-public class UrlsFromMessageExtractor {
-	private List<String> ##getUrls##(String content) throws ... {
-		List<String> urls = new ArrayList<>();
-		Pattern pattern = Pattern.compile(
-				##"https?://([\\w+?.\\w+])+([a-zA-Z0-9~!@#$%\\^&amp;*()_\\-=+\\\\/?.:;',]*)?"##);
-		while (matcher.find()) {
-			String url = matcher.group();
-			if (!urls.contains(url))
-				urls.add(url);
-		}
-	}	
-}
-\end{lstlisting}
-\end{scriptsize}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{images/mail-start.png}
+	\caption{webifier Mail - Screenshot der Startmail}
+	\label{fig:mail-start}
+\end{figure}
 
-Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und Ergebnisformatierung. Wurden die Tests durchlaufen, werden die Ergebnisse zu \ac{HTML} gerendert, eine Mail mit ebendiesen Ergebnissen erstellt und an den Nutzer geschickt. \autoref{fig:mail-result} zeigt einen Screenshot einer E-Mail Antwort von \textit{webifier Mail}.
+Sobald alle Links der Nachricht vom Tester analysiert und dessen Ergebnisse in \textit{webifier Mail} angekommen sind wird eine Ergebnismail generiert und an den Nutzer zurückgeschickt. Eine solche ist in Abbildung \ref{fig:mail-result} zu sehen. Das Gesamtergebis sowie alle Teilergebnisse werden farblich entsprechend des Ergebnisses gekennzeichnet um dem Nutzer dadurch die Vertrauenswürdigkeit der Webseite deutlich zu machen. Häufig werden externe Ressourcen wie Bilder nicht von den E-Mailprogrammen nachgeladen, wesshalb dadurch auch eine Kennzeichnung der Ergebnisse gewährleistet ist. Außerdem wird in dem Betreff der Antwortmail das Endergebnis aller Links der original E-Mail als Prefix verwendet um dem Nutzer vor dem eigentlichen Lesen der Auswertung schonmal eine Rückmeldung geben Zu können. Im Beispiel von Abbildung \ref{fig:mail-result} würde der Betreff \lstinline[style=eclipse]{BEDROHLICH: Nachrichtenbetreff} sein.
 
 \begin{figure}[H]
 	\centering
@@ -408,6 +393,8 @@ Der Rest der Komponente besteht aus Konfiguration, Nachrichtenübermittlung und 
 	\caption{webifier Mail - Screenshot der Ergebnismail}
 	\label{fig:mail-result}
 \end{figure}
+
+Die Konfigursation von \textit{webifier Mail} ist identisch mit der der Plattform, weshalb diese hier nicht noch einmal erklärt wird.
 
 \subsection{webifier Data}
 \label{sec:umsetzung-data}
