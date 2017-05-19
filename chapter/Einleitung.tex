@@ -1,6 +1,6 @@
 \chapter{Einleitung}
 
-Anbieter von zwielichtigen Web-Angeboten greifen ihre User mit diversen Client-seitigen Methoden an. Beispiele für solche Angriffe sind Malware Downloads, Phishing, JavaScript Intranet Angriffe, oder Browser Exploits.
+Anbieter von zwielichtigen Web-Angeboten greifen ihre User mit diversen Client-seitigen Methoden an. Beispiele für solche Angriffe sind Malware Downloads, Phishing, JavaScript Intranet Angriffe oder Browser Exploits.
 
 \begin{center}
 \textbf{\enquote{Jeder Fünfte Opfer von Internetkriminalität}}\footcite[Zitat][297]{cybercrime}
@@ -10,23 +10,33 @@ Dieses Zitat macht deutlich welche Bedrohung vom Internet und insbesondere von W
 
 \section{Aufbau der Arbeit}
 
-Die Studienarbeit ist in fünf Kapitel unterteilt.
-Das erste Kapitel ist die \textit{Einleitung}. Hier werden die Rahmenbedingungen für die Arbeit erläutert und es wird ein Einblick in die Hintergründe gegeben.
-Das nächste Kapitel \textit{Grundlagen} behandelt Tools, die maßgeblich zur Entwicklung der Lösung verwendet werden.
-Weiterhin werden clientseitige Probleme bzw. Angriffspunkte fachlich aufbereitet, die in der Lösung angesprochen werden.
-Im dritten Kapitel \textit{Konzeption} werden die Ergebnisse unseres Entwurfsprozesses dargestellt und begründet.
-Dabei wird grundsätzlich zwischen der Gesamtanwendung und den Tests unterschieden.
-Diese Aufteilung findet sich auch im darauffolgenden Kapitel der \textit{Umsetzung} wieder.
-Dort wird hingegen auf die konkrete Implementierung der Entwürfe eingegangen und bedeutende Anwendungslogik anhand von Codebeispielen erklärt.
-In Kapitel fünf \textit{Analyse} werden die Erkenntnisse der Arbeit präsentiert und danach differenziert beurteilt.
-In den letzten beiden Kapiteln \textit{Ausblick} und \textit{Fazit} werden Ideen und Verbesserungsvorschläge für mögliche Folgeprojekte vorgetragen und die Arbeit abschließen retrospektiv betrachtet.
+Die Studienarbeit ist in sieben Kapitel unterteilt. Das erste Kapitel ist die Einleitung.
+Hier werden die Rahmenbedingungen für die Arbeit erläutert und es wird ein Einblick in die
+Hintergründe gegeben. Das nächste Kapitel, Grundlagen, behandelt Tools, die maßgeblich zur
+Entwicklung der Lösung verwendet werden. Weiterhin werden clientseitige Probleme bzw. Angriffspunkte
+fachlich aufbereitet, die in der Lösung angesprochen werden. Im dritten Kapitel
+werden die Ergebnisse unseres Entwurfsprozesses dargestellt und begründet. Dabei wird grundsätzlich
+zwischen der Gesamtanwendung und den Tests unterschieden. Diese Aufteilung findet sich auch im
+darauffolgenden Kapitel, der Umsetzung, wieder. Dort wird hingegen auf die konkrete
+Implementierung des Konzepts eingegangen und bedeutende Anwendungslogik anhand von Codebeispielen
+erklärt. In Kapitel fünf, der Analyse, werden die Erkenntnisse der Arbeit präsentiert und danach
+differenziert beurteilt. Zum Abschluss der Arbeit werden in Ausblick und Fazit Ideen und
+Verbesserungsvorschläge für mögliche Folgeprojekte vorgetragen und die Arbeit abschließend
+bewertet.
 
 \section{Aufgabenstellung}
-Ziel der Arbeit ist eine systematische Untersuchung der Aktivitäten von semi-legalen Webseiten im \ac{WWW}. Das erwartete Ergebnis ist ein Prüfportal, auf dem jene Webseiten automatisiert analysiert werden und Ergebnisse präsentiert werden sollen.
+Ziel der Arbeit ist eine systematische Untersuchung der Aktivitäten von semi-legalen Webseiten im
+\ac{WWW}. Das erwartete Ergebnis ist ein Prüfportal, auf dem jene Webseiten automatisiert
+analysiert und Ergebnisse präsentiert werden sollen.
 
-Nach dem ersten Schaffen einer Übersicht von interessanten Zielen, wie z.B. One-Click-Hoster oder File-sharing Sites sollen ausgewählte Webseiten manuell untersucht werden. Außerdem sollen verschiedene Angriffsszenarien zur weiteren Prüfung ausgewählt werden. Der Untersuchungsprozes der Webseiten soll im Verlauf dieser Arbeit stückweise automatisiert und in den Rahmen einer Prüfanwendung gebracht werden.
+Nach dem Erstellen einer Übersicht von interessanten Zielen, wie z.B. One-Click-Hoster oder
+File-sharing Seiten sollen ausgewählte Webseiten manuell untersucht werden. Außerdem sollen
+verschiedene Angriffsszenarien zur weiteren Prüfung ausgewählt werden. Der Untersuchungsprozess der
+Webseiten soll im Verlauf dieser Arbeit stückweise automatisiert und in den Rahmen einer
+Prüfanwendung gebracht werden.
 
-Abschließend sollen eine Vielzahl von Webseiten mit der Anwendung getestet und die Ergebnisse ausgewertet und dokumentiert werden.
+Abschließend sollen eine Vielzahl von Webseiten mit der Anwendung getestet und die Ergebnisse
+ausgewertet und dokumentiert werden.
 
 \section{Team}
 Das Entwicklerteam besteht aus drei Studenten der angewandten Informatik:
@@ -37,7 +47,7 @@ Der Name der Arbeitsgruppe ist \textit{SecuritySquad}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=5cm]{images/securitysquad}
-	\caption{Secutitysquad - Logo}
+	\caption{SecuritySquad - Logo}
 	\label{fig:securitysquad-logo}
 \end{figure}
 
@@ -48,14 +58,25 @@ Die Studienarbeit wird von Dr. Martin Johns betreut, der an der DHBW Karlsruhe d
 \begin{figure}[H]
   \centering
   \includegraphics[width=5cm]{images/webifier}
-  \caption{webifier - Logo}
+  \caption{\textit{webifier} - Logo}
   \label{fig:webifier-logo}
 \end{figure}
 
-webifier ist eine Anwendung mit der Webseiten auf deren Seriosität und mögliche clientseitige Angriffe auf den Nutzer geprüft werden können. Sie besteht aus mehreren eigenständigen Teilanwendungen. Im Zentrum steht der Tester, welcher die einzelnen Tests verwaltet, ausführt und anschließend die Ergebnisse auswertet. Jeder einzelne Test ist eine weitere isolierte Teilanwendung des Testers. So kann jeder Test unabhänig von allen anderen betrieben werden.
+\textit{webifier} ist eine Anwendung mit der Webseiten auf deren Seriosität und mögliche
+clientseitige Angriffe auf den Nutzer geprüft werden können. Sie besteht aus mehreren
+eigenständigen Teilanwendungen. Im Zentrum steht der Tester, welcher die einzelnen Tests
+verwaltet, ausführt und anschließend die Ergebnisse auswertet. Jeder einzelne Test ist eine weitere isolierte
+Teilanwendung des Testers. So kann jeder Test unabhänig von allen anderen betrieben werden.
 
-Die Plattform ist eine Webanwendung welche den Endnutzern eine grafische Oberfläche zur Verfügung stellt, um Webseiten zu überprüfen. Im Hintergrund setzt die Plattform auf den Tester auf. webifier Mail ist ein Dienst mit dem Links aus E-Mails überprüft werden können. Anschließend erhält der Sender eine E-Mail mit den Resultaten zurück.
+\textit{webifier Plattform} ist eine Webanwendung welche den Endnutzern eine grafische
+Oberfläche zur Verfügung stellt, um Webseiten zu überprüfen. Im Hintergrund nutzt die Plattform
+den Tester. \textit{webifier Mail} ist ein Dienst mit dem Links aus E-Mails überprüft werden können.
+Anschließend erhält der Sender eine E-Mail mit den Resultaten zurück.
 
-Eine weitere Teilanwendung von webifier ist das Data-Modul. Es stellt eine Schnittstelle für den Tester bereit, um alle Testergebisse sammeln zu können. Das Statisitik-Modul ist die letzte Teilanwendung von webifier. Es setzt auf das Data-Modul auf und stellt Funktionen zur Auswertung aller Testergebnisse bereit.
+Eine weitere Teilanwendung ist \textit{webifier Data}. Sie stellt eine Schnittstelle
+für den Tester bereit, um alle Testergebisse sammeln zu können. \textit{webifier Statistics} ist die
+letzte Teilanwendung von \textit{webifier}. Sie nutzt die vom Data-Modul gespeicherten Daten um
+Auswertungen aller Testergebnisse bereitzustellen.
 
-Um die Techniken und Algorithmen von webifier verstehen zu können sind einige Grundlagen erforderlich, welche nun im nächsten Kapitel genauer vorgsetellt werden.
+Um das Konzept und die Umsetzung von \textit{webifier} verstehen zu können sind einige Grundlagen
+erforderlich, welche nun im nächsten Kapitel genauer vorgestellt werden.
