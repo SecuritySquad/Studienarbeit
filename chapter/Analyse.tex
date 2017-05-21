@@ -18,7 +18,7 @@ Die Grafik visualisiert die Aktivität von \textit{webifier} über den gesamten,
 \end{figure}
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
-An der Oberkante ist eine Navigationsleiste zu finden. Diese wird auf allen Teilseiten angezeigt. Der Nutzer kann hier zwischen den einzelnen Seiten wechseln, hinter dem Reiter \textit{Einzelauswertungen} befindet sich ein Dropdown-Menü zur Auswahl des jeweiligen Testes für den der Nutzer die Statistiken betrachten möchte. In den nachfolgenden Kapiteln wird auf diese Auswertungen genauer eingegangen.
+An der Oberkante ist eine Navigationsleiste zu finden. Diese wird auf allen Teilseiten angezeigt. Der Nutzer kann hier zwischen den einzelnen Seiten wechseln, hinter dem Reiter \textit{Einzelauswertungen} befindet sich ein Dropdown-Menü zur Auswahl des jeweiligen Tests für den der Nutzer die Statistiken betrachten möchte. In den nachfolgenden Kapiteln wird auf diese Auswertungen genauer eingegangen.
 
 \section{Gesamtauswertungen}
 In den Gesamtauswertungen finden sich alle Statistiken, die sich auf die Gesamttests der Webseite beziehen. Ein Gesamttest ist der komplette Durchlauf aller Tests einer Webseite mit aggregiertem Ergebnis. In den folgenden Abschnitten werden die Grafiken beschrieben, die dort zu finden sind.
@@ -106,7 +106,7 @@ Die Tabelle in Abbildung \ref{fig:analyse-top10} gehört nicht mehr direkt zu de
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
 \section{Einzelauswertungen}
-In den folgenden Abschnitten werden die Ergebnisse der einzelnen Tests beschrieben und bewertet. Abbildung \ref{fig:analyse-headerinspection} zeigt ein Beispiel für eine Seite der Einzelauswertungen eines Testes. Diese Seite ist für die meisten Tests identisch. Deshalb werden im folgenden nur die Kreisdiagramme gezeigt. Für die \textit{Überprüfung der Port-Nutzung }und dem \textit{Virenscan der Webseite} sind weitere Kennzahlen vorhanden, welche im jeweiligen Kapitel erläutert werden.
+In den folgenden Abschnitten werden die Ergebnisse der einzelnen Tests beschrieben und bewertet. Abbildung \ref{fig:analyse-headerinspection} zeigt ein Beispiel für eine Seite der Einzelauswertungen eines Tests. Diese Seite ist für die meisten Tests identisch. Deshalb werden im folgenden nur die Kreisdiagramme gezeigt. Für die \textit{Überprüfung der Port-Nutzung }und dem \textit{Virenscan der Webseite} sind weitere Kennzahlen vorhanden, welche im jeweiligen Kapitel erläutert werden.
 
 In den Einzelauswertungen sind Kennzahlen der getesteten Seiten und zur durchschnittlichen Analysezeit dargestellt. Darunter befindet sich ein Kreisdiagramm, welches die prozentuale Verteilung der Testergebnisse visualisiert.
 \begin{figure}[H]
@@ -153,7 +153,7 @@ wenn man die unterschiedlichen Antworten auf JavaScript und Links zu anderen Web
 \end{figure}
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{f}.}
 
-Abbildung \ref{fig:analyse-portscan} zeigt die Ergebnisse des Testes zur \textit{Überprüfung der
+Abbildung \ref{fig:analyse-portscan} zeigt die Ergebnisse des Tests zur \textit{Überprüfung der
 Portnutzung}.
 Hier ist festzustellen, dass Portscanning ein eher wenig genutztes Mittel ist, da 87.3\% der Webseiten unbedenklich sind. Zudem läuft der Test mit gerade einmal 0.111\% unbekannten Ergebnissen sehr stabil, denn das Ergebnis unbekannt kann hier nur entstehen indem der Test abstürzt.
 
@@ -208,7 +208,7 @@ Besser wäre es, wenn der Google Safe Browsing Service eine Art \textit{CLEAN}-E
 \end{figure}
 
 Sehr positiv an diesem Test ist wohl, dass kaum fehlerhafte Zertifikate gefunden wurden, wie
-Abbildung \ref{fig:analyse-diacertificate} zeigt. Beunruhigend ist hingegend das fast 84\% aller getesteten Webseiten überhaupt kein Zertifikat verwenden. Zumal der Erwerb eines Zertifikates auch finanziell keine Probleme mehr darstellt, da es wie an anderer Stelle bereits erwähnt Vergabestellen gibt, welche kostenlose Zertifikate ausstellen.
+Abbildung \ref{fig:analyse-diacertificate} zeigt. Beunruhigend ist hingegend das fast 84\% aller getesteten Webseiten überhaupt kein Zertifikat verwenden. Zumal der Erwerb eines Zertifikates auch finanziell keine Probleme mehr darstellt, da es wie an anderer Stelle bereits erwähnt, Vergabestellen gibt, welche kostenlose Zertifikate ausstellen.
 
 \subsection{Erkennung von Phishing}
 \begin{figure}[H]
@@ -218,7 +218,7 @@ Abbildung \ref{fig:analyse-diacertificate} zeigt. Beunruhigend ist hingegend das
   \label{fig:analyse-diaphishing}
 \end{figure}
 
-Etwa 6\% der überprüften Seiten wurden als Phishingseiten eingestuft. Absolut betrachtet wurden ca. 10.000 Phishingseiten von \textit{webifier} gefunden. Allerdings sollten diese Werte aufgrund der Einfachheit des Tests mit Vorsicht betrachtet werden, da deshalb auch einige Webseiten fehlerhaft klassifiziert wurden. Wichtig zu beachten ist außerdem das viele Phishingseiten nur wenige Minuten oder Stunden existieren, weshalb der Erkennungszeitraum auch entsprechend gering ist.
+Etwa 6\% der überprüften Seiten wurden als Phishingseiten eingestuft. Absolut betrachtet wurden ca. 10.000 Phishingseiten von \textit{webifier} gefunden. Allerdings sollten diese Werte aufgrund der Einfachheit des Tests mit Vorsicht betrachtet werden, da deshalb auch einige Webseiten fehlerhaft klassifiziert wurden. Wichtig zu beachten ist außerdem, dass viele Phishingseiten nur wenige Minuten oder Stunden existieren, weshalb der Erkennungszeitraum auch entsprechend gering ist.
 
 \section{Bewertung der Ergebnisse}
 Zur Bewertung der Ergebnisse müssen alle Tests betrachtet werden. Verwunderlich ist hierbei, die geringe Anzahl an gefundener Viren. In den Grundlagen wurde analysiert, dass die Verbreitung von Malware in Deutschland stark zugenommen hat (siehe Abbildung \ref{fig:malware}), jedoch die Ergebnisse von \textit{webifier} auf eine eher geringe Malware-Verbreitung über Webseiten schließen lassen. Dies kann beweisen, dass Malware deutlich stärker über E-Mailanhänge verbreitet wird, als über Webseiten. Ein weiterer Grund für dieses Ergebnis ist, dass eventuelle versteckte Downloads auf den entsprechenden Seiten nicht mit analysiert wurden.
@@ -230,8 +230,8 @@ Anzahl an genutzten Top-Level
 Domains\footnote{\url{https://w3techs.com/technologies/overview/top_level_domain/all}} erkennen. Der
 hauptsächliche Unterschied liegt in der Nutzung der russischen Domain. Diese liegt weltweit auf Platz 2 der am häufigsten genutzten Domainendungen. In den von \textit{webifier} getesteten Seiten taucht diese Endung allerdings sehr selten auf. Die \lstinline[style=eclipse]{.com}-Domain ist in der Analyse von \textit{webifier} ähnlich stark vertreten wie in der weltweiten Verteilung.
 
-Zur Bewertung der Ergebnisse müsste noch die Güte der genutzten Blacklists überprüft werden. Da dies nicht einfach ist würde eine größer angelegte Suche mit weiteren Webseiten die Ergebnisse aussagekräftiger machen. Im hier beschränkten Zeitraum von 1 Monat zur Analyse konnten bisher nur knapp 170.000 Webseiten analysiert werden. Dies stellt nur einen kleinen Bruchteil der im World Wide Web verfügbaren Webseiten dar. Eine länger angelegte Suche würde die Ergebnisse aussagekräftiger machen.
+Zur Bewertung der Ergebnisse müsste noch die Güte der genutzten Blacklists überprüft werden. Da dies nicht einfach ist, würde eine größer angelegte Suche mit weiteren Webseiten die Ergebnisse aussagekräftiger machen. Im hier beschränkten Zeitraum von 1 Monat zur Analyse konnten bisher nur knapp 170.000 Webseiten analysiert werden. Dies stellt nur einen kleinen Bruchteil der im World Wide Web verfügbaren Webseiten dar. Eine länger angelegte Suche würde die Ergebnisse aussagekräftiger machen.
 
-Bei Betrachtung der Tests zur \textit{Überprüfung der Port- \& IP-Nutzung} ist festzustellen, dass die Verbreitung dieser Angriffstypen eher gering ausfällt. Dies ist nicht verwunderlich, da diese Art von Angriffstypen meist für gezielte Angriffe genutzt werden. Der Angreifer hat meist ein bestimmtes Ziel im Auge und versucht mittels IP- \& Port-Scanning Schwachstellen im System des Opfers zu finden, über welche dann ein Hacker-Angriff gestartet werden kann. Die Nutzung dieser Scans auf Webseiten um sämtliche Nutzer auszuspähen ist daher wie erwartet gering.
+Bei Betrachtung der Tests zur \textit{Überprüfung der Port- \& IP-Nutzung} ist festzustellen, dass die Verbreitung dieser Angriffstypen eher gering ausfällt. Dies ist nicht verwunderlich, da diese Art von Angriffstypen meist für gezielte Angriffe genutzt werden. Der Angreifer hat meist ein bestimmtes Ziel im Auge und versucht mittels IP- \& Port-Scanning Schwachstellen im System des Opfers zu finden, über welche dann ein Hacker-Angriff gestartet werden kann. Die Nutzung dieser Scans auf Webseiten, um sämtliche Nutzer auszuspähen, ist daher wie erwartet gering.
 
-Zur Bewertung der Ergebnisse lässt sich abschließend sagen, dass die Anzahl an gefundenen Bedrohungen geringer als erwartet ist, dies sich aber auch auf die begrenzte Analysezeit zurückführen lässt. Im folgenden Kapitel wird auf die Zukunft von \textit{webifier} eingegangen, wie die Plattform erweitert und verbessert werden kann um weitere Analyseergebnisse zu erhalten.
+Zur Bewertung der Ergebnisse lässt sich abschließend sagen, dass die Anzahl an gefundenen Bedrohungen geringer als erwartet ist, dies sich aber auch auf die begrenzte Analysezeit zurückführen lässt. Im folgenden Kapitel wird auf die Zukunft von \textit{webifier} eingegangen, wie die Plattform erweitert und verbessert werden kann, um weitere Analyseergebnisse zu erhalten.
