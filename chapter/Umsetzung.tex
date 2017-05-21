@@ -104,7 +104,7 @@ usage: java -jar webifier-tester.jar
 Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende
 \acs{URL} angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben
 werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test.
-Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgebaformat spezifiziert werden. Dies ist
+Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgabeformat spezifiziert werden. Dies ist
 vorallem für die automatisierte Testausführung, beispielsweise mit \textit{webifier Plattform}
 relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben
 werden alle Events (beispielsweise Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird
@@ -252,9 +252,9 @@ folgt in Abschnitt \ref{sec:umsetzung-data}.
 \subsection{webifier Plattform}
 
 In diesem Abschnitt wird nun die Umsetzung von \textit{webifier Plattform} berschrieben. Diese
-Komponente wurde mit Java umgesetzt und basiert auf dem Spring-Framework. Zusätzlich kamen im Frontend die Technologiern \ac{HTML}, \ac{CSS} und JavaScript, sowie die Bibliotheken Bootstrap und jQuery zu Einsatz. Zunächst wird nun das Backend beschrieben, danach wird die Oberfläche der Plattform vorgestellt.
+Komponente wurde mit Java umgesetzt und basiert auf dem Spring-Framework. Zusätzlich kamen im Frontend die Technologien \ac{HTML}, \ac{CSS} und JavaScript, sowie die Bibliotheken Bootstrap und jQuery zum Einsatz. Zunächst wird nun das Backend beschrieben, danach wird die Oberfläche der Plattform vorgestellt.
 
-\textit{webifier Plattform} ist eine Webanwendung und bietet eine benutzerfreundliche Öberfläche zur
+\textit{webifier Plattform} ist eine Webanwendung und bietet eine benutzerfreundliche Oberfläche zur
 Bedienung von \textit{webifier Tester}. Um die \textit{Plattform} für die optimale Nutzung des
 Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} dargestellte Datei, mit der alle notwendigen Parameter angepasst werden können.
 
@@ -277,7 +277,7 @@ Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} darges
 \end{lstlisting}
 \end{scriptsize}
 
-Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers angegeben werden. Standartmäßig sollte der Tester im selben Verzeichnis liegen wie die Plattform. Ist dies nicht der Fall, muss der Pfad der Datei entsprechend geändert werden. Außerdem kann ein Timeout für den Tester angegeben werden. Standardmäßig liegt dieses bei 15 Minuten. Der wahrscheinlich wichtigste Parameter zur optimale Nutzung der vorhandenen Ressourcen ist der letzte Parameter. Mit diesem kann angegeben werden wie viele Tests parallel ausgeführt werden sollen. Per default werden alle Tests sequentiell ausgeführt. Wird die Plattform auf einem leistungsstarken System betrieben kann die anzahl entsprechend der vorhandenen Ressourcen angepasst werden.
+Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers angegeben werden. Standardmäßig sollte der Tester im selben Verzeichnis liegen wie die Plattform. Ist dies nicht der Fall, muss der Pfad der Datei entsprechend geändert werden. Außerdem kann ein Timeout für den Tester angegeben werden. Standardmäßig liegt dieses bei 15 Minuten. Der wahrscheinlich wichtigste Parameter zur optimale Nutzung der vorhandenen Ressourcen ist der letzte Parameter. Mit diesem kann angegeben werden wie viele Tests parallel ausgeführt werden sollen. Per default werden alle Tests sequentiell ausgeführt. Wird die Plattform auf einem leistungsstarken System betrieben kann die anzahl entsprechend der vorhandenen Ressourcen angepasst werden.
 
 Die Plattform stellt außerdem eine Möglichkeit zur Massenüberprüfung von Webseiten zur Verfügung. Hierfür kann eine Liste von Urls in form eines Texts oder einer Datei angegeben werden. In diesem Modus ist es allerdings nicht möglich alle Ergebnisse dierekt zu sehen, da der Vorgang je nach größe der Liste mehrere Tage oder Wochen dauern kann. Deshalb ist dieser Modus eher für langfristige Analysen geeignet.
 
@@ -748,7 +748,7 @@ Damit nicht bei jedem Testdurchlauf alle Header neu eingeholt werden müssen, we
 Zur Umsetzung dieses Tests wurde zunächst das Python-Skript \lstinline[style=eclipse]{collect.py} geschrieben, welches über einen Cloud-Service die Werte für das \acs{HTTP}-Headerfeld \textit{User Agent} abspeichert.
 Zuerst werden alle gewünschten Browserkonfigurationen über eine \ac{JSON}-Datei eingelesen (siehe
 Zeile 31).
-Diese Datei enthält eine Liste von Browserobjekten, die die Konfigurationen im Attribut 
+Diese Datei enthält eine Liste von Browserobjekten, die die Konfigurationen im Attribut
 Ein Element dieser Liste ist beispielhaft in Listing \ref{lst:browsers.json} zu sehen, wobei das
 \lstinline[style=eclipse]{"headers"}-Attribut vor Programmablauf noch nicht gesetzt ist.
 

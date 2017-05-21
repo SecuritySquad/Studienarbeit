@@ -117,11 +117,11 @@ können.
 Ein Test liefert sein Ergebnis an den Tester, welcher dies im Folgenden weiterverarbeitet.
 
 Das Starten und Organisisieren der Tests wird vom \textit{webifier Tester} durchgeführt, dessen
-Aufbau und Funktionsweise im nächsten Abschnitt beschrieben wird. 
+Aufbau und Funktionsweise im nächsten Abschnitt beschrieben wird.
 
 Zum Starten eines Tests werden zwei Startparameter übergegeben. Zum Einen wird eine ID und zum
 Anderen die vollständig aufgelöste URL der zu testenden Webseite gesetzt.
- 
+
 \textit{webifier} stellt, zum Zeitpunkt dieser Arbeit, 9 verschiedene Tests um eine Webseite zu
 klassifzieren.
 Das Konzept der einzelnen Tests wird separat in Abschnitt
@@ -136,14 +136,14 @@ In Tabelle \ref{tbl:tests} werden die Tests kurz beschrieben.
 \textbf{Test} & \textbf{Beschreibung} \\\hline
 \textit{Virenscan der Webseite} & Testet die Dateien einer Seite auf Malware \\\hline
 \textit{Vergleich in verschiedenen Browsern} & Test ob sich die Seite auf verschiedenen Systemen
-oder Browsern unterschiedlich verhält \\\hline 
+oder Browsern unterschiedlich verhält \\\hline
 \textit{Überprüfung der Port-Nutzung} & Überprüft ob die Seite Port-Scanning betreibt \\\hline
-\textit{Überprüfung der IP-Nutzung} & Überprüft ob die Seite IP-Scanning betreibt \\\hline 
+\textit{Überprüfung der IP-Nutzung} & Überprüft ob die Seite IP-Scanning betreibt \\\hline
 \textit{Prüfung aller verlinkten Seiten} & Sucht nach Einträgen zu den Links der Webseite
-in \textit{webifier Data} \\\hline 
+in \textit{webifier Data} \\\hline
 \textit{Google Safe Browsing} & Nutzt eine Google-API um die Webseite und deren Links von Google
-einstufen zu lassen \\\hline 
-\textit{Überprüfung des SSL-Zertifikats} & Überprüft das \acs{SSL}-Zertifikat der Webseite \\\hline 
+einstufen zu lassen \\\hline
+\textit{Überprüfung des SSL-Zertifikats} & Überprüft das \acs{SSL}-Zertifikat der Webseite \\\hline
 \textit{Erkennung von Phishing} & Testet ob es sich um eine Phishingseite handelt \\\hline
 \textit{Screenshot der Seite} & Liefert dem Nutzer einen Screenshot der Webseite \\\hline
 \end{tabularx}
@@ -164,12 +164,12 @@ genauer erklärt.
 
 Das Ergebnis kann entweder unbedenklich (\textit{CLEAN}), verdächtig (\textit{SUSPICIOUS}),
 bedrohlich (\textit{MALICIOUS}) oder unbekannt (\textit{UNDEFINED}) sein. Für die Berechnung des
-Endergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt eine Gewichtung,
+Gesamtergebnisses erhält jeder Test wie in Tabelle \ref{tbl:test-weights} dargestellt eine Gewichtung,
 da manche Tests mehr über die Vertrauenswürdigkeit oder Gefahr einer Webseite aussagen als andere.
 Am meisten fallen der \textit{Virenscan der Webseite} und die \textit{Erkennung von Phishing} ins
 Gewicht, da dieses die ausschlaggebendsten Tests sind. Am wenigsten gewichtet sind der
 \textit{Vergleich in verschiedenen Browsern}, weil dies nur ein Indiz ist, da es auch viele
-Webseiten, wie die von YouTube, Nachrichtensender, Blogs oder Ähnliche gibt, welche
+Webseiten, wie die von YouTube, Nachrichtensendern, Blogs oder Ähnliche gibt, welche
 dynamischen Inhalt bereitstellen und die \textit{Prüfung der verlinkten Seiten}, da dies immer vom
 Datenbestand abhängt. Der \textit{Screenshot der Seite} fällt nicht ins Gewicht, da dies kein Test
 im eigentlichen Sinne ist, sondern nur eine zusätzliche Information für den Nutzer darstellt. In
@@ -197,9 +197,9 @@ ausführlicher erläutert.
 
 Die prozentuale Gewichtung ergibt sich aus $\frac{Testgewichtung}{Summe~der~Gewichungen~aller~Tests}$.
 
-Ein weiterer wichtiger Punkt, der für die Berechung ges Gesamtergebnisses festgelegt wurde ist, dass mindestens 50\% aller Tests (berechnet anhand der prozentualen Gewichtung) ein bekanntes Ergebnis, also \textit{CLEAN}, \textit{SUSPICIOUS} oder \textit{MALICIOUS} haben müssen. Ist der Anteil bekannter Ergebnisse kleiner lässt sich kein zuverlässiges Ergebnis berechnen, da dieses sonst von zu wenigen ausschlaggebenden Faktoren abhängen würde.
+Ein weiterer wichtiger Punkt, der für die Berechung des Gesamtergebnisses festgelegt wurde ist, dass mindestens 50\% aller Tests (berechnet anhand der prozentualen Gewichtung) ein bekanntes Ergebnis, also \textit{CLEAN}, \textit{SUSPICIOUS} oder \textit{MALICIOUS} haben müssen. Ist der Anteil bekannter Ergebnisse kleiner lässt sich kein zuverlässiges Ergebnis berechnen, da dieses sonst von zu wenigen ausschlaggebenden Faktoren abhängen würde.
 
-Liefern also mehr als die Hälfte der Tests ein bekanntes Ergebnis, so kann daraus nun das Gesamtergebnis berechnet werden. Hierfür wird für jedes Testergebnis ein Wert zwischen 0 und 1 berechnet, welcher anschließend mit der prozentualen Gewichtung des Tests multipliziert wird. Die Werte der einzelnen Testergebnisse ergeben sich wie in Tabelle \ref{tbl:test-values} dargestellt. Ist das Testergebnis \textit{CLEAN} oder \textit{UNDEFINED} ist der Ergebniswert 0 und geht so nicht weiter in die Wertung ein. Ist das Ergebnis \textit{MALICIOUS} wird der Wergebniswert 1. Dadurch Fällt das Gewicht dieses Tests voll in die Wertung. Ist das Ergebnis \textit{SUSPICIOUS} so wird die prozentuale Gewichtung des Tests als Ergebniswert gewählt. So fließt dieser Test mit dem Quadrat der Gewichtung in das Gesamtergebnis ein.
+Liefern also mehr als die Hälfte der Tests ein bekanntes Ergebnis, so kann daraus nun das Gesamtergebnis berechnet werden. Hierfür wird für jedes Testergebnis ein Wert zwischen 0 und 1 berechnet, welcher anschließend mit der prozentualen Gewichtung des Tests multipliziert wird. Die Werte der einzelnen Testergebnisse ergeben sich wie in Tabelle \ref{tbl:test-values} dargestellt. Ist das Testergebnis \textit{CLEAN} oder \textit{UNDEFINED} ist der Ergebniswert 0 und geht so nicht weiter in die Wertung ein. Ist das Ergebnis \textit{MALICIOUS} wird der Ergebniswert 1. Dadurch fällt das Gewicht dieses Tests voll in die Wertung. Ist das Ergebnis \textit{SUSPICIOUS} so wird die prozentuale Gewichtung des Tests als Ergebniswert gewählt. So fließt dieser Test mit dem Quadrat der Gewichtung in das Gesamtergebnis ein.
 
 \begin{table}[H]
 \centering
@@ -215,7 +215,7 @@ Liefern also mehr als die Hälfte der Tests ein bekanntes Ergebnis, so kann dara
 \label{tbl:test-values}
 \end{table}
 
-Anschließend werden die Werte aller Tests zu einem Endergebnis aufsummiert. Daraus ergibt sich im Gesamtergebnis ein Minimalwert von 0 und ein Maximalwert von 1. Dieser Wertebereich wird nun wie folgt auf die drei Ergebnisse \textit{CLEAN}, \textit{SUSPICIOUS} und \textit{MALICIOUS} verteilt. Die Tests mit der größten Gewichtung sollen hierbei ausschlaggebend sein. Daraus ergibt sich die prozentuale Gewichtung des Tests mit der größten Gewichtung als Minimalwert für \textit{MALICIOUS} und das Quadrat der prozentualen Gewichtung des Tests mit der größten Gewichtung als Minimalwert für \textit{SUSPICIOUS}.
+Anschließend werden die Werte aller Tests zu einem Gesamtergebnis aufsummiert. Daraus ergibt sich ein Minimalwert von 0 und ein Maximalwert von 1. Dieser Wertebereich wird nun wie folgt auf die drei Ergebnisse \textit{CLEAN}, \textit{SUSPICIOUS} und \textit{MALICIOUS} verteilt. Die Tests mit der größten Gewichtung sollen hierbei ausschlaggebend sein. Daraus ergibt sich die prozentuale Gewichtung des Tests mit der größten Gewichtung als Minimalwert für \textit{MALICIOUS} und das Quadrat der prozentualen Gewichtung des Tests mit der größten Gewichtung als Minimalwert für \textit{SUSPICIOUS}.
 
 Daraus lässt sich für die Werte der Tests aus Tabelle \ref{tbl:test-weights} die folgende Werteverteilung der Gesamtergebniswerte ableiten:
 
@@ -237,7 +237,7 @@ einzugeben, welche getestet werden soll. Da die Kapazität jedes Systems beschr�
 Plattform alle Anfragen zur Webseitenüberprüfung in einer Warteschlange. In einer
 Konfigurationsdatei kann angegeben werden, wie viele Tests parallel ausgeführt werden sollen. So
 wird die Warteschlange nach und nach abgearbeit. Anschließend werden die Ergebnisse des Testers für
-den Benutzer visuell aufbereitet. Das bereitgestellte Ergebnis umfasst zum Einen das Gesamtresultat, welches vom Tester berechnet wurde und zu Anderen sowohl die Ergebnisse der einzelen Tests, als auch die zusätzlichen Informationen, welche von diesen bereitgestellt wurden.
+den Benutzer visuell aufbereitet. Das bereitgestellte Ergebnis umfasst zum Einen das Gesamtresultat, welches vom Tester berechnet wurde und zum Anderen sowohl die Ergebnisse der einzelnen Tests, als auch die zusätzlichen Informationen, welche von diesen bereitgestellt wurden.
 
 So erhält der Nutzer einen umfassenden Bericht über die Vertrauenswürdigkeit oder die ausgehende Gefahr der überprüften Webseite.
 
@@ -412,7 +412,7 @@ Informationen des Zertifikats aus und berechnet anschließend ein Testergebnis.
 Stellt die Webseite kein Zertifikat zur Verfügung so ist das Testergebnis \textit{SUSPICIOUS}, da
 es in Zeiten von Let's Encrypt\footnote{\url{https://letsencrypt.org/}} jedem möglich ist ein
 \acs{SSL}-Zertifikat kostenlos zu erwerben und so die Sicherheit der eigenen Webseite zu erhöhen.
-Nutzt die Webseite ein valides Zertifikat ist das Ergebnis \textit{CLEAN}. Weist das Tertifikat
+Nutzt die Webseite ein valides Zertifikat ist das Ergebnis \textit{CLEAN}. Weist das Zertifikat
 Fehler auf ist das Ergebnis \textit{MALICIOUS}. Solche Fehler können beispielsweise sein, dass das
 Zertifikat abgelaufen ist, dass es selbst signiert wurde oder das es für den falschen Host genutzt
 wird.
@@ -423,26 +423,26 @@ wird.
 sucht zuerst nach den Schlagwörtern der gegebenen Webseite. Hierfür zählt er die Häufigkeit aller
 vorkommenden Wörter die mehr als drei Buchstaben haben. Wörter in Bildbeschreibungen und
 Überschriften werden doppelt gewichtet, Wörter im Titel der Webseite werden fünffach gewichtet.
-Haben mehere Wörter die gleiche Gewichtung, so fällt die Länge der Wörter mit ins Gewicht und
+Haben mehrere Wörter die gleiche Gewichtung, so fällt die Länge der Wörter mit ins Gewicht und
 längere Wörter werden bevorzugt. Die vier Wörter, die im Ranking am höchsten stehen werden
 anschließend als Schüsselwörter gewählt.
 
-Anschließend werden mit Hilfe öffentlicher Suchmaschinen mögliche Duplikate der Webseite gesucht.
+Folgend werden mit Hilfe öffentlicher Suchmaschinen mögliche Duplikate der Webseite gesucht.
 Für diese Suche werden die ausgewählten Schlagwörter verwendet. Nun werden die Ergebnisse aller
 Suchmaschinen zusammengeführt und ebenfalls gewichtet. Je mehr Suchmaschinen einen Link gefunden
 haben, desto höher steigt dieser Link im Ranking. Als nächstes muss diese Liste der möglichen
 Duplikate nach Orginalen, welcher der gegebenen Webseite entsprechen gefilterert werden, da es sehr
 wahrscheinlich ist, dass diese ebenfalls in der Liste der Links enthalten ist. Als letztes wird die
-Liste noch auf maximal zehn Eintrage gekürtzt.
+Liste noch auf maximal zehn Eintrage gekürzt.
 
 Nun werden alle gefundenen Links mit der gegebenen Webseite verglichen und für jeden gefundenen Link
-wird ein Ergebnis berechnet. Der Vergleich erfolgt auf drei Ebenen: es werden der Inhalt und er der
+wird ein Ergebnis berechnet. Der Vergleich erfolgt auf drei Ebenen: es werden der Inhalt und der
 Quelltext der beiden Webseiten, aber auch das Aussehen verglichen. Jeder dieser Vergleiche gibt die
 prozentuale Übereinstimmung der zu vergleichenden Webseiten zurück. Anschließend werden diese drei
-Ergebnisse zu einem Gesamtergebnis verrechnet. In diese Rechnung fließt das Ergebnis des
-Screenshotsvergleichs mit doppeltem Gewicht ein, da dieser Vergleich am aussagekräftigsten ist.
+Ergebnisse zu einem Gesamtergebnis aggregiert. In diese Rechnung fließt das Ergebnis des
+Screenshotvergleichs mit doppeltem Gewicht ein, da dieser Vergleich am aussagekräftigsten ist.
 
-Aufgrund der Komplexität wird die genaue Berechnung des Ergebnisses wird in Abschnitt \ref{sec:umsetzung-phishungdetector} erklärt und hier nun vereinfacht dargestellt. Stimmen die beiden Webseiten zu 80\% überein, so ist das Ergebnis des Links \textit{SUSPICIOUS}, stimmen die beiden Webseiten zu 90\% überein, so ist das Ergebnis \textit{MALICIOUS}. Das Endergebnis des Tests wird abschließend wie folgt berechnet: wurde mindestens ein verdächtiger Link gefunden, so ist das Gesamtergebnis \textit{SUSPICIOUS}, wurde mindestens ein bedrohlicher Link gefunden, so ist das Ergebnis \textit{MALICIOUS}, andernfalls \textit{CLEAN}. Zusätzlich werden noch die gefundenen Schlagwörter, die gefundenen Phishingseiten, derern Vergleichswerte und ein Überlagerungsscreenshot mit der Originalseite für den Tester bereitgestellt.
+Aufgrund der Komplexität wird die genaue Berechnung des Ergebnisses in Abschnitt \ref{sec:umsetzung-phishungdetector} erklärt und hier nun vereinfacht dargestellt. Stimmen die beiden Webseiten zu 80\% überein, so ist das Ergebnis des Links \textit{SUSPICIOUS}, stimmen die beiden Webseiten zu 90\% überein, so ist das Ergebnis \textit{MALICIOUS}. Das Endergebnis des Tests wird abschließend wie folgt berechnet: wurde mindestens ein verdächtiger Link gefunden, so ist das Gesamtergebnis \textit{SUSPICIOUS}, wurde mindestens ein bedrohlicher Link gefunden, so ist das Ergebnis \textit{MALICIOUS}, andernfalls \textit{CLEAN}. Zusätzlich werden noch die gefundenen Schlagwörter, die gefundenen Phishingseiten, deren Vergleichswerte und ein Überlagerungsscreenshot mit der Originalseite für den Tester bereitgestellt.
 
 \subsection{Screenshot der Seite}
 Der \textit{Screenshot der Seite} ist kein Test im eigentlichen Sinne. Er liefert keine Aussage über
