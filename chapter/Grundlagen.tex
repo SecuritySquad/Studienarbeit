@@ -176,15 +176,15 @@ verschiedenen Abstraktionsschichten einzelne Module abgekapselt werden können. 
 Aufbauend auf dem \textit{Spring} Basis-Modul werden noch weitere Module, wie beispielsweise Spring
 Security, Sprint Boot, Spring Integration, Spring Data, Spring Session oder Spring MVC
 bereitgestellt.
-\footcite[Vgl.][2]{springPivotal} Im folgenden werden die \textit{Spring}-Mudule näher erläutert,
+\footcite[Vgl.][2]{springPivotal} Im folgenden werden die \textit{Spring}-Module näher erläutert,
 die für das weitere Verständnis der Arbeit notwendig sind.
 
 \begin{description}
   \item[Spring Boot] \hfill \\
     Mit Spring Boot können Anwendungen, welche das \textit{Spring}-Framework nutzen, einfacher
-    eintwickelt und ausgeführt werden, da dadurch eigenständig lauffähige Programme erzeugt werden können, welche nicht von externen Services abhängig sind. Hierfür bringt Spring Boot einen integrierten Server mit, auf welchem die Anwendung bereitgestellt wird.\footcite[Vgl.][1]{springBoot}
+    entwickelt und ausgeführt werden, da dadurch eigenständig lauffähige Programme erzeugt werden können, welche nicht von externen Services abhängig sind. Hierfür bringt Spring Boot einen integrierten Server mit, auf welchem die Anwendung bereitgestellt wird.\footcite[Vgl.][1]{springBoot}
   \item[Spring MVC] \hfill \\
-    Spring MVC ist sehr gut geeignet um Webanwendungen zu implementieren.\footcite[Vgl.][3]{spring3}
+    Spring MVC ist sehr gut geeignet, um Webanwendungen zu implementieren.\footcite[Vgl.][3]{spring3}
     Hierfür können diese in mehrere Abstraktionsschichten gegliedert werden, beispielsweise in
     \ac{UI}, Geschäftslogik und Persistenzschicht.\footcite[Vgl.][21]{springMvc}
   \item[Spring Data] \hfill \\
@@ -199,7 +199,7 @@ In Verbindung mit Spring Data wurde eine \textit{MongoDB} zur Speicherung der Er
 eingesetzt. \textit{MongoDB} ist eine dokumentorientierte, anpassungsfähige und skalierbare
 Datenbank. Sie vereint viele nützliche Eigenschaften von relationalen Datenbanken, wie
 Sekundärindizes, Auswahlabfragen und Sortierung mit Skalierbarkeit, MapReduce-Aggregationen und
-raumbezogenen Indizes. Außerdem gibt es bei \textit{MongoDB} keine festen Schemata, weshalb großen
+raumbezogenen Indizes. Außerdem gibt es bei \textit{MongoDB} keine festen Schemata, weshalb große
 Datenmigrationen normal nicht notwendig sind.\footcite[Vgl.][1f]{mongodb}
 
 Gewonnene und gespeicherte Daten müssen danach noch aufbereitet und visualisiert werden.
@@ -232,8 +232,8 @@ geschehen, da es diesen sonst potenziell gefährden könnte. Deshalb wird hierf�
 Virtualisierung benötigt um die Tests abgekapselt vom Gesamtsystem auszuführen. Dafür wird Docker
 als Tool eingesetzt. Docker ist eine Open-Source-Software zur Virtualisierung von Anwendungen.
 Hierbei wird auf die Container-Technologie gesetzt. Container sind vom Betriebssystem
-bereitgestellte isolierte Umgebungen zur Ausführung von Prozessen. Ein Vorteil der Container
-gegenüber der herkömmlicher virtuelle Maschinen ist der vielfach geringere Ressourcenbedarf.\footcite[Vgl.][]{docker}
+bereitgestellte isolierte Umgebungen zur Ausführung von Prozessen. Ein Vorteil von Containern
+gegenüber herkömmlichen virtuelle Maschinen ist der vielfach geringere Ressourcenbedarf.\footcite[Vgl.][]{docker}
 
 \section{Technologien und Frameworks der Tests}
 
@@ -243,7 +243,7 @@ der Sicherheitstests verwendet werden.
 \textit{Python} ist eine skriptbasierte Interpretersprache und auf Integration von
 verschiedenen Systemen spezialisiert.
 Die Sprache wird von der Python Software Foundation nach Open Source Standards entwickelt.
-Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, dass es wie bei \hyperref[par:javascript]{JavaScript} erst zur Laufzeit zu einer Typenprüfung kommt.
+Python zählt zu den dynamisch typisierten Programmiersprachen, was bedeutet, dass es wie bei \hyperref[par:javascript]{JavaScript} erst zur Laufzeit zu einer Typprüfung kommt.
 Weiterhin werden Codeblöcke nicht durch Sonderzeichen (wie z.B. geschweifte Klammern in Java)
 gekennzeichnet, sondern definieren sich anhand der Einrückungstiefe.
 \footcite[Vgl.][]{pythonHomepage}
@@ -258,7 +258,7 @@ Da \textit{PhantomJS} ein headless Browser ist besitzt er keine grafische Benutz
 Er wird über JavaScript gesteuert und über eine ausführbare Datei aufgerufen.
 Weitere Hauptfeatures sind: Bildschirmaufnahmen, Nutzersimulation und Netzwerküberwachung.
 \footcite[Vgl.][]{phantomjs}
-In \textit{PhantonJS} gilt es zwischen dem Steuerungsskript und dem Code der Webseite
+In \textit{PhantomJS} gilt es zwischen dem Steuerungsskript und dem Code der Webseite
 zu unterscheiden.
 Ersteres konfiguriert die Webseite und führt die Testlogik aus.
 In der Testlogik können wiederum Anweisungen an die Webseite geschickt werden, die mit dem Rest des
@@ -283,8 +283,8 @@ der beiden Bilder, sowie einige Zusatzinformationen. Außerdem ist es möglich m
 Differenzbild mit der Hervorhebung der Unterschiede zweier Bilder zu erzeugen.\footcite[Vgl.][]{resemblejs}
 
 Zu einer umfassenden Analyse gehört auch die Analyse des Netzwerktraffics. Dazu
-wird ein entsprechendes Tool genutzt. \textit{webifier} nutzt für diesen Zweck den \textit{Bro
-Network Security Monitor}. Bro ist ein unixbasiertes Network Intrusion Detection System.\footcite[Vgl.][199]{bro} Zudem
+wird ein entsprechendes Tool, der \textit{Bro
+Network Security Monitor}, genutzt. \textit{Bro} ist ein unixbasiertes Network Intrusion Detection System.\footcite[Vgl.][199]{bro} Zudem
 ermöglicht Bro dem Nutzer den Netzwerktraffic zu loggen und mittels eigener Skriptsprache zu filtern. \footcite[Vgl.][]{bro2} Die Logging-Möglichkeiten werden für die Analyse des Traffics genutzt um mögliche verdächtige Abfragen zu erkennen.
 
 
@@ -365,7 +365,7 @@ eines Angreifers vor Systembenutzern, inklusive Administratoren zu verstecken we
 bezeichnet.\footcite[Vgl.][96]{netzwerkDatensicherheit}
 
 Wie Abbildung \ref{fig:malware} zeigt, nimmt die Verbreitung von Malware in Deutschland weiterhin zu
-und verliert deshalb nicht an Bedeutung.
+und verliert nicht an Bedeutung.
 
 \begin{figure}[H]
   \centering
@@ -413,9 +413,9 @@ den Browsertyp, die Browserversion und das Betriebssystem, in welchem der Browse
 wird von einigen Webservern und Webanwendungen benutzt, um je nach Wert des Feldes unterschiedliche Ressourcen
 zurückzuliefern.\footcite[Vgl.][259, 528\psq]{httpGuide}
 
-Diese Technik wird \textit{User Agent Sniffing} genannt und ist ein unerwünschter Eingriff,
+\textit{User Agent Sniffing} ist ein unerwünschter Eingriff,
 der nur selten seine Berechtigung hat.
-Er zählt zu den Bad Pracitces in der Webentwicklung.\footcite[Vgl.][]{mdnBrowserDetection}
+Er zählt zu den Bad Practices in der Webentwicklung.\footcite[Vgl.][]{mdnBrowserDetection}
 Das Zurückliefern unterschiedlicher Ressourcen je nach \textit{User Agent} wird in der
 Fachliteratur hingegen unterschiedlich bewertet.
 Gorley zeigt zunächst ein entscheidendes Problem dieses
@@ -431,7 +431,7 @@ Im Gegensatz dazu macht er später die Aussage, dass Webserver durchaus ihre Ant
 an den \textit{User Agent} anpassen können und dies nicht so schlimm
 sei.\footcite[Vgl.][402]{httpGuide}
 
-Habe der Client einen veralteten Browser, der kein JavaScript unterstützt, so könne der
+Hat der Client einen veralteten Browser, der kein JavaScript unterstützt, so kann der
 Webserver in diesem Fall einfach eine Webseite ohne JavaScript zurückliefern.
 Shepherd erläutert drei Hauptgründe, warum \textit{User Agent Sniffing}
 betrieben wird: Bug-Workarounds, Feature-Unterstützung und Browserspezifisches
