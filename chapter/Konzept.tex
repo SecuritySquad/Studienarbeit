@@ -20,7 +20,7 @@ Es wird der konzeptionelle Zusammenhang zwischen den Teilanwendungen erläutert,
 Datenbank, da sie nicht eigenhändig entwickelt wurde, nicht näher beschrieben
 wird.
 
-Die Nutzerinteraktion erfolgt unter Anderem über \textit{webifier Plattform}. Diese stellt eine
+Die Nutzerinteraktion erfolgt unter anderem über \textit{webifier Plattform}. Diese stellt eine
 Webseite bereit, auf welcher ein Anwender Seiten analysieren lassen kann. Die Plattform leitet die
 Nutzeranfrage an \textit{webifier Tester} weiter.
 
@@ -109,17 +109,17 @@ Jeder Test wird in einer isolierten Laufzeitumgebung ausgeführt. Aus einem Test
 heraus darf nicht auf das System zugegriffen werden, da die Tests, durch das Erforschen von
 maliziösen Seiten, gegebenenfalls mit Schadcode befallen sein können. Es soll vermieden werden,
 dass sich Schadcode oder Malware aus den Tests auf dem Server verbreiten. Nach Durchlauf und
-Übermittelung des Ergebnisses löscht der Test sich selbst und alle zugrhörigen Daten. Die
-Übermittelung beschränkt sich auf eine Weitergabe des Ergebnisses in Form einer Zeichenkette um zu
+Übermittlung des Ergebnisses löscht der Test sich selbst und alle zugehörigen Daten. Die
+Übermittlung beschränkt sich auf eine Weitergabe des Ergebnisses in Form einer Zeichenkette um zu
 vermeiden, dass sich, eventuell mit Viren befallene, Dateien weiter auf dem System ausbreiten
 können.
 
 Ein Test liefert sein Ergebnis an den Tester, welcher dies im Folgenden weiterverarbeitet.
 
-Das Starten und Organisisieren der Tests wird vom \textit{webifier Tester} durchgeführt, dessen
+Das Starten und Organisieren der Tests wird vom \textit{webifier Tester} durchgeführt, dessen
 Aufbau und Funktionsweise im nächsten Abschnitt beschrieben wird.
 
-\textit{webifier} stellt, zum Zeitpunkt dieser Arbeit, 9 verschiedene Tests um eine Webseite zu
+\textit{webifier} stellt, zum Zeitpunkt dieser Arbeit, 9 verschiedene Tests zur Verfügung, um eine Webseite zu
 klassifzieren.
 Das Konzept der einzelnen Tests wird separat in Abschnitt
 \ref{sec:konzept-testarten} erläutert.
@@ -221,7 +221,7 @@ $0 \leq CLEAN < 0,043402\overline{7} \leq SUSPICIOUS < 0,208\overline{3} \leq MA
 \end{center}
 
 Zusätzlich zu dem berechneten Gesamtergebnis stellt der Tester auch alle Ergebnisse der Einzeltests
-und deren spezifischen Testinformationen bereit. Außerdem werden alle Ergebnisse zu Persistierung an
+und deren spezifischen Testinformationen bereit. Außerdem werden alle Ergebnisse zur Persistierung an
 das Modul \textit{webifier Data} gesendet, welches in Abschnitt \ref{sec:konzept-data} genauer erläutert wird.
 
 \subsection{webifier Plattform}
@@ -230,7 +230,7 @@ das Modul \textit{webifier Data} gesendet, welches in Abschnitt \ref{sec:konzept
 zur Verfügung stellt. Außerdem bereitet sie die Ergebnisse des Testers grafisch für den Benutzer auf.
 
 Der Nutzer hat die Möglichkeit auf der ersten Seite von \textit{webifier Plattform} eine \acs{URL}
-einzugeben, welche getestet werden soll. Da die Kapazität jedes Systems beschränkt ist verwaltet die
+einzugeben, welche getestet werden soll. Da die Kapazität jedes Systems beschränkt ist, verwaltet die
 Plattform alle Anfragen zur Webseitenüberprüfung in einer Warteschlange. In einer
 Konfigurationsdatei kann angegeben werden, wie viele Tests parallel ausgeführt werden sollen. So
 wird die Warteschlange nach und nach abgearbeit. Anschließend werden die Ergebnisse des Testers für
@@ -334,7 +334,7 @@ Netzwerkaktivität überwacht werden. Es werden alle eingehenden Anfragen auf da
 protokolliert. Da das Testsystem abgekapselt vom restlichen System ist, ist es irrelevant von
 welcher IP-Adresse die Anfragen kommen. Alle Anfragen lassen sich auf die aufgerufene Seite
 zurückführen, da restliche Netzwerkaktivität abgeschaltet ist. Dies ist wichtig, da es durchaus
-möglich ist das die Webseite nicht selbst einen Portscan-Angriff startet sondern beispielsweise
+möglich ist, dass die Webseite nicht selbst einen Portscan-Angriff startet sondern beispielsweise
 über einen Drittrechner oder ein Botnetz gescannt wird. Zudem könnten die Ports auch lokal auf dem
 Client über JavaScript gescannt werden. Deshalb werden lediglich die angefragten Ports im Log
 gespeichert.
@@ -382,7 +382,7 @@ Ansonsten liefert der Test \textit{CLEAN} zurück. Falls jedoch mehr als 34\% de
 	Google's constantly updated lists of unsafe web resources.}\footcite[Vgl.][]{googleSafeBrowsing}
 \end{center}
 
-Dieser Cloud-Service erlaubt es der Anwendung also eine weitaus größere Datenbank als ihre Eigene zu
+Dieser Cloud-Service erlaubt es der Anwendung eine weitaus größere Datenbank als ihre Eigene zu
 nutzen.
 
 Der Service unterscheidet zwischen vier Bededrohungstypen\label{par:konzep-gsb-types}: Malwareseiten, Sozialmanipulationsseiten, ungewollte Software und potenziell schadhafte Webanwendungen.
