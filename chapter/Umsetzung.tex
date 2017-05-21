@@ -53,6 +53,9 @@ eigenes Image erstellt. Die Tests werden dann vom Tester gestartet. So wird jede
 eigenen Container ausgeführt. So ist sichergestellt, dass die Tests unabhängig von äußeren Faktoren
 sind und sich weder gegenseitig, noch das Gesamtsystem beeinflussen.
 
+Zum Starten eines Tests werden zwei Startparameter übergegeben. Zum Einen wird eine ID und zum
+Anderen die vollständig aufgelöste URL der zu testenden Webseite gesetzt.
+
 Die Technologien der einzelnen Tests sind abhängig vom jeweiligen Test und werden deshalb in den
 jeweiligen Kapiteln erläutert. Die Ergebnisübermittelung der Tests an den Tester wird mittels
 \ac{JSON}-Strings realisiert. Wie in Listing \ref{lst:resultjson} zu sehen besteht das \ac{JSON} aus dem
@@ -75,8 +78,6 @@ beispielsweise eine Liste von verdächtigen Portanfragen übermittelt.
   }
 \end{lstlisting}
 \end{scriptsize}
-
-\todo{Beschreiben der Startparameter URL und ID}
 
 \subsection{webifier Tester}
 
