@@ -104,12 +104,12 @@ usage: java -jar webifier-tester.jar
 
 Die einzig erforderliche Option ist \lstinline[style=eclipse]{-u} mit welcher die zu überprüfende
 \acs{URL} angegeben wird. Mit der Option \lstinline[style=eclipse]{-i} kann dem Test eine Id gegeben
-werden. Wird keine Id angegeben generiert der Tester eigenständig eine Id für den gestarteten Test.
+werden. Wird keine Id angegeben, generiert der Tester eigenständig eine Id für den gestarteten Test.
 Mit der Option \lstinline[style=eclipse]{-o} kann ein Ausgabeformat spezifiziert werden. Dies ist
 vorallem für die automatisierte Testausführung, beispielsweise mit \textit{webifier Plattform}
-relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben
+relevant. Mögliche Ausgabeformate sind \ac{JSON} und \ac{XML}. Ist ein Ausgabeformat angegeben,
 werden alle Events (beispielsweise Start und Ende der Tests) im jeweiligen Format ausgegeben. Wird
-kein Format spezifiziert so werden die Ergebnisse wie in Listing \ref{lst:tester-result}
+kein Format spezifiziert, so werden die Ergebnisse wie in Listing \ref{lst:tester-result}
 dargestellt ausgegeben.
 
 \newpage
@@ -158,7 +158,7 @@ The url is clean!
 \end{lstlisting}
 \end{scriptsize}
 
-Wie im Konzept bereits erwähnt verwaltet der Tester alle auszuführenden Tests. Um die Tests dynamisch anpassen zu können werden alle notwendigen Parameter in einer Konfigurationsdatei gespeichert. Listing \ref{lst:tester-config} zeigt einen Ausschnitt dieser Datei.
+Wie im Konzept bereits erwähnt, verwaltet der Tester alle auszuführenden Tests. Um die Tests dynamisch anpassen zu können, werden alle notwendigen Parameter in einer Konfigurationsdatei gespeichert. Listing \ref{lst:tester-config} zeigt einen Ausschnitt dieser Datei.
 
 Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausführen und zum Beenden des Tests, sowie dafür vorgesehene Timeoutzeiten in Sekunden. Außerdem hat jeder Test einen Parameter, welcher die Java-Klasse für das Testergebnis angibt und einen Parameter mit dem der Test aktiviert oder deaktiviert werden kann. Bei der Ausführung und beim Beenden der Tests werden die Platzhalter \lstinline[style=eclipse]{#ID} und \lstinline[style=eclipse]{#URL} durch die generierten, bzw. vom Nutzer angegebenen Daten ersetzt.
 
@@ -202,8 +202,8 @@ Jeder Test hat einen eindeutigen Namen, seine Gewichtung, ein Befehl zum Ausfüh
 
 Am Ende der Datei lässt sich noch die Einstellung festlegen, ob das Endergebnis an \textit{webifier
 Data} gesendet werden soll oder nicht. Am Anfang der Datei lässt sich der so genannte
-Resolver konfigurieren. Dieser Prüft vor allen anderen Tests ob die angeforderte Seite überhaupt
-erreichbar ist und löst wenn nötig Weiterleitungen der \acs{URL} auf und gibt das Ergebnis an den
+Resolver konfigurieren. Dieser prüft vor allen anderen Tests ob die angeforderte Seite überhaupt
+erreichbar ist und löst, wenn nötig, Weiterleitungen der \acs{URL} auf und gibt das Ergebnis an den
 Tester zurück.
 
 Ist die angegebene Url erreichbar wird die vom Resolver aufgelöste \acs{URL} verwendet und alle
@@ -245,7 +245,7 @@ private WebifierOverallTestResult calculateOverallResult() {
 \end{scriptsize}
 \footnotetext{Der vollständige Inhalt der Ergebnisberechnung befindet sich in Anhang \appref{c}.}
 
-Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde wird dieses über
+Nachdem alle Tests ausgeführt wurden und das Gesamtresultat zusammengefasst wurde, wird dieses über
 die von \textit{webifier Data} bereitgestellte Schnittstelle dort gespeichert. Die Kommunikation mit
 \textit{webifier Data} läuft über \ac{REST}, ebenfalls über das \ac{JSON}-Format. Genaueres hierzu
 folgt in Abschnitt \ref{sec:umsetzung-data}.
@@ -278,9 +278,9 @@ Testers zu konfigurieren gibt es die in Listing \ref{lst:platform-config} darges
 \end{lstlisting}
 \end{scriptsize}
 
-Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers angegeben werden. Standardmäßig sollte der Tester im selben Verzeichnis liegen wie die Plattform. Ist dies nicht der Fall, muss der Pfad der Datei entsprechend geändert werden. Außerdem kann ein Timeout für den Tester angegeben werden. Standardmäßig liegt dieses bei 15 Minuten. Der wahrscheinlich wichtigste Parameter zur optimale Nutzung der vorhandenen Ressourcen ist der letzte Parameter. Mit diesem kann angegeben werden wie viele Tests parallel ausgeführt werden sollen. Per default werden alle Tests sequentiell ausgeführt. Wird die Plattform auf einem leistungsstarken System betrieben kann die anzahl entsprechend der vorhandenen Ressourcen angepasst werden.
+Zunächst muss in der Konfigurationsdatei der Befehl zur Ausführung des Testers angegeben werden. Standardmäßig sollte der Tester im selben Verzeichnis liegen wie die Plattform. Ist dies nicht der Fall, muss der Pfad der Datei entsprechend geändert werden. Außerdem kann ein Timeout für den Tester angegeben werden. Standardmäßig liegt dieses bei 15 Minuten. Der wahrscheinlich wichtigste Parameter, zur optimale Nutzung der vorhandenen Ressourcen, ist der letzte Parameter. Mit diesem kann angegeben werden wie viele Tests parallel ausgeführt werden sollen. Per Default werden alle Tests sequentiell ausgeführt. Wird die Plattform auf einem leistungsstarken System betrieben, kann die Anzahl entsprechend der vorhandenen Ressourcen angepasst werden.
 
-Die Plattform stellt außerdem eine Möglichkeit zur Massenüberprüfung von Webseiten zur Verfügung. Hierfür kann eine Liste von Urls in form eines Texts oder einer Datei angegeben werden. In diesem Modus ist es allerdings nicht möglich alle Ergebnisse dierekt zu sehen, da der Vorgang je nach größe der Liste mehrere Tage oder Wochen dauern kann. Deshalb ist dieser Modus eher für langfristige Analysen geeignet.
+Die Plattform stellt außerdem eine Möglichkeit zur Massenüberprüfung von Webseiten zur Verfügung. Hierfür kann eine Liste von Urls in Form eines Texts oder einer Datei angegeben werden. In diesem Modus ist es allerdings nicht möglich, alle Ergebnisse direkt zu sehen, da der Vorgang je nach Größe der Liste mehrere Tage oder Wochen dauern kann. Deshalb ist dieser Modus eher für langfristige Analysen geeignet.
 
 Im Folgenden wird nun noch einmal der Ablauf einer Überprüfung beschrieben und die Oberfläche von
 \textit{webifier Plattform} dargestellt. Besucht der Nutzer die Webseite der Plattform sieht er
@@ -298,7 +298,7 @@ Statistics}. Dieses Modul wird in Abschnitt \ref{sec:umsetzung-statistics} ausf�
 \end{figure}
 \footnotetext{Die Abbildung befindet sich in besserer Qualität in Anhang \appref{d}.}
 
-Nachdem die Überprüfung einer Webseite gestartet wurde wird der Nutzer auf die in Abbildung \ref{fig:platform-result} abgebildete Seite geleitet, welche sich nach und nach mit den Ergebnissen der einzelnen Tests füllt, sobald diese vorliegen. Sind alle Tests beendet, wird auch das Endresultat angezeigt. Die Ergebnisseite bietet zunächst einen kompakten Überblick über alle ausgeführten Tests und deren Ergebnisse.
+Nachdem die Überprüfung einer Webseite gestartet wurde, wird der Nutzer auf die in Abbildung \ref{fig:platform-result} abgebildete Seite geleitet, welche sich nach und nach mit den Ergebnissen der einzelnen Tests füllt, sobald diese vorliegen. Sind alle Tests beendet, wird auch das Endresultat angezeigt. Die Ergebnisseite bietet zunächst einen kompakten Überblick über alle ausgeführten Tests und deren Ergebnisse.
 
 \begin{figure}[H]
   \centering
@@ -353,7 +353,7 @@ entsprechenden Funden eine Liste aller IP-Adressen bereit.
 \label{fig:platform-result-portscan}
 \end{figure}
 
-Die Deteilansicht des \textit{Google Safe Browsing} Ergebnisses ist ähnlich dem der Prüfung aller
+Die Detailansicht des \textit{Google Safe Browsing} Ergebnisses ist ähnlich dem der Prüfung aller
 verlinkten Seiten. Allerdings listet diese nur alle gefundenen Bedrohungen auf und nicht alle
 geprüften Links. Abbildung \ref{fig:platform-result-google-safe-browsing} enthält zwei Beispielresultate.
 
@@ -417,7 +417,7 @@ Abbildung unterscheidet sich demnach nur der Text der Fußzeile.
 
 \newpage
 
-Der Screnenshot der Seite wird beim ausklappen des Panels einfach angezeigt, so wie es in Abbildung \ref{fig:platform-result-screenshot} dargestellt. Dies gibt dem Nutzer die Möglichkeit sich die Webseite anzusehen, ohne sie selbst zu besuchen.
+Der Screenshot der Seite wird beim Ausklappen des Panels einfach angezeigt, so wie es in Abbildung \ref{fig:platform-result-screenshot} dargestellt. Dies gibt dem Nutzer die Möglichkeit sich die Webseite anzusehen, ohne sie selbst zu besuchen.
 
 \begin{figure}[H]
   \centering
@@ -426,11 +426,11 @@ Der Screnenshot der Seite wird beim ausklappen des Panels einfach angezeigt, so 
   \label{fig:platform-result-screenshot}
 \end{figure}
 
-Wie nun gezeigt bietet die Plattform sehr viele interessante Zusatzinformationen zu den Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
+Wie nun gezeigt bietet die Plattform sehr viele interessante Zusatzinformationen zu den Testergebnissen, mit denen das Gesamtresultat noch genauer erklärt wird. Außerdem bekommt der Nutzer so genügend Informationen, um die Plausibilität der Testergebnisse selbst noch einmal zu überprüfen.
 
 \subsection{webifier Mail}
 
-Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail} ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit einem E-Mail-Client, welcher via \acs{IMAP} seine Mails abfragt. Die engehenden Nachrichten werden auf Links hinuntersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet \textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT: Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
+Von der Architektur her ähnlich wie \textit{webifier Plattform} ist \textit{webifier Mail} ebenfalls eine Java-Anwendung, die auch auf dem Spring-Framework basiert. Sie ist vergleichbar mit einem E-Mail-Client, welcher via \acs{IMAP} seine Mails abfragt. Die eingehenden Nachrichten werden auf Links hin untersucht, von denen anschließend bis zu fünf vom Tester geprüft werden. Sobald alle Links der E-Mail gefunden wurden und diese der Warteschlange hinzugefügt wurden sendet \textit{webifier Mail} eine erste Antwort mit dem Betreff \lstinline[style=eclipse]{EINGEREIHT: Nachrichtenbetreff} zurück, dass der Nutzer ein Feedback bekommt, dass die Verarbeitung seiner Nachricht beginnt. Eine Solche Nachricht ist in Abbildung \ref{fig:mail-start} dargestellt. In dieser sind einmal alle Links enthalten, sowie deren Position in der Warteschlange. So hat der Nutzer einen Anhaltspunkt wie lange die Überprüfung dauern kann.
 
 \begin{figure}[H]
 	\centering
@@ -554,7 +554,7 @@ einer oder mehreren Urls zu durchsuchen. Hierfür muss im Inhalt des POST-Reques
 \end{lstlisting}
 \end{scriptsize}
 
-Wie Listing \ref{lst:data-check} zeigt gruppiert \textit{webifier Data} zunächst alle Links anhand
+Wie Listing \ref{lst:data-check} zeigt, gruppiert \textit{webifier Data} zunächst alle Links anhand
 deren Host-Teil und entfernt alle ungültigen Einträge. Anschließend werden alle Resultate für jeden
 Eintrag der Liste geladen und daraus ein Gesamtergebnis pro Host berechnet. Dieses wird schließlich
 mit dem Host als Schlüssel zur Liste \textit{hostResults} hinzugefügt. Abschließend wird die
@@ -673,7 +673,7 @@ zurückgegriffen um den Entwicklungsaufwand für die Visualisierungen zu minimie
 \begin{enumerate}
   \item Daten aus der MongoDB laden
   \item Daten in die benötigte Form transformieren
-  \item Entsprechende API ansteuern für Generierung der Grafik
+  \item Entsprechende API für Generierung der Grafik ansteuern
 \end{enumerate}
 
 \begin{scriptsize}
@@ -701,10 +701,10 @@ wurde ausgewählt um den Erstellungsprozess für die Grafiken zu erklären. Dies
 Die Überschriften der Grafiken werden mit \textit{\#\#\#} markiert. Der R-Code befindet sich in Chunks, diese werden speziell markiert um dem Compiler kenntlich zu machen welches der R-Code ist.
 
 Im Beispiel werden zunächst benötigten Daten aus der MongoDB geladen. Da hier eine Valuebox für die
-Anzeige der durchschnittlichen Analysezeit generiert wird werden nur die
+Anzeige der durchschnittlichen Analysezeit generiert wird, werden nur die
 Analysezeiten (\lstinline[style=eclipse]{durationInMillis}) benötigt. Diese werden anschließend
 gemittelt und von Millisekunden in Minuten / Sekunden transformiert. Zur Erstellung der Valuebox
-muss nun nurnoch der Text, die Farbe und ein passendes Icon ausgewählt werden. Die Generierung und
+muss nun nur noch der Text, die Farbe und ein passendes Icon ausgewählt werden. Die Generierung und
 Platzierung übernimmt Flexdashboard. Als Ausgabe wird eine \ac{HTML}-Datei generiert, welche
 anschließend für die Nutzer zugänglich gemacht werden.
 
@@ -749,7 +749,7 @@ Damit nicht bei jedem Testdurchlauf alle Header neu eingeholt werden müssen, we
 Zur Umsetzung dieses Tests wurde zunächst das Python-Skript \lstinline[style=eclipse]{collect.py} geschrieben, welches über einen Cloud-Service die Werte für das \acs{HTTP}-Headerfeld \textit{User Agent} abspeichert.
 Zuerst werden alle gewünschten Browserkonfigurationen über eine \ac{JSON}-Datei eingelesen (siehe
 Zeile 31).
-Diese Datei enthält eine Liste von Browserobjekten, die die Konfigurationen im Attribut
+Diese Datei enthält eine Liste von Browserobjekten.
 Ein Element dieser Liste ist beispielhaft in Listing \ref{lst:browsers.json} zu sehen, wobei das
 \lstinline[style=eclipse]{"headers"}-Attribut vor Programmablauf noch nicht gesetzt ist.
 
@@ -827,7 +827,7 @@ Liegt der Wert über 500, dann ist das Ergebnis \textit{MALICIOUS}.
 Liegt der Wert zwischen 500 und 50, so ist das Ergebnis \textit{SUSPICIOUS}, ansonsten ist es \textit{CLEAN}.
 
 \subsection{Überprüfung der Port-Nutzung}
-Bei diesem Test wird überprüft ob die Seite versucht einen Portscan auf dem Computer des Anwenders
+Bei diesem Test wird überprüft, ob die Seite versucht einen Portscan auf dem Computer des Anwenders
 zu betreiben. Hierfür werden 3 Techniken eingesetzt. Die wichtigsten Aufgaben werden von PhantomJS
 und Bro erledigt.
 Bro wird hier genutzt um den Traffic welcher zwischen Webseite
@@ -843,8 +843,8 @@ Netzwerkaktivitäten. Sobald der Durchlauf von PhantomJS abgeschlossen ist wird 
 Validierung des Ergebnisses gestartet. Hier werden die angefragten Ports aus der Logdatei geladen
 und klassifiziert. Die Ports 80 und 443 werden verworfen, da diese die \acs{HTTP} und \acs{SSL}
 Ports sind und somit als harmlos klassifiziert werden können. Die weiteren Ports werden in einer
-Liste an riskanten Ports gespeichert. Die Anzahl an Ports in dieser Liste bestimmt nun das Ergebnis
-des Testes. Wurden keine verdächtigen Portanfragen gefunden wird das Ergebnis \textit{unbedenklich}
+Liste von riskanten Ports gespeichert. Die Anzahl an Ports in dieser Liste bestimmt nun das Ergebnis
+des Tests. Wurden keine verdächtigen Portanfragen gefunden, wird das Ergebnis \textit{unbedenklich}
 übermittelt. Bei ein oder zwei Ports in der Liste gibt der Test \textit{verdächtig} als Ergebnis
 zurück.
 Sollte die Anzahl größer gleich drei sein wird die Seite von diesem Test als \textit{bedrohlich}
@@ -861,7 +861,7 @@ da bei dieser Art von Angriff versucht wird mittels clientseitig ausgeführtem J
 Netzwerk des Anwenders auszuspähen. Den Aufruf der Seite übernimmt auch hier PhantomJS. Bei der
 darauf folgenden Validierung werden die IPs auf bekannte Heimnetzadressbereiche wie beispielsweise
 192.168.178.* oder 192.168.2.* gemappt. Auch hier werden verdächtige IPs in einer Liste
-gespeichert. Die Anzahl der Elemente in dieser Liste bestimmt das Ergebnis des Testes. Hierbei sind
+gespeichert. Die Anzahl der Elemente in dieser Liste bestimmt das Ergebnis des Tests. Hierbei sind
 die Schwellwerte identisch mit denen des Portscanning-Tests, also bei null Abfragen wird
 \textit{unbedenklich} zurückgegeben, bei ein bis zwei wird \textit{verdächtig} zurückgegeben und bei
 mehr als drei wird die Seite als \textit{bedrohlich} eingestuft. Zusätzlich zum Ergebnis wird die
@@ -870,7 +870,7 @@ Liste der riskanten IPs in der Ergebnisinformation weitergeleitet.
 \subsection{Prüfung aller verlinkten Seiten}
 
 Einstiegspunkt ist das Python-Skript \lstinline[style=eclipse]{check.py}.
-Ihm wird die zu testende \acs{URL} der Webeite mitgeliefert.
+Ihm wird die zu testende \acs{URL} der Webseite mitgeliefert.
 Daraufhin wird ein Unterprozess gestartet, in dem PhantomJS mit dem
 Steuerungsskript \lstinline[style=eclipse]{check.js} ausgeführt wird.
 Dieses bewerkstelligt das Sammeln der Links, indem zum einen ein Handler auf das
@@ -914,7 +914,7 @@ Der Test zur \textit{Überprüfung des SSL-Zertifikates} wurde mit Python umgese
 zur Überprüfung auf die \ac{CLI}-Anwendung \textit{openssl} gesetzt. Mit dieser wurden alle verfügbaren Informationen des Zertifikats der Webseite ausgelesen und zwischengespeichert.
 
 Anschließend wurden alle Daten zusammengetragen und daraus das entsprechende Endergebnis erzeugt.
-Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPLCIOUS}. Hat die Webseite ein
+Nutzt die Webseite kein Zertifikat, so ist das Ergebnis \textit{SUSPICIOUS}. Hat die Webseite ein
 gültiges Zertifikat, dann ist das Ergebnis des Tests \textit{CLEAN}. Nutzt die Webseite ein
 fehlerhaftes Zertifikat, so wird das Ergebnis \textit{MALICIOUS} zurückgegeben. Tritt während des
 Tests ein Fehler auf, so endet der Test mit dem Ergebnis \textit{UNDEFINED}. Zusätzlich
